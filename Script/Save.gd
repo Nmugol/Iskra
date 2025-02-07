@@ -12,15 +12,7 @@ var Equipment: Array = []:
 	set(value): Equipment = value
 	get: return Equipment
 
-var ScreenResolution: Vector2 = Vector2(1280,720):
-	set(value): 
-		ScreenResolution = value
-		DisplayServer.window_set_size(value)
-	get: return ScreenResolution
 
-var WindowType: int = 0:
-	set(value): WindowType = value
-	get: return WindowType
 
 func _ready()->void:	
 	loadData()
@@ -28,27 +20,23 @@ func _ready()->void:
 func loadData()->void:
 
 	# Sprawda czy plik istnieje
-	if not FileAccess.file_exists("user://save.json"):
+	if not FileAccess.file_exists("res://save.json"):
 		saveData()
 		return
 
 	# Otwiera plik
-	var file = FileAccess.open("user://save.json", FileAccess.READ)
+	var file = FileAccess.open("res://save.json", FileAccess.READ)
 
 	# Poprawne otwarcie
 	if file:
 
-		# Odczytuje plik
-		var json = file.get_as_text()
-
 		# Przetwarza plik
-		var data = JSON.parse_string(json)
+		var data = JSON.parse_string(file.get_as_text())
+
+		print(data)
 		
 		CurrentSceneName = data["CurrentSceneName"]
 		PlayerPosition = Vector2(data["PlayerPosition"][0], data["PlayerPosition"][1])
-
-		ScreenResolution = Vector2(data["ScreenResolution"][0], data["ScreenResolution"][1])
-		WindowType = data["WindowType"]
 
 		Equipment = data["Equipment"]
 
@@ -63,8 +51,6 @@ func saveData()->void:
 
 	# Tworzy obiekt do zapisu
 	var data = {
-		"ScreenResolution": [ScreenResolution.x, ScreenResolution.y],
-		"WindowType": WindowType,
 		"CurrentSceneName": CurrentSceneName,
 		"PlayerPosition": [PlayerPosition.x, PlayerPosition.y],
 		"Equipment": Equipment
@@ -74,7 +60,7 @@ func saveData()->void:
 	var json = JSON.stringify(data, "\t")
 
 	# Otwiera plik
-	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
+	var file = FileAccess.open("res://save.json", FileAccess.WRITE)
 
 	# Poprawne otwarcie
 	if file:
