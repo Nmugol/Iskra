@@ -1,5 +1,7 @@
 extends Node
 
+const DATA_PATH: String = "user://save.json"
+
 var CurrentSceneName: String = "": 
 	set(value): CurrentSceneName = value
 	get: return CurrentSceneName
@@ -19,18 +21,13 @@ func _ready()->void:
 
 func loadData()->void:
 
-	# Sprawda czy plik istnieje
-	if not FileAccess.file_exists("res://save.json"):
+	if not FileAccess.file_exists(DATA_PATH):
 		saveData()
 		return
 
-	# Otwiera plik
-	var file = FileAccess.open("res://save.json", FileAccess.READ)
+	var file = FileAccess.open(DATA_PATH, FileAccess.READ)
 
-	# Poprawne otwarcie
 	if file:
-
-		# Przetwarza plik
 		var data = JSON.parse_string(file.get_as_text())
 
 		print(data)
@@ -39,35 +36,24 @@ func loadData()->void:
 		PlayerPosition = Vector2(data["PlayerPosition"][0], data["PlayerPosition"][1])
 
 		Equipment = data["Equipment"]
-
-	# Niepoprawne otwarcie
 	else:
 		print("Bład otwarcia pliku")
-
-	# Zamyka plik
 	file.close()
 
 func saveData()->void:
 
-	# Tworzy obiekt do zapisu
 	var data = {
 		"CurrentSceneName": CurrentSceneName,
 		"PlayerPosition": [PlayerPosition.x, PlayerPosition.y],
 		"Equipment": Equipment
 	}
 
-	# Formatuje obiekt do formatu JSON
 	var json = JSON.stringify(data, "\t")
 
-	# Otwiera plik
-	var file = FileAccess.open("res://save.json", FileAccess.WRITE)
+	var file = FileAccess.open(DATA_PATH, FileAccess.WRITE)
 
-	# Poprawne otwarcie
 	if file:
-		# Zapisuje
 		file.store_string(json)
 	else:
 		print("Bład otwarcia pliku i zapisu")
-
-	# Zamyka plik
 	file.close()
