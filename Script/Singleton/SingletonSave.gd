@@ -2,9 +2,9 @@ extends Node
 
 const DATA_PATH: String = "user://save.json"
 
-var CurrentSceneName: String = "": 
-	set(value): CurrentSceneName = value
-	get: return CurrentSceneName
+var CurrentScenePath: String = "res://Scenes/Locations/Mines/MainEntrance.tscn": 
+	set(value): CurrentScenePath = value
+	get: return CurrentScenePath
 
 var PlayerPosition: Vector2 = Vector2(0,0):
 	set(value): PlayerPosition = value
@@ -16,13 +16,14 @@ var Equipment: Array = []:
 
 
 
-func _ready()->void:	
-	loadData()
+func _ready()->void:
+	Signals.connect("save_to_file",SaveDataToFile) 	
+	LoadDataFromFile()
 
-func loadData()->void:
+func LoadDataFromFile()->void:
 
 	if not FileAccess.file_exists(DATA_PATH):
-		saveData()
+		SaveDataToFile()
 		return
 
 	var file = FileAccess.open(DATA_PATH, FileAccess.READ)
@@ -32,7 +33,7 @@ func loadData()->void:
 
 		print(data)
 		
-		CurrentSceneName = data["CurrentSceneName"]
+		CurrentScenePath = data["CurrentScenePath"]
 		PlayerPosition = Vector2(data["PlayerPosition"][0], data["PlayerPosition"][1])
 
 		Equipment = data["Equipment"]
@@ -40,10 +41,10 @@ func loadData()->void:
 		print("Bład otwarcia pliku")
 	file.close()
 
-func saveData()->void:
+func SaveDataToFile()->void:
 
 	var data = {
-		"CurrentSceneName": CurrentSceneName,
+		"CurrentScenePath": CurrentScenePath,
 		"PlayerPosition": [PlayerPosition.x, PlayerPosition.y],
 		"Equipment": Equipment
 	}
@@ -57,3 +58,4 @@ func saveData()->void:
 	else:
 		print("Bład otwarcia pliku i zapisu")
 	file.close()
+

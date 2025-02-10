@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0yr4dgbqxqlm"]
+
+[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="1_hyppx"]
+[ext_resource type="Script" path="res://Script/Player/PlayerController.gd" id="1_lpgxi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gun0"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_lpgxi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hyppx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3gun0")
+
+[node name="Player" type="Node2D" parent="."]

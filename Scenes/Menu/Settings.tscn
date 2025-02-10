@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2altmlfejleb"]
 
-[ext_resource type="Script" path="res://Script/Menu/settings.gd" id="1_4yry0"]
+[ext_resource type="Script" path="res://Script/Menu/Settings.gd" id="1_4yry0"]
 
 [node name="Settings" type="Control" node_paths=PackedStringArray("ResolutionButton", "WindowTypeButton", "MasterSlider", "MasterSliderLabel", "MusicSlider", "MusicSliderLabel", "SoundEffectsSlider", "SoundEffectsSliderLabel")]
 layout_mode = 3
@@ -43,10 +43,9 @@ layout_mode = 2
 [node name="TabContainer" type="TabContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 0
 
 [node name="Video" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 tab_alignment = 1
 metadata/_tab_index = 0
@@ -109,6 +108,7 @@ layout_mode = 2
 tooltip_text = "Select resolutions"
 
 [node name="Sound" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
