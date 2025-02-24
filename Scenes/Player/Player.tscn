@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gun0"]
 size = Vector2(128, 128)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Navigation")]
 script = ExtResource("1_lpgxi")
+Navigation = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hyppx")
