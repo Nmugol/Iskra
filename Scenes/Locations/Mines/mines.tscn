@@ -1,32 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ts7t4v5e7dhj"]
+[gd_scene load_steps=2 format=3 uid="uid://ts7t4v5e7dhj"]
 
-[ext_resource type="PackedScene" uid="uid://rjp47bqjr6lq" path="res://Models/untitled.glb" id="1_soxu8"]
-[ext_resource type="PackedScene" uid="uid://vrwe5krvwcuj" path="res://Scenes/MainCam.tscn" id="2_375c4"]
+[ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_81nhs"]
 
-[sub_resource type="GDScript" id="GDScript_ceqon"]
-script/source = "extends Node3D
-"
+[node name="Mines" type="Node2D"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4o3cd"]
-
-[sub_resource type="Sky" id="Sky_bsis5"]
-sky_material = SubResource("PhysicalSkyMaterial_4o3cd")
-
-[sub_resource type="Environment" id="Environment_e6i1c"]
-background_mode = 2
-sky = SubResource("Sky_bsis5")
-
-[node name="Mines" type="Node3D"]
-script = SubResource("GDScript_ceqon")
-
-[node name="untitled" parent="." instance=ExtResource("1_soxu8")]
-transform = Transform3D(-0.157825, 0.703879, 0.692565, -0.117362, 0.683013, -0.720916, -0.980468, -0.19506, -0.0251877, 0, 0, 0)
-
-[node name="MainCam" parent="." instance=ExtResource("2_375c4")]
-transform = Transform3D(1, 0, 0, 0, 0.859228, 0.511593, 0, -0.511593, 0.859228, 0, 5.22971, 8.25534)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_e6i1c")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 4, 0)
+[node name="Player" parent="." instance=ExtResource("1_81nhs")]
+position = Vector2(662, 327)

@@ -30,9 +30,6 @@ func LoadDataFromFile()->void:
 
 	if file:
 		var data = JSON.parse_string(file.get_as_text())
-
-		print(data)
-		
 		CurrentScenePath = data["CurrentScenePath"]
 		PlayerPosition = Vector2(data["PlayerPosition"][0], data["PlayerPosition"][1])
 
@@ -58,4 +55,3 @@ func SaveDataToFile()->void:
 	else:
 		print("Bład otwarcia pliku i zapisu")
 	file.close()
-
