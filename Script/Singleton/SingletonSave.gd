@@ -2,7 +2,7 @@ extends Node
 
 const DATA_PATH: String = "user://save.json"
 
-var CurrentScenePath: String = "res://Scenes/Locations/Mines/MainEntrance.tscn": 
+var CurrentScenePath: String = "res://Scenes/Locations/Mines/mines.tscn": 
 	set(value): CurrentScenePath = value
 	get: return CurrentScenePath
 

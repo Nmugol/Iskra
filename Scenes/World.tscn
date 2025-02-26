@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5jhvegysctic"]
+
+[ext_resource type="Script" path="res://Script/World.gd" id="1_23x67"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="World" type="SubViewportContainer" parent="." node_paths=PackedStringArray("LevelLoader")]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+script = ExtResource("1_23x67")
+LevelLoader = NodePath("LevelLoader")
+
+[node name="LevelLoader" type="SubViewport" parent="World"]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="Button" type="Button" parent="."]
+offset_left = 11.0
+offset_top = 22.0
+offset_right = 149.0
+offset_bottom = 103.0
+text = "s2"
+
+[connection signal="button_down" from="Button" to="World" method="_on_button_button_down"]
