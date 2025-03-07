@@ -1,28 +1,31 @@
 extends CharacterBody2D
 
 @export var speed: float = 300
-@export var acceleration: float = 10
-@export var stop_threshold: float = 5
+@export var acceleration: float = 7
+@export var gravity: float = 980
+@onready var nav: NavigationAgent2D = $NavigationAgent2D
 
 var mouse_pos = Vector2()
 
 func _ready() -> void:
-
 	Signals.connect("save_game", SavePlayerData)
-	SetUp()
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("MovePlayer"):
-		pass
-	else:
-		velocity = Vector2.ZERO  # Zatrzymanie postaci
+	# Dodaj grawitację
+	velocity.y += gravity * delta
+	
+	if Input.is_action_pressed("MovePlayer"):
+		nav.target_position = get_global_mouse_position()
+		
+	var direction = (nav.get_next_path_position() - global_position).normalized()
+	
+	# Ustawienie ruchu tylko w osi X
+	direction.y = 0  
+	
+	velocity.x = lerp(velocity.x, direction.x * speed, acceleration * delta)
 	
 	move_and_slide()
 
 func SavePlayerData() -> void:
 	Save.PlayerPosition = position
 	Save.Equipment = []
-
-func SetUp() -> void:
-	position = Save.PlayerPosition
-	mouse_pos = Save.PlayerPosition

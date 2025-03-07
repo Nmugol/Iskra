@@ -1,8 +1,64 @@
-[gd_scene load_steps=2 format=3 uid="uid://ts7t4v5e7dhj"]
+[gd_scene load_steps=9 format=3 uid="uid://ts7t4v5e7dhj"]
 
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_81nhs"]
+[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_7ae8y"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_f35cd"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_kqrl4"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_gdhc6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3byke"]
+size = Vector2(6364, 123)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_noywe"]
+vertices = PackedVector2Array(4227.93, 14.9766, 4224.06, 602.977, -2096.4, 592.008, -2120.57, 6.00781)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2106, 602, 4234, 613, 4238, 5, -2131, -4)])
+
+[sub_resource type="Resource" id="Resource_a3pok"]
+script = ExtResource("5_gdhc6")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="Mines" type="Node2D"]
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-1043, 665)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2093, 0)
+scale = Vector2(49.6094, 1)
+texture = ExtResource("2_7ae8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2095, 0.5)
+shape = SubResource("RectangleShape2D_3byke")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_noywe")
+
 [node name="Player" parent="." instance=ExtResource("1_81nhs")]
-position = Vector2(662, 327)
+position = Vector2(196, 520)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(196, 520)
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_f35cd")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(196, 520)
+script = ExtResource("4_kqrl4")
+follow_mode = 5
+follow_target = NodePath("../Player")
+tween_resource = SubResource("Resource_a3pok")
+dead_zone_width = 0.193
+dead_zone_height = 0.288
+draw_limits = true

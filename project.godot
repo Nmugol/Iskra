@@ -20,11 +20,16 @@ config/icon="res://icon.svg"
 Settings="*res://Script/Singleton/SingletonSettings.gd"
 Save="*res://Script/Singleton/SingletonSave.gd"
 Signals="*res://Script/Singleton/SingletonSignals.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [filesystem]
 
