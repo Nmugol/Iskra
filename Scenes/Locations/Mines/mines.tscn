@@ -40,11 +40,9 @@ shape = SubResource("RectangleShape2D_3byke")
 navigation_polygon = SubResource("NavigationPolygon_noywe")
 
 [node name="Player" parent="." instance=ExtResource("1_81nhs")]
-position = Vector2(196, 520)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(196, 520)
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -54,7 +52,6 @@ script = ExtResource("3_f35cd")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(196, 520)
 script = ExtResource("4_kqrl4")
 follow_mode = 5
 follow_target = NodePath("../Player")

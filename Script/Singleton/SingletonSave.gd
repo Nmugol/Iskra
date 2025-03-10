@@ -17,7 +17,7 @@ var Equipment: Array = []:
 
 
 func _ready()->void:
-	Signals.connect("save_to_file",SaveDataToFile) 	
+	Signals.save_to_file.connect(SaveDataToFile) 	
 	LoadDataFromFile()
 
 func LoadDataFromFile()->void:

@@ -8,7 +8,7 @@ extends CharacterBody2D
 var mouse_pos = Vector2()
 
 func _ready() -> void:
-	Signals.connect("save_game", SavePlayerData)
+	Signals.save_game.connect(SavePlayerData)
 
 func _physics_process(delta: float) -> void:
 	# Dodaj grawitację
