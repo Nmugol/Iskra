@@ -18,14 +18,10 @@ func _physics_process(delta: float) -> void:
 		nav.target_position = get_global_mouse_position()
 		
 	var direction = (nav.get_next_path_position() - global_position).normalized()
-	
-	# Ustawienie ruchu tylko w osi X
-	direction.y = 0  
-	
-	velocity.x = lerp(velocity.x, direction.x * speed, acceleration * delta)
+	direction.y = 0  	
+	velocity.x = direction.x * speed
 	
 	move_and_slide()
 
 func SavePlayerData() -> void:
 	Save.PlayerPosition = position
-	Save.Equipment = []

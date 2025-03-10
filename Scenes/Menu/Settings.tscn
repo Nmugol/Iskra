@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2altmlfejleb"]
 
-[ext_resource type="Script" path="res://Script/Menu/Settings.gd" id="1_4yry0"]
+[ext_resource type="Script" uid="uid://dpg0kdqjgkirq" path="res://Script/Menu/Settings.gd" id="1_4yry0"]
 
 [node name="Settings" type="Control" node_paths=PackedStringArray("ResolutionButton", "WindowTypeButton", "MasterSlider", "MasterSliderLabel", "MusicSlider", "MusicSliderLabel", "SoundEffectsSlider", "SoundEffectsSliderLabel")]
 layout_mode = 3
