@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dgus4uexcarco" path="res://Script/Dialog.gd" id="1_0hepe"]
 [ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_0tpv1"]
 
-[node name="Dialog" type="Control" node_paths=PackedStringArray("playerbox", "playericon", "playertext", "peoplebox", "peopleicon", "peopletext")]
+[node name="Dialog" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,17 +11,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0hepe")
-playerbox = NodePath("PlayerBox")
-playericon = NodePath("PlayerBox/HBoxContainer/CharacterWindow/MarginContainer/PlayerIcons")
-playertext = NodePath("PlayerBox/HBoxContainer/DialogWindow/MarginContainer/PlayerText")
-playericonslist = Array[CompressedTexture2D]([ExtResource("2_0tpv1")])
-peoplebox = NodePath("PeopleBox")
-peopleicon = NodePath("PlayerBox/HBoxContainer/CharacterWindow/MarginContainer/PlayerIcons")
-peopletext = NodePath("PlayerBox/HBoxContainer/DialogWindow/MarginContainer/PlayerText")
-peopleiconslist = Array[CompressedTexture2D]([ExtResource("2_0tpv1")])
+Icons = Dictionary[String, CompressedTexture2D]({
+"tets": ExtResource("2_0tpv1")
+})
 
-[node name="PlayerBox" type="MarginContainer" parent="."]
-visible = false
+[node name="Box" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -34,15 +28,16 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Box"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CharacterWindow" type="Panel" parent="PlayerBox/HBoxContainer"]
+[node name="PeopelPanel" type="Panel" parent="Box/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(199, 200)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerBox/HBoxContainer/CharacterWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="Box/HBoxContainer/PeopelPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,15 +49,16 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PlayerIcons" type="TextureRect" parent="PlayerBox/HBoxContainer/CharacterWindow/MarginContainer"]
+[node name="PeopleIcons" type="TextureRect" parent="Box/HBoxContainer/PeopelPanel/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="DialogWindow" type="Panel" parent="PlayerBox/HBoxContainer"]
+[node name="DialogPanel" type="Panel" parent="Box/HBoxContainer"]
 custom_minimum_size = Vector2(199, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerBox/HBoxContainer/DialogWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="Box/HBoxContainer/DialogPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,34 +70,21 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PlayerText" type="Label" parent="PlayerBox/HBoxContainer/DialogWindow/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Box/HBoxContainer/DialogPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Box/HBoxContainer/DialogPanel/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 
-[node name="PeopleBox" type="MarginContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -200.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PeopleBox"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="DialogWindow" type="Panel" parent="PeopleBox/HBoxContainer"]
+[node name="PlayerPanel" type="Panel" parent="Box/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(199, 200)
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="PeopleBox/HBoxContainer/DialogWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="Box/HBoxContainer/PlayerPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,26 +96,8 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PeopleText" type="Label" parent="PeopleBox/HBoxContainer/DialogWindow/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-
-[node name="CharacterWindow" type="Panel" parent="PeopleBox/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(199, 200)
+[node name="PlayerIcons" type="TextureRect" parent="Box/HBoxContainer/PlayerPanel/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PeopleBox/HBoxContainer/CharacterWindow"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="PeopelIcons" type="TextureRect" parent="PeopleBox/HBoxContainer/CharacterWindow/MarginContainer"]
-layout_mode = 2
+[node name="Timer" type="Timer" parent="."]

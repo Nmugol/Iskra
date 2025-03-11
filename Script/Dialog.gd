@@ -1,53 +1,40 @@
 extends Control
 
-@export_category("tetx setings")
-@export var speed: float = 1.0
+@export var Icons: Dictionary[String, CompressedTexture2D]
+@export_range(0.2, 2.0, 0.1) var displaySpeed: float = 0.5
 
-@export_category("Player")
-@export var playerbox: MarginContainer
-@export var playericon: TextureRect
-@export var playertext: Label
-@export var playericonslist: Array[CompressedTexture2D]
+@onready var peopelPanel: Panel = %PeopelPanel
+@onready var peopelIcons: TextureRect = %PeopleIcons
 
-@export_category("People")
-@export var peoplebox: MarginContainer
-@export var peopleicon: TextureRect
-@export var peopletext: Label
-@export var peopleiconslist: Array[CompressedTexture2D]
+@onready var playerPanel: Panel = %PlayerPanel
+@onready var playerIcons: TextureRect = %PlayerIcons
+
+@onready var scroll: ScrollContainer = %ScrollContainer
+@onready var Text: Label = %Text
+
+@onready var timer = $Timer
 
 func _ready() -> void:
 	Signals.peopel_message.connect(PeopleTalk)
 	Signals.player_message.connect(PlayerTalk)
-	InitBox()
-	
-	PeopleTalk(0,["okwdad","2edadwadawd"])
 
-func PeopleTalk(iconNr: int=0, text: Array[String]=[""]) -> void:
-	playerbox.hide()
-	peoplebox.show()
-	peopleicon.texture = peopleiconslist[iconNr]
-	peopleicon.show()
-	LoadinText(peopletext,text)
+func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
+	playerPanel.hide()
+	peopelIcons.texture = Icons[iconName]
+	peopelPanel.show()
+	LoadinText(textToDisplay)
 
-func PlayerTalk(iconNr: int=0, text: Array[String]=[""]) -> void:
-	peoplebox.hide()
-	playerbox.show()
-	playericon.texture = playericonslist[iconNr]
-	playericon.show()
-	LoadinText(playertext,text)
+func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
+	peopelPanel.hide()
+	playerIcons.texture = Icons[iconName]
+	playerPanel.show()
+	LoadinText(textToDisplay)
 
-func InitBox() -> void:
-	playerbox.hide()
-	playericon.texture = playericonslist[0]
-	playertext.text = ""
-	
-	peoplebox.hide()
-	peopleicon.texture = peopleiconslist[0]
-	peopletext.text = ""
-
-func LoadinText(TetxContainer: Label, text: Array[String]):
-	TetxContainer.text = ""
-	for line in text:
-		TetxContainer.text += line +"\n"
-		if not Input.is_action_just_pressed("LoadText"):
-			await get_tree().create_timer(speed).timeout
+func LoadinText(text: String):
+	Text.visible_characters = 0
+	Text.text = text
+	for line in text.length():
+		timer.start(displaySpeed)
+		Text.visible_characters += 1
+		scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
+		await timer.timeout
