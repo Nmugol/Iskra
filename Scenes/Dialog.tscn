@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ch7ywbdvrm5ud"]
+[gd_scene load_steps=3 format=3 uid="uid://ch7ywbdvrm5ud"]
 
 [ext_resource type="Script" uid="uid://dgus4uexcarco" path="res://Script/Dialog.gd" id="1_0hepe"]
+[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_0tpv1"]
 
 [node name="Dialog" type="Control" node_paths=PackedStringArray("playerbox", "playericon", "playertext", "peoplebox", "peopleicon", "peopletext")]
 layout_mode = 3
@@ -13,9 +14,11 @@ script = ExtResource("1_0hepe")
 playerbox = NodePath("PlayerBox")
 playericon = NodePath("PlayerBox/HBoxContainer/CharacterWindow/MarginContainer/PlayerIcons")
 playertext = NodePath("PlayerBox/HBoxContainer/DialogWindow/MarginContainer/PlayerText")
+playericonslist = Array[CompressedTexture2D]([ExtResource("2_0tpv1")])
 peoplebox = NodePath("PeopleBox")
 peopleicon = NodePath("PlayerBox/HBoxContainer/CharacterWindow/MarginContainer/PlayerIcons")
 peopletext = NodePath("PlayerBox/HBoxContainer/DialogWindow/MarginContainer/PlayerText")
+peopleiconslist = Array[CompressedTexture2D]([ExtResource("2_0tpv1")])
 
 [node name="PlayerBox" type="MarginContainer" parent="."]
 visible = false
