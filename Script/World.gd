@@ -4,7 +4,7 @@ extends Node2D
 
 func _ready()->void:
 	LoadLevel()
-	
+
 func LoadLevel() -> void:
 	if(LevelLocation.get_child_count()>0):
 		var i =LevelLocation.get_child(0)
