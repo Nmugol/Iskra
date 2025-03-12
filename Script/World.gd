@@ -1,9 +1,15 @@
 extends Node2D
 
 @export var LevelLocation: Node
+@onready var dialog: Control = %Dialog
 
 func _ready()->void:
+	Signals.show_dialog.connect(ShowDialog)
+	Signals.hide_dialog.connect(HideDialog)
 	LoadLevel()
+	
+	Signals.show_dialog.emit()
+	Signals.peopel_message.emit("tets", "12323142342")
 
 func LoadLevel() -> void:
 	if(LevelLocation.get_child_count()>0):
@@ -15,3 +21,11 @@ func LoadLevel() -> void:
 
 func SaveLevel() -> void:
 	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()
+
+func ShowDialog():
+	Settings.IsRun = false
+	dialog.show()
+
+func HideDialog():
+	Settings.IsRun = true
+	dialog.hide()

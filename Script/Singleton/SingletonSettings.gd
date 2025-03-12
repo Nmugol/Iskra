@@ -1,5 +1,7 @@
 extends Node
 
+var IsRun: bool = true
+
 const DATA_PATH: String = "user://settings.json"
 
 var ScreenResolutionOptions: Array[String] = [

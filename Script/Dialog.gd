@@ -11,7 +11,8 @@ extends Node
 @onready var scroll: ScrollContainer = %ScrollContainer
 @onready var Text: Label = %Text
 
-@onready var timer = $Timer
+@onready var timer: Timer = $Timer
+@onready var closeButton: Button = %CloseButton
 
 var displaySpeed: float = 0.5
 var queue: Array = []
@@ -24,6 +25,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("LoadText"): displaySpeed= 0.01
+	if queue.is_empty() and not is_talking: closeButton.show()
 
 func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
 	queue.append([func_ref, iconName, textToDisplay])
@@ -43,12 +45,14 @@ func process_queue():
 
 func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
 	playerPanel.hide()
+	closeButton.hide()
 	peopelIcons.texture = Icons[iconName]
 	peopelPanel.show()
 	await LoadinText(textToDisplay)
 
 func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
 	peopelPanel.hide()
+	closeButton.hide()
 	playerIcons.texture = Icons[iconName]
 	playerPanel.show()
 	await LoadinText(textToDisplay)
@@ -62,3 +66,7 @@ func LoadinText(text: String):
 		Text.visible_characters += 1
 		scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
 		await timer.timeout
+
+
+func _on_close_button_pressed() -> void:
+	Signals.hide_dialog.emit()

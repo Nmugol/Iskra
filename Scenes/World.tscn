@@ -10,6 +10,7 @@ LevelLocation = NodePath("Level")
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Dialog" parent="GUI" instance=ExtResource("2_j0p05")]
+unique_name_in_owner = true
 visible = false
 top_level = true
 
