@@ -10,11 +10,9 @@ var PlayerPosition: Vector2 = Vector2(0,0):
 	set(value): PlayerPosition = value
 	get: return PlayerPosition
 
-var Equipment: Array = []:
+var Equipment: Array[Item] = []:
 	set(value): Equipment = value
 	get: return Equipment
-
-
 
 func _ready()->void:
 	Signals.save_to_file.connect(SaveDataToFile) 	
@@ -32,8 +30,10 @@ func LoadDataFromFile()->void:
 		var data = JSON.parse_string(file.get_as_text())
 		CurrentScenePath = data["CurrentScenePath"]
 		PlayerPosition = Vector2(data["PlayerPosition"][0], data["PlayerPosition"][1])
-
-		Equipment = data["Equipment"]
+		
+		for item in data["Equipment"]:
+			var new_item = Item.FromJson(item)
+			Equipment.append(new_item)
 	else:
 		print("Bład otwarcia pliku")
 	file.close()
@@ -43,8 +43,12 @@ func SaveDataToFile()->void:
 	var data = {
 		"CurrentScenePath": CurrentScenePath,
 		"PlayerPosition": [PlayerPosition.x, PlayerPosition.y],
-		"Equipment": Equipment
+		"Equipment": []
 	}
+	
+	for item in Equipment:
+		data["Equipment"].append(item.ToJson())
+		
 
 	var json = JSON.stringify(data, "\t")
 
