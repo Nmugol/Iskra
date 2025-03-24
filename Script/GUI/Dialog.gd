@@ -17,6 +17,8 @@ extends Node
 var displaySpeed: float = 0.5
 var queue: Array = []
 var is_talking: bool = false
+var next: bool = false
+var tetx_is_end: bool = false
 
 func _ready() -> void:
 	Signals.peopel_message.connect(func(icon, text): add_to_queue(PeopleTalk, icon, text))
@@ -25,6 +27,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("LoadText"): displaySpeed= 0.01
+	if Input.is_action_just_pressed("NextText") and tetx_is_end: next = true
 	if queue.is_empty() and not is_talking: closeButton.show()
 
 func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
@@ -40,24 +43,34 @@ func process_queue():
 	var iconName = item[1]
 	var textToDisplay = item[2]
 	await func_ref.call(iconName, textToDisplay)
+	
+	next = false
+	while not next:
+		await get_tree().process_frame
+
 	is_talking = false
 	process_queue() 
 
 func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
+	Settings.IsRun = false
 	playerPanel.hide()
 	closeButton.hide()
 	peopelIcons.texture = Icons[iconName]
 	peopelPanel.show()
 	await LoadinText(textToDisplay)
+	
 
 func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
+	Settings.IsRun = false
 	peopelPanel.hide()
 	closeButton.hide()
 	playerIcons.texture = Icons[iconName]
 	playerPanel.show()
 	await LoadinText(textToDisplay)
+	
 
 func LoadinText(text: String):
+	tetx_is_end = false
 	displaySpeed = 0.5
 	Text.visible_characters = 0
 	Text.text = text
@@ -66,7 +79,8 @@ func LoadinText(text: String):
 		Text.visible_characters += 1
 		scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
 		await timer.timeout
-
+	tetx_is_end = true
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
+	Settings.IsRun = true

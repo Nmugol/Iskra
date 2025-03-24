@@ -11,7 +11,9 @@ var PlayerPosition: Vector2 = Vector2(0,0):
 	get: return PlayerPosition
 
 var Equipment: Array[Item] = []:
-	set(value): Equipment = value
+	set(value): 
+		Equipment = value
+		Signals.load_equiment.emit()
 	get: return Equipment
 
 func _ready()->void:

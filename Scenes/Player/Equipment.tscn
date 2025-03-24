@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dny7k62r5c16u"]
+[gd_scene load_steps=2 format=3 uid="uid://dny7k62r5c16u"]
+
+[ext_resource type="Script" uid="uid://b568newwj37a1" path="res://Script/GUI/Equipment.gd" id="1_mv6v0"]
 
 [node name="Equipment" type="Control"]
 layout_mode = 3
@@ -9,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_mv6v0")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -37,6 +40,18 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/Background/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Background/MarginContainer"]
 layout_mode = 2
-columns = 8
+
+[node name="VBoxContainer" type="ScrollContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="ItemBox" type="VBoxContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

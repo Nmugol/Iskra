@@ -7,3 +7,5 @@ signal show_dialog()
 signal hide_dialog()
 signal player_message(iconName: String, textToDisplay:String)
 signal peopel_message(iconName: String, textToDisplay:String)
+
+signal load_equiment()
