@@ -6,11 +6,8 @@ extends Node2D
 func _ready()->void:
 	Signals.show_dialog.connect(ShowDialog)
 	Signals.hide_dialog.connect(HideDialog)
+	State.IsRun = true
 	LoadLevel()
-	
-	Signals.show_dialog.emit()
-	Signals.peopel_message.emit("tets", "3.141592653589793238")
-	Signals.player_message.emit("tets", "3.141592653589793238")
 
 func LoadLevel() -> void:
 	if(LevelLocation.get_child_count()>0):

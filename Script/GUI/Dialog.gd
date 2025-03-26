@@ -61,7 +61,7 @@ func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
 	
 
 func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
-	Settings.IsRun = false
+	State.IsRun = false
 	peopelPanel.hide()
 	closeButton.hide()
 	playerIcons.texture = Icons[iconName]
@@ -83,4 +83,4 @@ func LoadinText(text: String):
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
-	Settings.IsRun = true
+	State.IsRun = true

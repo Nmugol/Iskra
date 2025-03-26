@@ -2,16 +2,19 @@ extends Control
 
 @onready var ItemBox: VBoxContainer
 
-
 func _ready() -> void:
+	Signals.show_equipment.connect(ShowEquipment)
 	Signals.load_equiment.connect(CreateItem)
 	CreateItem()
 
 func CreateItem() -> void:
+	
+	#Remove items
 	var children = ItemBox.get_children()
 	for c in children:
 		c.free()
-		
+	
+	#Load items
 	for item: Item in Save.Equipment:
 		
 		var item_button: Button
@@ -24,5 +27,12 @@ func CreateItem() -> void:
 		
 		ItemBox.add_child(item_button)
 
-func SelectItem(item: Item):
+func SelectItem(item: Item) -> void:
 	pass
+
+func ShowEquipment() -> void:
+	CreateItem()
+	show()
+
+func _on_clouse_pressed() -> void:
+	hide()

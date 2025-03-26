@@ -33,6 +33,9 @@ func LoadDataFromFile()->void:
 		CurrentScenePath = data["CurrentScenePath"]
 		PlayerPosition = Vector2(data["PlayerPosition"][0], data["PlayerPosition"][1])
 		
+		State.StateNumber = data["StateNumber"]
+		State.StatePhase = data["StatePhase"]
+		
 		for item in data["Equipment"]:
 			var new_item = Item.FromJson(item)
 			Equipment.append(new_item)
@@ -45,6 +48,8 @@ func SaveDataToFile()->void:
 	var data = {
 		"CurrentScenePath": CurrentScenePath,
 		"PlayerPosition": [PlayerPosition.x, PlayerPosition.y],
+		"StateNumber": State.StateNumber,
+		"StatePhase": State.StatePhase, 
 		"Equipment": []
 	}
 	
