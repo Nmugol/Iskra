@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b568newwj37a1" path="res://Script/GUI/Equipment.gd" id="1_mv6v0"]
 
-[node name="Equipment" type="Control"]
+[node name="Equipment" type="Control" node_paths=PackedStringArray("UseButton", "DisassembleButton", "AssembleButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +12,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_mv6v0")
+UseButton = NodePath("MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Use")
+DisassembleButton = NodePath("MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Disassemble")
+AssembleButton = NodePath("MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Assemble")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -48,6 +51,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="ItemBox" type="VBoxContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -55,6 +59,41 @@ size_flags_vertical = 3
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="LoolAtItemTexture" type="TextureRect" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Use" type="Button" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Use
+"
+
+[node name="Disassemble" type="Button" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Disassemble"
+
+[node name="Assemble" type="Button" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Assemble"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -72,4 +111,7 @@ layout_mode = 2
 text = "Clous
 "
 
+[connection signal="pressed" from="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Disassemble" to="." method="_on_disassemble_pressed"]
+[connection signal="pressed" from="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Assemble" to="." method="_on_assemble_pressed"]
 [connection signal="pressed" from="MarginContainer2/Clouse" to="." method="_on_clouse_pressed"]

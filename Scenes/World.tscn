@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5jhvegysctic"]
+[gd_scene load_steps=4 format=3 uid="uid://c5jhvegysctic"]
 
 [ext_resource type="Script" uid="uid://cr8dggt4fem8f" path="res://Script/World.gd" id="1_23x67"]
 [ext_resource type="PackedScene" uid="uid://ch7ywbdvrm5ud" path="res://Scenes/Dialog.tscn" id="2_j0p05"]
+[ext_resource type="PackedScene" uid="uid://dny7k62r5c16u" path="res://Scenes/Player/Equipment.tscn" id="3_5nsto"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("LevelLocation")]
 script = ExtResource("1_23x67")
@@ -13,5 +14,8 @@ LevelLocation = NodePath("Level")
 unique_name_in_owner = true
 visible = false
 top_level = true
+
+[node name="Equipment" parent="GUI" instance=ExtResource("3_5nsto")]
+visible = false
 
 [node name="Level" type="Node" parent="."]

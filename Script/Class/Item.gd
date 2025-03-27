@@ -52,12 +52,10 @@ func AddToEquipment() -> void:
 func RemoveFromEquipment() -> void:
 	Save.Equipment.erase(self)
 
-func Assemble(itemToCombine: Item) -> bool:
+func Assemble(itemToCombine: Item) -> void:
 	if connects_with.has(itemToCombine.item_name) and is_finished:
 		contains_items.append(itemToCombine)
 		itemToCombine.RemoveFromEquipment()
-		return true
-	return false
 
 func Disassemble() -> void:
 	for item in contains_items:

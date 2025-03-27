@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var LevelLocation: Node
-@onready var dialog: Control = %Dialog
+@onready var Dialog: Control = %Dialog
 
 func _ready()->void:
 	Signals.show_dialog.connect(ShowDialog)
@@ -22,8 +22,8 @@ func SaveLevel() -> void:
 
 func ShowDialog():
 	Settings.IsRun = false
-	dialog.show()
+	Dialog.show()
 
 func HideDialog():
 	Settings.IsRun = true
-	dialog.hide()
+	Dialog.hide()

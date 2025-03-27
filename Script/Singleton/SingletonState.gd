@@ -2,8 +2,8 @@ extends Node
 
 var IsRun: bool = true
 
-var StateNumber: int = 0
-var StatePhase: int = 0
+var StateNumber: int
+var StatePhase: int
 
-var ActiveItem: Item = null
-var SelectedItem: Item = null
+var ActiveItem: Item
+var SelectedItem: Item
