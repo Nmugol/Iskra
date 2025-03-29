@@ -10,3 +10,4 @@ signal peopel_message(iconName: String, textToDisplay:String)
 
 signal load_equiment()
 signal show_equipment()
+signal lookAtItem(item: Item)

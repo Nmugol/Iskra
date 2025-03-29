@@ -58,7 +58,10 @@ func Assemble(itemToCombine: Item) -> void:
 		itemToCombine.RemoveFromEquipment()
 
 func Disassemble() -> void:
-	for item in contains_items:
+	for item:Item in contains_items:
 		item.is_finished = true
-		Save.Equipment.append(item)
+		Save.Equipment.push_back(item)
 	Save.Equipment.erase(self)
+
+	Signals.load_equiment.emit()
+	Signals.lookAtItem.emit(Save.Equipment[len(Save.Equipment)-1])

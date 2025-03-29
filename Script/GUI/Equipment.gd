@@ -9,6 +9,7 @@ extends Control
 func _ready() -> void:
 	Signals.show_equipment.connect(ShowEquipment)
 	Signals.load_equiment.connect(CreateItem)
+	Signals.lookAtItem.connect(LookAtItem)
 	SetUp()
 	CreateItem()
 
@@ -27,31 +28,32 @@ func CreateItem() -> void:
 	#Load items
 	for item: Item in Save.Equipment:
 		
-		var item_button: Button
-		var icon: CompressedTexture2D
-		icon.load_path = item.small_sprite_path
-		item_button.icon = icon
+		var item_button: Button = Button.new()
+		item_button.icon = load(item.small_sprite_path)
+		item_button.custom_minimum_size = Vector2(50,50)
+		item_button.texture_filter = 1
 		item_button.icon_alignment = 1
 		item_button.expand_icon = true
-		item_button.pressed.connect(self.LoolAtItem.bind(item))
+		item_button.pressed.connect(self.LookAtItem.bind(item))
 		
 		ItemBox.add_child(item_button)
 
-func LoolAtItem(item: Item) -> void:
+func LookAtItem(item: Item) -> void:
 	State.ActiveItem = item
-	var texture: CompressedTexture2D
-	texture.load_path = item.full_sprite_path
-	LoolAtItemTexture.texture = texture
+	LoolAtItemTexture.texture = load(item.full_sprite_path)
 	
 	UseButton.show()
-	if not item.is_finished: DisassembleButton.show()
+	if not State.ActiveItem.is_finished: DisassembleButton.show()
+	else: DisassembleButton.hide()
 	AssembleButton.show()
 
 func ShowEquipment() -> void:
+	State.IsRun = false
 	CreateItem()
 	show()
 
 func _on_clouse_pressed() -> void:
+	State.IsRun = true
 	hide()
 
 func _on_use_pressed() -> void:

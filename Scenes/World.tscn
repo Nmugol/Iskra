@@ -16,6 +16,5 @@ visible = false
 top_level = true
 
 [node name="Equipment" parent="GUI" instance=ExtResource("3_5nsto")]
-visible = false
 
 [node name="Level" type="Node" parent="."]

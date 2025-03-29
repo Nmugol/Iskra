@@ -77,7 +77,7 @@ func LoadinText(text: String):
 	for line in text.length():
 		timer.start(displaySpeed)
 		Text.visible_characters += 1
-		scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
+		scroll.scroll_vertical = floor(scroll.get_v_scroll_bar().max_value)
 		await timer.timeout
 	tetx_is_end = true
 
