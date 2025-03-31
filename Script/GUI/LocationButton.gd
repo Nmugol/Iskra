@@ -1,6 +1,9 @@
-@tool
-extends Button
+@tool 
+# @tool wywołuje poniższy bląd
+# ERROR: res://Script/GUI/LocationButton.gd:21 - Invalid access to property or key 'StateNumber' on a base object of type 'Node (SingletonState.gd)'.
+# WARNING Usunąć linię przed komplikcja
 
+extends Button
 
 @export var LocationSceenPath: String = "res://Scenes/Locations/Mines/mines.tscn"
 @export var LocationName: String = "location":

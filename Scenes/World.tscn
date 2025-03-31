@@ -17,8 +17,11 @@ visible = false
 top_level = true
 
 [node name="Equipment" parent="GUI" instance=ExtResource("3_5nsto")]
+unique_name_in_owner = true
 visible = false
 
 [node name="Map" parent="GUI" instance=ExtResource("4_gjpho")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Level" type="Node" parent="."]
