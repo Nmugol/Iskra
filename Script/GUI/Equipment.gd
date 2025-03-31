@@ -9,7 +9,7 @@ extends Control
 func _ready() -> void:
 	Signals.show_equipment.connect(ShowEquipment)
 	Signals.load_equiment.connect(CreateItem)
-	Signals.lookAtItem.connect(LookAtItem)
+	Signals.look_at_item.connect(LookAtItem)
 	SetUp()
 	CreateItem()
 

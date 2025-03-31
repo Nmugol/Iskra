@@ -10,4 +10,6 @@ signal peopel_message(iconName: String, textToDisplay:String)
 
 signal load_equiment()
 signal show_equipment()
-signal lookAtItem(item: Item)
+signal look_at_item(item: Item)
+
+signal change_scene()

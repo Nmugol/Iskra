@@ -64,4 +64,4 @@ func Disassemble() -> void:
 	Save.Equipment.erase(self)
 
 	Signals.load_equiment.emit()
-	Signals.lookAtItem.emit(Save.Equipment[len(Save.Equipment)-1])
+	Signals.look_at_item.emit(Save.Equipment[len(Save.Equipment)-1])
