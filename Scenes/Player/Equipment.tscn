@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dny7k62r5c16u"]
 
-[ext_resource type="Script" uid="uid://b568newwj37a1" path="res://Script/GUI/Equipment.gd" id="1_mv6v0"]
+[ext_resource type="Script" uid="uid://b568newwj37a1" path="res://Script/Player/Equipment.gd" id="1_mv6v0"]
 
 [node name="Equipment" type="Control" node_paths=PackedStringArray("UseButton", "DisassembleButton", "AssembleButton")]
 layout_mode = 3

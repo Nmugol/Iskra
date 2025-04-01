@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://ts7t4v5e7dhj"]
 
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_81nhs"]
-[ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/mines.gd" id="1_mbq0s"]
+[ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/Locations/mines.gd" id="1_mbq0s"]
 [ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_7ae8y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3byke"]
 size = Vector2(6364, 123)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_noywe"]
-vertices = PackedVector2Array(4227.93, 14.9766, 4224.06, 602.977, -2096.4, 592.008, -2120.57, 6.00781)
+vertices = PackedVector2Array(4223.87, 602.977, -2096.77, 592.008, -2107.15, 463.992, 4222.12, 460)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-2106, 602, 4234, 613, 4238, 5, -2131, -4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2106, 602, 4234, 613, 4232, 450, -2118, 454)])
 
 [node name="Mines" type="Node2D"]
 script = ExtResource("1_mbq0s")

@@ -54,6 +54,7 @@ func ShowEquipment() -> void:
 
 func _on_clouse_pressed() -> void:
 	State.IsRun = true
+	Signals.show_ui.emit()
 	hide()
 
 func _on_use_pressed() -> void:
