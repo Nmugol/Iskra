@@ -1,9 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5jhvegysctic"]
+[gd_scene load_steps=10 format=3 uid="uid://c5jhvegysctic"]
 
 [ext_resource type="Script" uid="uid://cr8dggt4fem8f" path="res://Script/World.gd" id="1_23x67"]
-[ext_resource type="PackedScene" uid="uid://ch7ywbdvrm5ud" path="res://Scenes/Dialog.tscn" id="2_j0p05"]
+[ext_resource type="PackedScene" uid="uid://ch7ywbdvrm5ud" path="res://Scenes/GUI/Dialog.tscn" id="2_j0p05"]
 [ext_resource type="PackedScene" uid="uid://dny7k62r5c16u" path="res://Scenes/Player/Equipment.tscn" id="3_5nsto"]
-[ext_resource type="PackedScene" uid="uid://qmdgtogrjq2q" path="res://Scenes/Locations/Map.tscn" id="4_gjpho"]
+[ext_resource type="PackedScene" uid="uid://qmdgtogrjq2q" path="res://Scenes/GUI/Map.tscn" id="4_gjpho"]
+[ext_resource type="PackedScene" uid="uid://do87224qs6nh6" path="res://Scenes/GUI/UI.tscn" id="5_p70al"]
+
+[sub_resource type="Animation" id="Animation_p70al"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GUI/Transition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_gjpho"]
 resource_name = "fade_in"
@@ -31,33 +59,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_p70al"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GUI/Transition/ColorRect:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GUI/Transition/ColorRect:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_45d1s"]
@@ -113,6 +114,9 @@ visible = false
 
 [node name="Map" parent="GUI" instance=ExtResource("4_gjpho")]
 unique_name_in_owner = true
+visible = false
+
+[node name="UI" parent="GUI" instance=ExtResource("5_p70al")]
 visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="GUI"]

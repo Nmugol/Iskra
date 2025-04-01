@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 	# Dodaj grawitację
 	velocity.y += gravity * delta
 	
+	#TODO Dodanie area2d sprawdzjąceko czy kursor jerest w danym skresie 
 	if Input.is_action_pressed("MovePlayer"):
 		nav.target_position = get_global_mouse_position()
 		

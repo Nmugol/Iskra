@@ -18,3 +18,5 @@ signal hide_map()
 signal change_scene()
 signal disabe_loadin_screen()
 signal enable_loadin_screen()
+
+signal show_ui()
