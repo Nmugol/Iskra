@@ -18,14 +18,13 @@ func _ready()->void:
 	
 	Signals.change_scene.connect(LoadLevel)
 	Signals.disabe_loadin_screen.connect(DisabeLoadinScreen)
+	Signals.enable_loadin_screen.connect(EnableLoadinScreen)
 	
 	State.IsRun = true
 	
 	LoadLevel()
 
 func LoadLevel() -> void:
-	Transition.play("fade_out")
-	await Transition.animation_finished
 	# Usunięcei cześniejszych załdowanych scen
 	var loadLevels = LevelLocation.get_children()
 	for l in loadLevels:
@@ -34,6 +33,9 @@ func LoadLevel() -> void:
 	# Załadowanie lewelu
 	var levelnode = load(Save.CurrentScenePath).instantiate()
 	LevelLocation.add_child(levelnode)
+	
+	DisabeLoadinScreen()
+	
 
 func SaveLevel() -> void:
 	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()
@@ -71,7 +73,13 @@ func HideMap() -> void:
 func DisabeLoadinScreen() -> void:
 	Transition.play("fade_in")
 	await Transition.animation_finished
-	State.IsRun = true
+	
 	HideDialog()
 	HideEquipment()
 	HideMap()
+
+func EnableLoadinScreen() -> void:
+	State.IsRun = true
+	Transition.play("fade_out")
+	await Transition.animation_finished
+	

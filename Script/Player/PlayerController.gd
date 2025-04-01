@@ -9,8 +9,10 @@ var mouse_pos = Vector2()
 
 func _ready() -> void:
 	Signals.save_game.connect(SavePlayerData)
+	
 
 func _physics_process(delta: float) -> void:
+	if not State.IsRun: return
 	# Dodaj grawitację
 	velocity.y += gravity * delta
 	

@@ -6,30 +6,31 @@
 [ext_resource type="PackedScene" uid="uid://qmdgtogrjq2q" path="res://Scenes/Locations/Map.tscn" id="4_gjpho"]
 
 [sub_resource type="Animation" id="Animation_gjpho"]
-resource_name = "fade_out"
+resource_name = "fade_in"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/path = NodePath("GUI/Transition/ColorRect:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.933333),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/path = NodePath("GUI/Transition/ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_p70al"]
@@ -37,7 +38,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/path = NodePath("GUI/Transition/ColorRect:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,51 +50,53 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/path = NodePath("GUI/Transition/ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_45d1s"]
-resource_name = "fade_in"
+resource_name = "fade_out"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/path = NodePath("GUI/Transition/ColorRect:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.933333),
+"times": PackedFloat32Array(0, 1.23333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Transition/ColorRect:visible")
+tracks/1/path = NodePath("GUI/Transition/ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.9),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7y61"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_45d1s"]
 _data = {
 &"RESET": SubResource("Animation_p70al"),
-&"fade_in": SubResource("Animation_45d1s"),
-&"fade_out": SubResource("Animation_gjpho")
+&"fade_in": SubResource("Animation_gjpho"),
+&"fade_out": SubResource("Animation_45d1s")
 }
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("LevelLocation")]
+visible = false
 script = ExtResource("1_23x67")
 LevelLocation = NodePath("Level")
 
@@ -114,12 +117,12 @@ visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="GUI"]
 unique_name_in_owner = true
+root_node = NodePath("../..")
 libraries = {
-&"": SubResource("AnimationLibrary_y7y61")
+&"": SubResource("AnimationLibrary_45d1s")
 }
 
 [node name="ColorRect" type="ColorRect" parent="GUI/Transition"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

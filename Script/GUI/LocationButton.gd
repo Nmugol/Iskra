@@ -27,4 +27,5 @@ func changeVizibility() -> void:
 
 func _on_pressed() -> void:
 	Save.CurrentScenePath = LocationSceenPath
+	Signals.enable_loadin_screen.emit()
 	Signals.change_scene.emit()
