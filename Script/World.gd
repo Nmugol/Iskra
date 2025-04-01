@@ -4,6 +4,7 @@ extends Node2D
 @onready var Dialog: Control = %Dialog
 @onready var Equipment: Control = %Equipment
 @onready var Map: Control = %Map
+@onready var Transition: AnimationPlayer = %Transition
 
 func _ready()->void:
 	Signals.show_dialog.connect(ShowDialog)
@@ -19,9 +20,12 @@ func _ready()->void:
 	Signals.disabe_loadin_screen.connect(DisabeLoadinScreen)
 	
 	State.IsRun = true
+	
 	LoadLevel()
 
 func LoadLevel() -> void:
+	Transition.play("fade_out")
+	await Transition.animation_finished
 	# Usunięcei cześniejszych załdowanych scen
 	var loadLevels = LevelLocation.get_children()
 	for l in loadLevels:
@@ -35,16 +39,20 @@ func SaveLevel() -> void:
 	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()
 
 func ShowDialog():
-	Settings.IsRun = false
+	State.IsRun = false
 	Dialog.show()
+	HideEquipment()
+	HideMap()
 
 func HideDialog():
-	Settings.IsRun = true
+	State.IsRun = true
 	Dialog.hide()
 
 func ShowEquipment() -> void:
 	State.IsRun = false
 	Equipment.show()
+	HideDialog()
+	HideMap()
 
 func HideEquipment() -> void:
 	State.IsRun = true
@@ -53,10 +61,17 @@ func HideEquipment() -> void:
 func ShowMap() -> void:
 	State.IsRun = false
 	Map.show()
+	HideDialog()
+	HideEquipment()
 
 func HideMap() -> void:
 	State.IsRun = true
 	Map.hide()
 
 func DisabeLoadinScreen() -> void:
-	pass
+	Transition.play("fade_in")
+	await Transition.animation_finished
+	State.IsRun = true
+	HideDialog()
+	HideEquipment()
+	HideMap()
