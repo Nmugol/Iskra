@@ -34,6 +34,7 @@ func LoadLevel() -> void:
 	var levelnode = load(Save.CurrentScenePath).instantiate()
 	LevelLocation.add_child(levelnode)
 	
+	
 	DisabeLoadinScreen()
 	
 
@@ -77,6 +78,7 @@ func DisabeLoadinScreen() -> void:
 	HideDialog()
 	HideEquipment()
 	HideMap()
+	Signals.show_ui.emit()
 
 func EnableLoadinScreen() -> void:
 	State.IsRun = true

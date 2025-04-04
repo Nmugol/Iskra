@@ -1,15 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://ts7t4v5e7dhj"]
+[gd_scene load_steps=9 format=3 uid="uid://ts7t4v5e7dhj"]
 
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_81nhs"]
 [ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/Locations/mines.gd" id="1_mbq0s"]
 [ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_7ae8y"]
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="4_jouuq"]
+[ext_resource type="Texture2D" uid="uid://btv4b0c0xrsb0" path="res://Sprite/MinesEnters.png" id="5_ef34e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3byke"]
 size = Vector2(6364, 123)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj231"]
+atlas = ExtResource("5_ef34e")
+region = Rect2(32, 104, 90, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ef34e"]
+atlas = ExtResource("5_ef34e")
+region = Rect2(0, 0, 70, 72)
+
 [node name="Mines" type="Node2D"]
 script = ExtResource("1_mbq0s")
+
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("4_jouuq")]
+CollisionArea = NodePath("../CollisionPolygon2D")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-454, 517, -456, 635, 518, 643, 518, 518, 159, 518, 160, 581, 55, 578, 55, 518)
+
+[node name="Player" parent="." instance=ExtResource("1_81nhs")]
+top_level = true
+position = Vector2(0, 583)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-1043, 665)
@@ -25,11 +44,25 @@ texture = ExtResource("2_7ae8y")
 position = Vector2(2095, 0.5)
 shape = SubResource("RectangleShape2D_3byke")
 
-[node name="Player" parent="." instance=ExtResource("1_81nhs")]
-position = Vector2(0, 583)
+[node name="NonInteractiveObject" type="Node2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-454, 517, -456, 672, 518, 686, 518, 518)
+[node name="EntranceBackground" type="Sprite2D" parent="NonInteractiveObject"]
+texture_filter = 1
+position = Vector2(105, 560)
+texture = SubResource("AtlasTexture_rj231")
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("4_jouuq")]
-CollisionArea = NodePath("../CollisionPolygon2D")
+[node name="InteractiveObject" type="Node2D" parent="."]
+
+[node name="TextureButton" type="TextureButton" parent="InteractiveObject"]
+texture_filter = 1
+offset_left = 69.0
+offset_top = 538.0
+offset_right = 139.0
+offset_bottom = 610.0
+texture_normal = SubResource("AtlasTexture_ef34e")
+texture_pressed = SubResource("AtlasTexture_ef34e")
+texture_hover = SubResource("AtlasTexture_ef34e")
+texture_disabled = SubResource("AtlasTexture_ef34e")
+texture_focused = SubResource("AtlasTexture_ef34e")
+
+[connection signal="pressed" from="InteractiveObject/TextureButton" to="." method="_on_texture_button_pressed"]

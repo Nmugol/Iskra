@@ -97,7 +97,6 @@ _data = {
 }
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("LevelLocation")]
-visible = false
 script = ExtResource("1_23x67")
 LevelLocation = NodePath("Level")
 
