@@ -3,14 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_81nhs"]
 [ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/Locations/mines.gd" id="1_mbq0s"]
 [ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_7ae8y"]
+[ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="4_jouuq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3byke"]
 size = Vector2(6364, 123)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_noywe"]
-vertices = PackedVector2Array(4223.87, 602.977, -2096.77, 592.008, -2107.15, 463.992, 4222.12, 460)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-2106, 602, 4234, 613, 4232, 450, -2118, 454)])
 
 [node name="Mines" type="Node2D"]
 script = ExtResource("1_mbq0s")
@@ -29,12 +25,11 @@ texture = ExtResource("2_7ae8y")
 position = Vector2(2095, 0.5)
 shape = SubResource("RectangleShape2D_3byke")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_noywe")
-
 [node name="Player" parent="." instance=ExtResource("1_81nhs")]
+position = Vector2(0, 583)
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(510, -127.5)
-scale = Vector2(2.65625, 17.1953)
-texture = ExtResource("2_7ae8y")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-454, 517, -456, 672, 518, 686, 518, 518)
+
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("4_jouuq")]
+CollisionArea = NodePath("../CollisionPolygon2D")

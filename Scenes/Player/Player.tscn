@@ -1,22 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0yr4dgbqxqlm"]
+[gd_scene load_steps=4 format=3 uid="uid://c0yr4dgbqxqlm"]
 
 [ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="1_hyppx"]
 [ext_resource type="Script" uid="uid://bo7fjk0di7b5m" path="res://Script/Player/PlayerController.gd" id="1_lpgxi"]
-[ext_resource type="PackedScene" uid="uid://dk4p4m2mokoll" path="res://Scenes/Player/Camera.tscn" id="3_h54ih"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gun0"]
-size = Vector2(128, 128)
+size = Vector2(35, 44)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_lpgxi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.325)
 texture = ExtResource("1_hyppx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_3gun0")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="Camera" parent="." instance=ExtResource("3_h54ih")]
-position = Vector2(0, -247)
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -50)
+zoom = Vector2(3, 3)

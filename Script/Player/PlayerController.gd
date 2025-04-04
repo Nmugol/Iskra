@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y += gravity * delta
 	
 	#TODO Dodanie area2d sprawdzjąceko czy kursor jerest w danym skresie 
-	if Input.is_action_pressed("MovePlayer"):
+	if Input.is_action_pressed("MovePlayer") and State.IsInArea:
 		nav.target_position = get_global_mouse_position()
 		
 	var direction = (nav.get_next_path_position() - global_position).normalized()

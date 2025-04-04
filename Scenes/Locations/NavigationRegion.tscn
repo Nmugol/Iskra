@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlea37ch83wt3"]
+
+[ext_resource type="Script" uid="uid://bhgujdnnpxy4v" path="res://Script/Locations/NavigationRegion.gd" id="1_fxch3"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fxch3"]
+
+[node name="NavigationRegion" type="Node2D"]
+script = ExtResource("1_fxch3")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_fxch3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(1, -1, 1, 1, -1, 1, -1, -1)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

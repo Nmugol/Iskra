@@ -101,6 +101,8 @@ visible = false
 script = ExtResource("1_23x67")
 LevelLocation = NodePath("Level")
 
+[node name="Level" type="Node" parent="."]
+
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Dialog" parent="GUI" instance=ExtResource("2_j0p05")]
@@ -133,5 +135,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
-
-[node name="Level" type="Node" parent="."]

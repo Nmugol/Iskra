@@ -1,6 +1,7 @@
 extends Node
 
 var IsRun: bool = true
+var IsInArea: bool = false
 
 var StateNumber: int = 0
 var StatePhase: int = 0
