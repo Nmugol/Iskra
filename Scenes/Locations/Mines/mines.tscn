@@ -1,13 +1,143 @@
-[gd_scene load_steps=9 format=3 uid="uid://ts7t4v5e7dhj"]
+[gd_scene load_steps=13 format=4 uid="uid://ts7t4v5e7dhj"]
 
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_81nhs"]
 [ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/Locations/mines.gd" id="1_mbq0s"]
-[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_7ae8y"]
+[ext_resource type="Texture2D" uid="uid://0ton3wc3gfvg" path="res://Sprite/BrickWall.png" id="2_rj231"]
+[ext_resource type="Texture2D" uid="uid://cphbc3jcpkvy4" path="res://Sprite/Grass.png" id="3_cfd4e"]
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="4_jouuq"]
 [ext_resource type="Texture2D" uid="uid://btv4b0c0xrsb0" path="res://Sprite/MinesEnters.png" id="5_ef34e"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3byke"]
-size = Vector2(6364, 123)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cfd4e"]
+texture = ExtResource("2_rj231")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+2:1/0/terrains_peering_bit/top_side = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_left_corner = 0
+2:2/0/terrains_peering_bit/top_side = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wokcf"]
+tile_size = Vector2i(32, 32)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_cfd4e")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wokcf"]
+texture = ExtResource("3_cfd4e")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -3, 16, -3, 16, 16, -16, 16)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1rdg3"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_wokcf")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rj231"]
 atlas = ExtResource("5_ef34e")
@@ -20,49 +150,51 @@ region = Rect2(0, 0, 70, 72)
 [node name="Mines" type="Node2D"]
 script = ExtResource("1_mbq0s")
 
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="Wall" type="TileMapLayer" parent="TileMap"]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAASABIAAAACAAIAAAARABIAAAABAAIAAAAQABIAAAABAAIAAAAPABIAAAABAAIAAAAOABIAAAABAAIAAAANABIAAAABAAIAAAAMABIAAAABAAIAAAALABIAAAABAAIAAAAKABIAAAABAAIAAAAJABIAAAABAAIAAAAIABIAAAABAAIAAAAHABIAAAABAAIAAAAGABIAAAABAAIAAAAFABIAAAABAAIAAAAEABIAAAABAAIAAAADABIAAAABAAIAAAACABIAAAABAAIAAAABABIAAAABAAIAAAAAABIAAAABAAIAAAD//xIAAAABAAIAAAD+/xIAAAABAAIAAAD9/xIAAAABAAIAAAD8/xIAAAABAAIAAAD7/xIAAAABAAIAAAD6/xIAAAABAAIAAAD5/xIAAAABAAIAAAD4/xIAAAABAAIAAAD3/xIAAAABAAIAAAD2/xIAAAABAAIAAAD1/xIAAAABAAIAAAD0/xIAAAABAAIAAADz/xIAAAAAAAIAAAASABEAAAACAAEAAAASABAAAAACAAAAAAARABEAAAABAAEAAAARABAAAAABAAAAAAAQABEAAAABAAEAAAAQABAAAAABAAAAAAAPABEAAAABAAEAAAAPABAAAAABAAAAAAAOABEAAAABAAEAAAAOABAAAAABAAAAAAANABEAAAABAAEAAAANABAAAAABAAAAAAAMABEAAAABAAEAAAAMABAAAAABAAAAAAALABEAAAABAAEAAAALABAAAAABAAAAAAAKABEAAAABAAEAAAAKABAAAAABAAAAAAAJABEAAAABAAEAAAAJABAAAAABAAAAAAAIABEAAAABAAEAAAAIABAAAAABAAAAAAAHABEAAAABAAEAAAAHABAAAAABAAAAAAAGABEAAAABAAEAAAAGABAAAAABAAAAAAAFABEAAAABAAEAAAAFABAAAAABAAAAAAAEABEAAAABAAEAAAAEABAAAAABAAAAAAADABEAAAABAAEAAAADABAAAAABAAAAAAACABEAAAABAAEAAAACABAAAAABAAAAAAABABEAAAABAAEAAAABABAAAAABAAAAAAAAABEAAAABAAEAAAAAABAAAAABAAAAAAD//xEAAAABAAEAAAD//xAAAAABAAAAAAD+/xEAAAABAAEAAAD+/xAAAAABAAAAAAD9/xEAAAABAAEAAAD9/xAAAAABAAAAAAD8/xEAAAABAAEAAAD8/xAAAAABAAAAAAD7/xEAAAABAAEAAAD7/xAAAAABAAAAAAD6/xEAAAABAAEAAAD6/xAAAAABAAAAAAD5/xEAAAABAAEAAAD5/xAAAAABAAAAAAD4/xEAAAABAAEAAAD4/xAAAAABAAAAAAD3/xEAAAABAAEAAAD3/xAAAAABAAAAAAD2/xEAAAABAAEAAAD2/xAAAAABAAAAAAD1/xEAAAABAAEAAAD1/xAAAAABAAAAAAD0/xEAAAABAAEAAAD0/xAAAAABAAAAAADz/xEAAAAAAAEAAADz/xAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_wokcf")
+
+[node name="Grass" type="TileMapLayer" parent="TileMap"]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAARABMAAAAAAAAAAAAQABMAAAAAAAAAAAAPABMAAAAAAAAAAAAOABMAAAAAAAAAAAANABMAAAAAAAAAAAAMABMAAAAAAAAAAAALABMAAAAAAAAAAAAKABMAAAAAAAAAAAAJABMAAAAAAAAAAAAIABMAAAAAAAAAAAAHABMAAAAAAAAAAAAGABMAAAAAAAAAAAAFABMAAAAAAAAAAAAEABMAAAAAAAAAAAADABMAAAAAAAAAAADz/xMAAAAAAAAAAAD0/xMAAAAAAAAAAAD1/xMAAAAAAAAAAAD2/xMAAAAAAAAAAAD3/xMAAAAAAAAAAAD4/xMAAAAAAAAAAAD5/xMAAAAAAAAAAAD6/xMAAAAAAAAAAAD7/xMAAAAAAAAAAAD8/xMAAAAAAAAAAAD9/xMAAAAAAAAAAAD+/xMAAAAAAAAAAAD//xMAAAAAAAAAAAAAABMAAAAAAAAAAAABABMAAAAAAAAAAAACABMAAAAAAAAAAAASABMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_1rdg3")
+
 [node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("4_jouuq")]
 CollisionArea = NodePath("../CollisionPolygon2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-454, 517, -456, 635, 518, 643, 518, 518, 159, 518, 160, 581, 55, 578, 55, 518)
+visible = false
+polygon = PackedVector2Array(-795, 548, -796, 658, 1713, 666, 1697, 555, 138, 545, 140, 595, 65, 595, 67, 553)
 
 [node name="Player" parent="." instance=ExtResource("1_81nhs")]
 top_level = true
 position = Vector2(0, 583)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-1043, 665)
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(2093, 0)
-scale = Vector2(49.6094, 1)
-texture = ExtResource("2_7ae8y")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2095, 0.5)
-shape = SubResource("RectangleShape2D_3byke")
-
 [node name="NonInteractiveObject" type="Node2D" parent="."]
 
 [node name="EntranceBackground" type="Sprite2D" parent="NonInteractiveObject"]
+visible = false
 texture_filter = 1
-position = Vector2(105, 560)
+position = Vector2(103, 571)
 texture = SubResource("AtlasTexture_rj231")
 
 [node name="InteractiveObject" type="Node2D" parent="."]
+position = Vector2(-2, 11)
 
 [node name="TextureButton" type="TextureButton" parent="InteractiveObject"]
 texture_filter = 1
-offset_left = 69.0
-offset_top = 538.0
-offset_right = 139.0
-offset_bottom = 610.0
+offset_left = 72.0
+offset_top = 542.0
+offset_right = 142.0
+offset_bottom = 614.0
 texture_normal = SubResource("AtlasTexture_ef34e")
 texture_pressed = SubResource("AtlasTexture_ef34e")
 texture_hover = SubResource("AtlasTexture_ef34e")
 texture_disabled = SubResource("AtlasTexture_ef34e")
 texture_focused = SubResource("AtlasTexture_ef34e")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="InteractiveObject/TextureButton" to="." method="_on_texture_button_pressed"]
