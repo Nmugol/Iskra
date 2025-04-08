@@ -20,5 +20,5 @@ shape = SubResource("RectangleShape2D_3gun0")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -50)
-zoom = Vector2(3, 3)
+offset = Vector2(0, -44)
+zoom = Vector2(5, 5)
