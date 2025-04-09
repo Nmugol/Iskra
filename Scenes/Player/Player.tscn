@@ -14,11 +14,14 @@ scale = Vector2(0.25, 0.325)
 texture = ExtResource("1_hyppx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_3gun0")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+simplify_path = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.695234, 0, 0.213363, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -44)
-zoom = Vector2(5, 5)
+offset = Vector2(0, -60)
+zoom = Vector2(3, 3)
