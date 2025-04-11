@@ -1,12 +1,13 @@
 extends Node
 
 const DATA_PATH: String = "user://save.json"
+const SECURITY_KEY: String = "5422e6745a3d257e754364bdd07a323fcc2718f8140f0849b0719b59fd508921"
 
-var CurrentScenePath: String = "res://Scenes/Locations/Mines/mines.tscn": 
+var CurrentScenePath: String = "res://Scenes/Locations/Mines/Mines.tscn": 
 	set(value): CurrentScenePath = value
 	get: return CurrentScenePath
 
-var PlayerPosition: Vector2 = Vector2(0,0):
+var PlayerPosition: Vector2 = Vector2(254,-75):
 	set(value): PlayerPosition = value
 	get: return PlayerPosition
 
@@ -26,7 +27,7 @@ func LoadDataFromFile()->void:
 		SaveDataToFile()
 		return
 
-	var file = FileAccess.open(DATA_PATH, FileAccess.READ)
+	var file = FileAccess.open_encrypted_with_pass(DATA_PATH, FileAccess.READ,SECURITY_KEY)
 
 	if file:
 		var data = JSON.parse_string(file.get_as_text())
@@ -59,10 +60,11 @@ func SaveDataToFile()->void:
 
 	var json = JSON.stringify(data, "\t")
 
-	var file = FileAccess.open(DATA_PATH, FileAccess.WRITE)
-
+	var file = FileAccess.open_encrypted_with_pass(DATA_PATH,FileAccess.WRITE,SECURITY_KEY)
+	
 	if file:
 		file.store_string(json)
+		file.close()
 	else:
 		print("Bład otwarcia pliku i zapisu")
-	file.close()
+	

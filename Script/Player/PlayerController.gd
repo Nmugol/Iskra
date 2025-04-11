@@ -4,12 +4,12 @@ extends CharacterBody2D
 @export var gravity: float = 980
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 
-var mouse_pos = Vector2()
-
 func _ready() -> void:
 	Signals.save_game.connect(SavePlayerData)
+	
+	position = Save.PlayerPosition
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not State.IsRun:
 		return
 

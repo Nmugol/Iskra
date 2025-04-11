@@ -34,9 +34,7 @@ func LoadLevel() -> void:
 	var levelnode = load(Save.CurrentScenePath).instantiate()
 	LevelLocation.add_child(levelnode)
 	
-	
 	DisabeLoadinScreen()
-	
 
 func SaveLevel() -> void:
 	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()

@@ -25,7 +25,7 @@ func _ready() -> void:
 	Signals.player_message.connect(func(icon, text): add_to_queue(PlayerTalk, icon, text))
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("LoadText"): displaySpeed= 0.01
 	if Input.is_action_just_pressed("NextText") and tetx_is_end: next = true
 	if queue.is_empty() and not is_talking: closeButton.show()

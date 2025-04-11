@@ -31,8 +31,8 @@ func CreateItem() -> void:
 		var item_button: Button = Button.new()
 		item_button.icon = load(item.small_sprite_path)
 		item_button.custom_minimum_size = Vector2(50,50)
-		item_button.texture_filter = 1
-		item_button.icon_alignment = 1
+		item_button.texture_filter = TEXTURE_FILTER_NEAREST
+		item_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		item_button.expand_icon = true
 		item_button.pressed.connect(self.LookAtItem.bind(item))
 		

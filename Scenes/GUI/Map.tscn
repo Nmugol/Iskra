@@ -36,6 +36,7 @@ offset_right = 197.0
 offset_bottom = 232.0
 text = "wdawda"
 icon = ExtResource("3_4g1po")
+LocationSceenPath = "res://Scenes/Locations/Mines/Mines.tscn"
 LocationName = "wdawda"
 LocationActiveOnStage = Array[int]([0])
 LocationIcon = ExtResource("3_4g1po")
@@ -48,6 +49,7 @@ offset_right = 355.0
 offset_bottom = 235.0
 text = "lowdawdwda"
 icon = ExtResource("3_4g1po")
+LocationSceenPath = "res://Scenes/Locations/Mines/Mines.tscn"
 LocationActiveOnStage = Array[int]([0])
 LocationIcon = ExtResource("3_4g1po")
 

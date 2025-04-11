@@ -7,24 +7,25 @@
 atlas = ExtResource("2_ft8w5")
 region = Rect2(24, 18, 16, 30)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gun0"]
-size = Vector2(16, 30)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ft8w5"]
+radius = 1.0
+height = 14.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_lpgxi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, -15)
 texture = SubResource("AtlasTexture_h54ih")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_3gun0")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ft8w5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
 debug_enabled = true
 debug_use_custom = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -60)
-zoom = Vector2(3, 3)
