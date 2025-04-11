@@ -5,6 +5,7 @@ extends Node2D
 @onready var Equipment: Control = %Equipment
 @onready var Map: Control = %Map
 @onready var Transition: AnimationPlayer = %Transition
+@onready var SettingsInGame: Control = %Setting
 
 func _ready()->void:
 	Signals.show_dialog.connect(ShowDialog)
@@ -20,9 +21,22 @@ func _ready()->void:
 	Signals.disabe_loadin_screen.connect(DisabeLoadinScreen)
 	Signals.enable_loadin_screen.connect(EnableLoadinScreen)
 	
+	Signals.show_settin_in_game.connect(ShowSettinIngame)
+	Signals.hide_settin_in_game.connect(HideSettinIngame)
+	
 	State.IsRun = true
 	
 	LoadLevel()
+
+func ShowSettinIngame() -> void:
+	HideDialog()
+	HideEquipment()
+	HideMap()
+	SettingsInGame.show()
+
+func HideSettinIngame() -> void:
+	SettingsInGame.hide()
+	Signals.show_ui.emit()
 
 func LoadLevel() -> void:
 	# Usunięcei cześniejszych załdowanych scen
@@ -44,6 +58,7 @@ func ShowDialog():
 	Dialog.show()
 	HideEquipment()
 	HideMap()
+	HideSettinIngame()
 
 func HideDialog():
 	State.IsRun = true
@@ -54,6 +69,7 @@ func ShowEquipment() -> void:
 	Equipment.show()
 	HideDialog()
 	HideMap()
+	HideSettinIngame()
 
 func HideEquipment() -> void:
 	State.IsRun = true
@@ -64,6 +80,7 @@ func ShowMap() -> void:
 	Map.show()
 	HideDialog()
 	HideEquipment()
+	HideSettinIngame()
 
 func HideMap() -> void:
 	State.IsRun = true
@@ -76,6 +93,7 @@ func DisabeLoadinScreen() -> void:
 	HideDialog()
 	HideEquipment()
 	HideMap()
+	HideSettinIngame()
 	Signals.show_ui.emit()
 
 func EnableLoadinScreen() -> void:

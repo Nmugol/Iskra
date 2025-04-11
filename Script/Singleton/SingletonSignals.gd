@@ -19,4 +19,7 @@ signal change_scene()
 signal disabe_loadin_screen()
 signal enable_loadin_screen()
 
+signal show_settin_in_game()
+signal hide_settin_in_game()
+
 signal show_ui()
