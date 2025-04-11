@@ -27,5 +27,3 @@ shape = SubResource("CapsuleShape2D_ft8w5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-debug_enabled = true
-debug_use_custom = true
