@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_xc3rf"]
 [ext_resource type="Script" uid="uid://db0ix8wubve5u" path="res://Script/Locations/EntranceToTheMine.gd" id="17_6p72f"]
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/Light2.png" id="18_pw3ey"]
-[ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Locations/Exit.gd" id="19_pw3ey"]
+[ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="19_pw3ey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qi5i"]
 size = Vector2(1484, 640)
@@ -167,6 +167,7 @@ position = Vector2(1032, -186)
 script = ExtResource("17_6p72f")
 HightLight = NodePath("PointLight2D")
 Player = NodePath("../Player")
+MinDistance = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntranceToTheMine"]
 position = Vector2(0, -7)

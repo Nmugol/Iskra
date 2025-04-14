@@ -3,18 +3,19 @@ extends Area2D
 @export var HightLight: PointLight2D
 @export var Player: CharacterBody2D
 @export var MinDistance: float = 100
-
+@export var LocationPath: String
 var dist
 
 func _ready() -> void:
 	HightLight.hide()
-	
 
 func _process(_delta: float) -> void:
 	if HightLight.visible:
 
 		if Input.is_action_just_pressed("MovePlayer") and dist <= MinDistance:
-			print("Można wejść") 
+			Save.CurrentScenePath = LocationPath
+			Signals.enable_loadin_screen.emit()
+			Signals.change_scene.emit()
 		if Input.is_action_just_pressed("MovePlayer") and dist > MinDistance:
 			Player.nav.target_position = Vector2(1030, -150)
 

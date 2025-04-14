@@ -22,7 +22,9 @@ func  _ready() -> void:
 func _process(_delta: float) -> void:
 	if mouse_hover:
 		if Input.is_action_just_pressed("MovePlayer") and dist <= MinDistance:
-			print("Można wejść") 
+			Save.CurrentScenePath = LocationPath
+			Signals.enable_loadin_screen.emit()
+			Signals.change_scene.emit()
 		if Input.is_action_just_pressed("MovePlayer") and dist > MinDistance:
 			Player.nav.target_position = StoppingPoint
 			dist = floor(position.distance_to(Player.position))
