@@ -39,6 +39,9 @@ func HideSettinIngame() -> void:
 	Signals.show_ui.emit()
 
 func LoadLevel() -> void:
+	
+	print(Save.CurrentScenePath)
+	
 	# Usunięcei cześniejszych załdowanych scen
 	var loadLevels = LevelLocation.get_children()
 	for l in loadLevels:
@@ -49,6 +52,8 @@ func LoadLevel() -> void:
 	LevelLocation.add_child(levelnode)
 	
 	DisabeLoadinScreen()
+	Signals.save_game.emit()
+	Signals.save_to_file.emit()
 
 func SaveLevel() -> void:
 	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://ts7t4v5e7dhj"]
+[gd_scene load_steps=23 format=4 uid="uid://ts7t4v5e7dhj"]
 
 [ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/Locations/Mines.gd" id="1_op74w"]
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="2_uv6ud"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="14_xlb57"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="15_txgkb"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_xc3rf"]
-[ext_resource type="Script" uid="uid://db0ix8wubve5u" path="res://Script/Locations/EntranceToTheMine.gd" id="17_6p72f"]
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/Light2.png" id="18_pw3ey"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="19_pw3ey"]
 
@@ -34,7 +33,7 @@ radius = 24.0
 height = 60.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ha0f"]
-size = Vector2(37, 208)
+size = Vector2(40, 208)
 
 [node name="Mines" type="Node2D"]
 script = ExtResource("1_op74w")
@@ -130,17 +129,17 @@ monitorable = false
 polygon = PackedVector2Array(40, 8, 96, 8, 96, -80, 128, -80, 128, -56, 112, -56, 112, -32, 96, -32, 96, 8, 376, 8, 376, -24, 388, -43, 400, -40, 400, -67, 400, -104, 384, -104, 384, -80, 368, -80, 368, -128, 400, -128, 400, -104, 408, -112, 432, -112, 432, -88, 416, -88, 416, -66, 400, -67, 400, -40, 424, -40, 448, -32, 464, -16, 464, 8, 496, 8, 512, -16, 528, -16, 536, 8, 568, 8, 568, -8, 576, -16, 592, -48, 616, -48, 632, -8, 656, -8, 680, 16, 680, 40, 720, 40, 712, 32, 728, 8, 736, 8, 760, -8, 784, -8, 784, -16, 800, -24, 824, -32, 840, 0, 832, 16, 800, 16, 776, 32, 768, 48, 720, 48, 720, 40, 680, 40, 680, 96, 712, 96, 720, 88, 744, 88, 752, 80, 768, 80, 776, 96, 768, 104, 744, 104, 744, 120, 712, 120, 712, 96, 680, 96, 680, 168, 704, 168, 712, 176, 728, 200, 752, 200, 768, 216, 800, 216, 800, 184, 792, 184, 792, 168, 760, 168, 760, 144, 792, 144, 792, 160, 824, 160, 824, 144, 856, 144, 856, 168, 824, 168, 824, 184, 800, 184, 800, 216, 856, 216, 896, 216, 896, 136, 944, 136, 944, 216, 992, 216, 992, 120, 1040, 120, 1040, 216, 1152, 216, 1152, 192, 1144, 192, 1144, 176, 1128, 176, 1128, 152, 1144, 128, 1160, 120, 1176, 120, 1192, 104, 1208, 96, 1216, 112, 1224, 128, 1216, 144, 1216, 160, 1200, 168, 1176, 168, 1176, 184, 1152, 192, 1152, 216, 1200, 216, 1216, 200, 1232, 200, 1240, 216, 1248, 216, 1264, 192, 1280, 192, 1312, 184, 1328, 168, 1344, 168, 1360, 184, 1376, 200, 1384, 200, 1376, 184, 1400, 160, 1416, 176, 1424, 176, 1424, 160, 1432, 144, 1432, 104, 1448, 88, 1448, 40, 1400, 40, 1400, 56, 1384, 64, 1368, 64, 1368, 80, 1344, 88, 1336, 80, 1344, 64, 1352, 56, 1368, 56, 1368, 40, 1352, 32, 1336, 40, 1320, 32, 1320, 56, 1304, 64, 1288, 56, 1296, 32, 1304, 16, 1312, 16, 1312, 8, 1304, 0, 1312, -16, 1320, -24, 1336, -8, 1336, 8, 1352, -8, 1368, -32, 1392, -16, 1400, 0, 1384, 8, 1376, 8, 1376, 16, 1392, 16, 1400, 32, 1400, 40, 1448, 40, 1448, -40, 1448, -184, 1408, -184, 1408, -208, 1392, -208, 1392, -248, 1360, -248, 1344, -232, 1296, -232, 1296, -224, 1320, -224, 1320, -200, 1288, -200, 1288, -224, 1296, -224, 1296, -232, 1288, -240, 1272, -256, 1256, -256, 1248, -240, 1248, -216, 1264, -216, 1288, -192, 1296, -176, 1288, -168, 1272, -168, 1272, -144, 1280, -136, 1288, -104, 1280, -96, 1264, -96, 1256, -80, 1248, -88, 1232, -88, 1224, -96, 1208, -96, 1200, -104, 1208, -112, 1216, -128, 1200, -128, 1200, -136, 1208, -144, 1216, -136, 1232, -136, 1248, -144, 1256, -120, 1264, -120, 1264, -136, 1272, -144, 1272, -168, 1256, -168, 1232, -192, 1232, -208, 1200, -208, 1192, -192, 1160, -192, 1152, -184, 1136, -184, 1136, -160, 1128, -144, 1104, -144, 1056, -146, 1052, -164, 1041, -158, 1031, -156, 1023, -158, 1005, -165, 1000, -152, 992, -144, 992, -120, 976, -120, 976, -96, 960, -96, 960, -144, 992, -144, 1000, -152, 976, -152, 960, -168, 952, -184, 944, -184, 936, -160, 912, -160, 904, -168, 872, -168, 872, -144, 824, -144, 824, -160, 800, -160, 800, -136, 784, -136, 784, -112, 768, -112, 768, -160, 800, -160, 792, -192, 776, -192, 760, -200, 736, -232, 736, -280, 728, -280, 720, -264, 704, -264, 696, -280, 600, -280, 600, -272, 648, -272, 656, -264, 664, -232, 648, -224, 640, -216, 648, -208, 648, -192, 640, -184, 624, -184, 616, -192, 592, -192, 584, -208, 552, -208, 552, -232, 568, -256, 592, -264, 600, -272, 600, -280, 544, -280, 536, -256, 440, -256, 424, -248, 424, -224, 416, -216, 408, -184, 216, -184, 216, -168, 176, -168, 160, -160, 160, -152, 184, -152, 184, -128, 160, -128, 160, -112, 192, -112, 192, -88, 176, -88, 176, -64, 160, -64, 160, -112, 160, -128, 152, -128, 144, -120, 128, -120, 120, -128, 120, -136, 96, -136, 96, -152, 112, -168, 128, -168, 128, -184, 72, -184, 72, -176, 40, -176)
 
 [node name="Player" parent="." instance=ExtResource("13_i1nue")]
-position = Vector2(320, -91)
+position = Vector2(56, -80)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(320, -91)
+position = Vector2(217.333, -80)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -88
-limit_top = -256
-limit_right = 1464
-limit_bottom = 856
+limit_left = 4
+limit_top = -384
+limit_right = 1488
+limit_bottom = 256
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 process_priority = 300
@@ -149,7 +148,7 @@ script = ExtResource("14_xlb57")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(320, -91)
+position = Vector2(217.333, -80)
 script = ExtResource("15_txgkb")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -161,12 +160,14 @@ dead_zone_width = 0.183
 dead_zone_height = 0.252
 limit_target = NodePath("../CameraBorder/CollisionShape2D")
 
-[node name="EntranceToTheMine" type="Area2D" parent="." node_paths=PackedStringArray("HightLight", "Player")]
+[node name="EntranceToTheMine" type="Area2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(1032, -186)
-script = ExtResource("17_6p72f")
-HightLight = NodePath("PointLight2D")
-Player = NodePath("../Player")
-MinDistance = 50.0
+script = ExtResource("19_pw3ey")
+location_path = "res://Scenes/Locations/Mines/Cave1.tscn"
+min_distance = 55.0
+player = NodePath("../Player")
+stopping_point = Vector2(1032, -144)
+target_player_position = Vector2(314, 131)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntranceToTheMine"]
 position = Vector2(0, -7)
@@ -178,16 +179,16 @@ scale = Vector2(0.35, 0.35)
 energy = 2.85
 texture = ExtResource("18_pw3ey")
 
-[node name="Exit" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Exit" type="Area2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("19_pw3ey")
-LocationPath = "wdawd"
-MinDistance = 135.0
-StoppingPoint = Vector2(50, -100)
-Player = NodePath("../Player")
+location_path = "res://Scenes/Locations/Mines/Cave1.tscn"
+player = NodePath("../Player")
+stopping_point = Vector2(48, -80)
+target_player_position = Vector2(314, 131)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
-position = Vector2(18.5, -88)
+position = Vector2(20, -88)
 shape = SubResource("RectangleShape2D_3ha0f")
 
-[connection signal="mouse_entered" from="EntranceToTheMine" to="EntranceToTheMine" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="EntranceToTheMine" to="EntranceToTheMine" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="EntranceToTheMine" to="." method="_on_entrance_to_the_mine_mouse_entered"]
+[connection signal="mouse_exited" from="EntranceToTheMine" to="." method="_on_entrance_to_the_mine_mouse_exited"]

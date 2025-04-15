@@ -1,8 +1,12 @@
 extends Node2D
 
+@onready var light = $EntranceToTheMine/PointLight2D
+
 func _ready() -> void:
-	Signals.emit_signal("disabe_loadin_screen")
+	light.hide()
 
+func _on_entrance_to_the_mine_mouse_entered() -> void:
+	light.show()
 
-func _on_texture_button_pressed() -> void:
-	print("press")
+func _on_entrance_to_the_mine_mouse_exited() -> void:
+	light.hide()
