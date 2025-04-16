@@ -32,7 +32,8 @@ func _process(_delta: float) -> void:
 			in_scene = false
 			Save.CurrentScenePath = location_path
 			Save.PlayerPosition = target_player_position
-			get_tree().change_scene_to_file(MainScene)
+			Signals.enable_loadin_screen.emit()
+			Signals.change_scene.emit()
 			
 		if Input.is_action_just_pressed("MovePlayer") and dist > min_distance and in_scene:
 			player.nav.target_position = stopping_point
