@@ -136,10 +136,10 @@ physics_interpolation_mode = 1
 position = Vector2(217.333, -80)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -528
-limit_top = -864
+limit_left = -520
+limit_top = -844
 limit_right = 1856
-limit_bottom = 2064
+limit_bottom = 2056
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 process_priority = 300
@@ -179,9 +179,11 @@ scale = Vector2(0.35, 0.35)
 energy = 2.85
 texture = ExtResource("18_pw3ey")
 
-[node name="Exit" type="Area2D" parent="." node_paths=PackedStringArray("player")]
+[node name="Exit" type="Area2D" parent="." node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("19_pw3ey")
 location_path = "res://Scenes/Locations/Mines/MineHub.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
 player = NodePath("../Player")
 stopping_point = Vector2(48, -80)
 target_player_position = Vector2(1808, -88)
