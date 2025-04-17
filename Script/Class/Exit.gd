@@ -2,7 +2,8 @@ extends Area2D
 class_name Exit
 
 @export var location_path: String
-@export_range(10,200,1) var min_distance: float = 100
+
+@export var min_distance: float = 500
 
 @export_category("Player")
 @export var player: CharacterBody2D
@@ -18,7 +19,8 @@ var in_scene: bool = true
 func  _ready() -> void:
 	in_scene = true
 	mouse_entered.connect(func():
-		dist = floor(position.distance_to(player.position))
+		dist = floor(global_transform.origin.distance_to(player.global_transform.origin))
+
 		mouse_hover = true
 		)
 
@@ -29,12 +31,17 @@ func  _ready() -> void:
 func _process(_delta: float) -> void:
 	if mouse_hover:
 		if Input.is_action_just_pressed("MovePlayer") and dist <= min_distance:
+
 			in_scene = false
+			print(dist)
+
 			Save.CurrentScenePath = location_path
 			Save.PlayerPosition = target_player_position
-			Signals.enable_loadin_screen.emit()
-			Signals.change_scene.emit()
-			
+			get_tree().change_scene_to_file(MainScene)
+
 		if Input.is_action_just_pressed("MovePlayer") and dist > min_distance and in_scene:
+
+
 			player.nav.target_position = stopping_point
+			print(dist)
 			dist = floor(position.distance_to(player.position))
