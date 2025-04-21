@@ -6,6 +6,7 @@
 extends Button
 
 @export var LocationSceenPath: String = "res://Scenes/Locations/Mines/mines.tscn"
+@export var LocationPosition: Vector2
 @export var LocationName: String = "location":
 	set(value):
 		LocationName = value
@@ -16,6 +17,8 @@ extends Button
 	set(value):
 		LocationIcon = value
 		icon = LocationIcon
+		
+const  MainScene = "res://Scenes/World.tscn"
 
 func _ready() -> void:
 	changeVizibility()
@@ -24,8 +27,10 @@ func changeVizibility() -> void:
 	hide()
 	if LocationActiveOnStage.has(State.StateNumber):
 		show()
+	if Save.CurrentScenePath == LocationSceenPath:
+		hide()
 
 func _on_pressed() -> void:
+	Save.PlayerPosition = LocationPosition
 	Save.CurrentScenePath = LocationSceenPath
-	Signals.enable_loadin_screen.emit()
-	Signals.change_scene.emit()
+	get_tree().change_scene_to_file(MainScene)

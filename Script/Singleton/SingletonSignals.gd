@@ -54,3 +54,6 @@ signal hide_settin_in_game()
 
 @warning_ignore("unused_signal")
 signal show_ui()
+
+@warning_ignore("unused_signal")
+signal update_distanace()

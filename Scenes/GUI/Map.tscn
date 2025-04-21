@@ -36,9 +36,9 @@ offset_right = 197.0
 offset_bottom = 232.0
 text = "wdawda"
 icon = ExtResource("3_4g1po")
-LocationSceenPath = "res://Scenes/Locations/Mines/Mines.tscn"
-LocationName = "wdawda"
-LocationActiveOnStage = Array[int]([0])
+LocationSceenPath = "res://Scenes/Locations/Town/Town.tscn"
+LocationName = "Town"
+LocationActiveOnStage = Array[int]([0, 1])
 LocationIcon = ExtResource("3_4g1po")
 
 [node name="LocationButton2" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
@@ -49,7 +49,9 @@ offset_right = 355.0
 offset_bottom = 235.0
 text = "lowdawdwda"
 icon = ExtResource("3_4g1po")
-LocationSceenPath = "res://Scenes/Locations/Mines/Mines.tscn"
+LocationSceenPath = "res://Scenes/Locations/Mines/MineHub.tscn"
+LocationPosition = Vector2(766, 1523)
+LocationName = "Mines"
 LocationActiveOnStage = Array[int]([0])
 LocationIcon = ExtResource("3_4g1po")
 

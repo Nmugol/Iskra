@@ -20,7 +20,7 @@ func _physics_process(_delta: float) -> void:
 	if nav.is_navigation_finished():
 		velocity = Vector2.ZERO
 		sprite.play("idle")
-		
+		Signals.update_distanace.emit()
 	else:
 		var direction = (nav.get_next_path_position() - global_position).normalized()
 		velocity = direction * speed
