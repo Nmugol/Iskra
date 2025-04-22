@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://culk15ib3i1ev"]
+[gd_scene load_steps=18 format=4 uid="uid://culk15ib3i1ev"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_cje54"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_wi3wh"]
@@ -25,6 +25,9 @@ ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rciga"]
 size = Vector2(40, 272)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2qt3"]
+size = Vector2(48, 160)
 
 [node name="MineHub" type="Node2D"]
 
@@ -136,3 +139,21 @@ texture = ExtResource("10_4c4mo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mines1"]
 position = Vector2(1836, -88)
 shape = SubResource("RectangleShape2D_rciga")
+
+[node name="Town" type="Area2D" parent="." node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("9_p4enp")
+location_path = "res://Scenes/Locations/Town/Town.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
+player = NodePath("../Player")
+stopping_point = Vector2(-460, 687)
+target_player_position = Vector2(1112, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Town"]
+position = Vector2(-504, 688)
+shape = SubResource("RectangleShape2D_t2qt3")
+
+[node name="PointLight2D" type="PointLight2D" parent="Town"]
+position = Vector2(-504, 688)
+scale = Vector2(0.24, 0.8)
+texture = ExtResource("10_4c4mo")

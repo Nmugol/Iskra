@@ -87,12 +87,11 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ft8w5"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h54ih"]
 radius = 1.0
-height = 14.0
+height = 6.0
 
 [node name="Player" type="CharacterBody2D"]
-z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_lpgxi")
 
@@ -104,8 +103,9 @@ animation = &"walk"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ft8w5")
+shape = SubResource("CapsuleShape2D_h54ih")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
