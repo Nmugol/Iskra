@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=20 format=4 uid="uid://4jjkf688l0no"]
 
+[ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="1_sycnr"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="2_8f76d"]
@@ -11,6 +12,8 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_2siod"]
 [ext_resource type="TileSet" uid="uid://dnsb1dhex2si7" path="res://TileSet/Furnace.tres" id="6_basko"]
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="11_basko"]
+[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="12_5r2dp"]
+[ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="13_7y4t6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -21,7 +24,17 @@ duration = 1.0
 transition = 0
 ease = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5r2dp"]
+size = Vector2(96, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gycxx"]
+size = Vector2(96, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7y4t6"]
+size = Vector2(96, 24)
+
 [node name="RailwayStation" type="Node2D"]
+script = ExtResource("1_gycxx")
 
 [node name="Border" type="Area2D" parent="."]
 
@@ -90,17 +103,17 @@ tile_map_data = PackedByteArray("AAAnAAoAAAAAABYAAAAmAAkAAAAAAAMAAAAnAAkAAAABAAM
 tile_set = ExtResource("1_nuh5u")
 
 [node name="Player" parent="." instance=ExtResource("2_8f76d")]
-position = Vector2(214, 97)
+position = Vector2(1232, 384)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(214, 97)
+position = Vector2(1232, 296)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 0
-limit_top = -352
-limit_right = 2416
-limit_bottom = 416
+limit_left = -524
+limit_top = -850
+limit_right = 1852
+limit_bottom = 2050
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -110,7 +123,7 @@ script = ExtResource("3_sycnr")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(214, 97)
+position = Vector2(1232, 296)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -129,4 +142,70 @@ CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion/Area2D2"]
-polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 136, 136, 136, 392, 216, 392, 216, 136, 520, 136, 520, 360, 600, 360, 600, 136, 1192, 136, 1192, 392, 1272, 392, 1272, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2328, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2336, 96, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, 16, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 96, 2336, 48, 2368, 0, 2392, 0, 2392, -136, 2328, -136, 2264, -136, 2264, -160, 2328, -160, 2328, -136, 2392, -136, 2392, -184, 2328, -184, 2264, -184, 2264, -208, 2328, -208, 2328, -184, 2392, -184, 2392, -280, 2208, -280, 2208, -264, 2096, -264, 2096, -280, 2096, -160, 2096, -136, 2080, -136, 2072, -112, 2064, -136, 2064, -160, 2096, -160, 2096, -264, 2096, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -216, 1904, -184, 1904, -152, 1856, -152, 1840, -168, 1840, -192, 1824, -184, 1776, -184, 1784, -192, 1808, -192, 1816, -208, 1824, -208, 1840, -256, 1824, -280, 1816, -264, 1776, -232, 1768, -280, 1640, -280, 1640, -216, 1544, -216, 1545.46, -208, 1496, -208, 1496, -120, 1512, -120, 1520, -176, 1536, -192, 1576, -184, 1552, -152, 1584, -136, 1568, -120, 1544, -112, 1512, -120, 1496, -120, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1552, -8, 1552, 8, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
+polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 128, 136, 128, 392, 224, 392, 224, 136, 512, 136, 512, 392, 608, 392, 608, 136, 1184, 136, 1184, 392, 1280, 392, 1280, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2328, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2336, 96, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, 16, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 96, 2336, 48, 2368, 0, 2392, 0, 2392, -136, 2328, -136, 2264, -136, 2264, -160, 2328, -160, 2328, -136, 2392, -136, 2392, -184, 2328, -184, 2264, -184, 2264, -208, 2328, -208, 2328, -184, 2392, -184, 2392, -280, 2208, -280, 2208, -264, 2096, -264, 2096, -280, 2096, -160, 2096, -136, 2080, -136, 2072, -112, 2064, -136, 2064, -160, 2096, -160, 2096, -264, 2096, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -216, 1904, -184, 1904, -152, 1856, -152, 1840, -168, 1840, -192, 1824, -184, 1776, -184, 1784, -192, 1808, -192, 1816, -208, 1824, -208, 1840, -256, 1824, -280, 1816, -264, 1776, -232, 1768, -280, 1640, -280, 1640, -216, 1544, -216, 1545.46, -208, 1496, -208, 1496, -120, 1512, -120, 1520, -176, 1536, -192, 1576, -184, 1552, -152, 1584, -136, 1568, -120, 1544, -112, 1512, -120, 1496, -120, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1552, -8, 1552, 8, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
+
+[node name="Passage" type="Node2D" parent="."]
+
+[node name="Enter1" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("13_7y4t6")
+location_path = "res://Scenes/Locations/Town/Town.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
+player = NodePath("../../Player")
+stopping_point = Vector2(176, 384)
+target_player_position = Vector2(-568, -672)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Enter1"]
+position = Vector2(176, 404)
+shape = SubResource("RectangleShape2D_5r2dp")
+
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter1"]
+position = Vector2(176.191, 403.962)
+rotation = -1.5708
+scale = Vector2(0.118302, 0.480587)
+texture = ExtResource("12_5r2dp")
+
+[node name="Enter2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("13_7y4t6")
+location_path = "res://Scenes/Locations/Town/Town.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
+player = NodePath("../../Player")
+stopping_point = Vector2(560, 384)
+target_player_position = Vector2(-568, -672)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Enter2"]
+position = Vector2(560, 404)
+shape = SubResource("RectangleShape2D_gycxx")
+
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter2"]
+position = Vector2(559.604, 404.227)
+rotation = -1.5708
+scale = Vector2(0.121866, 0.479823)
+texture = ExtResource("12_5r2dp")
+
+[node name="Enter3" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("13_7y4t6")
+location_path = "res://Scenes/Locations/Mines/MineHub.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
+player = NodePath("../../Player")
+stopping_point = Vector2(1232, 384)
+target_player_position = Vector2(760, -800)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Enter3"]
+position = Vector2(1232, 404)
+shape = SubResource("RectangleShape2D_7y4t6")
+
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter3"]
+position = Vector2(1232.06, 404.02)
+rotation = -1.5708
+scale = Vector2(0.11898, 0.479144)
+texture = ExtResource("12_5r2dp")
+
+[connection signal="mouse_entered" from="Passage/Enter1" to="." method="_on_enter_1_mouse_entered"]
+[connection signal="mouse_exited" from="Passage/Enter1" to="." method="_on_enter_1_mouse_exited"]
+[connection signal="mouse_entered" from="Passage/Enter2" to="." method="_on_enter_2_mouse_entered"]
+[connection signal="mouse_exited" from="Passage/Enter2" to="." method="_on_enter_2_mouse_exited"]
+[connection signal="mouse_entered" from="Passage/Enter3" to="." method="_on_enter_3_mouse_entered"]
+[connection signal="mouse_exited" from="Passage/Enter3" to="." method="_on_enter_3_mouse_exited"]
