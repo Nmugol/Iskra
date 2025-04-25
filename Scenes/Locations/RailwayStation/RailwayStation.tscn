@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=21 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="11_basko"]
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="12_5r2dp"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="13_7y4t6"]
+[ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_ljs7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -110,10 +111,10 @@ physics_interpolation_mode = 1
 position = Vector2(1232, 296)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -524
-limit_top = -850
-limit_right = 1852
-limit_bottom = 2050
+limit_left = 0
+limit_top = -352
+limit_right = 2416
+limit_bottom = 416
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -159,11 +160,13 @@ target_player_position = Vector2(-568, -672)
 position = Vector2(176, 404)
 shape = SubResource("RectangleShape2D_5r2dp")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter1"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter1" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(176.191, 403.962)
 rotation = -1.5708
 scale = Vector2(0.118302, 0.480587)
 texture = ExtResource("12_5r2dp")
+script = ExtResource("15_ljs7w")
+ParenArea = NodePath("..")
 
 [node name="Enter2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("13_7y4t6")
@@ -178,11 +181,13 @@ target_player_position = Vector2(-568, -672)
 position = Vector2(560, 404)
 shape = SubResource("RectangleShape2D_gycxx")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter2"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter2" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(559.604, 404.227)
 rotation = -1.5708
 scale = Vector2(0.121866, 0.479823)
 texture = ExtResource("12_5r2dp")
+script = ExtResource("15_ljs7w")
+ParenArea = NodePath("..")
 
 [node name="Enter3" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("13_7y4t6")
@@ -197,15 +202,10 @@ target_player_position = Vector2(760, -800)
 position = Vector2(1232, 404)
 shape = SubResource("RectangleShape2D_7y4t6")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter3"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter3" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(1232.06, 404.02)
 rotation = -1.5708
 scale = Vector2(0.11898, 0.479144)
 texture = ExtResource("12_5r2dp")
-
-[connection signal="mouse_entered" from="Passage/Enter1" to="." method="_on_enter_1_mouse_entered"]
-[connection signal="mouse_exited" from="Passage/Enter1" to="." method="_on_enter_1_mouse_exited"]
-[connection signal="mouse_entered" from="Passage/Enter2" to="." method="_on_enter_2_mouse_entered"]
-[connection signal="mouse_exited" from="Passage/Enter2" to="." method="_on_enter_2_mouse_exited"]
-[connection signal="mouse_entered" from="Passage/Enter3" to="." method="_on_enter_3_mouse_entered"]
-[connection signal="mouse_exited" from="Passage/Enter3" to="." method="_on_enter_3_mouse_exited"]
+script = ExtResource("15_ljs7w")
+ParenArea = NodePath("..")

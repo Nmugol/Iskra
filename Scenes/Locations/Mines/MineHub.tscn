@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://culk15ib3i1ev"]
+[gd_scene load_steps=20 format=4 uid="uid://culk15ib3i1ev"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_cje54"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_wi3wh"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="8_5qlm5"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="9_p4enp"]
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="10_4c4mo"]
+[ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_5hspf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qlm5"]
 size = Vector2(2376, 2900)
@@ -123,59 +124,67 @@ dead_zone_height = 0.252
 draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
-[node name="Mines1" type="Area2D" parent="." node_paths=PackedStringArray("area_shape", "player")]
+[node name="Passage" type="Node2D" parent="."]
+
+[node name="Mines1" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("9_p4enp")
 location_path = "res://Scenes/Locations/Mines/Mines.tscn"
 area_shape = NodePath("CollisionShape2D")
 min_distance = 50.0
-player = NodePath("../Player")
+player = NodePath("../../Player")
 stopping_point = Vector2(1808, -88)
 target_player_position = Vector2(48, -80)
 
-[node name="PointLight2D" type="PointLight2D" parent="Mines1"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines1" node_paths=PackedStringArray("ParenArea")]
 texture_filter = 1
 position = Vector2(1848, -88)
 rotation = -3.14159
 scale = Vector2(0.213713, 1.35709)
 texture = ExtResource("10_4c4mo")
+script = ExtResource("14_5hspf")
+ParenArea = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mines1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Mines1"]
 position = Vector2(1836, -88)
 shape = SubResource("RectangleShape2D_rciga")
 
-[node name="Town" type="Area2D" parent="." node_paths=PackedStringArray("area_shape", "player")]
+[node name="Town" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("9_p4enp")
 location_path = "res://Scenes/Locations/Town/Town.tscn"
 area_shape = NodePath("CollisionShape2D")
 min_distance = 50.0
-player = NodePath("../Player")
+player = NodePath("../../Player")
 stopping_point = Vector2(-460, 687)
 target_player_position = Vector2(1112, -200)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Town"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Town"]
 position = Vector2(-504, 688)
 shape = SubResource("RectangleShape2D_t2qt3")
 
-[node name="PointLight2D" type="PointLight2D" parent="Town"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Town" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(-504, 688)
 scale = Vector2(0.24, 0.8)
 texture = ExtResource("10_4c4mo")
+script = ExtResource("14_5hspf")
+ParenArea = NodePath("..")
 
-[node name="RailwayStation" type="Area2D" parent="." node_paths=PackedStringArray("area_shape", "player")]
+[node name="RailwayStation" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("9_p4enp")
 location_path = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
 area_shape = NodePath("CollisionShape2D")
 min_distance = 50.0
-player = NodePath("../Player")
+player = NodePath("../../Player")
 stopping_point = Vector2(760, -800)
 target_player_position = Vector2(1232, 384)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RailwayStation"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/RailwayStation"]
 position = Vector2(752, -833.5)
 shape = SubResource("RectangleShape2D_5hspf")
 
-[node name="PointLight2D" type="PointLight2D" parent="RailwayStation"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/RailwayStation" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(752.111, -833.631)
 rotation = 1.5708
 scale = Vector2(0.174114, 0.959737)
 texture = ExtResource("10_4c4mo")
+script = ExtResource("14_5hspf")
+ParenArea = NodePath("..")

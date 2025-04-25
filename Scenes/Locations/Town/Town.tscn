@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dwveajj4tv1bu"]
+[gd_scene load_steps=21 format=4 uid="uid://dwveajj4tv1bu"]
 
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="1_j2mr0"]
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_j8x0t"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_j8x0t"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="12_0x46y"]
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="13_t4w28"]
+[ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_1on30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5t81g"]
 size = Vector2(2224, 1648)
@@ -166,11 +167,13 @@ metadata/_edit_lock_ = true
 position = Vector2(1132, -200)
 shape = SubResource("RectangleShape2D_1on30")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines1"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines1" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(1132.03, -200)
 rotation = 3.14159
 scale = Vector2(0.120257, 0.48)
 texture = ExtResource("13_t4w28")
+script = ExtResource("15_1on30")
+ParenArea = NodePath("..")
 
 [node name="Mines2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("12_0x46y")
@@ -186,11 +189,13 @@ metadata/_edit_lock_ = true
 position = Vector2(1132, 168)
 shape = SubResource("RectangleShape2D_t4w28")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines2"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines2" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(1132, 168)
 rotation = 3.14159
 scale = Vector2(0.12, 0.48)
 texture = ExtResource("13_t4w28")
+script = ExtResource("15_1on30")
+ParenArea = NodePath("..")
 
 [node name="RailwayStation" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("12_0x46y")
@@ -205,15 +210,10 @@ target_player_position = Vector2(176, 384)
 position = Vector2(-536, -700)
 shape = SubResource("RectangleShape2D_qk8aa")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/RailwayStation"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/RailwayStation" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(-535.977, -699.881)
 rotation = 1.5708
 scale = Vector2(0.116048, 0.798003)
 texture = ExtResource("13_t4w28")
-
-[connection signal="mouse_entered" from="Passage/Mines1" to="." method="_on_mines_1_mouse_entered"]
-[connection signal="mouse_exited" from="Passage/Mines1" to="." method="_on_mines_1_mouse_exited"]
-[connection signal="mouse_entered" from="Passage/Mines2" to="." method="_on_mines_2_mouse_entered"]
-[connection signal="mouse_exited" from="Passage/Mines2" to="." method="_on_mines_2_mouse_exited"]
-[connection signal="mouse_entered" from="Passage/RailwayStation" to="." method="_on_railway_station_mouse_entered"]
-[connection signal="mouse_exited" from="Passage/RailwayStation" to="." method="_on_railway_station_mouse_exited"]
+script = ExtResource("15_1on30")
+ParenArea = NodePath("..")

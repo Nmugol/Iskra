@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cwpyjyttkkb54"]
+[gd_scene load_steps=18 format=4 uid="uid://cwpyjyttkkb54"]
 
 [ext_resource type="TileSet" uid="uid://fakyakw3gfom" path="res://TileSet/Wall.tres" id="1_3k242"]
 [ext_resource type="Script" uid="uid://buf2nex6eqpt3" path="res://Script/Locations/Cave1.gd" id="1_jpcqj"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_jpcqj"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="11_1to3h"]
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/Light2.png" id="12_v2ujh"]
+[ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_v8sys"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saell"]
 size = Vector2(1552, 1112)
@@ -121,25 +122,29 @@ limit_target = NodePath("../CameraBorder/CollisionShape2D")
 [node name="Player" parent="." instance=ExtResource("7_saell")]
 position = Vector2(314, 131)
 
-[node name="Node2D" type="Area2D" parent="." node_paths=PackedStringArray("player")]
+[node name="Passage" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Node2D" type="Area2D" parent="Passage" node_paths=PackedStringArray("player")]
 y_sort_enabled = true
 position = Vector2(312, 80)
 script = ExtResource("11_1to3h")
 location_path = "res://Scenes/Locations/Mines/Mines.tscn"
 min_distance = 68.0
-player = NodePath("../Player")
+player = NodePath("../../Player")
 stopping_point = Vector2(314, 131)
 target_player_position = Vector2(1032, -144)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Node2D"]
 shape = SubResource("CapsuleShape2D_v2ujh")
 
-[node name="PointLight2D" type="PointLight2D" parent="Node2D"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Node2D" node_paths=PackedStringArray("ParenArea")]
 y_sort_enabled = true
 position = Vector2(1, -1)
 scale = Vector2(0.32, 0.3275)
 energy = 2.85
 texture = ExtResource("12_v2ujh")
-
-[connection signal="mouse_entered" from="Node2D" to="." method="_on_node_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Node2D" to="." method="_on_node_2d_mouse_exited"]
+script = ExtResource("14_v8sys")
+ParenArea = NodePath("..")
