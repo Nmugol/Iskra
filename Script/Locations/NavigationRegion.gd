@@ -5,6 +5,7 @@ extends Node2D
 @export var CollisionArea: CollisionPolygon2D
 
 func _ready() -> void:
+	show()
 	var new_navigation_mesh = NavigationPolygon.new()
 	var bounding_outline: PackedVector2Array = CollisionArea.polygon
 	new_navigation_mesh.add_outline(bounding_outline)

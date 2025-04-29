@@ -34,8 +34,7 @@ func  _ready() -> void:
 		)
 
 func CalculateDistance() -> void:
-	#var d1 = sqrt(pow(area_shape.global_position.x - start_point.x,2)+pow(area_shape.global_position.y-start_point.y,2))
-	#var d2 = sqrt(pow(player.global_position.x - start_point.x,2)+pow(player.global_position.y-start_point.y,2))
+	
 	dist = floor(area_shape.global_position.distance_to(player.global_position))
 
 func _process(_delta: float) -> void:

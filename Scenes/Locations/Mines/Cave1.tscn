@@ -79,7 +79,6 @@ tile_map_data = PackedByteArray("AAAbABsAAAAAAAEAAAAcAB0AAAALAAEAAAAcABwAAAAGAAE
 tile_set = ExtResource("5_7fv1q")
 
 [node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("6_jne6g")]
-visible = false
 CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
 metadata/_edit_lock_ = true
 
@@ -125,11 +124,12 @@ position = Vector2(314, 131)
 [node name="Passage" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="Node2D" type="Area2D" parent="Passage" node_paths=PackedStringArray("player")]
+[node name="Node2D" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 y_sort_enabled = true
 position = Vector2(312, 80)
 script = ExtResource("11_1to3h")
 location_path = "res://Scenes/Locations/Mines/Mines.tscn"
+area_shape = NodePath("CollisionShape2D")
 min_distance = 68.0
 player = NodePath("../../Player")
 stopping_point = Vector2(314, 131)
