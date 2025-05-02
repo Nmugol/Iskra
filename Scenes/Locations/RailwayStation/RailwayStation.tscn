@@ -104,17 +104,17 @@ tile_map_data = PackedByteArray("AAAnAAoAAAAAABYAAAAmAAkAAAAAAAMAAAAnAAkAAAABAAM
 tile_set = ExtResource("1_nuh5u")
 
 [node name="Player" parent="." instance=ExtResource("2_8f76d")]
-position = Vector2(1232, 384)
+position = Vector2(2048, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(1232, 296)
+position = Vector2(2048, -8)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -88
-limit_top = -256
-limit_right = 1464
-limit_bottom = 856
+limit_left = 0
+limit_top = -352
+limit_right = 2416
+limit_bottom = 416
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -124,7 +124,7 @@ script = ExtResource("3_sycnr")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(1232, 296)
+position = Vector2(2048, -8)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")

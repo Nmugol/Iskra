@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://gu6ykutygd0o"]
+[gd_scene load_steps=17 format=4 uid="uid://gu6ykutygd0o"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_plpsv"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="2_lwscp"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="10_pgvm3"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_r08l3"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_r5nvl"]
+[ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="13_2mhdm"]
 
 [sub_resource type="Resource" id="Resource_w173l"]
 script = ExtResource("12_r5nvl")
@@ -22,11 +23,14 @@ ease = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nn4xx"]
 size = Vector2(3064, 1656)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgvm3"]
+size = Vector2(128, 24)
+
 [node name="ResidentialHousesZone" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(-224, 176)
+position = Vector2(656, -480)
 zoom = Vector2(3, 3)
 process_callback = 0
 limit_left = -1016
@@ -42,7 +46,7 @@ script = ExtResource("10_pgvm3")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(-224, 176)
+position = Vector2(656, -480)
 script = ExtResource("11_r08l3")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -161,4 +165,18 @@ disabled = true
 
 [node name="Player" parent="." instance=ExtResource("9_2mhdm")]
 z_index = 1
-position = Vector2(-224, 176)
+position = Vector2(656, -560)
+
+[node name="Passage" type="Node2D" parent="."]
+
+[node name="Town" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("13_2mhdm")
+location_path = "res://Scenes/Locations/Town/Town.tscn"
+area_shape = NodePath("CollisionShape2D")
+player = NodePath("../../Player")
+stopping_point = Vector2(656, -560)
+target_player_position = Vector2(-1040, 408)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Town"]
+position = Vector2(656, -588)
+shape = SubResource("RectangleShape2D_pgvm3")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dwveajj4tv1bu"]
+[gd_scene load_steps=24 format=4 uid="uid://dwveajj4tv1bu"]
 
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="1_j2mr0"]
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_j8x0t"]
@@ -37,6 +37,9 @@ size = Vector2(160, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ora4"]
 size = Vector2(32, 168)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lefyd"]
+size = Vector2(32, 112)
 
 [node name="Town" type="Node2D"]
 script = ExtResource("1_t4w28")
@@ -122,11 +125,11 @@ polygon = PackedVector2Array(768, -576, 760, -616, 704, -624, 696, -664, 688, -7
 
 [node name="Player" parent="." instance=ExtResource("2_duv5h")]
 z_index = 1
-position = Vector2(-1032, -144)
+position = Vector2(0, -72)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(-866.667, -144)
+position = Vector2(1.17191e-32, -72)
 zoom = Vector2(3, 3)
 process_callback = 0
 limit_left = -1080
@@ -142,7 +145,7 @@ script = ExtResource("3_w3muf")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(-866.667, -144)
+position = Vector2(0, -72)
 script = ExtResource("4_1ef16")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -238,6 +241,26 @@ shape = SubResource("RectangleShape2D_3ora4")
 [node name="PointLight2D" type="PointLight2D" parent="Passage/CommercialArea" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(-1064, -148)
 scale = Vector2(0.16, 0.84)
+texture = ExtResource("13_t4w28")
+script = ExtResource("15_1on30")
+ParenArea = NodePath("..")
+
+[node name="ResidentialHousesZone" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("12_0x46y")
+location_path = "res://Scenes/Locations/Town/ResidentialHousesZone.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
+player = NodePath("../../Player")
+stopping_point = Vector2(-1040, 408)
+target_player_position = Vector2(656, -560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/ResidentialHousesZone"]
+position = Vector2(-1064, 408)
+shape = SubResource("RectangleShape2D_lefyd")
+
+[node name="PointLight2D" type="PointLight2D" parent="Passage/ResidentialHousesZone" node_paths=PackedStringArray("ParenArea")]
+position = Vector2(-1064, 408)
+scale = Vector2(0.16, 0.56)
 texture = ExtResource("13_t4w28")
 script = ExtResource("15_1on30")
 ParenArea = NodePath("..")

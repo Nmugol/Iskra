@@ -28,7 +28,8 @@ theme_override_constants/margin_bottom = 60
 [node name="Panel" type="Panel" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="LocationButton" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+[node name="Town" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
 layout_mode = 0
 offset_left = 61.0
 offset_top = 50.0
@@ -37,11 +38,13 @@ offset_bottom = 232.0
 text = "wdawda"
 icon = ExtResource("3_4g1po")
 LocationSceenPath = "res://Scenes/Locations/Town/Town.tscn"
+LocationPosition = Vector2(0, -72)
 LocationName = "Town"
 LocationActiveOnStage = Array[int]([0, 1])
 LocationIcon = ExtResource("3_4g1po")
 
-[node name="LocationButton2" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+[node name="Mines" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
 layout_mode = 0
 offset_left = 219.0
 offset_top = 53.0
@@ -52,6 +55,19 @@ icon = ExtResource("3_4g1po")
 LocationSceenPath = "res://Scenes/Locations/Mines/MineHub.tscn"
 LocationPosition = Vector2(766, 1523)
 LocationName = "Mines"
+LocationActiveOnStage = Array[int]([0])
+LocationIcon = ExtResource("3_4g1po")
+
+[node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
+layout_mode = 0
+offset_left = 379.0
+offset_top = 61.0
+offset_right = 515.0
+offset_bottom = 243.0
+LocationSceenPath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
+LocationPosition = Vector2(2048, -8)
+LocationName = "Railway Station"
 LocationActiveOnStage = Array[int]([0])
 LocationIcon = ExtResource("3_4g1po")
 
