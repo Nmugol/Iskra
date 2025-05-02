@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://gu6ykutygd0o"]
+[gd_scene load_steps=19 format=4 uid="uid://gu6ykutygd0o"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_plpsv"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="2_lwscp"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_r08l3"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_r5nvl"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="13_2mhdm"]
+[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="14_r08l3"]
+[ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_r5nvl"]
 
 [sub_resource type="Resource" id="Resource_w173l"]
 script = ExtResource("12_r5nvl")
@@ -180,3 +182,11 @@ target_player_position = Vector2(-1040, 408)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Town"]
 position = Vector2(656, -588)
 shape = SubResource("RectangleShape2D_pgvm3")
+
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Town" node_paths=PackedStringArray("ParenArea")]
+position = Vector2(656.125, -588.035)
+rotation = 1.5708
+scale = Vector2(0.124469, 0.639838)
+texture = ExtResource("14_r08l3")
+script = ExtResource("15_r5nvl")
+ParenArea = NodePath("..")

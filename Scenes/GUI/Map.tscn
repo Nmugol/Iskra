@@ -61,10 +61,10 @@ LocationIcon = ExtResource("3_4g1po")
 [node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 visible = true
 layout_mode = 0
-offset_left = 379.0
-offset_top = 61.0
-offset_right = 515.0
-offset_bottom = 243.0
+offset_left = 375.0
+offset_top = 46.0
+offset_right = 511.0
+offset_bottom = 228.0
 LocationSceenPath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
 LocationPosition = Vector2(2048, -8)
 LocationName = "Railway Station"
