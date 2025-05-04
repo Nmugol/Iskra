@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
+const distansToClick: float = 30
+
 func _ready() -> void:
 	Signals.save_game.connect(SavePlayerData)
 	sprite.play("idle")
@@ -14,7 +16,7 @@ func _physics_process(_delta: float) -> void:
 	if not State.IsRun:
 		return
 
-	if Input.is_action_pressed("MovePlayer") and State.IsInArea:
+	if Input.is_action_pressed("MovePlayer") and State.IsInArea and DistaneToClick():
 		nav.target_position = get_global_mouse_position()
 
 	if nav.is_navigation_finished():
@@ -34,6 +36,12 @@ func _physics_process(_delta: float) -> void:
 		sprite.play("walk")
 
 	move_and_slide()
+
+func DistaneToClick() -> float:
+	var d = global_position.distance_to(get_global_mouse_position())
+	
+	if d >= distansToClick: return true
+	return false
 
 func SavePlayerData() -> void:
 	Save.PlayerPosition = position

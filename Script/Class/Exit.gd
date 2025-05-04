@@ -23,6 +23,8 @@ func  _ready() -> void:
 	
 	Signals.update_distanace.connect(CalculateDistance)
 	
+	CalculateDistance()
+	
 	in_scene = true
 	mouse_entered.connect(func():
 		CalculateDistance()
