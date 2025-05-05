@@ -1,0 +1,18 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cbmrdwd2iym64"]
+
+[ext_resource type="Texture2D" uid="uid://0in17y33q81r" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Structures/Buildings/Floors.png" id="1_mm7lq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xqtjj"]
+texture = ExtResource("1_mm7lq")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_xqtjj")
