@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cflie5mi8mlhh"]
+[gd_scene load_steps=24 format=4 uid="uid://cflie5mi8mlhh"]
 
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_00xur"]
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_osjfl"]
@@ -29,6 +29,12 @@ size = Vector2(20, 33)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8knba"]
 size = Vector2(20, 34)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqw0d"]
+size = Vector2(20, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsyqg"]
+size = Vector2(20, 39)
+
 [sub_resource type="Resource" id="Resource_8s6ho"]
 script = ExtResource("4_t4kvu")
 duration = 1.0
@@ -36,7 +42,6 @@ transition = 0
 ease = 2
 
 [node name="CommercialArea" type="Node2D"]
-position = Vector2(1, 0)
 
 [node name="Teren" type="Node2D" parent="."]
 
@@ -117,6 +122,8 @@ shape = SubResource("RectangleShape2D_d8aml")
 disabled = true
 
 [node name="Passage" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Town" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("8_oujmm")
@@ -126,6 +133,8 @@ min_distance = 50.0
 player = NodePath("../../Player")
 stopping_point = Vector2(1384, 128)
 target_player_position = Vector2(-1032, -144)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Passage/Town" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(1416, 120)
@@ -147,6 +156,8 @@ min_distance = 50.0
 player = NodePath("../../Player")
 stopping_point = Vector2(-8, 80)
 target_player_position = Vector2(280, 120)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Jeweller"]
 position = Vector2(-8, 47.5)
@@ -167,6 +178,8 @@ min_distance = 50.0
 player = NodePath("../../Player")
 stopping_point = Vector2(360, 579)
 target_player_position = Vector2(480, 304)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Passage/Forge" node_paths=PackedStringArray("ParenArea")]
 position = Vector2(360, 542)
@@ -179,18 +192,62 @@ ParenArea = NodePath("..")
 position = Vector2(360, 542)
 shape = SubResource("RectangleShape2D_8knba")
 
+[node name="AntiqueShop1" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("8_oujmm")
+location_path = "res://Scenes/Locations/Town/AntiqueShop.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
+player = NodePath("../../Player")
+stopping_point = Vector2(296, -344)
+target_player_position = Vector2(-84, 376)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/AntiqueShop1"]
+position = Vector2(296, -387.5)
+shape = SubResource("RectangleShape2D_jqw0d")
+
+[node name="PointLight2D" type="PointLight2D" parent="Passage/AntiqueShop1" node_paths=PackedStringArray("ParenArea")]
+position = Vector2(296, -385.5)
+scale = Vector2(0.13, 0.235)
+texture = ExtResource("11_8knba")
+script = ExtResource("10_8knba")
+ParenArea = NodePath("..")
+
+[node name="AntiqueShop2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+script = ExtResource("8_oujmm")
+location_path = "res://Scenes/Locations/Town/AntiqueShop.tscn"
+area_shape = NodePath("CollisionShape2D")
+min_distance = 50.0
+player = NodePath("../../Player")
+stopping_point = Vector2(456, -320)
+target_player_position = Vector2(284, 376)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/AntiqueShop2"]
+position = Vector2(456, -355.5)
+shape = SubResource("RectangleShape2D_xsyqg")
+
+[node name="PointLight2D" type="PointLight2D" parent="Passage/AntiqueShop2" node_paths=PackedStringArray("ParenArea")]
+position = Vector2(456, -352.5)
+scale = Vector2(0.12, 0.245)
+texture = ExtResource("11_8knba")
+script = ExtResource("10_8knba")
+ParenArea = NodePath("..")
+
 [node name="Player" parent="." instance=ExtResource("1_00xur")]
-position = Vector2(360, 579)
+position = Vector2(456, -320)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(360, 579)
+position = Vector2(456, -320)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -472
-limit_top = -400
-limit_right = 808
-limit_bottom = 360
+limit_left = -920
+limit_top = -656
+limit_right = 1432
+limit_bottom = 720
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -200,7 +257,7 @@ script = ExtResource("2_xakv7")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(361, 579)
+position = Vector2(456, -320)
 script = ExtResource("3_osjfl")
 follow_mode = 5
 follow_target = NodePath("../Player")
