@@ -28,7 +28,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("LoadText"): displaySpeed= 0.01
 	if Input.is_action_just_pressed("NextText") and tetx_is_end: next = true
-	if queue.is_empty() and not is_talking: closeButton.show()
+	if queue.is_empty() and not is_talking: 
+		closeButton.show()
 
 func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
 	queue.append([func_ref, iconName, textToDisplay])

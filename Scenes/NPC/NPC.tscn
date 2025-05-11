@@ -736,8 +736,10 @@ npc_name = "EmilSchmidt"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -16)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_kwlhr")
-animation = &"Przemek_Walk"
+animation = &"EmilSchmidt_Idle"
+frame_progress = 0.590341
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

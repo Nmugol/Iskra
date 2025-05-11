@@ -2,6 +2,8 @@
 class_name NPC
 extends CharacterBody2D
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 @export_enum(
 	"EmilSchmidt", 
 	"MiriamSchmidt", 
@@ -16,14 +18,15 @@ extends CharacterBody2D
 	"Patryk",
 	"Przemek"
 	) var npc_name: String = "Guards":
-		set(value):
-			npc_name = value
-			animation_to_play = npc_name+"_"+animation_name
-			
+	set(value):
+		npc_name = value
+		animation_to_play = npc_name+"_"+animation_name
+		
+		if sprite != null:
 			sprite.play(animation_to_play)
-	
-		get: return npc_name
-	
+
+	get: return npc_name
+
 @export_enum(
 	"Idle", 
 	"Walk"
@@ -37,22 +40,19 @@ extends CharacterBody2D
 		match value:
 			"Idle": sprite.scale = Vector2(0.5,0.5)
 			"Walk": sprite.scale = Vector2(0.667,0.667)
-			
-		
+
 	get: return animation_name
 
 @export var flip_sprite: bool = false:
 	set(value):
 		flip_sprite = value
 		
-		sprite.flip_h = value
+		if sprite != null:
+			sprite.flip_h = value
+
 	get: return flip_sprite
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-
-var animation_to_play: String = ""
-
-
+var animation_to_play: String = "Guards_Idle"
 
 func _ready() -> void:
 	sprite.play(animation_to_play)

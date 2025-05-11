@@ -210,12 +210,10 @@ limit_target = NodePath("../CameraBorder/CollisionShape2D")
 [node name="NPCS" type="Node2D" parent="."]
 
 [node name="Guard" parent="NPCS" instance=ExtResource("20_3ha0f")]
-z_index = 2
-position = Vector2(1068, -142)
+position = Vector2(1081, -146)
 npc_name = "Guards"
 
 [node name="Guard2" parent="NPCS" instance=ExtResource("20_3ha0f")]
-z_index = 2
 position = Vector2(853, -147)
 npc_name = "Guards"
 flip_sprite = true
@@ -227,7 +225,6 @@ npc_name = "Guards"
 flip_sprite = true
 
 [node name="Guard4" parent="NPCS" instance=ExtResource("20_3ha0f")]
-z_index = 2
 position = Vector2(36, -169)
 npc_name = "Guards"
 flip_sprite = true
