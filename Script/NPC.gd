@@ -41,11 +41,18 @@ extends CharacterBody2D
 		
 	get: return animation_name
 
+@export var flip_sprite: bool = false:
+	set(value):
+		flip_sprite = value
+		
+		sprite.flip_h = value
+	get: return flip_sprite
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var animation_to_play: String = ""
 
-var flip_sprite: bool = false
+
 
 func _ready() -> void:
 	sprite.play(animation_to_play)
