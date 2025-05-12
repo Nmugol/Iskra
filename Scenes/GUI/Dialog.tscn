@@ -1,7 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch7ywbdvrm5ud"]
+[gd_scene load_steps=22 format=3 uid="uid://ch7ywbdvrm5ud"]
 
 [ext_resource type="Script" uid="uid://dgus4uexcarco" path="res://Script/GUI/Dialog.gd" id="1_0hepe"]
-[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_0tpv1"]
+[ext_resource type="Texture2D" uid="uid://glidwj223lpj" path="res://Sprite/Character/Guards/Guard Face.png" id="2_lu68g"]
+[ext_resource type="Texture2D" uid="uid://cy6s0ae2ghjue" path="res://Sprite/Character/Guards/Guard Face2.png" id="3_v3bn7"]
+[ext_resource type="Texture2D" uid="uid://c8bolr8dvfglt" path="res://Sprite/Character/Guards/Guard Face3.png" id="4_h15r2"]
+[ext_resource type="Texture2D" uid="uid://c5f3rjlkt2a2f" path="res://Sprite/Character/Guards/Guard Face4.png" id="5_1eixm"]
+[ext_resource type="Texture2D" uid="uid://c4r1gkqyg2apr" path="res://Sprite/Character/Guards/Guard Face5.png" id="6_tnyw7"]
+[ext_resource type="Texture2D" uid="uid://d0ayivq1va11u" path="res://Sprite/Character/Guards/Guard Face6.png" id="7_68ntn"]
+[ext_resource type="Texture2D" uid="uid://cp72nj4dgmcag" path="res://Sprite/Character/Guards/Guard Face7.png" id="8_qgiuj"]
+[ext_resource type="Texture2D" uid="uid://cto803vxlxrnn" path="res://Sprite/Character/Guards/Guard Face8.png" id="9_ajxkh"]
+[ext_resource type="Texture2D" uid="uid://4ln5y3w21xe0" path="res://Sprite/Character/Daniel/Daniel Face.png" id="10_arl41"]
+[ext_resource type="Texture2D" uid="uid://dkj782tcu0lp" path="res://Sprite/Character/EmilSchmidt/EmilSchmidt Face.png" id="11_v13xj"]
+[ext_resource type="Texture2D" uid="uid://cqj86wnrcb4k6" path="res://Sprite/Character/Hania/Hania Face.png" id="12_skagb"]
+[ext_resource type="Texture2D" uid="uid://cv78v6xat47nt" path="res://Sprite/Character/James/James Face.png" id="13_t45a8"]
+[ext_resource type="Texture2D" uid="uid://b3n41ca8b7nq" path="res://Sprite/Character/Jonas/James Face.png" id="14_8mnkg"]
+[ext_resource type="Texture2D" uid="uid://cul7rcjrkd13g" path="res://Sprite/Character/Kacper/Kacper Face.png" id="15_7omyu"]
+[ext_resource type="Texture2D" uid="uid://cu2m6p66mk5d3" path="res://Sprite/Character/Kamila/Kamila Face.png" id="16_gkxrx"]
+[ext_resource type="Texture2D" uid="uid://cihei5rt6ykgb" path="res://Sprite/Character/MiriamSchmidt/MiriamSchmidt Face.png" id="17_3ikec"]
+[ext_resource type="Texture2D" uid="uid://hd3vq3gfj5j2" path="res://Sprite/Character/Patryk/Patryk Face.png" id="18_lwaeu"]
+[ext_resource type="Texture2D" uid="uid://ri4xkks1ar6" path="res://Sprite/Character/Peter/Peter Face.png" id="19_sflmd"]
+[ext_resource type="Texture2D" uid="uid://cqaoa43fo2d0v" path="res://Sprite/Character/Przemek/Przemek Face.png" id="20_yc2vb"]
+[ext_resource type="Texture2D" uid="uid://dpe2fyc4ogfcg" path="res://Sprite/Character/Zygmunt/Zygmunt Face.png" id="21_71ten"]
 
 [node name="Dialog" type="Control"]
 layout_mode = 3
@@ -12,7 +31,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0hepe")
 Icons = Dictionary[String, CompressedTexture2D]({
-"tets": ExtResource("2_0tpv1")
+"Daniel": ExtResource("10_arl41"),
+"EmilSchmidt": ExtResource("11_v13xj"),
+"Guard1": ExtResource("2_lu68g"),
+"Guard2": ExtResource("3_v3bn7"),
+"Guard3": ExtResource("4_h15r2"),
+"Guard4": ExtResource("5_1eixm"),
+"Guard5": ExtResource("6_tnyw7"),
+"Guard6": ExtResource("7_68ntn"),
+"Guard7": ExtResource("8_qgiuj"),
+"Guard8": ExtResource("9_ajxkh"),
+"Hania": ExtResource("12_skagb"),
+"James": ExtResource("13_t45a8"),
+"Jonas": ExtResource("14_8mnkg"),
+"Kacper": ExtResource("15_7omyu"),
+"Kamila": ExtResource("16_gkxrx"),
+"MiriamSchmidt": ExtResource("17_3ikec"),
+"Patryk": ExtResource("18_lwaeu"),
+"Peter": ExtResource("19_sflmd"),
+"Przemek": ExtResource("20_yc2vb"),
+"Zygmunt": ExtResource("21_71ten")
 })
 
 [node name="Box" type="MarginContainer" parent="."]
@@ -74,10 +112,12 @@ theme_override_constants/margin_bottom = 15
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Text" type="Label" parent="Box/HBoxContainer/DialogPanel/MarginContainer/ScrollContainer"]
+[node name="Text" type="RichTextLabel" parent="Box/HBoxContainer/DialogPanel/MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_following = true
 
 [node name="CloseButton" type="Button" parent="Box/HBoxContainer/DialogPanel"]
 unique_name_in_owner = true

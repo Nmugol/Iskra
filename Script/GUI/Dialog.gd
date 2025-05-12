@@ -9,26 +9,31 @@ extends Node
 @onready var playerIcons: TextureRect = %PlayerIcons
 
 @onready var scroll: ScrollContainer = %ScrollContainer
-@onready var Text: Label = %Text
+# Zmieniliśmy Label na RichTextLabel
+@onready var Text: RichTextLabel = %Text
 
 @onready var timer: Timer = $Timer
 @onready var closeButton: Button = %CloseButton
 
-var displaySpeed: float = 0.5
+var displaySpeed: float = 0.1
 var queue: Array = []
 var is_talking: bool = false
 var next: bool = false
-var tetx_is_end: bool = false
+var text_is_end: bool = false
 
 func _ready() -> void:
+	# Włączamy BBCode (jeśli chcemy później używać tagów)
+	Text.bbcode_enabled = true
 	Signals.peopel_message.connect(func(icon, text): add_to_queue(PeopleTalk, icon, text))
 	Signals.player_message.connect(func(icon, text): add_to_queue(PlayerTalk, icon, text))
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("LoadText"): displaySpeed= 0.01
-	if Input.is_action_just_pressed("NextText") and tetx_is_end: next = true
-	if queue.is_empty() and not is_talking: 
+	if Input.is_action_just_pressed("LoadText"):
+		displaySpeed = 0.01
+	if Input.is_action_just_pressed("NextText") and text_is_end:
+		next = true
+	if queue.is_empty() and not is_talking:
 		closeButton.show()
 
 func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
@@ -36,7 +41,8 @@ func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
 	process_queue()
 
 func process_queue():
-	if is_talking or queue.is_empty(): return
+	if is_talking or queue.is_empty():
+		return
 	
 	is_talking = true
 	var item = queue.pop_front()
@@ -53,7 +59,7 @@ func process_queue():
 	process_queue() 
 
 func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
-	Settings.IsRun = false
+	State.IsRun = false
 	playerPanel.hide()
 	closeButton.hide()
 	peopelIcons.texture = Icons[iconName]
@@ -70,17 +76,19 @@ func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
 	await LoadinText(textToDisplay)
 	
 
-func LoadinText(text: String):
-	tetx_is_end = false
-	displaySpeed = 0.5
-	Text.visible_characters = 0
-	Text.text = text
-	for line in text.length():
+func LoadinText(text: String) -> void:
+	text_is_end = false
+	displaySpeed = 0.1
+	Text.clear()                    # czyścimy zawartość
+	Text.bbcode_text = text         # ustawiamy pełny tekst
+	Text.visible_characters = 0     # żadnych widocznych znaków na start
+	for i in text.length():
 		timer.start(displaySpeed)
 		Text.visible_characters += 1
+		# przewiń na sam dół
 		scroll.scroll_vertical = floor(scroll.get_v_scroll_bar().max_value)
 		await timer.timeout
-	tetx_is_end = true
+	text_is_end = true
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()

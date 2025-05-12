@@ -8,6 +8,7 @@ extends Node2D
 @onready var SettingsInGame: Control = %Setting
 
 func _ready()->void:
+	State.LevelIsLoad = false
 	Signals.show_dialog.connect(ShowDialog)
 	Signals.hide_dialog.connect(HideDialog)
 	
@@ -39,9 +40,7 @@ func HideSettinIngame() -> void:
 	Signals.show_ui.emit()
 
 func LoadLevel() -> void:
-	
-	print(Save.CurrentScenePath)
-	
+
 	# Usunięcei cześniejszych załdowanych scen
 	var loadLevels = LevelLocation.get_children()
 	for l in loadLevels:
@@ -100,6 +99,7 @@ func DisabeLoadinScreen() -> void:
 	HideMap()
 	HideSettinIngame()
 	Signals.show_ui.emit()
+	State.LevelIsLoad = true
 
 func EnableLoadinScreen() -> void:
 	State.IsRun = true
