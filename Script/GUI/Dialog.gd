@@ -4,14 +4,10 @@ extends Node
 
 @onready var peopelPanel: Panel = %PeopelPanel
 @onready var peopelIcons: TextureRect = %PeopleIcons
-
 @onready var playerPanel: Panel = %PlayerPanel
 @onready var playerIcons: TextureRect = %PlayerIcons
-
 @onready var scroll: ScrollContainer = %ScrollContainer
-# Zmieniliśmy Label na RichTextLabel
 @onready var Text: RichTextLabel = %Text
-
 @onready var timer: Timer = $Timer
 @onready var closeButton: Button = %CloseButton
 
@@ -20,13 +16,66 @@ var queue: Array = []
 var is_talking: bool = false
 var next: bool = false
 var text_is_end: bool = false
+var finus_statae: bool = true
+
+var thread: Thread
+var mutex: Mutex = Mutex.new()
+var should_exit: bool = false
 
 func _ready() -> void:
-	# Włączamy BBCode (jeśli chcemy później używać tagów)
 	Text.bbcode_enabled = true
-	Signals.peopel_message.connect(func(icon, text): add_to_queue(PeopleTalk, icon, text))
-	Signals.player_message.connect(func(icon, text): add_to_queue(PlayerTalk, icon, text))
+	finus_statae = true
+	Signals.peopel_message.connect(add_people_message)
+	Signals.player_message.connect(add_player_message)
+	
+	thread = Thread.new()
+	thread.start(_thread_process)
 
+func add_people_message(icon: String, text: String):
+	mutex.lock()
+	queue.append([PeopleTalk, icon, text])
+	mutex.unlock()
+
+func add_player_message(icon: String, text: String):
+	mutex.lock()
+	queue.append([PlayerTalk, icon, text])
+	mutex.unlock()
+
+func _thread_process():
+	while true:
+		mutex.lock()
+		if should_exit:
+			mutex.unlock()
+			return
+			
+		if queue.is_empty() or is_talking:
+			mutex.unlock()
+			await Engine.get_main_loop().process_frame
+			continue
+			
+		is_talking = true
+		var item = queue.pop_front()
+		mutex.unlock()
+		
+		# Przekazujemy obsługę UI do głównego wątku
+		call_deferred("_process_item", item)
+
+func _process_item(item: Array):
+	var func_ref = item[0]
+	var iconName = item[1]
+	var textToDisplay = item[2]
+	
+	func_ref.call(iconName, textToDisplay)
+	State.StatePhase += 1
+	
+	# Oczekiwanie na głównym wątku
+	next = false
+	while not next:
+		await get_tree().process_frame
+	
+	mutex.lock()
+	is_talking = false
+	mutex.unlock()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("LoadText"):
@@ -36,28 +85,6 @@ func _process(_delta: float) -> void:
 	if queue.is_empty() and not is_talking:
 		closeButton.show()
 
-func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
-	queue.append([func_ref, iconName, textToDisplay])
-	process_queue()
-
-func process_queue():
-	if is_talking or queue.is_empty():
-		return
-	
-	is_talking = true
-	var item = queue.pop_front()
-	var func_ref = item[0]
-	var iconName = item[1]
-	var textToDisplay = item[2]
-	await func_ref.call(iconName, textToDisplay)
-	
-	next = false
-	while not next:
-		await get_tree().process_frame
-
-	is_talking = false
-	process_queue() 
-
 func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
 	State.IsRun = false
 	playerPanel.hide()
@@ -65,7 +92,6 @@ func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
 	peopelIcons.texture = Icons[iconName]
 	peopelPanel.show()
 	await LoadinText(textToDisplay)
-	
 
 func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
 	State.IsRun = false
@@ -74,22 +100,28 @@ func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
 	playerIcons.texture = Icons[iconName]
 	playerPanel.show()
 	await LoadinText(textToDisplay)
-	
 
 func LoadinText(text: String) -> void:
 	text_is_end = false
 	displaySpeed = 0.1
-	Text.clear()                    # czyścimy zawartość
-	Text.bbcode_text = text         # ustawiamy pełny tekst
-	Text.visible_characters = 0     # żadnych widocznych znaków na start
+	Text.clear()
+	Text.bbcode_text = text
+	Text.visible_characters = 0
+	
 	for i in text.length():
 		timer.start(displaySpeed)
 		Text.visible_characters += 1
-		# przewiń na sam dół
 		scroll.scroll_vertical = floor(scroll.get_v_scroll_bar().max_value)
 		await timer.timeout
+		
 	text_is_end = true
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
 	State.IsRun = true
+
+func _exit_tree():
+	mutex.lock()
+	should_exit = true
+	mutex.unlock()
+	thread.wait_to_finish()

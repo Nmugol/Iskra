@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://ts7t4v5e7dhj"]
+[gd_scene load_steps=26 format=4 uid="uid://ts7t4v5e7dhj"]
 
 [ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/Locations/Mines.gd" id="1_op74w"]
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="2_uv6ud"]
@@ -36,6 +36,12 @@ script = ExtResource("16_xc3rf")
 duration = 1.0
 transition = 0
 ease = 2
+
+[sub_resource type="Curve2D" id="Curve2D_3ha0f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -15, -17, -12.8258, -0.781134, 12.8258, 0.781134, 114, -19, -8.63143, 26.685, 8.63143, -26.685, 152, -45, 22.8879, 8.18306, -22.8879, -8.18306, 135, -88, 0, 0, 0, 0, 87, -95, 0, 0, 0, 0, -26, -96)
+}
+point_count = 6
 
 [node name="Mines" type="Node2D"]
 script = ExtResource("1_op74w")
@@ -227,4 +233,29 @@ flip_sprite = true
 [node name="Guard4" parent="NPCS" instance=ExtResource("20_3ha0f")]
 position = Vector2(36, -169)
 npc_name = "Guards5"
+flip_sprite = true
+
+[node name="Peter" parent="NPCS" instance=ExtResource("20_3ha0f")]
+position = Vector2(215, -76)
+npc_name = "Peter"
+flip_sprite = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_3ha0f")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-15, -17)
+rotation = -0.0155026
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="Guard5" parent="Path2D/PathFollow2D" instance=ExtResource("20_3ha0f")]
+position = Vector2(9.59759, -6.22684)
+npc_name = "Guards7"
+flip_sprite = true
+
+[node name="Guard6" parent="Path2D/PathFollow2D" instance=ExtResource("20_3ha0f")]
+position = Vector2(-9.53964, 2.47754)
+npc_name = "Guards8"
 flip_sprite = true

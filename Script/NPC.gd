@@ -27,48 +27,58 @@ extends CharacterBody2D
 	) var npc_name: String = "Guards":
 	set(value):
 		npc_name = value
-		animation_to_play = npc_name+"_"+animation_name
-		
-		if sprite != null:
-			sprite.play(animation_to_play)
-
+		update_animation()
 	get: return npc_name
 
-@export_enum(
-	"Idle", 
-	"Walk"
-	) var animation_name: String = "Idle":
+@export_enum("Idle", "Walk") var animation_name: String = "Idle":
 	set(value):
 		animation_name = value
-		animation_to_play = npc_name+"_"+animation_name
-		
-		sprite.play(animation_to_play)
-		
-		match value:
-			"Idle": sprite.scale = Vector2(0.5,0.5)
-			"Walk": sprite.scale = Vector2(0.667,0.667)
-
-	get: return animation_name
+		update_animation()
 
 @export var flip_sprite: bool = false:
 	set(value):
 		flip_sprite = value
-		
-		if sprite != null:
-			sprite.flip_h = value
-
+		update_flip()
 	get: return flip_sprite
 
-var animation_to_play: String = "Guards_Idle"
+func setup(anim: String, flip: bool):
+	animation_name = anim
+	flip_sprite = flip
+
+func update_state(anim: String, flip: bool):
+	animation_name = anim
+	flip_sprite = flip
+
+func update_animation():
+	if not is_instance_valid(sprite) or not sprite.sprite_frames:
+		return  # Zabezpieczenie przed dostępem do niezainicjalizowanego węzła
+	
+	var target_animation = "%s_%s" % [npc_name, animation_name]
+	
+	if sprite.sprite_frames.has_animation(target_animation):
+		
+		match animation_name:
+			"Idle": 
+				sprite.scale = Vector2(0.5, 0.5)
+			"Walk": 
+				sprite.scale = Vector2(0.667, 0.667)
+				
+		for i in 2:
+			await get_tree().process_frame
+	
+		sprite.play(target_animation)
+	else:
+		printerr("Brak animacji: ", target_animation)
+
+func update_flip():
+	if is_instance_valid(sprite):
+		sprite.flip_h = flip_sprite
 
 func _ready() -> void:
-	sprite.play(animation_to_play)
-	match animation_name:
-			"Idle": sprite.scale = Vector2(0.5,0.5)
-			"Walk": sprite.scale = Vector2(0.667,0.667)
-
-func _process(_delta: float) -> void:
-	if flip_sprite:
-		sprite.flip_h = true
-	else:
-		sprite.flip_h = false
+	if Engine.is_editor_hint():
+		return  # Ignoruj w edytorze
+		
+	# Inicjalizacja po wszystkich węzłach
+	await get_tree().process_frame
+	update_animation()
+	update_flip()
