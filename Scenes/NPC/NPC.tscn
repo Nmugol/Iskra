@@ -512,7 +512,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_37ake")
 }],
 "loop": true,
-"name": &"EmilSchmidt_Idle",
+"name": &"Emil_Schmidt_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -529,7 +529,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_b2drp")
 }],
 "loop": true,
-"name": &"EmilSchmidt_Walk",
+"name": &"Emil_Schmidt_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -546,7 +546,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_s70dh")
 }],
 "loop": true,
-"name": &"Guards1_Idle",
+"name": &"Guard_1_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -563,7 +563,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ryid7")
 }],
 "loop": true,
-"name": &"Guards1_Walk",
+"name": &"Guard_1_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -580,7 +580,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_blk7e")
 }],
 "loop": true,
-"name": &"Guards2_Idle",
+"name": &"Guard_2_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -597,7 +597,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_b85qj")
 }],
 "loop": true,
-"name": &"Guards2_Walk",
+"name": &"Guard_2_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -614,7 +614,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ftqvo")
 }],
 "loop": true,
-"name": &"Guards3_Idle",
+"name": &"Guard_3_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -631,7 +631,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_owt5k")
 }],
 "loop": true,
-"name": &"Guards3_Walk",
+"name": &"Guard_3_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -648,7 +648,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_gbv71")
 }],
 "loop": true,
-"name": &"Guards4_Idle",
+"name": &"Guard_4_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -665,7 +665,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_by22q")
 }],
 "loop": true,
-"name": &"Guards4_Walk",
+"name": &"Guard_4_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -682,7 +682,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_0gg2x")
 }],
 "loop": true,
-"name": &"Guards5_Idle",
+"name": &"Guard_5_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -699,7 +699,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bc3fw")
 }],
 "loop": true,
-"name": &"Guards5_Walk",
+"name": &"Guard_5_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -716,7 +716,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_b0o4j")
 }],
 "loop": true,
-"name": &"Guards6_Idle",
+"name": &"Guard_6_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -733,7 +733,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_87h8f")
 }],
 "loop": true,
-"name": &"Guards6_Walk",
+"name": &"Guard_6_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -750,7 +750,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ofjoy")
 }],
 "loop": true,
-"name": &"Guards7_Idle",
+"name": &"Guard_7_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -767,7 +767,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_5vemd")
 }],
 "loop": true,
-"name": &"Guards7_Walk",
+"name": &"Guard_7_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -784,7 +784,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_6yt2w")
 }],
 "loop": true,
-"name": &"Guards8_Idle",
+"name": &"Guard_8_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -801,7 +801,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bn0im")
 }],
 "loop": true,
-"name": &"Guards8_Walk",
+"name": &"Guard_8_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -988,7 +988,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_uy66f")
 }],
 "loop": true,
-"name": &"MiriamSchmidt_Idle",
+"name": &"Miriam_Schmidt_Idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1005,7 +1005,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_od38d")
 }],
 "loop": true,
-"name": &"MiriamSchmidt_Walk",
+"name": &"Miriam_Schmidt_Walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1151,14 +1151,14 @@ height = 8.0
 
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_ri8vb")
-npc_name = "EmilSchmidt"
+npc_name = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -16)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_kwlhr")
-animation = &"Guards4_Walk"
+animation = &"Guard_8_Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
