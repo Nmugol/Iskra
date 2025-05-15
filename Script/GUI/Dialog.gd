@@ -119,6 +119,7 @@ func LoadinText(text: String) -> void:
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
 	State.IsRun = true
+	State.StatePhase += 1
 
 func _exit_tree():
 	mutex.lock()

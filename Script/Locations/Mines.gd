@@ -5,7 +5,9 @@ extends Node2D
 
 @onready var path: PathFollow2D = $Path2D/PathFollow2D
 
-var speed_ratio = 0.1    # prędkość w jednostkach ratio na sekundę
+const  MainScene = "res://Scenes/World.tscn"
+
+var speed_ratio = 0.07    # prędkość w jednostkach ratio na sekundę
 var target_ratio = 0.45   # gdzie ma się zatrzymać
 
 var walk: bool = false
@@ -22,15 +24,11 @@ func _process(delta: float) -> void:
 	if not State.LevelIsLoad: return
 	
 	if walk:
-		guard7.update_state("Walk", false)
-		guard8.update_state("Walk", false)
 		path.progress_ratio = move_toward(path.progress_ratio, target_ratio, speed_ratio*delta)
-		
 	if abs(path.progress_ratio - target_ratio) < 0.001:
 		path.progress_ratio = target_ratio
 		walk = false
-		guard7.update_state("Idle", true)
-		guard8.update_state("Idle", true)
+		
 	
 	match State.StateNumber:
 		0:
@@ -38,13 +36,27 @@ func _process(delta: float) -> void:
 				0: 
 					StartDialog();
 				4:
+					guard7.update_state("Walk", false)
+					guard8.update_state("Walk", false)
 					walk = true
 				5: 
 					path.progress_ratio = target_ratio
+					guard7.update_state("Idle", true)
+					guard8.update_state("Idle", true)
 					$NPCS/Peter.flip_sprite = false
+				8:
+					guard7.update_state("Walk", true)
+					guard8.update_state("Walk", true)
+					target_ratio = 1
+					walk = true
+				
 				9:
-					pass
-
+					State.StateNumber = 1
+					State.StatePhase = 0
+					Save.PlayerPosition = Vector2(2048,-8)
+					Save.CurrentScenePath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
+					Signals.enable_loadin_screen.emit()
+					get_tree().change_scene_to_file(MainScene)
 
 func StartDialog() -> void:
 	
