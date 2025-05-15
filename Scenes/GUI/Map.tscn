@@ -55,7 +55,7 @@ icon = ExtResource("3_4g1po")
 LocationSceenPath = "res://Scenes/Locations/Mines/MineHub.tscn"
 LocationPosition = Vector2(766, 1523)
 LocationName = "Mines"
-LocationActiveOnStage = Array[int]([0])
+LocationActiveOnStage = Array[int]([0, 1])
 LocationIcon = ExtResource("3_4g1po")
 
 [node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
@@ -68,7 +68,7 @@ offset_bottom = 228.0
 LocationSceenPath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
 LocationPosition = Vector2(2048, -8)
 LocationName = "Railway Station"
-LocationActiveOnStage = Array[int]([0])
+LocationActiveOnStage = Array[int]([0, 1])
 LocationIcon = ExtResource("3_4g1po")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]

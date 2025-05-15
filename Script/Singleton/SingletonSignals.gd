@@ -57,3 +57,6 @@ signal show_ui()
 
 @warning_ignore("unused_signal")
 signal update_distanace()
+
+@warning_ignore("unused_signal")
+signal delete_save()

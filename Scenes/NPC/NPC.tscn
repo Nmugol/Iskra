@@ -1158,7 +1158,7 @@ texture_filter = 1
 position = Vector2(0, -16)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_kwlhr")
-animation = &"EmilSchmidt_Idle"
+animation = &"Guards4_Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

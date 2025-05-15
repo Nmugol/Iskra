@@ -27,6 +27,8 @@ func _process(delta: float) -> void:
 		path.progress_ratio = move_toward(path.progress_ratio, target_ratio, speed_ratio*delta)
 	if abs(path.progress_ratio - target_ratio) < 0.001:
 		path.progress_ratio = target_ratio
+		guard7.update_state("Idle", true)
+		guard8.update_state("Idle", true)
 		walk = false
 		
 	

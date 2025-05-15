@@ -17,8 +17,16 @@ var Equipment: Array[Item] = []:
 		Signals.load_equiment.emit()
 	get: return Equipment
 
+func DefoultDate() -> void:
+	CurrentScenePath = "res://Scenes/Locations/Mines/Mines.tscn"
+	PlayerPosition = Vector2(254,-75)
+	Equipment = []
+	State.StateNumber = 0
+	State.StatePhase = 0
+
 func _ready()->void:
 	Signals.save_to_file.connect(SaveDataToFile) 	
+	Signals.delete_save.connect(delete_save_file)
 	LoadDataFromFile()
 
 func LoadDataFromFile()->void:
@@ -67,4 +75,20 @@ func SaveDataToFile()->void:
 		file.close()
 	else:
 		print("Bład otwarcia pliku i zapisu")
-	
+
+
+func delete_save_file() -> void:
+	# Sprawdź, czy plik istnieje
+	if FileAccess.file_exists(DATA_PATH):
+		# Otwórz dostęp do katalogu (np. "user://")
+		var dir = DirAccess.open("user://")
+		
+		if dir:
+			# Usuń plik (używaj nazwy pliku, nie pełnej ścieżki)
+			var error = dir.remove(DATA_PATH.get_file())
+			if error == OK:
+				DefoultDate()
+				SaveDataToFile()
+			else: print("Błąd podczas usuwania pliku: ", error)
+		else: print("Błąd dostępu do katalogu.")
+	else: print("Plik nie istnieje.")

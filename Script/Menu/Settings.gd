@@ -80,3 +80,7 @@ func updateLabels() -> void:
 	MusicSliderLabel.text = str(Settings.MusicVolume*100)+"%"
 	SoundEffectsSliderLabel.text = str(Settings.SoundEffectsVolume*100)+"%"
 	MasterSliderLabel.text = str(Settings.MasterVolume*100)+"%"
+
+
+func _on_button_button_down() -> void:
+	Signals.delete_save.emit()

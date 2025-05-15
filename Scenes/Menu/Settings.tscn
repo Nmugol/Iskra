@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2altmlfejleb"]
+[gd_scene load_steps=3 format=3 uid="uid://c2altmlfejleb"]
 
 [ext_resource type="Script" uid="uid://dpg0kdqjgkirq" path="res://Script/Menu/Settings.gd" id="1_4yry0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhyuu"]
+bg_color = Color(0.498595, 0, 0.105798, 1)
 
 [node name="Settings" type="Control" node_paths=PackedStringArray("ResolutionButton", "WindowTypeButton", "MasterSlider", "MasterSliderLabel", "MusicSlider", "MusicSliderLabel", "SoundEffectsSlider", "SoundEffectsSliderLabel")]
 layout_mode = 3
@@ -224,6 +227,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Mian Menu"
 
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_bhyuu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bhyuu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bhyuu")
+text = "Remove Save"
+
 [node name="Reset" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -236,4 +247,5 @@ text = "Reset
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Music/HBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/SoundEffects/HBoxContainer/SoundEfectsSlider" to="." method="_on_sound_efects_slider_value_changed"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Mian Menu" to="." method="_on_mian_menu_button_down"]
+[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Reset" to="." method="_on_reset_button_down"]
