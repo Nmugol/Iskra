@@ -7,12 +7,10 @@ extends Node2D
 
 const  MainScene = "res://Scenes/World.tscn"
 
-var speed_ratio = 0.07    # prędkość w jednostkach ratio na sekundę
+var speed_ratio = 0.1    # prędkość w jednostkach ratio na sekundę
 var target_ratio = 0.45   # gdzie ma się zatrzymać
 
 var walk: bool = false
-
-var thread: Thread
 
 func  _ready() -> void:
 	State.StatePhase = 0
@@ -55,7 +53,7 @@ func _process(delta: float) -> void:
 				9:
 					State.StateNumber = 1
 					State.StatePhase = 0
-					Save.PlayerPosition = Vector2(2048,-8)
+					Save.PlayerPosition = Vector2(2120.0,-40)
 					Save.CurrentScenePath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
 					Signals.enable_loadin_screen.emit()
 					get_tree().change_scene_to_file(MainScene)

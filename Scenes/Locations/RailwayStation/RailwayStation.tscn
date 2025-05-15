@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=22 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="12_5r2dp"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="13_7y4t6"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_ljs7w"]
+[ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="16_bcjxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -104,17 +105,17 @@ shape = SubResource("RectangleShape2D_basko")
 disabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_8f76d")]
-position = Vector2(2048, -8)
+position = Vector2(2120, -40)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(2048, -8)
+position = Vector2(2120, -40)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 4
-limit_top = -384
-limit_right = 1488
-limit_bottom = 256
+limit_left = 0
+limit_top = -352
+limit_right = 2416
+limit_bottom = 416
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -124,7 +125,7 @@ script = ExtResource("3_sycnr")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(2048, -8)
+position = Vector2(2120, -40)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -143,7 +144,7 @@ CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion/Area2D2"]
-polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 136, 136, 136, 392, 216, 392, 216, 136, 520, 136, 520, 392, 600, 392, 600, 136, 1192, 136, 1192, 392, 1272, 392, 1272, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2320, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2352, 96, 2336, 88, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, 16, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 88, 2336, 48, 2368, 0, 2392, 0, 2392, -136, 2328, -136, 2264, -136, 2264, -160, 2328, -160, 2328, -136, 2392, -136, 2392, -184, 2328, -184, 2264, -184, 2264, -208, 2328, -208, 2328, -184, 2392, -184, 2392, -280, 2208, -280, 2208, -264, 2096, -264, 2096, -280, 2096, -160, 2096, -136, 2080, -136, 2072, -112, 2064, -136, 2064, -160, 2096, -160, 2096, -264, 2096, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -216, 1904, -184, 1904, -152, 1856, -152, 1840, -168, 1840, -192, 1824, -184, 1776, -184, 1784, -192, 1808, -192, 1816, -208, 1824, -208, 1840, -256, 1824, -280, 1816, -264, 1776, -232, 1768, -280, 1640, -280, 1640, -216, 1544, -216, 1545.46, -208, 1496, -208, 1496, -120, 1512, -120, 1520, -176, 1536, -192, 1576, -184, 1552, -152, 1584, -136, 1568, -120, 1544, -112, 1512, -120, 1496, -120, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1552, -8, 1552, 8, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
+polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 136, 136, 136, 392, 216, 392, 216, 136, 520, 136, 520, 392, 600, 392, 600, 136, 1192, 136, 1192, 392, 1272, 392, 1272, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2320, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2336, 96, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, 16, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 96, 2336, 40, 2368, 24, 2368, 0, 2392, 0, 2392, -136, 2336, -136, 2256, -136, 2256, -168, 2336, -168, 2336, -136, 2392, -136, 2392, -184, 2336, -184, 2256, -184, 2256, -216, 2336, -216, 2336, -184, 2392, -184, 2392, -280, 2216, -280, 2216, -264, 2088, -264, 2088, -280, 2088, -160, 2096, -160, 2096, -136, 2080, -136, 2080, -112, 2064, -112, 2064, -160, 2088, -160, 2088, -264, 2088, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -208, 1888, -208, 1888, -192, 1904, -184, 1904, -152, 1856, -152, 1856, -168, 1840, -168, 1840, -192, 1824, -192, 1824, -176, 1776, -176, 1776, -192, 1808, -192, 1816, -208, 1824, -208, 1840, -256, 1824, -280, 1824, -256, 1800, -240, 1776, -232, 1760, -248, 1768, -280, 1648, -280, 1648, -208, 1544, -208, 1544, -200, 1496, -200, 1496, -112, 1536, -112, 1536, -192, 1568, -192, 1568, -168, 1552, -168, 1552, -144, 1584, -144, 1584, -128, 1568, -128, 1568, -112, 1536, -112, 1496, -112, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1568, -8, 1552, -8, 1552, 16, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
 
 [node name="Passage" type="Node2D" parent="."]
 
@@ -209,3 +210,19 @@ scale = Vector2(0.11898, 0.479144)
 texture = ExtResource("12_5r2dp")
 script = ExtResource("15_ljs7w")
 ParenArea = NodePath("..")
+
+[node name="NPC" type="Node2D" parent="."]
+
+[node name="Guard7" parent="NPC" instance=ExtResource("16_bcjxh")]
+position = Vector2(2200, -72)
+npc_name = 12
+
+[node name="Guard8" parent="NPC" instance=ExtResource("16_bcjxh")]
+position = Vector2(2088, -112)
+npc_name = 13
+flip_sprite = true
+
+[node name="Peter" parent="NPC" instance=ExtResource("16_bcjxh")]
+position = Vector2(2104, -80)
+npc_name = 5
+flip_sprite = true
