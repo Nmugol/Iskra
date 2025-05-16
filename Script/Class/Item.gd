@@ -53,6 +53,18 @@ func RemoveFromEquipment() -> void:
 	Save.Equipment.erase(self)
 
 func Assemble(itemToCombine: Item) -> void:
+	# Zabezpieczenie przed null'em
+	if not is_instance_valid(itemToCombine):
+		return
+	
+	# Zabezpieczenie przed łączeniem z samym sobą
+	if itemToCombine == self or itemToCombine.item_name == self.item_name:
+		return
+	
+	# Zabezpieczenie przed duplikatami
+	if contains_items.has(itemToCombine):
+		return
+	
 	if connects_with.has(itemToCombine.item_name) and is_finished:
 		contains_items.append(itemToCombine)
 		itemToCombine.RemoveFromEquipment()

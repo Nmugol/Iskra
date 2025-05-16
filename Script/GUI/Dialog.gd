@@ -2,17 +2,17 @@ extends Node
 
 @export var Icons: Dictionary[String, CompressedTexture2D]
 
-@onready var peopelPanel: Panel = %PeopelPanel
+@onready var peopelPanel: NinePatchRect = %PeopelPanel
 @onready var peopelIcons: TextureRect = %PeopleIcons
 
-@onready var playerPanel: Panel = %PlayerPanel
+@onready var playerPanel: NinePatchRect = %PlayerPanel
 @onready var playerIcons: TextureRect = %PlayerIcons
 
 @onready var scroll: ScrollContainer = %ScrollContainer
 @onready var Text: RichTextLabel = %Text
 
 @onready var timer: Timer = $Timer
-@onready var closeButton: Button = %CloseButton
+@onready var closeButton: TextureButton = %CloseButton
 
 var displaySpeed: float = 0.1
 var queue: Array = []

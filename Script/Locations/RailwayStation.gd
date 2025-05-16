@@ -7,13 +7,17 @@ extends Node2D
 func _ready() -> void:
 	$Player.sprite.flip_h = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
 	match State.StateNumber:
 		1:
 			match State.StatePhase:
 				0: 
 					_first_task()
+				10:
+					$Player.sprite.flip_h = false
+					State.StateNumber = 2
+					State.StatePhase = 0
 
 func _first_task() -> void:
 	Signals.show_dialog.emit()

@@ -107,14 +107,14 @@ LevelLocation = NodePath("Level")
 
 [node name="Setting" parent="GUI" instance=ExtResource("2_45d1s")]
 unique_name_in_owner = true
-visible = false
 top_level = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -100.0
-offset_right = 0.0
+offset_left = -192.0
+offset_bottom = 106.0
 grow_horizontal = 0
+size_flags_horizontal = 8
 
 [node name="Dialog" parent="GUI" instance=ExtResource("2_j0p05")]
 unique_name_in_owner = true
@@ -130,6 +130,9 @@ unique_name_in_owner = true
 visible = false
 
 [node name="UI" parent="GUI" instance=ExtResource("5_p70al")]
+unique_name_in_owner = true
+offset_right = 192.0
+offset_bottom = 106.0
 
 [node name="Transition" type="AnimationPlayer" parent="GUI"]
 unique_name_in_owner = true

@@ -1,14 +1,26 @@
 extends Node2D
 
 @export var LevelLocation: Node
+
 @onready var Dialog: Control = %Dialog
 @onready var Equipment: Control = %Equipment
 @onready var Map: Control = %Map
 @onready var Transition: AnimationPlayer = %Transition
 @onready var SettingsInGame: Control = %Setting
+@onready var ContronButton: Control = %UI
 
-func _ready()->void:
+func _ready() -> void:
 	State.LevelIsLoad = false
+	State.IsRun = true
+	
+	_connect_signals()
+	LoadLevel()
+
+func _connect_signals() -> void:
+	Signals.show_ui.connect(func():
+		SettingsInGame.show()
+		)
+	
 	Signals.show_dialog.connect(ShowDialog)
 	Signals.hide_dialog.connect(HideDialog)
 	
@@ -24,26 +36,10 @@ func _ready()->void:
 	
 	Signals.show_settin_in_game.connect(ShowSettinIngame)
 	Signals.hide_settin_in_game.connect(HideSettinIngame)
-	
-	State.IsRun = true
-	
-	LoadLevel()
-
-func ShowSettinIngame() -> void:
-	HideDialog()
-	HideEquipment()
-	HideMap()
-	SettingsInGame.show()
-
-func HideSettinIngame() -> void:
-	SettingsInGame.hide()
-	Signals.show_ui.emit()
 
 func LoadLevel() -> void:
-
 	# Usunięcei cześniejszych załdowanych scen
-	var loadLevels = LevelLocation.get_children()
-	for l in loadLevels:
+	for l in LevelLocation.get_children():
 		l.free()
 	
 	# Załadowanie lewelu
@@ -57,16 +53,19 @@ func LoadLevel() -> void:
 func SaveLevel() -> void:
 	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()
 
-func ShowDialog():
+func ShowDialog() -> void:
 	State.IsRun = false
 	Dialog.show()
 	HideEquipment()
-	HideMap()
 	HideSettinIngame()
+	HideMap()
+	ContronButton.hide()
 
-func HideDialog():
+func HideDialog() -> void:
 	State.IsRun = true
 	Dialog.hide()
+	ContronButton.show()
+	SettingsInGame.show()
 
 func ShowEquipment() -> void:
 	State.IsRun = false
@@ -97,7 +96,6 @@ func DisabeLoadinScreen() -> void:
 	HideDialog()
 	HideEquipment()
 	HideMap()
-	HideSettinIngame()
 	Signals.show_ui.emit()
 	State.LevelIsLoad = true
 
@@ -105,4 +103,12 @@ func EnableLoadinScreen() -> void:
 	State.IsRun = true
 	Transition.play("fade_out")
 	await Transition.animation_finished
-	
+
+func ShowSettinIngame() -> void:
+	HideDialog()
+	HideEquipment()
+	HideMap()
+	SettingsInGame.show()
+
+func HideSettinIngame() -> void:
+	SettingsInGame.hide()

@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dny7k62r5c16u"]
+[gd_scene load_steps=8 format=3 uid="uid://dny7k62r5c16u"]
 
 [ext_resource type="Script" uid="uid://b568newwj37a1" path="res://Script/Player/Equipment.gd" id="1_mv6v0"]
+[ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="2_hbu0k"]
+[ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="2_ll5if"]
+[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/OptionIcons.png" id="3_106t7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll5if"]
+atlas = ExtResource("3_106t7")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxj23"]
+atlas = ExtResource("3_106t7")
+region = Rect2(0, 22, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fthru"]
+atlas = ExtResource("3_106t7")
+region = Rect2(0, 44, 21, 21)
 
 [node name="Equipment" type="Control" node_paths=PackedStringArray("UseButton", "DisassembleButton", "AssembleButton")]
 layout_mode = 3
@@ -12,9 +27,18 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_mv6v0")
-UseButton = NodePath("MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Use")
-DisassembleButton = NodePath("MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Disassemble")
-AssembleButton = NodePath("MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Assemble")
+UseButton = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Use")
+DisassembleButton = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Disassemble")
+AssembleButton = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Assemble")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ll5if")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -23,15 +47,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 60
+theme_override_constants/margin_left = 120
 theme_override_constants/margin_top = 60
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 60
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
 
-[node name="Background" type="Panel" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/MarginContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+texture = ExtResource("2_hbu0k")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MarginContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,81 +79,119 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 13
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Background/MarginContainer"]
+[node name="AllItems" type="ScrollContainer" parent="MarginContainer/HBoxContainer/MarginContainer/NinePatchRect/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="ScrollContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="ItemBox" type="VBoxContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ItemBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer/NinePatchRect/MarginContainer/AllItems"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="LoolAtItemTexture" type="TextureRect" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
-unique_name_in_owner = true
+[node name="NinePatchRect2" type="NinePatchRect" parent="MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch_mode = 3
+texture = ExtResource("2_hbu0k")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 61
+theme_override_constants/margin_top = 61
+theme_override_constants/margin_right = 62
+theme_override_constants/margin_bottom = 62
+
+[node name="LoolAtItemTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/NinePatchRect2/MarginContainer"]
+unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
-theme_override_constants/margin_left = 10
+size_flags_horizontal = 6
+size_flags_vertical = 3
+expand_mode = 3
+stretch_mode = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/MarginContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+texture = ExtResource("2_hbu0k")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+[node name="ItemOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Use" type="Button" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Use" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions"]
 layout_mode = 2
+theme = ExtResource("2_ll5if")
 text = "Use
 "
 
-[node name="Disassemble" type="Button" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Disassemble" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions"]
 layout_mode = 2
+theme = ExtResource("2_ll5if")
 text = "Disassemble"
 
-[node name="Assemble" type="Button" parent="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Assemble" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions"]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("2_ll5if")
 text = "Assemble"
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="Clouse" type="TextureButton" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -51.0
-offset_bottom = 31.0
+offset_left = -285.0
+offset_top = 51.0
+offset_right = -243.0
+offset_bottom = 93.0
 grow_horizontal = 0
-theme_override_constants/margin_top = 27
-theme_override_constants/margin_right = 94
+texture_normal = SubResource("AtlasTexture_ll5if")
+texture_pressed = SubResource("AtlasTexture_oxj23")
+texture_hover = SubResource("AtlasTexture_fthru")
+texture_disabled = SubResource("AtlasTexture_oxj23")
+texture_focused = SubResource("AtlasTexture_fthru")
+stretch_mode = 4
 
-[node name="Clouse" type="Button" parent="MarginContainer2"]
-layout_mode = 2
-text = "Clous
-"
-
-[connection signal="pressed" from="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Use" to="." method="_on_use_pressed"]
-[connection signal="pressed" from="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Disassemble" to="." method="_on_disassemble_pressed"]
-[connection signal="pressed" from="MarginContainer/Background/MarginContainer/HBoxContainer/PanelContainer/HBoxContainer/MarginContainer/HBoxContainer/Assemble" to="." method="_on_assemble_pressed"]
-[connection signal="pressed" from="MarginContainer2/Clouse" to="." method="_on_clouse_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Disassemble" to="." method="_on_disassemble_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Assemble" to="." method="_on_assemble_pressed"]
+[connection signal="pressed" from="Clouse" to="." method="_on_clouse_pressed"]

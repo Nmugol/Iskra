@@ -9,7 +9,3 @@ func _on_save_pressed() -> void:
 func _on_exit_pressed() -> void:
 	_on_save_pressed()
 	get_tree().change_scene_to_file(MenuScen)
-
-
-func _on_button_pressed() -> void:
-	Signals.hide_settin_in_game.emit()
