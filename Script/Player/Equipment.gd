@@ -59,7 +59,6 @@ func _on_clouse_pressed() -> void:
 
 func _on_use_pressed() -> void:
 	State.SelectedItem = State.ActiveItem
-	State.ActiveItem = null
 
 func _on_disassemble_pressed() -> void:
 	State.ActiveItem.Disassemble()

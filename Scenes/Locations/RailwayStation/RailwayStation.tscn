@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=28 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -17,7 +17,8 @@
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_ljs7w"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="16_bcjxh"]
 [ext_resource type="Texture2D" uid="uid://cf14nrp8pbfl" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Tools.png" id="17_m7ffe"]
-[ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Locations/RailwayStauionItems.gd" id="17_mva2b"]
+[ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
+[ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -43,6 +44,9 @@ radius = 12.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_pxp8k"]
 atlas = ExtResource("17_m7ffe")
 region = Rect2(0, 259, 16, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pxp8k"]
+radius = 40.0125
 
 [node name="RailwayStation" type="Node2D"]
 script = ExtResource("1_gycxx")
@@ -149,6 +153,7 @@ draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
 [node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("11_basko")]
+visible = false
 CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
@@ -236,13 +241,19 @@ flip_sprite = true
 [node name="Peter" parent="NPC" instance=ExtResource("16_bcjxh")]
 position = Vector2(2104, -80)
 npc_name = 5
+flip_sprite = true
 
-[node name="Items" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="Items" type="Node2D" parent="." node_paths=PackedStringArray("player", "item_area")]
 script = ExtResource("17_mva2b")
 player = NodePath("../Player")
+item_area = {
+"steel_sheet": NodePath("SteelSheet")
+}
 
 [node name="SteelSheet" type="Area2D" parent="Items"]
 position = Vector2(1776, -264)
+script = ExtResource("18_pxp8k")
+aree_name = "steel_sheet"
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Items/SteelSheet"]
@@ -253,5 +264,12 @@ texture_filter = 1
 rotation = -0.612611
 texture = SubResource("AtlasTexture_pxp8k")
 
-[connection signal="mouse_entered" from="Items/SteelSheet" to="Items" method="_on_steel_sheet_mouse_entered"]
-[connection signal="mouse_exited" from="Items/SteelSheet" to="Items" method="_on_steel_sheet_mouse_exited"]
+[node name="EventArea" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="EventArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/Area2D"]
+position = Vector2(2116, -95)
+shape = SubResource("CircleShape2D_pxp8k")
+
+[connection signal="body_entered" from="EventArea/Area2D" to="." method="_on_area_2d_body_entered"]

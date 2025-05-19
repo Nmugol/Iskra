@@ -60,3 +60,9 @@ signal update_distanace()
 
 @warning_ignore("unused_signal")
 signal delete_save()
+
+@warning_ignore("unused_signal")
+signal mouse_above_item(area: String)
+
+@warning_ignore("unused_signal")
+signal mouse_off_item()

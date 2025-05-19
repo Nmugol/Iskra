@@ -48,6 +48,10 @@ folder_colors={
 
 import/blender/enabled=false
 
+[global_group]
+
+Player=""
+
 [input]
 
 MovePlayer={

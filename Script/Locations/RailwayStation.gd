@@ -83,3 +83,10 @@ func _first_task() -> void:
 	Peter, stay here. I'll look around the platform maybe I'll find something.
 	In the meantime, try to work on shaping a new wheel.
 	")
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		print(" gracz w obszaże ")
+		if State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
+			print("z itemem")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://do87224qs6nh6"]
+[gd_scene load_steps=10 format=3 uid="uid://do87224qs6nh6"]
 
 [ext_resource type="Script" uid="uid://b72176335dimk" path="res://Script/GUI/UI.gd" id="1_w371h"]
 [ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/OptionIcons.png" id="2_2rnfa"]
@@ -6,11 +6,27 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_adret"]
 atlas = ExtResource("2_2rnfa")
-region = Rect2(112, 0, 24, 22)
+region = Rect2(120, 6, 24, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlwpb"]
+atlas = ExtResource("2_2rnfa")
+region = Rect2(120, 38, 24, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csd48"]
+atlas = ExtResource("2_2rnfa")
+region = Rect2(120, 70, 24, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5mw1m"]
 atlas = ExtResource("2_2rnfa")
-region = Rect2(112, 23, 24, 26)
+region = Rect2(146, 6, 24, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yr7l"]
+atlas = ExtResource("2_2rnfa")
+region = Rect2(146, 38, 24, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imv1v"]
+atlas = ExtResource("2_2rnfa")
+region = Rect2(146, 70, 24, 26)
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -54,10 +70,10 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = SubResource("AtlasTexture_adret")
-texture_pressed = SubResource("AtlasTexture_adret")
-texture_hover = SubResource("AtlasTexture_adret")
-texture_disabled = SubResource("AtlasTexture_adret")
-texture_focused = SubResource("AtlasTexture_adret")
+texture_pressed = SubResource("AtlasTexture_vlwpb")
+texture_hover = SubResource("AtlasTexture_csd48")
+texture_disabled = SubResource("AtlasTexture_vlwpb")
+texture_focused = SubResource("AtlasTexture_csd48")
 stretch_mode = 4
 
 [node name="Ekwipunek" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer"]
@@ -66,10 +82,10 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = SubResource("AtlasTexture_5mw1m")
-texture_pressed = SubResource("AtlasTexture_5mw1m")
-texture_hover = SubResource("AtlasTexture_5mw1m")
-texture_disabled = SubResource("AtlasTexture_5mw1m")
-texture_focused = SubResource("AtlasTexture_5mw1m")
+texture_pressed = SubResource("AtlasTexture_6yr7l")
+texture_hover = SubResource("AtlasTexture_imv1v")
+texture_disabled = SubResource("AtlasTexture_6yr7l")
+texture_focused = SubResource("AtlasTexture_imv1v")
 stretch_mode = 4
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Mapa" to="." method="_on_mapa_pressed"]

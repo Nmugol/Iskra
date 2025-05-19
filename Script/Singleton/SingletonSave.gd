@@ -21,6 +21,7 @@ func DefoultDate() -> void:
 	CurrentScenePath = "res://Scenes/Locations/Mines/Mines.tscn"
 	PlayerPosition = Vector2(254,-75)
 	Equipment = []
+	State.PickUpItems = []
 	State.StateNumber = 0
 	State.StatePhase = 0
 

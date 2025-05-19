@@ -106,6 +106,7 @@ func EnableLoadinScreen() -> void:
 	await Transition.animation_finished
 
 func ShowSettinIngame() -> void:
+	
 	HideDialog()
 	HideEquipment()
 	HideMap()
