@@ -5,6 +5,8 @@ var LevelIsLoad: bool = false
 var IsRun: bool = true
 var IsInArea: bool = false
 
+var PickUpItems: Array[Item] = []
+
 var StateNumber: int = 0
 var StatePhase: int = 0
 

@@ -16,6 +16,7 @@ func _init(itemName: String, containsItems: Array[Item], isFinished: bool, small
 	connects_with = connectsWith
 
 func ToJson() -> Dictionary:
+
 	var json_data := {
 		"item_name": item_name,
 		"contains_items": [],
@@ -30,24 +31,36 @@ func ToJson() -> Dictionary:
 	
 	return json_data
 
+
 static func FromJson(json_data: Dictionary) -> Item:
+	# Prepare an empty Array[Item] for contains_items
+	var contains_items_arr: Array[Item] = []
+	
+	# Convert connects_with data to Array[String]
+	var connects_with_data: Array = json_data.get("connects_with", [])
+	var connects_with_arr: Array[String] = []
+	for entry in connects_with_data:
+		connects_with_arr.append(str(entry))
+	
+	# Create the Item instance with properly typed arrays
 	var item := Item.new(
 		json_data.get("item_name", ""),
-		[],
+		contains_items_arr,  # Array[Item]
 		json_data.get("is_finished", true),
 		json_data.get("small_sprite_path", ""),
 		json_data.get("full_sprite_path", ""),
-		json_data.get("connects_with", [])
+		connects_with_arr    # Array[String]
 	)
 	
-
+	# Recursively populate contains_items
 	for item_data in json_data.get("contains_items", []):
-		item.contains_items.append(FromJson(item_data))  # Rekurencyjne tworzenie obiektów
-
+		item.contains_items.append(FromJson(item_data))
+	
 	return item
 
 func AddToEquipment() -> void:
 	Save.Equipment.append(self)
+	State.PickUpItems.append(self)
 
 func RemoveFromEquipment() -> void:
 	Save.Equipment.erase(self)

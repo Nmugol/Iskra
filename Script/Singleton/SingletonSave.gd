@@ -48,6 +48,11 @@ func LoadDataFromFile()->void:
 		for item in data["Equipment"]:
 			var new_item = Item.FromJson(item)
 			Equipment.append(new_item)
+		
+		for item in data["PickUpItems"]:
+			var new_item = Item.FromJson(item)
+			State.PickUpItems.append(new_item)
+		
 	else:
 		print("Bład otwarcia pliku")
 	file.close()
@@ -59,11 +64,15 @@ func SaveDataToFile()->void:
 		"PlayerPosition": [PlayerPosition.x, PlayerPosition.y],
 		"StateNumber": State.StateNumber,
 		"StatePhase": State.StatePhase, 
-		"Equipment": []
+		"Equipment": [],
+		"PickUpItems": []
 	}
 	
 	for item in Equipment:
 		data["Equipment"].append(item.ToJson())
+	
+	for item in State.PickUpItems:
+		data["PickUpItems"].append(item.ToJson())
 		
 
 	var json = JSON.stringify(data, "\t")

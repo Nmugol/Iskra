@@ -10,6 +10,7 @@ extends Node2D
 @onready var ContronButton: Control = %UI
 
 func _ready() -> void:
+	EnableLoadinScreen()
 	State.LevelIsLoad = false
 	State.IsRun = true
 	

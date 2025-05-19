@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwu10n65f0dbx"]
+[gd_scene load_steps=8 format=3 uid="uid://cwu10n65f0dbx"]
 
 [ext_resource type="Script" uid="uid://c3gk2gqswcqhe" path="res://Script/Menu/Menu.gd" id="1_38mcx"]
+[ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="2_p4pvn"]
+[ext_resource type="Texture2D" uid="uid://bwmhsfk5d5wwj" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/TopPatternPanel_02_33x15.png" id="3_s3ie0"]
+[ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="4_rsxkb"]
 
 [sub_resource type="Animation" id="Animation_mj0i0"]
 length = 0.001
@@ -95,32 +98,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
 layout_mode = 2
+offset_left = 56.0
+offset_top = -112.0
+offset_right = 368.0
+offset_bottom = 785.0
 size_flags_horizontal = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
+texture = ExtResource("2_p4pvn")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-layout_mode = 2
+[node name="TopPatternPanel0233x15" type="TextureRect" parent="NinePatchRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 11.0
+offset_top = 127.0
+offset_right = 299.0
+offset_bottom = 159.0
+texture = ExtResource("3_s3ie0")
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Play" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme = ExtResource("4_rsxkb")
 text = "PLAY"
 
-[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme = ExtResource("4_rsxkb")
 text = "SETTINGS"
 
-[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme = ExtResource("4_rsxkb")
 text = "QUIT"
 
-[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_button_down"]
-[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_button_down"]
-[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_down"]
+[node name="TopPatternPanel0233x16" type="TextureRect" parent="NinePatchRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 11.0
+offset_top = 792.0
+offset_right = 299.0
+offset_bottom = 824.0
+texture = ExtResource("3_s3ie0")
+
+[connection signal="button_down" from="NinePatchRect/MarginContainer/VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="NinePatchRect/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_button_down"]
+[connection signal="button_down" from="NinePatchRect/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_down"]

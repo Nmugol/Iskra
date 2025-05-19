@@ -4,9 +4,6 @@ extends Node2D
 @onready var guard8: NPC = $NPC/Guard8
 @onready var peter: NPC = $NPC/Peter
 
-func _ready() -> void:
-	$Player.sprite.flip_h = true
-
 func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
 	match State.StateNumber:
@@ -14,6 +11,7 @@ func _process(_delta: float) -> void:
 			match State.StatePhase:
 				0: 
 					_first_task()
+					$Player.sprite.flip_h = true
 				10:
 					$Player.sprite.flip_h = false
 					State.StateNumber = 2
