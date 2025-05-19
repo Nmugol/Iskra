@@ -3,6 +3,7 @@ extends Node2D
 @onready var guard7: NPC = $NPC/Guard7
 @onready var guard8: NPC = $NPC/Guard8
 @onready var peter: NPC = $NPC/Peter
+@export var player: Player
 
 func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
@@ -15,6 +16,14 @@ func _process(_delta: float) -> void:
 				10:
 					$Player.sprite.flip_h = false
 					State.StateNumber = 2
+					State.StatePhase = 0
+		2:
+			match  State.StatePhase:
+				1:
+					_secon_task()
+				
+				8:
+					State.StateNumber = 3
 					State.StatePhase = 0
 
 func _first_task() -> void:
@@ -84,9 +93,56 @@ func _first_task() -> void:
 	In the meantime, try to work on shaping a new wheel.
 	")
 
+func _secon_task() -> void:
+	Save.SaveDataToFile()
+	Signals.show_dialog.emit()
+	#1
+	Signals.player_message.emit("Daniel",
+	"
+	Peter, will this sheet metal do?
+	")
+	#2
+	Signals.peopel_message.emit("Peter",
+	"
+	Yeah, I think I can make a wheel out of this.
+	")
+	#3
+	Signals.peopel_message.emit("Peter",
+	"
+	Alright. That’s the best wheel I can make.
+	Daniel, can you lift the cart a little?
+	")
+	#4
+	Signals.player_message.emit("Daniel",
+	"
+	Alright, got it.
+	")
+	#5
+	Signals.peopel_message.emit("Guard8",
+	"
+	[b]Couldn't you be any slower?[/b]
+	And what is that supposed to be? Why is the wheel so uneven?
+	")
+	#6
+	Signals.peopel_message.emit("Peter",
+	"
+	Bbbbbut...
+	I-I-I d-don't... c-control the Spark that well.
+	I can reshape metal b-b-but... it doesn’t come out p-p-perfect...
+	")
+	#7
+	Signals.peopel_message.emit("Guard7",
+	"
+	Alright, alright.
+	What matters is that you fixed it. But the loading is already way behind schedule.
+	Push the cart through the emergency track and get back to the mine.
+	")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
-		print(" gracz w obszaże ")
-		if State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
-			print("z itemem")
+	if body.is_in_group("Player") and State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
+			State.StatePhase = 1
+			var stop_point: Vector2 = Vector2(2127,-54)
+			player.global_position = stop_point
+			player.nav.target_position = stop_point
+			player.sprite.play("Idle")
+			$EventArea/GiveSTeelSheet.queue_free()

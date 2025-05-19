@@ -12,7 +12,6 @@ extends Node2D
 func _ready() -> void:
 	EnableLoadinScreen()
 	State.LevelIsLoad = false
-	State.IsRun = true
 	
 	_connect_signals()
 	LoadLevel()
@@ -92,18 +91,20 @@ func HideMap() -> void:
 
 func DisabeLoadinScreen() -> void:
 	Transition.play("fade_in")
-	await Transition.animation_finished
-	
 	HideDialog()
 	HideEquipment()
 	HideMap()
 	Signals.show_ui.emit()
 	State.LevelIsLoad = true
+	await Transition.animation_finished
+	
+	
 
 func EnableLoadinScreen() -> void:
-	State.IsRun = true
+	
 	Transition.play("fade_out")
 	await Transition.animation_finished
+	State.IsRun = true
 
 func ShowSettinIngame() -> void:
 	

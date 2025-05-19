@@ -48,8 +48,9 @@ region = Rect2(0, 259, 16, 13)
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxp8k"]
 radius = 40.0125
 
-[node name="RailwayStation" type="Node2D"]
+[node name="RailwayStation" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_gycxx")
+player = NodePath("Player")
 
 [node name="Teren" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -119,11 +120,11 @@ disabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_8f76d")]
 top_level = true
-position = Vector2(2120, -40)
+position = Vector2(2127, -74)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(2120, -40)
+position = Vector2(2127, -74)
 zoom = Vector2(3, 3)
 process_callback = 0
 limit_left = 0
@@ -139,7 +140,7 @@ script = ExtResource("3_sycnr")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(2120, -40)
+position = Vector2(2127, -74)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -266,10 +267,10 @@ texture = SubResource("AtlasTexture_pxp8k")
 
 [node name="EventArea" type="Node2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="EventArea"]
+[node name="GiveSTeelSheet" type="Area2D" parent="EventArea"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/GiveSTeelSheet"]
 position = Vector2(2116, -95)
 shape = SubResource("CircleShape2D_pxp8k")
 
-[connection signal="body_entered" from="EventArea/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="EventArea/GiveSTeelSheet" to="." method="_on_area_2d_body_entered"]
