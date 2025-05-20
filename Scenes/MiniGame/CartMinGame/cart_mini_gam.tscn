@@ -1,49 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvc7y03xy1xa2"]
+[gd_scene load_steps=2 format=3 uid="uid://dvc7y03xy1xa2"]
 
-[ext_resource type="PackedScene" uid="uid://b046ajchlgrbc" path="res://Scenes/MiniGame/CartMinGame/H_track_straight.tscn" id="1_jac1x"]
-[ext_resource type="PackedScene" uid="uid://bwde8lpg0womb" path="res://Scenes/MiniGame/CartMinGame/track_turn.tscn" id="2_iqlwr"]
-[ext_resource type="PackedScene" uid="uid://cx6sp18rv53ci" path="res://Scenes/MiniGame/CartMinGame/V_track_straight.tscn" id="3_lsid1"]
 [ext_resource type="PackedScene" uid="uid://8nijol4503yx" path="res://Scenes/MiniGame/CartMinGame/cart.tscn" id="4_0u0f4"]
 
 [node name="CartMiniGam" type="Node2D"]
 
-[node name="HTrackStraight" parent="." node_paths=PackedStringArray("cart") instance=ExtResource("1_jac1x")]
-position = Vector2(272, 144)
-cart = NodePath("../Cart")
-flip_y = true
+[node name="Leve1" type="Node2D" parent="."]
 
-[node name="HTrackStraight2" parent="." node_paths=PackedStringArray("cart") instance=ExtResource("1_jac1x")]
-position = Vector2(256, 144)
-cart = NodePath("../Cart")
-flip_y = true
+[node name="Leve2" type="Node2D" parent="."]
 
-[node name="HTrackStraight3" parent="." node_paths=PackedStringArray("cart") instance=ExtResource("1_jac1x")]
-position = Vector2(240, 144)
-cart = NodePath("../Cart")
-flip_y = true
-
-[node name="HTrackStraight4" parent="." node_paths=PackedStringArray("cart") instance=ExtResource("1_jac1x")]
-position = Vector2(224, 144)
-cart = NodePath("../Cart")
-flip_y = true
-
-[node name="HTrackStraight5" parent="." node_paths=PackedStringArray("cart") instance=ExtResource("1_jac1x")]
-position = Vector2(208, 144)
-cart = NodePath("../Cart")
-flip_y = true
-
-[node name="TrackTurn" parent="." node_paths=PackedStringArray("cart") instance=ExtResource("2_iqlwr")]
-position = Vector2(288, 144)
-cart = NodePath("../Cart")
-
-[node name="VTrackStraight" parent="." node_paths=PackedStringArray("cart") instance=ExtResource("3_lsid1")]
-position = Vector2(288, 160)
-cart = NodePath("../Cart")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(264, 152)
-zoom = Vector2(3, 3)
+[node name="Leve3" type="Node2D" parent="."]
 
 [node name="Cart" parent="." instance=ExtResource("4_0u0f4")]
 z_index = 1
-position = Vector2(288, 168)
+position = Vector2(296, 184)

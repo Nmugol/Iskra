@@ -9,7 +9,7 @@ region = Rect2(64, 640, 16, 16)
 
 [sub_resource type="Curve2D" id="Curve2D_d32fo"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 1, 0.120885, -2.53971, -0.120885, 2.53971, -8, 0, 0, 0, 0, 0, -8, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, -8, 0)
 }
 point_count = 4
 
@@ -30,8 +30,7 @@ curve = SubResource("Curve2D_d32fo")
 metadata/_edit_group_ = true
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0, 12)
-rotation = -1.86758
+position = Vector2(0, 11)
 rotates = false
 loop = false
 

@@ -1,7 +1,7 @@
 class_name Track
 extends Node2D
 
-@export var speed: float = 10.0  # Zmieniono na bardziej realistyczną prędkość
+@export var speed: float = 30.0  # Zmieniono na bardziej realistyczną prędkość
 @export var attach: Area2D
 @export var cart: Node2D
 @export var attach_to: PathFollow2D

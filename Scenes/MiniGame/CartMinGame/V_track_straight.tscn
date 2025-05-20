@@ -9,7 +9,7 @@ region = Rect2(64, 656, 16, 16)
 
 [sub_resource type="Curve2D" id="Curve2D_cfq66"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, -8)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, -8)
 }
 point_count = 2
 
@@ -29,8 +29,7 @@ texture = SubResource("AtlasTexture_auvwx")
 curve = SubResource("Curve2D_cfq66")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0, 12)
-rotation = -1.5708
+position = Vector2(0, 11)
 rotates = false
 loop = false
 

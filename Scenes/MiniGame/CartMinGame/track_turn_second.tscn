@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://djn710bebe8bt"]
+
+[ext_resource type="Script" uid="uid://dj6p1laukgb3r" path="res://Script/Class/Track.gd" id="1_3d2ys"]
+[ext_resource type="Texture2D" uid="uid://beya1ewlw1uac" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Furniture.png" id="1_uemab"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d2ys"]
+atlas = ExtResource("1_uemab")
+region = Rect2(0, 672, 16, 16)
+
+[sub_resource type="Curve2D" id="Curve2D_163en"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -8)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kire5"]
+size = Vector2(1, 17)
+
+[node name="TrackTurnSecond" type="Node2D" node_paths=PackedStringArray("attach", "attach_to")]
+script = ExtResource("1_3d2ys")
+attach = NodePath("AttachCartArea")
+attach_to = NodePath("Path2D/PathFollow2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_3d2ys")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_163en")
+metadata/_edit_group_ = true
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(11, 0)
+rotates = false
+loop = false
+
+[node name="AttachCartArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttachCartArea"]
+position = Vector2(7.5, -0.5)
+shape = SubResource("RectangleShape2D_kire5")
