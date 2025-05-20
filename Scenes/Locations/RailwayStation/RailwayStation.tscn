@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=33 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cf14nrp8pbfl" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Tools.png" id="17_m7ffe"]
 [ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
+[ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/Cart1.png" id="20_egf6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -47,6 +48,21 @@ region = Rect2(0, 259, 16, 13)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxp8k"]
 radius = 40.0125
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1ofm"]
+atlas = ExtResource("20_egf6h")
+region = Rect2(48, 6, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s613"]
+atlas = ExtResource("20_egf6h")
+region = Rect2(3, 20, 10, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv2js"]
+atlas = ExtResource("20_egf6h")
+region = Rect2(16, 6, 32, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oy7t8"]
+size = Vector2(40, 32)
 
 [node name="RailwayStation" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_gycxx")
@@ -154,13 +170,12 @@ draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
 [node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("11_basko")]
-visible = false
 CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion/Area2D2"]
-polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 136, 136, 136, 392, 216, 392, 216, 136, 520, 136, 520, 392, 600, 392, 600, 136, 1192, 136, 1192, 392, 1272, 392, 1272, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2320, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2336, 96, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, 16, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 96, 2336, 40, 2368, 24, 2368, 0, 2392, 0, 2392, -136, 2336, -136, 2256, -136, 2256, -168, 2336, -168, 2336, -136, 2392, -136, 2392, -184, 2336, -184, 2256, -184, 2256, -216, 2336, -216, 2336, -184, 2392, -184, 2392, -280, 2216, -280, 2216, -264, 2088, -264, 2088, -280, 2088, -160, 2096, -160, 2096, -136, 2080, -136, 2080, -112, 2064, -112, 2064, -160, 2088, -160, 2088, -264, 2088, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -208, 1888, -208, 1888, -192, 1904, -192, 1904, -152, 1856, -152, 1824, -176, 1768, -176, 1768, -192, 1816, -216, 1840, -232, 1840, -256, 1824, -280, 1800, -240, 1776, -232, 1760, -248, 1760, -280, 1648, -280, 1648, -208, 1544, -208, 1544, -200, 1496, -200, 1496, -112, 1536, -112, 1536, -192, 1568, -192, 1568, -168, 1552, -168, 1552, -144, 1584, -144, 1584, -128, 1568, -128, 1568, -112, 1536, -112, 1496, -112, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1568, -8, 1552, -8, 1552, 16, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
+polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 136, 136, 136, 392, 216, 392, 216, 136, 520, 136, 520, 392, 600, 392, 600, 136, 1192, 136, 1192, 392, 1272, 392, 1272, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2320, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2336, 96, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, 16, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 96, 2336, 40, 2368, 24, 2368, 0, 2392, 0, 2392, -136, 2336, -136, 2256, -136, 2256, -168, 2336, -168, 2336, -136, 2392, -136, 2392, -184, 2336, -184, 2256, -184, 2256, -216, 2336, -216, 2336, -184, 2392, -184, 2392, -280, 2216, -280, 2216, -264, 2088, -264, 2088, -280, 2088, -160, 2096, -160, 2096, -136, 2080, -136, 2080, -112, 2112, -96, 2112, -128, 2152, -128, 2152, -96, 2112, -96, 2080, -112, 2064, -112, 2064, -160, 2088, -160, 2088, -264, 2088, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -208, 1888, -208, 1888, -192, 1904, -192, 1904, -152, 1856, -152, 1824, -176, 1768, -176, 1768, -192, 1816, -216, 1840, -232, 1840, -256, 1824, -280, 1800, -240, 1776, -232, 1760, -248, 1760, -280, 1648, -280, 1648, -208, 1544, -208, 1544, -200, 1496, -200, 1496, -112, 1536, -112, 1536, -192, 1568, -192, 1568, -168, 1552, -168, 1552, -144, 1584, -144, 1584, -128, 1568, -128, 1568, -112, 1536, -112, 1496, -112, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1568, -8, 1552, -8, 1552, 16, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
 metadata/_edit_group_ = true
 
 [node name="Passage" type="Node2D" parent="."]
@@ -268,9 +283,32 @@ texture = SubResource("AtlasTexture_pxp8k")
 [node name="EventArea" type="Node2D" parent="."]
 
 [node name="GiveSTeelSheet" type="Area2D" parent="EventArea"]
+position = Vector2(13, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/GiveSTeelSheet"]
 position = Vector2(2116, -95)
 shape = SubResource("CircleShape2D_pxp8k")
 
+[node name="BrokenCart" type="Sprite2D" parent="EventArea/GiveSTeelSheet"]
+texture_filter = 1
+position = Vector2(2117, -103)
+texture = SubResource("AtlasTexture_h1ofm")
+
+[node name="Sprite2D" type="Sprite2D" parent="EventArea/GiveSTeelSheet/BrokenCart"]
+position = Vector2(-6, 14)
+texture = SubResource("AtlasTexture_1s613")
+
+[node name="Cart" type="Area2D" parent="EventArea"]
+position = Vector2(2134, -112)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EventArea/Cart"]
+texture_filter = 1
+texture = SubResource("AtlasTexture_nv2js")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/Cart"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_oy7t8")
+
 [connection signal="body_entered" from="EventArea/GiveSTeelSheet" to="." method="_on_area_2d_body_entered"]
+[connection signal="mouse_entered" from="EventArea/Cart" to="." method="_on_cart_mouse_entered"]

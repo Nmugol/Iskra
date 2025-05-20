@@ -5,6 +5,11 @@ extends Node2D
 @onready var peter: NPC = $NPC/Peter
 @export var player: Player
 
+func _ready() -> void:
+	if State.StateNumber >= 3:
+		$EventArea/GiveSTeelSheet.queue_free()
+		$EventArea/Cart.show()
+
 func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
 	match State.StateNumber:
@@ -22,13 +27,23 @@ func _process(_delta: float) -> void:
 				1:
 					_secon_task()
 				
+					
+				5:
+					if $EventArea/GiveSTeelSheet != null:
+						$EventArea/GiveSTeelSheet/BrokenCart.hide()
+						$EventArea/GiveSTeelSheet.free()
+						$EventArea/Cart.show()
 				8:
 					State.StateNumber = 3
 					State.StatePhase = 0
 
 func _first_task() -> void:
-	Signals.show_dialog.emit()
+	var stop: Vector2 = Vector2(2127,-74)
 	
+	player.global_position = stop
+	player.nav.target_position = stop
+	Signals.show_dialog.emit()
+	player.sprite.play("Idle")
 	#1
 	Signals.peopel_message.emit("Guard7",
 	"
@@ -145,4 +160,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			player.global_position = stop_point
 			player.nav.target_position = stop_point
 			player.sprite.play("Idle")
-			$EventArea/GiveSTeelSheet.queue_free()
+
+
+func _on_cart_mouse_entered() -> void:
+	var pl_pos = player.global_position
+	var mous_pos = get_global_mouse_position()
+	if mous_pos.distance_to(player.global_position) <= 30:
+		print("play mini game")
+		player.global_position = pl_pos
+		player.nav.target_position = pl_pos
