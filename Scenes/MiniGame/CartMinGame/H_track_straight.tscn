@@ -9,12 +9,12 @@ region = Rect2(32, 688, 16, 16)
 
 [sub_resource type="Curve2D" id="Curve2D_211w8"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 8, 0, 0, 0, 0, 0, -8, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 12, 0, 0, 0, 0, 0, -8, 0)
 }
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fa3q"]
-size = Vector2(7, 20)
+size = Vector2(1, 20)
 
 [node name="HTrackStraight" type="Node2D" node_paths=PackedStringArray("attach", "attach_to")]
 scale = Vector2(-1, 1)
@@ -30,11 +30,13 @@ texture = SubResource("AtlasTexture_ulcbf")
 curve = SubResource("Curve2D_211w8")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(8, 0)
+position = Vector2(12, 0)
 rotation = 3.14159
+rotates = false
+loop = false
 
 [node name="AttachCartArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttachCartArea"]
-position = Vector2(8.5, 0)
+position = Vector2(7.5, 0)
 shape = SubResource("RectangleShape2D_3fa3q")

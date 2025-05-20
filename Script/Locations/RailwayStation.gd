@@ -29,9 +29,10 @@ func _process(_delta: float) -> void:
 				
 					
 				5:
-					if $EventArea/GiveSTeelSheet != null:
+					
+					if get_node_or_null("EventArea/GiveSTeelSheet") != null:
 						$EventArea/GiveSTeelSheet/BrokenCart.hide()
-						$EventArea/GiveSTeelSheet.free()
+						$EventArea/GiveSTeelSheet.queue_free()
 						$EventArea/Cart.show()
 				8:
 					State.StateNumber = 3
@@ -159,7 +160,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			var stop_point: Vector2 = Vector2(2127,-54)
 			player.global_position = stop_point
 			player.nav.target_position = stop_point
-			player.sprite.play("Idle")
+			player.sprite.play("idle")
 
 
 func _on_cart_mouse_entered() -> void:
