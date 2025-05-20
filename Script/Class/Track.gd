@@ -3,7 +3,7 @@ extends Node2D
 
 @export var speed: float = 30.0  # Zmieniono na bardziej realistyczną prędkość
 @export var attach: Area2D
-@export var cart: Node2D
+@export var cart: Cart
 @export var attach_to: PathFollow2D
 @export var flip_x: bool
 @export var flip_y: bool

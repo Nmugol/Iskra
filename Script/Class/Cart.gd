@@ -1,2 +1,2 @@
 class_name Cart
-extends Node
+extends CharacterBody2D

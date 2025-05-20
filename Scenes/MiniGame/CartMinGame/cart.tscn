@@ -7,11 +7,11 @@
 size = Vector2(8, 8)
 
 [node name="Cart" type="CharacterBody2D" groups=["Cart"]]
+script = ExtResource("2_iod86")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("1_kw5as")
-script = ExtResource("2_iod86")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_iod86")
