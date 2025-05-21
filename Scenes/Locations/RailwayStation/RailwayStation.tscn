@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=34 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
 [ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/Cart1.png" id="20_egf6h"]
+[ext_resource type="PackedScene" uid="uid://dvc7y03xy1xa2" path="res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn" id="21_h1ofm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -64,9 +65,8 @@ region = Rect2(16, 6, 32, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oy7t8"]
 size = Vector2(40, 32)
 
-[node name="RailwayStation" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="RailwayStation" type="Node2D"]
 script = ExtResource("1_gycxx")
-player = NodePath("Player")
 
 [node name="Teren" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -141,7 +141,7 @@ position = Vector2(2127, -74)
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(2127, -74)
-zoom = Vector2(3, 3)
+zoom = Vector2(2.5, 2.5)
 process_callback = 0
 limit_left = 0
 limit_top = -352
@@ -160,7 +160,7 @@ position = Vector2(2127, -74)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(3, 3)
+zoom = Vector2(2.5, 2.5)
 tween_resource = SubResource("Resource_bmnd2")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)
@@ -170,6 +170,7 @@ draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
 [node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("11_basko")]
+visible = false
 CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
@@ -309,6 +310,10 @@ texture = SubResource("AtlasTexture_nv2js")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/Cart"]
 position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_oy7t8")
+
+[node name="CartMiniGam" parent="." instance=ExtResource("21_h1ofm")]
+z_index = 1
+position = Vector2(1897, -202)
 
 [connection signal="body_entered" from="EventArea/GiveSTeelSheet" to="." method="_on_area_2d_body_entered"]
 [connection signal="mouse_entered" from="EventArea/Cart" to="." method="_on_cart_mouse_entered"]

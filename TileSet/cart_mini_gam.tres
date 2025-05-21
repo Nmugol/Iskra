@@ -1,0 +1,30 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cntsa1l3d20sm"]
+
+[ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="1_ilfco"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hyde5"]
+texture = ExtResource("1_ilfco")
+0:0/0 = 0
+0:1/0 = 0
+1:0/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+5:4/0 = 0
+5:1/0 = 0
+5:0/0 = 0
+4:0/0 = 0
+1:1/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+5:3/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+0:2/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_hyde5")

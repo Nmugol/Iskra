@@ -72,3 +72,6 @@ signal cart_game_timer_on()
 
 @warning_ignore("unused_signal")
 signal cart_game_timer_off()
+
+@warning_ignore("unused_signal")
+signal cart_go()

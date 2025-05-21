@@ -3,7 +3,7 @@ extends Node2D
 @onready var guard7: NPC = $NPC/Guard7
 @onready var guard8: NPC = $NPC/Guard8
 @onready var peter: NPC = $NPC/Peter
-@export var player: Player
+@onready var player: Player = $Player
 
 func _ready() -> void:
 	if State.StateNumber >= 3:
@@ -167,6 +167,11 @@ func _on_cart_mouse_entered() -> void:
 	var pl_pos = player.global_position
 	var mous_pos = get_global_mouse_position()
 	if mous_pos.distance_to(player.global_position) <= 30:
-		print("play mini game")
+		State.IsRun = false
+		for i in 2: await get_tree().process_frame
+		player.hide()
+		$CartMiniGam.show()
+		$PhantomCamera2D.follow_target = $CartMiniGam
+		
 		player.global_position = pl_pos
 		player.nav.target_position = pl_pos

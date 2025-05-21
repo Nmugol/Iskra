@@ -5,6 +5,8 @@ extends Node2D
 @export var track_to_flip_x: Array[Track] = []
 @export var track_to_flip_y: Array[Track] = []
 
+@onready var sprite: AnimatedSprite2D = $Sprite2D
+
 var mous_on: bool = false
 
 func _rotate()-> void:
@@ -31,6 +33,9 @@ func _process(_delta: float) -> void:
 		_rotate()
 		_flio_x()
 		_flio_y()
+		sprite.play("use")
+		await sprite.animation_finished
+		sprite.play("normal")
 
 func _on_area_2d_mouse_entered() -> void:
 	mous_on = true
