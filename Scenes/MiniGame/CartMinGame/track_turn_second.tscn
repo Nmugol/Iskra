@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3d2ys"]
 atlas = ExtResource("1_uemab")
-region = Rect2(0, 672, 16, 16)
+region = Rect2(16, 720, 16, 16)
 
 [sub_resource type="Curve2D" id="Curve2D_163en"]
 _data = {
@@ -14,7 +14,7 @@ _data = {
 point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kire5"]
-size = Vector2(1, 17)
+size = Vector2(1, 6)
 
 [node name="TrackTurnSecond" type="Node2D" node_paths=PackedStringArray("attach", "attach_to")]
 script = ExtResource("1_3d2ys")
@@ -37,5 +37,5 @@ loop = false
 [node name="AttachCartArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttachCartArea"]
-position = Vector2(7.5, -0.5)
+position = Vector2(7.5, 0)
 shape = SubResource("RectangleShape2D_kire5")

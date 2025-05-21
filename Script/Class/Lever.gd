@@ -26,7 +26,7 @@ func _flio_y()-> void:
 		t.flip_y = !t.flip_y
 		t.update_scale()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if mous_on and Input.is_action_just_pressed("MovePlayer"):
 		_rotate()
 		_flio_x()

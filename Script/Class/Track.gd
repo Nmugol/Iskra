@@ -79,7 +79,9 @@ func _deferred_reparent(pos: Vector2, rot: float) -> void:
 	
 	attach_to.progress = 0.0
 	attach_flag = true
+	Signals.cart_game_timer_off.emit()
 
 func handle_end_of_path() -> void:
 	# Tutaj dodaj logikę przejścia do następnego segmentu
 	attach_flag = false
+	Signals.cart_game_timer_on.emit()

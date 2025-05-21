@@ -5,16 +5,16 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1c5oh"]
 atlas = ExtResource("2_l7w51")
-region = Rect2(64, 640, 16, 16)
+region = Rect2(48, 720, 16, 16)
 
 [sub_resource type="Curve2D" id="Curve2D_d32fo"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, -8, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -9, 0)
 }
-point_count = 4
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3k8o0"]
-size = Vector2(20, 1)
+size = Vector2(6, 1)
 
 [node name="TrackTurn" type="Node2D" node_paths=PackedStringArray("attach", "attach_to")]
 script = ExtResource("1_d32fo")

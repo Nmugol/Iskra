@@ -66,3 +66,9 @@ signal mouse_above_item(area: String)
 
 @warning_ignore("unused_signal")
 signal mouse_off_item()
+
+@warning_ignore("unused_signal")
+signal cart_game_timer_on()
+
+@warning_ignore("unused_signal")
+signal cart_game_timer_off()

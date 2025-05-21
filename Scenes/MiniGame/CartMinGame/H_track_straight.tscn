@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ulcbf"]
 atlas = ExtResource("2_suxe8")
-region = Rect2(32, 688, 16, 16)
+region = Rect2(32, 720, 16, 16)
 
 [sub_resource type="Curve2D" id="Curve2D_211w8"]
 _data = {
@@ -14,10 +14,9 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fa3q"]
-size = Vector2(1, 20)
+size = Vector2(1, 6)
 
 [node name="HTrackStraight" type="Node2D" node_paths=PackedStringArray("attach", "attach_to")]
-scale = Vector2(-1, 1)
 script = ExtResource("1_iqyfg")
 attach = NodePath("AttachCartArea")
 attach_to = NodePath("Path2D/PathFollow2D")

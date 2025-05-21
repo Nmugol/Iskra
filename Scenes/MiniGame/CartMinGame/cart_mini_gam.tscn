@@ -1,5 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvc7y03xy1xa2"]
+[gd_scene load_steps=10 format=3 uid="uid://dvc7y03xy1xa2"]
 
+[ext_resource type="Script" uid="uid://cp1idoalo0734" path="res://Script/Locations/cart_mini_gam.gd" id="1_0tact"]
+[ext_resource type="Script" uid="uid://bksi83yje0dv7" path="res://Script/Class/TracLoader.gd" id="1_0u0f4"]
 [ext_resource type="PackedScene" uid="uid://cx6sp18rv53ci" path="res://Scenes/MiniGame/CartMinGame/V_track_straight.tscn" id="1_x0d2a"]
 [ext_resource type="PackedScene" uid="uid://b046ajchlgrbc" path="res://Scenes/MiniGame/CartMinGame/H_track_straight.tscn" id="2_sg5nt"]
 [ext_resource type="PackedScene" uid="uid://bwde8lpg0womb" path="res://Scenes/MiniGame/CartMinGame/track_turn.tscn" id="3_iqlwr"]
@@ -7,9 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://djn710bebe8bt" path="res://Scenes/MiniGame/CartMinGame/track_turn_second.tscn" id="4_lsid1"]
 [ext_resource type="PackedScene" uid="uid://gevsv0nxju2n" path="res://Scenes/MiniGame/CartMinGame/lever.tscn" id="6_lsid1"]
 
-[node name="CartMiniGam" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tact"]
+size = Vector2(20, 8)
 
-[node name="Leve1" type="Node2D" parent="."]
+[node name="CartMiniGam" type="Node2D"]
+script = ExtResource("1_0tact")
+
+[node name="Leve1" type="Node2D" parent="." node_paths=PackedStringArray("cart")]
+script = ExtResource("1_0u0f4")
+cart = NodePath("../Cart")
 
 [node name="Tackvertical" parent="Leve1" instance=ExtResource("1_x0d2a")]
 position = Vector2(128, 120)
@@ -69,21 +77,32 @@ position = Vector2(160, -24)
 
 [node name="TrackHorizontal" parent="Leve1" instance=ExtResource("2_sg5nt")]
 position = Vector2(48, 8)
+flip_x = true
+flip_y = true
 
 [node name="TrackHorizontal2" parent="Leve1" instance=ExtResource("2_sg5nt")]
 position = Vector2(64, 8)
+flip_x = true
+flip_y = true
 
 [node name="TrackHorizontal3" parent="Leve1" instance=ExtResource("2_sg5nt")]
 position = Vector2(80, 8)
+flip_x = true
+flip_y = true
 
 [node name="TrackHorizontal4" parent="Leve1" instance=ExtResource("2_sg5nt")]
 position = Vector2(96, 8)
+flip_x = true
+flip_y = true
 
 [node name="TrackHorizontal11" parent="Leve1" instance=ExtResource("2_sg5nt")]
 position = Vector2(144, 88)
+flip_x = true
 
 [node name="TrackHorizontal5" parent="Leve1" instance=ExtResource("2_sg5nt")]
 position = Vector2(112, 8)
+flip_x = true
+flip_y = true
 
 [node name="TrackHorizontal6" parent="Leve1" instance=ExtResource("2_sg5nt")]
 position = Vector2(48, 88)
@@ -111,8 +130,6 @@ position = Vector2(128, 88)
 
 [node name="TrackTurnSecond" parent="Leve1" instance=ExtResource("4_lsid1")]
 position = Vector2(128, 8)
-flip_x = true
-flip_y = true
 
 [node name="TrackTurnSecond2" parent="Leve1" instance=ExtResource("4_lsid1")]
 position = Vector2(32, 88)
@@ -123,6 +140,12 @@ position = Vector2(160, 88)
 [node name="TrackTurn2" parent="Leve1" instance=ExtResource("3_iqlwr")]
 position = Vector2(32, 8)
 
+[node name="Area2D" type="Area2D" parent="Leve1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leve1/Area2D"]
+position = Vector2(160, -33)
+shape = SubResource("RectangleShape2D_0tact")
+
 [node name="Leve2" type="Node2D" parent="."]
 visible = false
 
@@ -131,16 +154,29 @@ visible = false
 
 [node name="Cart" parent="." instance=ExtResource("4_0u0f4")]
 z_index = 1
-position = Vector2(32, 136)
+position = Vector2(128, 132)
 
-[node name="Lever" parent="." instance=ExtResource("6_lsid1")]
+[node name="Lever1" parent="." node_paths=PackedStringArray("track_to_flip_x", "track_to_flip_y") instance=ExtResource("6_lsid1")]
 position = Vector2(8, 192)
+track_to_flip_x = [NodePath("../Leve1/TrackTurnSecond"), NodePath("../Leve1/TrackTurn")]
+track_to_flip_y = [NodePath("../Leve1/TrackTurnSecond")]
 
-[node name="Lever2" parent="." instance=ExtResource("6_lsid1")]
+[node name="Lever2" parent="." node_paths=PackedStringArray("track_to_flip_x") instance=ExtResource("6_lsid1")]
 position = Vector2(32, 192)
+track_to_flip_x = [NodePath("../Leve1/TrackTurnSecond2"), NodePath("../Leve1/TrackTurnSecond3")]
 
-[node name="Lever3" parent="." instance=ExtResource("6_lsid1")]
+[node name="Lever3" parent="." node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x") instance=ExtResource("6_lsid1")]
 position = Vector2(56, 192)
+track_to_rotate = [NodePath("../Leve1/Tackvertical16")]
+track_to_flip_x = [NodePath("../Leve1/TrackTurn"), NodePath("../Leve1/TrackTurn2")]
 
-[node name="Lever4" parent="." instance=ExtResource("6_lsid1")]
+[node name="Lever4" parent="." node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x") instance=ExtResource("6_lsid1")]
 position = Vector2(80, 192)
+track_to_rotate = [NodePath("../Leve1/Tackvertical16")]
+track_to_flip_x = [NodePath("../Leve1/TrackTurnSecond2")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="Leve1/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
