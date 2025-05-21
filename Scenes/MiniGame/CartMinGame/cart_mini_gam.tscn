@@ -213,7 +213,7 @@ visible = false
 
 [node name="Cart" parent="Node2D" instance=ExtResource("4_0u0f4")]
 z_index = 1
-position = Vector2(120, 183)
+position = Vector2(120, 185)
 
 [node name="Lever1" parent="Node2D" node_paths=PackedStringArray("track_to_flip_x", "track_to_flip_y") instance=ExtResource("6_lsid1")]
 texture_filter = 1
@@ -250,3 +250,4 @@ texture = SubResource("AtlasTexture_43d8e")
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Node2D/Leve1/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="mouse_entered" from="Node2D/StartCart" to="." method="_on_start_cart_mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/StartCart" to="." method="_on_start_cart_mouse_exited"]

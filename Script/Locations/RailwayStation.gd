@@ -5,7 +5,12 @@ extends Node2D
 @onready var peter: NPC = $NPC/Peter
 @onready var player: Player = $Player
 
+@onready var minigame = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
+
 func _ready() -> void:
+	
+	Signals.load_cart_game.connect(_load_game)
+	
 	if State.StateNumber >= 3:
 		$EventArea/GiveSTeelSheet.queue_free()
 		$EventArea/Cart.show()
@@ -167,11 +172,18 @@ func _on_cart_mouse_entered() -> void:
 	var pl_pos = player.global_position
 	var mous_pos = get_global_mouse_position()
 	if mous_pos.distance_to(player.global_position) <= 30:
-		State.IsRun = false
-		for i in 2: await get_tree().process_frame
 		player.hide()
-		$CartMiniGam.show()
-		$PhantomCamera2D.follow_target = $CartMiniGam
-		
 		player.global_position = pl_pos
 		player.nav.target_position = pl_pos
+		State.IsRun = false
+		for i in 2: await get_tree().process_frame
+		
+		_load_game()
+		
+
+func _load_game()-> void:
+	var game = minigame.instantiate()
+	game.z_index = 1
+	game.global_position = $CartMiniGamePos.global_position
+	add_child(game)
+	$PhantomCamera2D.follow_target = game

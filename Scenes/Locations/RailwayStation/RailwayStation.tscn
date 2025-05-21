@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=33 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -20,7 +20,6 @@
 [ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
 [ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/Cart1.png" id="20_egf6h"]
-[ext_resource type="PackedScene" uid="uid://dvc7y03xy1xa2" path="res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn" id="21_h1ofm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -311,8 +310,7 @@ texture = SubResource("AtlasTexture_nv2js")
 position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_oy7t8")
 
-[node name="CartMiniGam" parent="." instance=ExtResource("21_h1ofm")]
-z_index = 1
+[node name="CartMiniGamePos" type="Marker2D" parent="."]
 position = Vector2(1897, -202)
 
 [connection signal="body_entered" from="EventArea/GiveSTeelSheet" to="." method="_on_area_2d_body_entered"]

@@ -8,6 +8,7 @@ extends Node2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
 var mous_on: bool = false
+var mingame_is_runing: bool = false
 
 func _rotate()-> void:
 	if track_to_rotate.is_empty(): return
@@ -28,7 +29,11 @@ func _flio_y()-> void:
 		t.flip_y = !t.flip_y
 		t.update_scale()
 
+func _ready() -> void:
+	Signals.cart_go.connect(func (): mingame_is_runing = true)
+
 func _process(_delta: float) -> void:
+	if mingame_is_runing: return
 	if mous_on and Input.is_action_just_pressed("MovePlayer"):
 		_rotate()
 		_flio_x()
