@@ -217,26 +217,27 @@ position = Vector2(120, 185)
 
 [node name="Lever1" parent="Node2D" node_paths=PackedStringArray("track_to_flip_x", "track_to_flip_y") instance=ExtResource("6_lsid1")]
 texture_filter = 1
-position = Vector2(32, 232)
+position = Vector2(32, 233)
 track_to_flip_x = [NodePath("../Leve1/TrackTurnSecond"), NodePath("../Leve1/TrackTurn")]
 track_to_flip_y = [NodePath("../Leve1/TrackTurnSecond")]
 
 [node name="Lever2" parent="Node2D" node_paths=PackedStringArray("track_to_flip_x") instance=ExtResource("6_lsid1")]
-position = Vector2(56, 231)
+position = Vector2(56, 233)
 track_to_flip_x = [NodePath("../Leve1/TrackTurnSecond2"), NodePath("../Leve1/TrackTurnSecond3")]
 
 [node name="Lever3" parent="Node2D" node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x") instance=ExtResource("6_lsid1")]
-position = Vector2(120, 231)
+position = Vector2(120, 233)
 track_to_rotate = [NodePath("../Leve1/Tackvertical16")]
 track_to_flip_x = [NodePath("../Leve1/TrackTurn"), NodePath("../Leve1/TrackTurn2")]
 
 [node name="Lever4" parent="Node2D" node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x") instance=ExtResource("6_lsid1")]
-position = Vector2(144, 232)
+position = Vector2(144, 233)
 track_to_rotate = [NodePath("../Leve1/Tackvertical16")]
 track_to_flip_x = [NodePath("../Leve1/TrackTurnSecond2")]
 
 [node name="StartCart" type="Area2D" parent="Node2D"]
-position = Vector2(88, 231)
+position = Vector2(88, 233)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StartCart"]
 rotation = 1.5708
