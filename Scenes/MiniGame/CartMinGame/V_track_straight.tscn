@@ -18,6 +18,7 @@ size = Vector2(6, 1)
 
 [node name="VTrackStraight" type="Node2D" node_paths=PackedStringArray("attach", "attach_to")]
 script = ExtResource("1_auvwx")
+speed = 120.0
 attach = NodePath("AttachCartArea")
 attach_to = NodePath("Path2D/PathFollow2D")
 

@@ -10,10 +10,14 @@ extends Node2D
 func _ready() -> void:
 	
 	Signals.load_cart_game.connect(_load_game)
+	Signals.finish_cart_game.connect(_finish_game)
 	
 	if State.StateNumber >= 3:
 		$EventArea/GiveSTeelSheet.queue_free()
 		$EventArea/Cart.show()
+	
+	if State.StateNumber >= 4:
+		$EventArea/Cart.monitoring = false
 
 func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
@@ -176,8 +180,6 @@ func _on_cart_mouse_entered() -> void:
 		player.global_position = pl_pos
 		player.nav.target_position = pl_pos
 		State.IsRun = false
-		for i in 2: await get_tree().process_frame
-		
 		_load_game()
 		
 
@@ -187,3 +189,11 @@ func _load_game()-> void:
 	game.global_position = $CartMiniGamePos.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
+
+func _finish_game()-> void:
+	$PhantomCamera2D.follow_target = player
+	player.show()
+	State.StateNumber = 4
+	State.StatePhase = 0
+	$EventArea/Cart.monitoring = false
+	State.IsRun = true

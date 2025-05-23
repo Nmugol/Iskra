@@ -1,9 +1,9 @@
 class_name Track
 extends Node2D
 
-@export var speed: float = 30.0  # Zmieniono na bardziej realistyczną prędkość
+@export var speed: float = 60.0  # Zmieniono na bardziej realistyczną prędkość
 @export var attach: Area2D
-@export var cart: Cart
+var cart: Cart
 @export var attach_to: PathFollow2D
 @export var flip_x: bool
 @export var flip_y: bool
@@ -55,18 +55,14 @@ func reparent_cart() -> void:
 	if not is_instance_valid(cart) or not is_instance_valid(attach_to):
 		return
 	
-	# Zapisz pozycję globalną PRZED usunięciem
-	var old_global_position = cart.global_position
-	var old_global_rotation = cart.global_rotation
-	
 	# Bezpieczne usuwanie rodzica
 	if cart.get_parent():
 		cart.get_parent().remove_child(cart)
 	
 	# Opoźnione dodawanie do nowego rodzica
-	call_deferred("_deferred_reparent", old_global_position, old_global_rotation)
+	call_deferred("_deferred_reparent")
 
-func _deferred_reparent(pos: Vector2, rot: float) -> void:
+func _deferred_reparent() -> void:
 	if not attach_to.is_inside_tree():
 		return
 	

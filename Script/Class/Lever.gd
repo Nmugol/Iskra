@@ -31,6 +31,7 @@ func _flio_y()-> void:
 
 func _ready() -> void:
 	Signals.cart_go.connect(func (): mingame_is_runing = true)
+	Signals.reparent_cart.connect(func (): mingame_is_runing = false)
 
 func _process(_delta: float) -> void:
 	if mingame_is_runing: return

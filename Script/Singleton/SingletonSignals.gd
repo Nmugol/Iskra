@@ -78,3 +78,15 @@ signal cart_go()
 
 @warning_ignore("unused_signal")
 signal load_cart_game()
+
+@warning_ignore("unused_signal")
+signal finish_cart_game()
+
+@warning_ignore("unused_signal")
+signal reparent_cart()
+
+@warning_ignore("unused_signal")
+signal set_cart_pos(pos: Vector2) 
+
+@warning_ignore("unused_signal")
+signal get_cart(cart:Cart)
