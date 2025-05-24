@@ -35,14 +35,12 @@ func _process(_delta: float) -> void:
 			match  State.StatePhase:
 				1:
 					_secon_task()
-				
-					
 				5:
-					
 					if get_node_or_null("EventArea/GiveSTeelSheet") != null:
 						$EventArea/GiveSTeelSheet/BrokenCart.hide()
 						$EventArea/GiveSTeelSheet.queue_free()
 						$EventArea/Cart.show()
+						
 				8:
 					State.StateNumber = 3
 					State.StatePhase = 0
@@ -170,6 +168,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			player.global_position = stop_point
 			player.nav.target_position = stop_point
 			player.sprite.play("idle")
+			State.SelectedItem.RemoveFromEquipment()
 
 
 func _on_cart_mouse_entered() -> void:

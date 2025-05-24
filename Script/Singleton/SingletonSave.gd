@@ -17,6 +17,8 @@ var Equipment: Array[Item] = []:
 		Signals.load_equiment.emit()
 	get: return Equipment
 
+
+
 func DefoultDate() -> void:
 	CurrentScenePath = "res://Scenes/Locations/Mines/Mines.tscn"
 	PlayerPosition = Vector2(254,-75)
