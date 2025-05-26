@@ -51,7 +51,7 @@ func _first_task() -> void:
 	player.global_position = stop
 	player.nav.target_position = stop
 	Signals.show_dialog.emit()
-	player.sprite.play("Idle")
+	player.sprite.play("idle")
 	#1
 	Signals.peopel_message.emit("Guard7",
 	"
@@ -172,6 +172,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_cart_mouse_entered() -> void:
+	if State.StateNumber != 3 : return
 	var pl_pos = player.global_position
 	var mous_pos = get_global_mouse_position()
 	if mous_pos.distance_to(player.global_position) <= 30:

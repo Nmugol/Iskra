@@ -52,7 +52,7 @@ texture = ExtResource("9_43d8e")
 sources/0 = SubResource("TileSetAtlasSource_hyde5")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tact"]
-size = Vector2(20, 16)
+size = Vector2(16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xcvqf"]
 atlas = ExtResource("8_gps52")
@@ -584,6 +584,7 @@ position = Vector2(88, 104)
 position = Vector2(136, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Leve3/Finish3"]
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_0tact")
 
 [node name="1" parent="Node2D/Leve3" instance=ExtResource("1_x0d2a")]
@@ -791,11 +792,6 @@ flip_x = true
 [node name="49" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
 position = Vector2(104, 24)
 flip_x = true
-
-[node name="50" parent="Node2D/Leve3" instance=ExtResource("3_iqlwr")]
-position = Vector2(120, 24)
-rotation = -1.5708
-flip_y = true
 
 [node name="Lever1" parent="Node2D" node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x", "track_to_flip_y") instance=ExtResource("6_lsid1")]
 texture_filter = 1

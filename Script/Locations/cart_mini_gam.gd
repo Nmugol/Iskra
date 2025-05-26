@@ -7,6 +7,11 @@ var minigame_is_run: bool = false
 var main_cart: Cart
 
 func _ready() -> void:
+	
+	$Node2D/Leve1.show()
+	$Node2D/Leve2.hide()
+	$Node2D/Leve3.hide()
+	
 	Signals.cart_game_timer_on.connect(func (): 
 		$Timer.wait_time = 0.6
 		$Timer.one_shot = true

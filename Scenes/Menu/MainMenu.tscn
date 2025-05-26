@@ -100,11 +100,13 @@ grow_vertical = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
-layout_mode = 2
-offset_left = 56.0
-offset_top = -112.0
-offset_right = 368.0
-offset_bottom = 785.0
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_right = 320.0
+offset_bottom = 32.0
+grow_vertical = 2
 size_flags_horizontal = 0
 texture = ExtResource("2_p4pvn")
 patch_margin_left = 26
@@ -114,11 +116,15 @@ patch_margin_bottom = 27
 
 [node name="TopPatternPanel0233x15" type="TextureRect" parent="NinePatchRect"]
 texture_filter = 1
-layout_mode = 0
-offset_left = 11.0
-offset_top = 127.0
-offset_right = 299.0
-offset_bottom = 159.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_top = 56.0
+offset_right = 144.0
+offset_bottom = 88.0
+grow_horizontal = 2
 texture = ExtResource("3_s3ie0")
 
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
@@ -157,11 +163,18 @@ text = "QUIT"
 
 [node name="TopPatternPanel0233x16" type="TextureRect" parent="NinePatchRect"]
 texture_filter = 1
-layout_mode = 0
-offset_left = 11.0
-offset_top = 792.0
-offset_right = 299.0
-offset_bottom = 824.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -72.0
+offset_right = 144.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
 texture = ExtResource("3_s3ie0")
 
 [connection signal="button_down" from="NinePatchRect/MarginContainer/VBoxContainer/Play" to="." method="_on_play_button_down"]

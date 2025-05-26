@@ -299,6 +299,7 @@ position = Vector2(-6, 14)
 texture = SubResource("AtlasTexture_1s613")
 
 [node name="Cart" type="Area2D" parent="EventArea"]
+visible = false
 position = Vector2(2134, -112)
 metadata/_edit_group_ = true
 
