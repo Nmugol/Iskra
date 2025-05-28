@@ -5,6 +5,9 @@ extends Node2D
 @onready var peter: NPC = $NPC/Peter
 @onready var player: Player = $Player
 
+@onready var cart: Area2D = $EventArea/Cart
+@onready var give_sheet: Area2D = $EventArea/GiveSTeelSheet
+
 @onready var minigame = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
 
 func _ready() -> void:
@@ -21,6 +24,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
+	
+	if cart.overlaps_body(player) and State.StateNumber != 3:
+		_on_cart_mouse_entered()
+	
+	if give_sheet.overlaps_area(player) and State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
+		_reper_cart()
+	
 	match State.StateNumber:
 		1:
 			match State.StatePhase:
@@ -44,6 +54,51 @@ func _process(_delta: float) -> void:
 				8:
 					State.StateNumber = 3
 					State.StatePhase = 0
+		4:
+			match  State.StatePhase:
+				pass
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	Signals.set_coursor.emit(State.Coursors.USE)
+	if body.is_in_group("Player") and State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
+		_reper_cart()
+
+func  _reper_cart() -> void:
+	State.StatePhase = 1
+	var stop_point: Vector2 = Vector2(2127,-54)
+	player.global_position = stop_point
+	player.nav.target_position = stop_point
+	player.sprite.play("idle")
+	State.SelectedItem.RemoveFromEquipment()
+
+
+func _on_cart_mouse_entered() -> void:
+	if State.StateNumber != 3 : return
+	var pl_pos = player.global_position
+	var mous_pos = get_global_mouse_position()
+	if mous_pos.distance_to(player.global_position) <= 30:
+		player.hide()
+		player.global_position = pl_pos
+		player.nav.target_position = pl_pos
+		State.IsRun = false
+		_load_game()
+		
+
+func _load_game()-> void:
+	var game = minigame.instantiate()
+	game.z_index = 1
+	game.global_position = $CartMiniGamePos.global_position
+	add_child(game)
+	$PhantomCamera2D.follow_target = game
+
+func _finish_game()-> void:
+	$PhantomCamera2D.follow_target = player
+	player.show()
+	State.StateNumber = 4
+	State.StatePhase = 0
+	$EventArea/Cart.monitoring = false
+	State.IsRun = true
+
 
 func _first_task() -> void:
 	var stop: Vector2 = Vector2(2127,-74)
@@ -160,42 +215,3 @@ func _secon_task() -> void:
 	What matters is that you fixed it. But the loading is already way behind schedule.
 	Push the cart through the emergency track and get back to the mine.
 	")
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	Signals.set_coursor.emit(State.Coursors.USE)
-	if body.is_in_group("Player") and State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
-			
-			State.StatePhase = 1
-			var stop_point: Vector2 = Vector2(2127,-54)
-			player.global_position = stop_point
-			player.nav.target_position = stop_point
-			player.sprite.play("idle")
-			State.SelectedItem.RemoveFromEquipment()
-
-
-func _on_cart_mouse_entered() -> void:
-	if State.StateNumber != 3 : return
-	var pl_pos = player.global_position
-	var mous_pos = get_global_mouse_position()
-	if mous_pos.distance_to(player.global_position) <= 30:
-		player.hide()
-		player.global_position = pl_pos
-		player.nav.target_position = pl_pos
-		State.IsRun = false
-		_load_game()
-		
-
-func _load_game()-> void:
-	var game = minigame.instantiate()
-	game.z_index = 1
-	game.global_position = $CartMiniGamePos.global_position
-	add_child(game)
-	$PhantomCamera2D.follow_target = game
-
-func _finish_game()-> void:
-	$PhantomCamera2D.follow_target = player
-	player.show()
-	State.StateNumber = 4
-	State.StatePhase = 0
-	$EventArea/Cart.monitoring = false
-	State.IsRun = true

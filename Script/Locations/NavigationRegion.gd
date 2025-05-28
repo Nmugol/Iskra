@@ -15,6 +15,7 @@ func _ready() -> void:
 	Collision.polygon = CollisionArea.polygon
 
 
+
 func _on_area_2d_mouse_entered() -> void:
 	State.IsInArea = true
 	Signals.set_coursor.emit(State.Coursors.WALK)

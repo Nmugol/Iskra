@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if not State.IsRun:
+		Signals.reset_coursor.emit()
 		return
 
 	if Input.is_action_pressed("MovePlayer") and State.IsInArea and DistaneToClick():

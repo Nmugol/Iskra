@@ -18,3 +18,12 @@ func _on_ekwipunek_pressed() -> void:
 func _on_mapa_pressed() -> void:
 	Signals.show_map.emit()
 	hide()
+
+
+func _on_panel_mouse_entered() -> void:
+	State.IsRun = false
+	
+
+
+func _on_panel_mouse_exited() -> void:
+	State.IsRun = true
