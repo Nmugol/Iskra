@@ -12,14 +12,14 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_2siod"]
 [ext_resource type="TileSet" uid="uid://dnsb1dhex2si7" path="res://TileSet/Furnace.tres" id="6_basko"]
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="11_basko"]
-[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="12_5r2dp"]
+[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="12_5r2dp"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="13_7y4t6"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_ljs7w"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="16_bcjxh"]
 [ext_resource type="Texture2D" uid="uid://cf14nrp8pbfl" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Tools.png" id="17_m7ffe"]
 [ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
-[ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/Cart1.png" id="20_egf6h"]
+[ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/CartMiniGame/Cart1.png" id="20_egf6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -142,10 +142,10 @@ physics_interpolation_mode = 1
 position = Vector2(2127, -74)
 zoom = Vector2(2.5, 2.5)
 process_callback = 0
-limit_left = 0
-limit_top = -352
-limit_right = 2416
-limit_bottom = 416
+limit_left = -1080
+limit_top = -712
+limit_right = 1144
+limit_bottom = 936
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

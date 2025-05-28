@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://gevsv0nxju2n" path="res://Scenes/MiniGame/CartMinGame/lever.tscn" id="6_lsid1"]
 [ext_resource type="Texture2D" uid="uid://beya1ewlw1uac" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Furniture.png" id="8_gps52"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="9_43d8e"]
-[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/OptionIcons.png" id="10_43d8e"]
+[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="10_43d8e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gps52"]
 atlas = ExtResource("10_43d8e")
@@ -584,7 +584,7 @@ position = Vector2(88, 104)
 position = Vector2(136, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Leve3/Finish3"]
-position = Vector2(1, 0)
+position = Vector2(8, 24)
 shape = SubResource("RectangleShape2D_0tact")
 
 [node name="1" parent="Node2D/Leve3" instance=ExtResource("1_x0d2a")]
@@ -613,15 +613,6 @@ position = Vector2(120, 40)
 rotation = 1.5708
 flip_x = true
 flip_y = true
-
-[node name="7" parent="Node2D/Leve3" instance=ExtResource("4_lsid1")]
-position = Vector2(136, 40)
-rotation = -4.71239
-flip_x = true
-
-[node name="8" parent="Node2D/Leve3" instance=ExtResource("1_x0d2a")]
-position = Vector2(136, 24)
-speed = 60.0
 
 [node name="9" parent="Node2D/Leve3" instance=ExtResource("1_x0d2a")]
 position = Vector2(104, 88)
@@ -740,13 +731,14 @@ speed = 60.0
 position = Vector2(120, 72)
 speed = 60.0
 
-[node name="36" parent="Node2D/Leve3" instance=ExtResource("4_lsid1")]
-position = Vector2(104, 40)
-rotation = 1.5708
-flip_y = true
-
 [node name="37" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
 position = Vector2(88, 40)
+
+[node name="52" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
+position = Vector2(104, 40)
+
+[node name="53" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
+position = Vector2(120, 24)
 
 [node name="38" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
 position = Vector2(72, 40)
@@ -785,6 +777,14 @@ flip_x = true
 position = Vector2(72, 24)
 flip_x = true
 
+[node name="50" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
+position = Vector2(136, 40)
+flip_x = true
+
+[node name="51" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
+position = Vector2(136, 40)
+flip_x = true
+
 [node name="48" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
 position = Vector2(88, 24)
 flip_x = true
@@ -792,6 +792,11 @@ flip_x = true
 [node name="49" parent="Node2D/Leve3" instance=ExtResource("2_sg5nt")]
 position = Vector2(104, 24)
 flip_x = true
+
+[node name="End9" type="Sprite2D" parent="Node2D/Leve3"]
+texture_filter = 1
+position = Vector2(136, 24)
+texture = SubResource("AtlasTexture_hv8rs")
 
 [node name="Lever1" parent="Node2D" node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x", "track_to_flip_y") instance=ExtResource("6_lsid1")]
 texture_filter = 1
@@ -802,7 +807,7 @@ track_to_flip_y = [NodePath("../Leve1/10"), NodePath("../Leve2/14"), NodePath(".
 
 [node name="Lever2" parent="Node2D" node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x", "track_to_flip_y") instance=ExtResource("6_lsid1")]
 position = Vector2(56, 233)
-track_to_rotate = [NodePath("../Leve1/29"), NodePath("../Leve1/32"), NodePath("../Leve2/14"), NodePath("../Leve2/37"), NodePath("../Leve3/7")]
+track_to_rotate = [NodePath("../Leve1/29"), NodePath("../Leve1/32"), NodePath("../Leve2/14"), NodePath("../Leve2/37")]
 track_to_flip_x = [NodePath("../Leve1/24"), NodePath("../Leve2/50"), NodePath("../Leve3/5"), NodePath("../Leve3/27"), NodePath("../Leve3/3")]
 track_to_flip_y = [NodePath("../Leve1/24"), NodePath("../Leve2/3"), NodePath("../Leve2/50"), NodePath("../Leve3/30")]
 

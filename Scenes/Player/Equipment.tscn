@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b568newwj37a1" path="res://Script/Player/Equipment.gd" id="1_mv6v0"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="2_hbu0k"]
 [ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="2_ll5if"]
-[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/OptionIcons.png" id="3_106t7"]
+[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="3_106t7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ll5if"]
 atlas = ExtResource("3_106t7")

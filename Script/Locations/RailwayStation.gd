@@ -162,7 +162,9 @@ func _secon_task() -> void:
 	")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	Signals.set_coursor.emit(State.Coursors.USE)
 	if body.is_in_group("Player") and State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
+			
 			State.StatePhase = 1
 			var stop_point: Vector2 = Vector2(2127,-54)
 			player.global_position = stop_point

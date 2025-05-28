@@ -17,7 +17,9 @@ func _ready() -> void:
 
 func _on_area_2d_mouse_entered() -> void:
 	State.IsInArea = true
+	Signals.set_coursor.emit(State.Coursors.WALK)
 
 
 func _on_area_2d_mouse_exited() -> void:
 	State.IsInArea = false
+	Signals.reset_coursor.emit()

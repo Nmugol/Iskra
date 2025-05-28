@@ -8,6 +8,8 @@ var main_cart: Cart
 
 func _ready() -> void:
 	
+	Signals.reset_coursor.emit()
+	
 	$Node2D/Leve1.show()
 	$Node2D/Leve2.hide()
 	$Node2D/Leve3.hide()

@@ -14,7 +14,7 @@
 [ext_resource type="TileSet" uid="uid://dnsb1dhex2si7" path="res://TileSet/Furnace.tres" id="11_n72us"]
 [ext_resource type="TileSet" uid="uid://b8x4hwflm7x23" path="res://TileSet/Resources.tres" id="12_bfbpn"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="14_8dmtp"]
-[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/Light3.png" id="15_ybn7d"]
+[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/LightShape/Light3.png" id="15_ybn7d"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="16_7s5um"]
 
 [sub_resource type="Resource" id="Resource_ed5sf"]

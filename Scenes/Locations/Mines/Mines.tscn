@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=4 uid="uid://ts7t4v5e7dhj"]
 
 [ext_resource type="Script" uid="uid://bcxsv3qu0uuw7" path="res://Script/Locations/Mines.gd" id="1_op74w"]
-[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="2_uv6ud"]
+[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="2_uv6ud"]
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="3_6p72f"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="4_pw3ey"]
 [ext_resource type="TileSet" uid="uid://bq71cb3hyf62k" path="res://TileSet/Vegetation.tres" id="5_3ha0f"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="15_txgkb"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="16_xc3rf"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="18_3ha0f"]
-[ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/Light2.png" id="18_pw3ey"]
+[ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="18_pw3ey"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="19_pw3ey"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="20_3ha0f"]
 
@@ -187,10 +187,10 @@ physics_interpolation_mode = 1
 position = Vector2(217.333, -80)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 0
-limit_top = -352
-limit_right = 2416
-limit_bottom = 416
+limit_left = -1080
+limit_top = -712
+limit_right = 1144
+limit_bottom = 936
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

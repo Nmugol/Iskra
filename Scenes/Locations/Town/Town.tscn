@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_j8x0t"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="8_qk8aa"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="12_0x46y"]
-[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="13_t4w28"]
+[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="13_t4w28"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_1on30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5t81g"]
@@ -232,7 +232,7 @@ area_shape = NodePath("CollisionShape2D")
 min_distance = 50.0
 player = NodePath("../../Player")
 stopping_point = Vector2(-1032, -144)
-target_player_position = Vector2(1384, 128)
+target_player_position = Vector2(1392, 128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/CommercialArea"]
 position = Vector2(-1064, -148)

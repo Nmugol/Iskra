@@ -12,7 +12,7 @@
 [ext_resource type="TileSet" uid="uid://b8x4hwflm7x23" path="res://TileSet/Resources.tres" id="5_8kkhh"]
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="11_7vnyi"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="11_ktjdc"]
-[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/Light3.png" id="12_pj1h8"]
+[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/LightShape/Light3.png" id="12_pj1h8"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="13_o8g02"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvmyi"]

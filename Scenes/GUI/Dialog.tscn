@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cqaoa43fo2d0v" path="res://Sprite/Character/Przemek/Przemek Face.png" id="20_yc2vb"]
 [ext_resource type="Texture2D" uid="uid://dpe2fyc4ogfcg" path="res://Sprite/Character/Zygmunt/Zygmunt Face.png" id="21_71ten"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="22_v3bn7"]
-[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/OptionIcons.png" id="23_h15r2"]
+[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="23_h15r2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1eixm"]
 atlas = ExtResource("23_h15r2")

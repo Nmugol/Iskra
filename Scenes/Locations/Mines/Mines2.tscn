@@ -15,9 +15,9 @@
 [ext_resource type="TileSet" uid="uid://b8x4hwflm7x23" path="res://TileSet/Resources.tres" id="12_er0jo"]
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="14_ncjw1"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="15_n2e3n"]
-[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/Light1.png" id="16_bqmar"]
+[ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="16_bqmar"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="17_l42c2"]
-[ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/Light2.png" id="18_bqmar"]
+[ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="18_bqmar"]
 
 [sub_resource type="Resource" id="Resource_ikvpf"]
 script = ExtResource("3_03ur4")

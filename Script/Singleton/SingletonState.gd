@@ -12,3 +12,10 @@ var StatePhase: int = 0
 
 var ActiveItem: Item
 var SelectedItem: Item
+
+enum Coursors {
+	DEFOULT,
+	PICKUP,
+	USE,
+	WALK
+}

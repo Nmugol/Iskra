@@ -34,6 +34,7 @@ func _process(delta: float) -> void:
 		0:
 			match State.StatePhase:
 				0: 
+					State.IsRun = false
 					StartDialog();
 				4:
 					guard7.update_state("Walk", false)
@@ -59,7 +60,7 @@ func _process(delta: float) -> void:
 					get_tree().change_scene_to_file(MainScene)
 
 func StartDialog() -> void:
-	
+	State.IsRun = false
 	Signals.show_dialog.emit()
 	#1
 	Signals.peopel_message.emit("Peter", 

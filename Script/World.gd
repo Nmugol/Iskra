@@ -11,7 +11,6 @@ extends Node2D
 
 func _ready() -> void:
 	EnableLoadinScreen()
-	State.LevelIsLoad = false
 	
 	_connect_signals()
 	LoadLevel()
@@ -36,16 +35,18 @@ func _connect_signals() -> void:
 	
 	Signals.show_settin_in_game.connect(ShowSettinIngame)
 	Signals.hide_settin_in_game.connect(HideSettinIngame)
+	
+
 
 func LoadLevel() -> void:
+	State.IsRun = false
 	# Usunięcei cześniejszych załdowanych scen
 	for l in LevelLocation.get_children():
-		l.free()
+		l.queue_free()
 	
 	# Załadowanie lewelu
 	var levelnode = load(Save.CurrentScenePath).instantiate()
 	LevelLocation.add_child(levelnode)
-	
 	DisabeLoadinScreen()
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()
@@ -54,6 +55,7 @@ func SaveLevel() -> void:
 	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()
 
 func ShowDialog() -> void:
+	Signals.reset_coursor.emit()
 	State.IsRun = false
 	Dialog.show()
 	HideEquipment()
@@ -68,6 +70,7 @@ func HideDialog() -> void:
 	SettingsInGame.show()
 
 func ShowEquipment() -> void:
+	Signals.reset_coursor.emit()
 	State.IsRun = false
 	Equipment.show()
 	HideDialog()
@@ -79,6 +82,7 @@ func HideEquipment() -> void:
 	Equipment.hide()
 
 func ShowMap() -> void:
+	Signals.reset_coursor.emit()
 	State.IsRun = false
 	Map.show()
 	HideDialog()
@@ -95,8 +99,9 @@ func DisabeLoadinScreen() -> void:
 	HideEquipment()
 	HideMap()
 	Signals.show_ui.emit()
-	State.LevelIsLoad = true
 	await Transition.animation_finished
+	State.LevelIsLoad = true
+	
 	
 	
 
@@ -104,7 +109,6 @@ func EnableLoadinScreen() -> void:
 	
 	Transition.play("fade_out")
 	await Transition.animation_finished
-	State.IsRun = true
 
 func ShowSettinIngame() -> void:
 	
@@ -115,3 +119,4 @@ func ShowSettinIngame() -> void:
 
 func HideSettinIngame() -> void:
 	SettingsInGame.hide()
+	

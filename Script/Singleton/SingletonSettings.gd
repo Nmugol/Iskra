@@ -117,5 +117,23 @@ func resetSettings() -> void:
 	SoundEffectsVolume = 1.0
 	saveSettings()
 
+func _reset_coursor() -> void:
+	Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0177.png"),Input.CURSOR_ARROW,Vector2(8,8))
+
+func _set_coursor(cursor_name: State.Coursors) -> void:
+	match  cursor_name:
+		State.Coursors.USE:
+			Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0132.png"),Input.CURSOR_ARROW,Vector2(8,8))
+		State.Coursors.PICKUP:
+			Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0135.png"),Input.CURSOR_ARROW,Vector2(8,8))
+		State.Coursors.WALK:
+			Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0098.png"),Input.CURSOR_ARROW,Vector2(8,8))
+		_:
+			_reset_coursor()
+
+
 func _ready() -> void:
+	Signals.set_coursor.connect(_set_coursor)
+	Signals.reset_coursor.connect(_reset_coursor)
+	_reset_coursor()
 	loadSettings()

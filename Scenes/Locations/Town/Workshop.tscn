@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_45q5c"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="11_w3biq"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="12_ia28m"]
-[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/Light3.png" id="13_wty3n"]
+[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/LightShape/Light3.png" id="13_wty3n"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_85ban"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2oj5v"]

@@ -11,7 +11,7 @@
 [ext_resource type="TileSet" uid="uid://bbrsvodg8uu0g" path="res://TileSet/BuildingWall.tres" id="7_8y7vf"]
 [ext_resource type="TileSet" uid="uid://cbmrdwd2iym64" path="res://TileSet/Floor.tres" id="7_bmhxp"]
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="11_wmiu7"]
-[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/Light3.png" id="12_bpqe2"]
+[ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/LightShape/Light3.png" id="12_bpqe2"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="13_05tpc"]
 
 [sub_resource type="Resource" id="Resource_bmhxp"]

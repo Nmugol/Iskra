@@ -90,3 +90,9 @@ signal set_cart_pos(pos: Vector2)
 
 @warning_ignore("unused_signal")
 signal get_cart(cart:Cart)
+
+@warning_ignore("unused_signal")
+signal  set_coursor(cursor_name: State.Coursors)
+
+@warning_ignore("unused_signal")
+signal reset_coursor()
