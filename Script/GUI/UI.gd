@@ -5,6 +5,7 @@ func _ready() -> void:
 	show()
 
 func _process(_delta: float) -> void:
+	
 	if Input.is_action_just_pressed("Mapa"):
 		_on_mapa_pressed()
 	
@@ -19,11 +20,9 @@ func _on_mapa_pressed() -> void:
 	Signals.show_map.emit()
 	hide()
 
-
-func _on_panel_mouse_entered() -> void:
+func _on_mouse_entered() -> void:
 	State.IsRun = false
-	
 
 
-func _on_panel_mouse_exited() -> void:
+func _on_mouse_exited() -> void:
 	State.IsRun = true
