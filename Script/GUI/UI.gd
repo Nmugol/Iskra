@@ -1,5 +1,7 @@
 extends Control
 
+var windows_is_open: bool = false
+
 func _ready() -> void:
 	Signals.show_ui.connect(func():show())
 	show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=32 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -16,9 +16,9 @@
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="13_7y4t6"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_ljs7w"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="16_bcjxh"]
-[ext_resource type="Texture2D" uid="uid://cf14nrp8pbfl" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Tools.png" id="17_m7ffe"]
 [ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
+[ext_resource type="Texture2D" uid="uid://8p1syjqyicg4" path="res://Sprite/Items/SteelShetSmal.png" id="19_egf6h"]
 [ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/CartMiniGame/Cart1.png" id="20_egf6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
@@ -41,10 +41,6 @@ size = Vector2(96, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mva2b"]
 radius = 12.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pxp8k"]
-atlas = ExtResource("17_m7ffe")
-region = Rect2(0, 259, 16, 13)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxp8k"]
 radius = 40.0125
@@ -277,8 +273,7 @@ shape = SubResource("CircleShape2D_mva2b")
 
 [node name="Sprite2D" type="Sprite2D" parent="Items/SteelSheet"]
 texture_filter = 1
-rotation = -0.612611
-texture = SubResource("AtlasTexture_pxp8k")
+texture = ExtResource("19_egf6h")
 
 [node name="EventArea" type="Node2D" parent="."]
 

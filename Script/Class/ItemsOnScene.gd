@@ -14,7 +14,7 @@ var pointin_on: curson_above = curson_above.NONE
 
 var item_position: Vector2
 
-var steel_sheet: Item = Item.new("Steel sheet",[],true,"res://icon.svg","res://icon.svg",[])
+var steel_sheet: Item = Item.new("Steel sheet",[],true,"res://Sprite/Items/SteelShetSmal.png","res://Sprite/Items/SteelShet.png",[])
 
 func _distance_to_item() -> bool:
 	if player.global_position.distance_to(item_position) <= PICK_UP_DISTANCE:

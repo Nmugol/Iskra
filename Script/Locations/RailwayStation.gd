@@ -9,6 +9,7 @@ extends Node2D
 @onready var give_sheet: Area2D = $EventArea/GiveSTeelSheet
 
 @onready var minigame = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
+const  MainScene = "res://Scenes/World.tscn"
 
 func _ready() -> void:
 	
@@ -56,7 +57,18 @@ func _process(_delta: float) -> void:
 					State.StatePhase = 0
 		4:
 			match  State.StatePhase:
-				pass
+				0:
+					_third_dialogue()
+				1:
+					var broken_whell: Item = Item.new("Broken whell",[],true,"res://Sprite/Items/BrokenCartWhellSmall.png","res://Sprite/Items/BrokenCartWhell.png",[])
+					broken_whell.AddToEquipment()
+				4:
+					State.StateNumber = 5
+					State.StatePhase = 0
+					Save.PlayerPosition = Vector2(-368,568) 
+					Save.CurrentScenePath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
+					Signals.enable_loadin_screen.emit()
+					get_tree().change_scene_to_file(MainScene)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	Signals.set_coursor.emit(State.Coursors.USE)
@@ -71,7 +83,6 @@ func  _reper_cart() -> void:
 	player.sprite.play("idle")
 	State.SelectedItem.RemoveFromEquipment()
 
-
 func _on_cart_mouse_entered() -> void:
 	if State.StateNumber != 3 : return
 	var pl_pos = player.global_position
@@ -82,7 +93,6 @@ func _on_cart_mouse_entered() -> void:
 		player.nav.target_position = pl_pos
 		State.IsRun = false
 		_load_game()
-		
 
 func _load_game()-> void:
 	var game = minigame.instantiate()
@@ -99,6 +109,30 @@ func _finish_game()-> void:
 	$EventArea/Cart.monitoring = false
 	State.IsRun = true
 
+func  _third_dialogue() -> void:
+	Save.SaveDataToFile()
+	Signals.show_dialog.emit()
+	player.sprite.play("idle")
+	
+	#1
+	Signals.peopel_message.emit("Guard7",
+	"
+	Peter, you go back to the mine, and Daniel, you take this broken wheel.
+	Go to the twins and ask them to repair it.
+	")
+	
+	#2
+	Signals.player_message.emit("Daniel",
+	"
+	Okay. After I give it to them, should I return to the mine right away?
+	")
+	
+	#3
+	Signals.peopel_message.emit("Guard8",
+	"
+	No, wait there until they fix the wheel, and only then go back to the mine.
+	Don't waste time—go.
+	")
 
 func _first_task() -> void:
 	var stop: Vector2 = Vector2(2127,-74)

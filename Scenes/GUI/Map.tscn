@@ -1,8 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://qmdgtogrjq2q"]
+[gd_scene load_steps=15 format=3 uid="uid://qmdgtogrjq2q"]
 
 [ext_resource type="Script" uid="uid://dhqh8gmth30vm" path="res://Script/GUI/Map.gd" id="1_y1ncg"]
+[ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="2_cvhm5"]
 [ext_resource type="PackedScene" uid="uid://gn6u6ckf4w48" path="res://Scenes/GUI/location_button.tscn" id="2_ercyb"]
 [ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="3_4g1po"]
+[ext_resource type="Texture2D" uid="uid://dmyj5ngq83tr1" path="res://Sprite/Map.png" id="3_skwkt"]
+[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="5_skwkt"]
+[ext_resource type="Texture2D" uid="uid://cayejyt3sudjl" path="res://Sprite/MiningAreaIcon.png" id="7_3da73"]
+[ext_resource type="Texture2D" uid="uid://cgd0l4ybedpja" path="res://Sprite/TownIcon.png" id="7_dmvi7"]
+[ext_resource type="Texture2D" uid="uid://d2sosxpj6u0ml" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/CoinIcon(WithoutStroke)_16x18.png" id="8_dmvi7"]
+[ext_resource type="Texture2D" uid="uid://d28e2vcvm00vq" path="res://Sprite/SpeepArea.png" id="9_u51vk"]
+[ext_resource type="Texture2D" uid="uid://c4ftwdikghkrm" path="res://Sprite/TruckIcon.png" id="9_w6joy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0vta"]
+atlas = ExtResource("5_skwkt")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3da73"]
+atlas = ExtResource("5_skwkt")
+region = Rect2(0, 22, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmvi7"]
+atlas = ExtResource("5_skwkt")
+region = Rect2(0, 44, 21, 21)
 
 [node name="Map" type="Control"]
 layout_mode = 3
@@ -25,65 +45,155 @@ theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 60
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
+[node name="Panel" type="NinePatchRect" parent="MarginContainer"]
+texture_filter = 1
 layout_mode = 2
+texture = ExtResource("2_cvhm5")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
 
-[node name="Town" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
-layout_mode = 0
-offset_left = 61.0
-offset_top = 50.0
-offset_right = 197.0
-offset_bottom = 232.0
-text = "wdawda"
-icon = ExtResource("3_4g1po")
-LocationSceenPath = "res://Scenes/Locations/Town/Town.tscn"
-LocationPosition = Vector2(0, -72)
-LocationName = "Town"
-LocationActiveOnStage = Array[int]([0, 1])
-LocationIcon = ExtResource("3_4g1po")
-
-[node name="Mines" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
-layout_mode = 0
-offset_left = 219.0
-offset_top = 53.0
-offset_right = 355.0
-offset_bottom = 235.0
-text = "lowdawdwda"
-icon = ExtResource("3_4g1po")
-LocationSceenPath = "res://Scenes/Locations/Mines/MineHub.tscn"
-LocationPosition = Vector2(766, 1523)
-LocationName = "Mines"
-LocationActiveOnStage = Array[int]([0, 1])
-LocationIcon = ExtResource("3_4g1po")
-
-[node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
-layout_mode = 0
-offset_left = 375.0
-offset_top = 46.0
-offset_right = 511.0
-offset_bottom = 228.0
-LocationSceenPath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
-LocationPosition = Vector2(2048, -8)
-LocationName = "Railway Station"
-LocationActiveOnStage = Array[int]([0, 1])
-LocationIcon = ExtResource("3_4g1po")
-
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="clousButton" type="TextureButton" parent="MarginContainer/Panel"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
+offset_left = -26.0
+offset_top = -11.0
+offset_right = 13.0
+offset_bottom = 28.0
 grow_horizontal = 0
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 30
+texture_normal = SubResource("AtlasTexture_u0vta")
+texture_pressed = SubResource("AtlasTexture_3da73")
+texture_hover = SubResource("AtlasTexture_dmvi7")
+texture_disabled = SubResource("AtlasTexture_3da73")
+texture_focused = SubResource("AtlasTexture_dmvi7")
+stretch_mode = 4
 
-[node name="clousButton" type="Button" parent="MarginContainer2"]
-layout_mode = 2
-text = "clous"
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -571.0
+offset_top = -291.0
+offset_right = 570.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_skwkt")
 
-[connection signal="pressed" from="MarginContainer2/clousButton" to="." method="_on_clous_button_pressed"]
+[node name="Town" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -66.0
+offset_right = 91.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "wdawda"
+icon = ExtResource("3_4g1po")
+expand_icon = true
+LocationSceenPath = "res://Scenes/Locations/Town/Town.tscn"
+LocationPosition = Vector2(0, -72)
+LocationName = "Town"
+LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
+LocationIcon = ExtResource("7_dmvi7")
+
+[node name="Mines" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 254.0
+offset_top = -216.0
+offset_right = 390.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "lowdawdwda"
+icon = ExtResource("3_4g1po")
+expand_icon = true
+LocationSceenPath = "res://Scenes/Locations/Mines/MineHub.tscn"
+LocationPosition = Vector2(766, 1523)
+LocationName = "Mines"
+LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
+LocationIcon = ExtResource("7_3da73")
+
+[node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -267.0
+offset_right = -154.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+LocationSceenPath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
+LocationPosition = Vector2(2048, -8)
+LocationName = "Railway station"
+LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
+LocationIcon = ExtResource("9_w6joy")
+
+[node name="ResidentialArea" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = 28.0
+offset_right = -125.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_icon = true
+LocationSceenPath = "res://Scenes/Locations/Town/ResidentialHousesZone.tscn"
+LocationPosition = Vector2(2048, -8)
+LocationName = "Residential area"
+LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
+LocationIcon = ExtResource("9_u51vk")
+
+[node name="ShoppingDistrict" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
+visible = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -474.0
+offset_top = -68.0
+offset_right = -338.0
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_icon = true
+LocationSceenPath = "res://Scenes/Locations/Town/CommercialArea.tscn"
+LocationPosition = Vector2(2048, -8)
+LocationName = "Shopping district"
+LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
+LocationIcon = ExtResource("8_dmvi7")
+
+[connection signal="pressed" from="MarginContainer/Panel/clousButton" to="." method="_on_clous_button_pressed"]

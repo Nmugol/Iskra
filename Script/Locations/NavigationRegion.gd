@@ -4,6 +4,8 @@ extends Node2D
 @onready var Collision: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 @export var CollisionArea: CollisionPolygon2D
 
+
+
 func _ready() -> void:
 	show()
 	var new_navigation_mesh = NavigationPolygon.new()
