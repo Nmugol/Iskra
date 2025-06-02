@@ -33,6 +33,9 @@ func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("Close"):
+		_on_close_button_pressed()
+	
 	if Input.is_action_just_pressed("LoadText"):
 		if !text_is_end:  # Pierwsze kliknięcie - szybkie zakończenie tekstu
 			current_char_index = current_text.length()

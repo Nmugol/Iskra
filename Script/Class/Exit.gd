@@ -40,9 +40,6 @@ func CalculateDistance() -> void:
 	dist = floor(area_shape.global_position.distance_to(player.global_position))
 
 func _process(_delta: float) -> void:
-	
-	
-	
 	if mouse_hover:
 		if Input.is_action_just_pressed("MovePlayer") and dist <= min_distance:
 

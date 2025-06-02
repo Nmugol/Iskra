@@ -13,6 +13,10 @@ func _ready() -> void:
 	SetUp()
 	CreateItem()
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("Close") and visible:
+		_on_clouse_pressed()
+
 func SetUp() -> void:
 	UseButton.hide()
 	DisassembleButton.hide()

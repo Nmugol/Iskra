@@ -8,10 +8,10 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	
-	if Input.is_action_just_pressed("Mapa"):
+	if Input.is_action_just_pressed("Mapa") and self.visible:
 		_on_mapa_pressed()
 	
-	if Input.is_action_just_pressed("Equipment"):
+	if Input.is_action_just_pressed("Equipment") and self.visible: 
 		_on_ekwipunek_pressed()
 
 func _on_ekwipunek_pressed() -> void:

@@ -4,6 +4,7 @@ extends Node2D
 @onready var guard8: NPC = $NPC/Guard8
 @onready var peter: NPC = $NPC/Peter
 @onready var player: Player = $Player
+@onready var camer: PhantomCamera2D = $PhantomCamera2D
 
 @onready var cart: Area2D = $EventArea/Cart
 @onready var give_sheet: Area2D = $EventArea/GiveSTeelSheet
@@ -12,6 +13,8 @@ extends Node2D
 const  MainScene = "res://Scenes/World.tscn"
 
 func _ready() -> void:
+	camer.global_position = player.global_position 
+	camer.follow_target = player
 	
 	Signals.load_cart_game.connect(_load_game)
 	Signals.finish_cart_game.connect(_finish_game)
@@ -26,16 +29,16 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
 	
-	if cart.overlaps_body(player) and State.StateNumber != 3:
-		_on_cart_mouse_entered()
+	if cart.overlaps_body(player) and State.StateNumber != 3: _on_cart_mouse_entered()
 	
-	if give_sheet.overlaps_area(player) and State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet":
-		_reper_cart()
+	if give_sheet != null:
+		if give_sheet.overlaps_area(player) and State.SelectedItem != null and State.SelectedItem.item_name == "Steel sheet": _reper_cart()
 	
 	match State.StateNumber:
 		1:
 			match State.StatePhase:
 				0: 
+					
 					_first_task()
 					$Player.sprite.flip_h = true
 				10:
@@ -61,12 +64,13 @@ func _process(_delta: float) -> void:
 					_third_dialogue()
 				1:
 					var broken_whell: Item = Item.new("Broken whell",[],true,"res://Sprite/Items/BrokenCartWhellSmall.png","res://Sprite/Items/BrokenCartWhell.png",[])
-					broken_whell.AddToEquipment()
-				4:
+					if not Save._is_in_equipment(broken_whell.item_name):
+						broken_whell.AddToEquipment()
+				9:
 					State.StateNumber = 5
 					State.StatePhase = 0
-					Save.PlayerPosition = Vector2(-368,568) 
-					Save.CurrentScenePath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
+					Save.PlayerPosition = Vector2(440,-184) 
+					Save.CurrentScenePath = 'res://Scenes/Locations/Town/Workshop.tscn'
 					Signals.enable_loadin_screen.emit()
 					get_tree().change_scene_to_file(MainScene)
 
@@ -82,6 +86,7 @@ func  _reper_cart() -> void:
 	player.nav.target_position = stop_point
 	player.sprite.play("idle")
 	State.SelectedItem.RemoveFromEquipment()
+	State.ActiveItem = null
 
 func _on_cart_mouse_entered() -> void:
 	if State.StateNumber != 3 : return
@@ -108,31 +113,6 @@ func _finish_game()-> void:
 	State.StatePhase = 0
 	$EventArea/Cart.monitoring = false
 	State.IsRun = true
-
-func  _third_dialogue() -> void:
-	Save.SaveDataToFile()
-	Signals.show_dialog.emit()
-	player.sprite.play("idle")
-	
-	#1
-	Signals.peopel_message.emit("Guard7",
-	"
-	Peter, you go back to the mine, and Daniel, you take this broken wheel.
-	Go to the twins and ask them to repair it.
-	")
-	
-	#2
-	Signals.player_message.emit("Daniel",
-	"
-	Okay. After I give it to them, should I return to the mine right away?
-	")
-	
-	#3
-	Signals.peopel_message.emit("Guard8",
-	"
-	No, wait there until they fix the wheel, and only then go back to the mine.
-	Don't waste time—go.
-	")
 
 func _first_task() -> void:
 	var stop: Vector2 = Vector2(2127,-74)
@@ -206,6 +186,7 @@ func _first_task() -> void:
 	")
 
 func _secon_task() -> void:
+	
 	Save.SaveDataToFile()
 	Signals.show_dialog.emit()
 	#1
@@ -248,4 +229,65 @@ func _secon_task() -> void:
 	Alright, alright.
 	What matters is that you fixed it. But the loading is already way behind schedule.
 	Push the cart through the emergency track and get back to the mine.
+	")
+
+func  _third_dialogue() -> void:
+	Save.SaveDataToFile()
+	Signals.show_dialog.emit()
+	player.sprite.play("idle")
+	
+	#1
+	Signals.peopel_message.emit("Peter",
+	"
+	Psst... Daniel, look what I found while we were moving the cart.
+	")
+	
+	#2
+	Signals.player_message.emit("Daniel",
+	"
+	Wait, what is this? A Resistance poster?! Hide it, or they'll do something to us!
+	")
+	
+	#3
+	Signals.peopel_message.emit("Guard8",
+	"
+	What's going on there? What do you have?
+	")
+	
+	#4
+	Signals.player_message.emit("Daniel",
+	"
+	I was just handing Peter a rag so he could wipe his forehead—he got all sweaty from the coal.
+	")
+	
+	#5
+	Signals.peopel_message.emit("Guard7",
+	"
+	And are you done with that cart yet?
+	")
+	
+	#6
+	Signals.player_message.emit("Daniel",
+	"
+	Yes. We pushed the cart all the way through.
+	")
+	
+	#7
+	Signals.peopel_message.emit("Guard7",
+	"
+	Peter, you go back to the mine, and Daniel, you take this broken wheel.
+	Go to the twins and ask them to repair it.
+	")
+	
+	#8
+	Signals.player_message.emit("Daniel",
+	"
+	Okay. After I give it to them, should I return to the mine right away?
+	")
+	
+	#9
+	Signals.peopel_message.emit("Guard8",
+	"
+	No, wait there until they fix the wheel, and only then go back to the mine.
+	Don't waste time—go.
 	")

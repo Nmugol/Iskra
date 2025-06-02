@@ -17,7 +17,10 @@ var Equipment: Array[Item] = []:
 		Signals.load_equiment.emit()
 	get: return Equipment
 
-
+func _is_in_equipment(i_name: String)-> bool:
+	for i in Save.Equipment:
+		if i.item_name == i_name: return true
+	return false
 
 func DefoultDate() -> void:
 	CurrentScenePath = "res://Scenes/Locations/Mines/Mines.tscn"

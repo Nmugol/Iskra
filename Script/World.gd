@@ -70,8 +70,9 @@ func HideDialog() -> void:
 	SettingsInGame.show()
 
 func ShowEquipment() -> void:
-	Signals.reset_coursor.emit()
 	State.IsRun = false
+	Signals.reset_coursor.emit()
+	
 	Equipment.show()
 	HideDialog()
 	HideMap()
