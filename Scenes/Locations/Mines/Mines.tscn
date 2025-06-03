@@ -187,10 +187,10 @@ physics_interpolation_mode = 1
 position = Vector2(217.333, -80)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 0
-limit_top = -352
-limit_right = 2416
-limit_bottom = 416
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

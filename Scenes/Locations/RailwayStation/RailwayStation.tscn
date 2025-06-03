@@ -140,12 +140,12 @@ position = Vector2(2120, -40)
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(2120, -40)
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2.2, 2.2)
 process_callback = 0
-limit_left = 392
-limit_top = -660
-limit_right = 920
-limit_bottom = -284
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -159,7 +159,7 @@ position = Vector2(2120, -40)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2.2, 2.2)
 tween_resource = SubResource("Resource_bmnd2")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)

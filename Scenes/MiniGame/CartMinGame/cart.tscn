@@ -8,7 +8,7 @@ atlas = ExtResource("2_wvsi2")
 region = Rect2(80, 16, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iod86"]
-size = Vector2(8, 2)
+size = Vector2(8, 8)
 
 [node name="Cart" type="CharacterBody2D" groups=["Cart"]]
 script = ExtResource("2_iod86")
@@ -18,5 +18,4 @@ texture_filter = 1
 texture = SubResource("AtlasTexture_quf3t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_iod86")
