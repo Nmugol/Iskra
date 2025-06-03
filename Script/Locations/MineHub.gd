@@ -10,6 +10,14 @@ func _process(_delta: float) -> void:
 			match State.StatePhase:
 				0:
 					_first_dialog()
+				3:
+					State.StateNumber = 9
+					State.StatePhase = 0
+					Save.PlayerPosition = Vector2(704,-424) 
+					Save.CurrentScenePath = 'res://Scenes/Locations/Town/DanielHouse.tscn'
+					Signals.enable_loadin_screen.emit()
+					get_tree().change_scene_to_file(MainScene)
+
 
 func _first_dialog() -> void:
 	player.sprite.play("idle")
