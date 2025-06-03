@@ -20,11 +20,10 @@ func _ready() -> void:
 	Signals.finish_cart_game.connect(_finish_game)
 	
 	if State.StateNumber >= 3:
-		$EventArea/GiveSTeelSheet.queue_free()
-		$EventArea/Cart.show()
+		cart.show()
 	
 	if State.StateNumber >= 4:
-		$EventArea/Cart.monitoring = false
+		cart.monitoring = false
 
 func _process(_delta: float) -> void:
 	if not State.LevelIsLoad: return
@@ -40,9 +39,9 @@ func _process(_delta: float) -> void:
 				0: 
 					
 					_first_task()
-					$Player.sprite.flip_h = true
+					player.sprite.flip_h = true
 				10:
-					$Player.sprite.flip_h = false
+					player.sprite.flip_h = false
 					State.StateNumber = 2
 					State.StatePhase = 0
 		2:
@@ -53,7 +52,7 @@ func _process(_delta: float) -> void:
 					if get_node_or_null("EventArea/GiveSTeelSheet") != null:
 						$EventArea/GiveSTeelSheet/BrokenCart.hide()
 						$EventArea/GiveSTeelSheet.queue_free()
-						$EventArea/Cart.show()
+						cart.show()
 						
 				8:
 					State.StateNumber = 3

@@ -11,9 +11,15 @@ func _ready() -> void:
 	Signals.save_game.connect(SavePlayerData)
 	sprite.scale = Vector2(0.5,0.5)
 	sprite.play("idle")
-	position = Save.PlayerPosition
+	
+	# Zabezpieczenie przed pustą pozycją
+	if Save.PlayerPosition != Vector2.ZERO:
+		position = Save.PlayerPosition
 
 func _physics_process(_delta: float) -> void:
+	if not is_inside_tree() or is_queued_for_deletion():
+		return  # Zabezpieczenie jeśli węzeł jest usuwany
+	
 	if not State.IsRun:
 		Signals.reset_coursor.emit()
 		return
@@ -24,36 +30,38 @@ func _physics_process(_delta: float) -> void:
 	if nav.is_navigation_finished():
 		velocity = Vector2.ZERO
 		sprite.scale = Vector2(0.5,0.5)
-		for i in 2:
-			await get_tree().process_frame
 		sprite.play("idle")
 		Signals.update_distanace.emit()
 	else:
-		var direction = (nav.get_next_path_position() - global_position).normalized()
-		velocity = direction * speed
-		sprite.scale = Vector2(0.667,0.667)
-		
+		var next_pos = nav.get_next_path_position()
+		# Zabezpieczenie przed błędami nawigacji
+		if is_instance_valid(nav) and next_pos != Vector2.INF:
+			var direction = (next_pos - global_position).normalized()
+			velocity = direction * speed
+			sprite.scale = Vector2(0.667,0.667)
+			
+			# Poprawiona logika animacji
+			update_animations(direction)
 
-		if velocity.x == 0 and  velocity.y > 0:
+	# Dodajemy warunek sprawdzający czy możemy wykonać move_and_slide()
+	if is_inside_tree() and get_world_2d() != null:
+		move_and_slide()
+
+# Wydzielona logika animacji
+func update_animations(direction: Vector2) -> void:
+	if abs(direction.x) > abs(direction.y):
+		if direction.x > 0:
+			sprite.play("walk_right")
+		else:
+			sprite.play("walk_left")
+	else:
+		if direction.y > 0:
 			sprite.play("walk_down")
-		
-		if velocity.x == 0 and  velocity.y < 0:
+		else:
 			sprite.play("walk_up")
-		
-		else :
-			if velocity.x > 0:
-				sprite.play("walk_right")
-		
-			if velocity.x < 0:
-				sprite.play("walk_left")
 
-	move_and_slide()
-
-func DistaneToClick() -> float:
-	var d = global_position.distance_to(get_global_mouse_position())
-	
-	if d >= distansToClick: return true
-	return false
+func DistaneToClick() -> bool:
+	return global_position.distance_to(get_global_mouse_position()) >= distansToClick
 
 func SavePlayerData() -> void:
 	Save.PlayerPosition = position

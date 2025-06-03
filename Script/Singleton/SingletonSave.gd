@@ -22,6 +22,11 @@ func _is_in_equipment(i_name: String)-> bool:
 		if i.item_name == i_name: return true
 	return false
 
+func _remove_item(i_name: String) -> void:
+	for i in Save.Equipment:
+		if i.item_name == i_name: i.RemoveFromEquipment()
+		SaveDataToFile()
+
 func DefoultDate() -> void:
 	CurrentScenePath = "res://Scenes/Locations/Mines/Mines.tscn"
 	PlayerPosition = Vector2(254,-75)

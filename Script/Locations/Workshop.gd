@@ -1,10 +1,8 @@
 extends Node2D
 
 @onready var player: Player = $Player
+const  MainScene = "res://Scenes/World.tscn"
 
-func _ready() -> void:
-	if State.StateNumber >= 8:
-		$BlockingAreas/Area2D.queue_free()
 
 func _process(_delta: float) -> void:
 	match State.StateNumber:
@@ -15,15 +13,24 @@ func _process(_delta: float) -> void:
 				9:
 					State.StatePhase = 0
 					State.StateNumber = 6
-					
+					Save._remove_item("Broken whell")
 		7:
 			match  State.StatePhase:
 				0:
 					_second_dialog()
 				1:
-					if get_node("BlockingAreas/Area2D") != null:
-						$BlockingAreas/Area2D.queue_free()
-				
+					var blocking_areas = $BlockingAreas
+					if blocking_areas:
+						var area = blocking_areas.get_node_or_null("Area2D")
+						if area:
+							area.queue_free()
+				7:
+					State.StateNumber = 8
+					State.StatePhase = 0
+					Save.PlayerPosition = Vector2(792,1616) 
+					Save.CurrentScenePath = 'res://Scenes/Locations/Mines/MineHub.tscn'
+					Signals.enable_loadin_screen.emit()
+					get_tree().change_scene_to_file(MainScene)
 
 func _first_dialog() -> void:
 

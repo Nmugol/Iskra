@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=4 uid="uid://culk15ib3i1ev"]
+[gd_scene load_steps=27 format=4 uid="uid://culk15ib3i1ev"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_cje54"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_wi3wh"]
+[ext_resource type="Script" uid="uid://biw2xk8ii36s8" path="res://Script/Locations/MineHub.gd" id="1_xox2l"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="2_ay6kk"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_wft7a"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="3_ay6kk"]
@@ -14,6 +15,7 @@
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="9_p4enp"]
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="10_4c4mo"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_5hspf"]
+[ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="15_wlgog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qlm5"]
 size = Vector2(2376, 2900)
@@ -36,9 +38,24 @@ size = Vector2(192, 35)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wlgog"]
 size = Vector2(112, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xox2l"]
+size = Vector2(106, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kh5g"]
+size = Vector2(648, 114)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ckltd"]
+size = Vector2(265, 66)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kri75"]
+size = Vector2(169, 98)
+
 [node name="MineHub" type="Node2D"]
+script = ExtResource("1_xox2l")
 
 [node name="Teren" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Ground1" type="TileMapLayer" parent="Teren"]
 texture_filter = 1
@@ -79,6 +96,8 @@ tile_map_data = PackedByteArray("AABKAEIAAAAEAAUAAABKAEEAAAAEAAUAAABKAEAAAAAEAAU
 tile_set = ExtResource("3_ay6kk")
 
 [node name="Border" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
 position = Vector2(664, 600)
@@ -86,7 +105,10 @@ shape = SubResource("RectangleShape2D_5qlm5")
 disabled = true
 
 [node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("8_5qlm5")]
+visible = false
 CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
@@ -101,10 +123,10 @@ physics_interpolation_mode = 1
 position = Vector2(792, 1616)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -524
-limit_top = -850
-limit_right = 1852
-limit_bottom = 2050
+limit_left = -344
+limit_top = -432
+limit_right = 1048
+limit_bottom = 96
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -128,6 +150,8 @@ draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
 [node name="Passage" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Mines1" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("9_p4enp")
@@ -212,3 +236,28 @@ ParenArea = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Mines2"]
 position = Vector2(1128, 2032)
 shape = SubResource("RectangleShape2D_wlgog")
+
+[node name="BlockingAreas" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="BlockingAreas" node_paths=PackedStringArray("plyer")]
+script = ExtResource("15_wlgog")
+plyer = NodePath("../../Player")
+active_on = Array[int]([8])
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockingAreas/Area2D"]
+position = Vector2(1432, 1200)
+shape = SubResource("RectangleShape2D_xox2l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BlockingAreas/Area2D"]
+position = Vector2(556, 328)
+shape = SubResource("RectangleShape2D_4kh5g")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BlockingAreas/Area2D"]
+position = Vector2(419.5, 1672)
+shape = SubResource("RectangleShape2D_ckltd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockingAreas/Area2D"]
+position = Vector2(1131.5, 1680)
+shape = SubResource("RectangleShape2D_kri75")
