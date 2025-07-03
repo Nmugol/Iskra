@@ -29,12 +29,14 @@ func _process(_delta: float) -> void:
 				9:
 					State.StatePhase = 0
 					State.StateNumber = 6
+					james.hide()
 					Save._remove_item("Broken whell")
 		7:
 			match  State.StatePhase:
 				0:
 					_second_dialog()
 				1:
+					james.show()
 					var blocking_areas = $BlockingAreas
 					if blocking_areas:
 						var area = blocking_areas.get_node_or_null("Area2D")
