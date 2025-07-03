@@ -3,13 +3,29 @@ extends Node2D
 @onready var player: Player = $Player
 const  MainScene = "res://Scenes/World.tscn"
 
+@onready var jonas: NPC = $NPCS/Jonas
+@onready var james: NPC = $NPCS/James
+
+func set_up() -> void:
+	if State.StateNumber != 5:
+		jonas.show()
+		james.show()
+	else:
+		james.show()
+		jonas.hide()
+
+func _ready() -> void:
+	set_up()
 
 func _process(_delta: float) -> void:
 	match State.StateNumber:
 		5:
 			match State.StatePhase:
 				0:
+					jonas.hide()
 					_first_dialog()
+				3:
+					jonas.show()
 				9:
 					State.StatePhase = 0
 					State.StateNumber = 6
