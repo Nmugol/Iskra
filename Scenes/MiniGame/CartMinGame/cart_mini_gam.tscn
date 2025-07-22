@@ -137,6 +137,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAAAAAEAAAAAAAE
 tile_set = SubResource("TileSet_43d8e")
 
 [node name="Leve1" type="Node2D" parent="Node2D" node_paths=PackedStringArray("cart")]
+visible = false
 position = Vector2(16, 8)
 script = ExtResource("1_0u0f4")
 cart = NodePath("../../Cart")
@@ -337,7 +338,6 @@ rotation = 1.5708
 texture = SubResource("AtlasTexture_hv8rs")
 
 [node name="Leve2" type="Node2D" parent="Node2D"]
-visible = false
 script = ExtResource("1_0u0f4")
 
 [node name="Marker2D" type="Marker2D" parent="Node2D/Leve2"]

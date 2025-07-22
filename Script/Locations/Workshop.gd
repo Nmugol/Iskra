@@ -5,6 +5,10 @@ const  MainScene = "res://Scenes/World.tscn"
 
 @onready var jonas: NPC = $NPCS/Jonas
 @onready var james: NPC = $NPCS/James
+@onready var James_out:PathControler = $NPCS/Path/James_out
+@onready var Jonas_in:PathControler = $NPCS/Path/Jonas_in
+@onready var James_out_path_follow: PathFollow2D =  $NPCS/Path/James_out/PathFollow2D
+@onready var Jonas_in_path_follow: PathFollow2D = $NPCS/Path/Jonas_in/PathFollow2D
 
 func set_up() -> void:
 	if State.StateNumber != 5:
@@ -26,6 +30,13 @@ func _process(_delta: float) -> void:
 					_first_dialog()
 				3:
 					jonas.show()
+					jonas.reparent(Jonas_in_path_follow)
+					Jonas_in._updet_NPC_arrey()
+					for i in 2:
+						await  get_tree().process_frame
+					Jonas_in.is_active = true
+					while Jonas_in.is_active == false:
+						continue
 				9:
 					State.StatePhase = 0
 					State.StateNumber = 6

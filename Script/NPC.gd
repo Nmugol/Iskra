@@ -46,9 +46,9 @@ enum  animation_mames{
 		update_flip()
 	get: return flip_sprite
 
-func setup(anim: String, flip: bool):
-	animation_name = animation_mames[anim.to_upper()]
-	flip_sprite = flip
+#func setup(anim: String, flip: bool):
+	#animation_name = animation_mames[anim.to_upper()]
+	#flip_sprite = flip
 
 func update_state(anim: String, flip: bool):
 	animation_name = animation_mames[anim.to_upper()]

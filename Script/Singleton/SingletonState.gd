@@ -1,8 +1,8 @@
 extends Node
 
 var LevelIsLoad: bool = false
-
 var IsRun: bool = true
+
 var IsInArea: bool = false
 
 var PickUpItems: Array[Item] = []

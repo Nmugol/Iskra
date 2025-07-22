@@ -8,12 +8,11 @@ extends Node2D
 
 func _ready() -> void:
 	show()
-	var new_navigation_mesh = NavigationPolygon.new()
-	var bounding_outline: PackedVector2Array = CollisionArea.polygon
-	new_navigation_mesh.add_outline(bounding_outline)
-	NavigationServer2D.bake_from_source_geometry_data(new_navigation_mesh, NavigationMeshSourceGeometryData2D.new());
-	Navigation.navigation_polygon = new_navigation_mesh
+	var navigation_polygon = NavigationPolygon.new()
+	navigation_polygon.add_outline(CollisionArea.polygon)
+	navigation_polygon.make_polygons_from_outlines()
 	
+	Navigation.navigation_polygon = navigation_polygon
 	Collision.polygon = CollisionArea.polygon
 
 

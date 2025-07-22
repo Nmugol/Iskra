@@ -36,8 +36,6 @@ func _connect_signals() -> void:
 	Signals.show_settin_in_game.connect(ShowSettinIngame)
 	Signals.hide_settin_in_game.connect(HideSettinIngame)
 	
-
-
 func LoadLevel() -> void:
 	State.IsRun = false
 	# Usunięcei cześniejszych załdowanych scen

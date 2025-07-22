@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bmfr6huj4wig3"]
+[gd_scene load_steps=31 format=4 uid="uid://bmfr6huj4wig3"]
 
 [ext_resource type="Script" uid="uid://ccbuep3ih5m7j" path="res://Script/Locations/Workshop.gd" id="1_ra8wh"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="1_vcysl"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="17_mcm2u"]
 [ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="19_mcm2u"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="20_djqyw"]
+[ext_resource type="Script" uid="uid://c2tymt362682o" path="res://Script/Class/PathControler.gd" id="21_v7tvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2oj5v"]
 size = Vector2(1392, 528)
@@ -43,7 +44,19 @@ radius = 8.0
 size = Vector2(521, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcm2u"]
-size = Vector2(520, 24)
+size = Vector2(679, 55)
+
+[sub_resource type="Curve2D" id="Curve2D_djqyw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 390, -203, 17.1165, 19.7498, -17.1165, -19.7498, 393, -307, 0, 0, 0, 0, 312, -312)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_v7tvf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 329, -306, 0, 0, 0, 0, 329, -231)
+}
+point_count = 2
 
 [node name="Workshop" type="Node2D"]
 script = ExtResource("1_ra8wh")
@@ -118,7 +131,7 @@ polygon = PackedVector2Array(312, -336, 352, -336, 352, -328, 400, -328, 400, -3
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
-position = Vector2(352, -168)
+position = Vector2(354, -174)
 shape = SubResource("RectangleShape2D_2oj5v")
 disabled = true
 
@@ -127,10 +140,10 @@ physics_interpolation_mode = 1
 position = Vector2(440, -184)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -344
-limit_top = -432
-limit_right = 1048
-limit_bottom = 96
+limit_left = -342
+limit_top = -438
+limit_right = 1050
+limit_bottom = 90
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -246,7 +259,7 @@ shape = SubResource("RectangleShape2D_djqyw")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Area2D"]
-position = Vector2(572, -180)
+position = Vector2(651.5, -195.5)
 shape = SubResource("RectangleShape2D_mcm2u")
 
 [node name="NPCS" type="Node2D" parent="."]
@@ -260,5 +273,28 @@ flip_sprite = true
 position = Vector2(325, -302)
 npc_name = 3
 flip_sprite = true
+
+[node name="Path" type="Node2D" parent="NPCS"]
+
+[node name="James_out" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path")]
+curve = SubResource("Curve2D_djqyw")
+script = ExtResource("21_v7tvf")
+path = NodePath("PathFollow2D")
+stop_points = Array[float]([1.0])
+
+[node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/James_out"]
+position = Vector2(390, -203)
+rotation = -1.54196
+
+[node name="Jonas_in" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path")]
+curve = SubResource("Curve2D_v7tvf")
+script = ExtResource("21_v7tvf")
+path = NodePath("PathFollow2D")
+stop_points = Array[float]([1.0])
+speed = 0.4
+
+[node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/Jonas_in"]
+position = Vector2(329, -306)
+rotation = 1.5708
 
 [connection signal="body_entered" from="Events/Area2D" to="." method="_on_area_2d_body_entered"]

@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
-const distansToClick: float = 30
+const distansToClick: float = 10
 
 func _ready() -> void:
 	Signals.save_game.connect(SavePlayerData)
@@ -49,7 +49,11 @@ func _physics_process(_delta: float) -> void:
 
 # Wydzielona logika animacji
 func update_animations(direction: Vector2) -> void:
-	if abs(direction.x) > abs(direction.y):
+	if direction.length_squared() < 0.01:
+		return
+	
+	var abs_direction = direction.abs()
+	if abs_direction.x > abs_direction.y:
 		if direction.x > 0:
 			sprite.play("walk_right")
 		else:
