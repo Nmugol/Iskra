@@ -37,7 +37,6 @@ func _process(_delta: float) -> void:
 		1:
 			match State.StatePhase:
 				0: 
-					
 					_first_task()
 					player.sprite.flip_h = true
 				10:
@@ -99,11 +98,16 @@ func _on_cart_mouse_entered() -> void:
 		_load_game()
 
 func _load_game()-> void:
+	State.IsRun = false
+	Signals.enable_loadin_screen.emit()
 	var game = minigame.instantiate()
 	game.z_index = 1
 	game.global_position = $CartMiniGamePos.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
+	await get_tree().create_timer(0.2).timeout
+	Signals.disabe_loadin_screen.emit()
+	State.IsRun = true
 
 func _finish_game()-> void:
 	$PhantomCamera2D.follow_target = player
