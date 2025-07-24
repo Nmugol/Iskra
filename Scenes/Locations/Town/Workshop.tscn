@@ -140,10 +140,10 @@ physics_interpolation_mode = 1
 position = Vector2(440, -184)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -342
-limit_top = -438
-limit_right = 1050
-limit_bottom = 90
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -264,37 +264,38 @@ shape = SubResource("RectangleShape2D_mcm2u")
 
 [node name="NPCS" type="Node2D" parent="."]
 
-[node name="James" parent="NPCS" instance=ExtResource("20_djqyw")]
-position = Vector2(390, -198)
-npc_name = 2
-flip_sprite = true
-
-[node name="Jonas" parent="NPCS" instance=ExtResource("20_djqyw")]
-position = Vector2(325, -302)
-npc_name = 3
-flip_sprite = true
-
 [node name="Path" type="Node2D" parent="NPCS"]
 
 [node name="James_out" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path")]
 curve = SubResource("Curve2D_djqyw")
 script = ExtResource("21_v7tvf")
 path = NodePath("PathFollow2D")
-stop_points = Array[float]([1.0])
 
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/James_out"]
 position = Vector2(390, -203)
 rotation = -1.54196
 
-[node name="Jonas_in" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path")]
+[node name="James" parent="NPCS/Path/James_out/PathFollow2D" instance=ExtResource("20_djqyw")]
+position = Vector2(-4.99792, 0.144165)
+rotation = 1.54196
+npc_name = 2
+flip_sprite = true
+
+[node name="Jonas_in" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path", "npc")]
 curve = SubResource("Curve2D_v7tvf")
 script = ExtResource("21_v7tvf")
 path = NodePath("PathFollow2D")
-stop_points = Array[float]([1.0])
 speed = 0.4
+npc = NodePath("PathFollow2D/Jonas")
+flip_sprite_on_end = true
 
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/Jonas_in"]
 position = Vector2(329, -306)
-rotation = 1.5708
+rotates = false
+loop = false
+
+[node name="Jonas" parent="NPCS/Path/Jonas_in/PathFollow2D" instance=ExtResource("20_djqyw")]
+npc_name = 3
+flip_sprite = true
 
 [connection signal="body_entered" from="Events/Area2D" to="." method="_on_area_2d_body_entered"]

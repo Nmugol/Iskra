@@ -58,8 +58,8 @@ region = Rect2(3, 20, 10, 8)
 atlas = ExtResource("20_egf6h")
 region = Rect2(16, 6, 32, 26)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oy7t8"]
-size = Vector2(40, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_h1ofm"]
+radius = 46.0109
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egf6h"]
 size = Vector2(1370, 66)
@@ -169,7 +169,6 @@ draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
 [node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("11_basko")]
-visible = false
 CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
@@ -304,7 +303,7 @@ texture = SubResource("AtlasTexture_1s613")
 
 [node name="Cart" type="Area2D" parent="EventArea"]
 visible = false
-position = Vector2(2134, -112)
+position = Vector2(2130, -112)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EventArea/Cart"]
@@ -313,7 +312,7 @@ texture = SubResource("AtlasTexture_nv2js")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/Cart"]
 position = Vector2(-2, 0)
-shape = SubResource("RectangleShape2D_oy7t8")
+shape = SubResource("CircleShape2D_h1ofm")
 
 [node name="CartMiniGamePos" type="Marker2D" parent="."]
 position = Vector2(1940, -234)

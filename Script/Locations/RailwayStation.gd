@@ -54,6 +54,7 @@ func _process(_delta: float) -> void:
 						cart.show()
 						
 				8:
+					Signals.enable_loadin_screen.emit()
 					State.StateNumber = 3
 					State.StatePhase = 0
 		4:
@@ -99,7 +100,6 @@ func _on_cart_mouse_entered() -> void:
 
 func _load_game()-> void:
 	State.IsRun = false
-	Signals.enable_loadin_screen.emit()
 	var game = minigame.instantiate()
 	game.z_index = 1
 	game.global_position = $CartMiniGamePos.global_position

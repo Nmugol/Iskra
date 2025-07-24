@@ -11,6 +11,7 @@ extends Node2D
 
 func _ready() -> void:
 	Transition.play("loading")
+	await Transition.animation_finished
 	
 	_connect_signals()
 	LoadLevel()
@@ -99,6 +100,7 @@ func DisabeLoadinScreen() -> void:
 	HideMap()
 	Signals.show_ui.emit()
 	await Transition.animation_finished
+	await get_tree().create_timer(0.2).timeout
 	State.LevelIsLoad = true
 	
 	

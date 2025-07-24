@@ -32,7 +32,7 @@ enum npc_names{
 	get: return npc_name
 
 enum  animation_mames{
-	IDLE, WALK
+	IDLE, WALK, UP, DOWN
 }
 
 @export var animation_name: animation_mames = animation_mames.IDLE:
@@ -45,10 +45,6 @@ enum  animation_mames{
 		flip_sprite = value
 		update_flip()
 	get: return flip_sprite
-
-#func setup(anim: String, flip: bool):
-	#animation_name = animation_mames[anim.to_upper()]
-	#flip_sprite = flip
 
 func update_state(anim: String, flip: bool):
 	animation_name = animation_mames[anim.to_upper()]
