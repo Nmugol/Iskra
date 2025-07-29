@@ -96,3 +96,6 @@ signal  set_coursor(cursor_name: State.Coursors)
 
 @warning_ignore("unused_signal")
 signal reset_coursor()
+
+@warning_ignore("unused_signal")
+signal reset_lool_at_item()

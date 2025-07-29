@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d28e2vcvm00vq"
-path="res://.godot/imported/SpeepArea.png-5978d48bae1dba0e13b68926598be84b.ctex"
+uid="uid://cbhb2ux1k0epd"
+path="res://.godot/imported/RostaArrow.png-b31ff8e2463d0e609d830b6ffd9e5a17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/SpeepArea.png"
-dest_files=["res://.godot/imported/SpeepArea.png-5978d48bae1dba0e13b68926598be84b.ctex"]
+source_file="res://Sprite/Map/RostaArrow.png"
+dest_files=["res://.godot/imported/RostaArrow.png-b31ff8e2463d0e609d830b6ffd9e5a17.ctex"]
 
 [params]
 

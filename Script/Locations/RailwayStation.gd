@@ -11,7 +11,8 @@ extends Node2D
 
 @onready var minigame = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
 const  MainScene = "res://Scenes/World.tscn"
-
+var game:Node = null
+var game_load_finish: bool = false
 func _ready() -> void:
 	camer.global_position = player.global_position 
 	camer.follow_target = player
@@ -41,6 +42,8 @@ func _process(_delta: float) -> void:
 					player.sprite.flip_h = true
 				10:
 					player.sprite.flip_h = false
+					for i in 2:
+						await get_tree().process_frame
 					State.StateNumber = 2
 					State.StatePhase = 0
 		2:
@@ -54,7 +57,8 @@ func _process(_delta: float) -> void:
 						cart.show()
 						
 				8:
-					Signals.enable_loadin_screen.emit()
+					_load_game()
+					State.IsRun = false
 					State.StateNumber = 3
 					State.StatePhase = 0
 		4:
@@ -86,8 +90,10 @@ func  _reper_cart() -> void:
 	player.sprite.play("idle")
 	State.SelectedItem.RemoveFromEquipment()
 	State.ActiveItem = null
+	Signals.reset_lool_at_item.emit()
 
 func _on_cart_mouse_entered() -> void:
+	
 	if State.StateNumber != 3 : return
 	var pl_pos = player.global_position
 	var mous_pos = get_global_mouse_position()
@@ -95,18 +101,14 @@ func _on_cart_mouse_entered() -> void:
 		player.hide()
 		player.global_position = pl_pos
 		player.nav.target_position = pl_pos
-		State.IsRun = false
-		_load_game()
 
 func _load_game()-> void:
-	State.IsRun = false
-	var game = minigame.instantiate()
+	game = minigame.instantiate()
 	game.z_index = 1
 	game.global_position = $CartMiniGamePos.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
-	await get_tree().create_timer(0.2).timeout
-	Signals.disabe_loadin_screen.emit()
+	game_load_finish = true
 	State.IsRun = true
 
 func _finish_game()-> void:

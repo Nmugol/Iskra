@@ -65,9 +65,11 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 	Complit_Level = 1
 
 func _on_start_cart_mouse_entered() -> void:
+	Signals.set_coursor.emit(State.Coursors.USE)
 	StartCart = true
 
 func _on_start_cart_mouse_exited() -> void:
+	Signals.reset_coursor.emit()
 	StartCart = false
 
 func _on_finish_2_body_entered(_body: Node2D) -> void:

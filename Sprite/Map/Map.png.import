@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4ftwdikghkrm"
-path="res://.godot/imported/TruckIcon.png-d9f98b6a1ea62213be2f37a136919ee5.ctex"
+uid="uid://dmyj5ngq83tr1"
+path="res://.godot/imported/Map.png-ef52d4fc82010a6a266c8700ed92c4c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/TruckIcon.png"
-dest_files=["res://.godot/imported/TruckIcon.png-d9f98b6a1ea62213be2f37a136919ee5.ctex"]
+source_file="res://Sprite/Map/Map.png"
+dest_files=["res://.godot/imported/Map.png-ef52d4fc82010a6a266c8700ed92c4c1.ctex"]
 
 [params]
 

@@ -102,17 +102,12 @@ func DisabeLoadinScreen() -> void:
 	await Transition.animation_finished
 	await get_tree().create_timer(0.2).timeout
 	State.LevelIsLoad = true
-	
-	
-	
 
 func EnableLoadinScreen() -> void:
-	
 	Transition.play("fade_out")
 	await Transition.animation_finished
 
 func ShowSettinIngame() -> void:
-	
 	HideDialog()
 	HideEquipment()
 	HideMap()

@@ -10,6 +10,7 @@ func _ready() -> void:
 	Signals.show_equipment.connect(ShowEquipment)
 	Signals.load_equiment.connect(CreateItem)
 	Signals.look_at_item.connect(LookAtItem)
+	Signals.reset_lool_at_item.connect(func () -> void: LoolAtItemTexture.texture = null)
 	SetUp()
 	CreateItem()
 

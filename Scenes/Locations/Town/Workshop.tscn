@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://bmfr6huj4wig3"]
+[gd_scene load_steps=34 format=4 uid="uid://bmfr6huj4wig3"]
 
 [ext_resource type="Script" uid="uid://ccbuep3ih5m7j" path="res://Script/Locations/Workshop.gd" id="1_ra8wh"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="1_vcysl"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="19_mcm2u"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="20_djqyw"]
 [ext_resource type="Script" uid="uid://c2tymt362682o" path="res://Script/Class/PathControler.gd" id="21_v7tvf"]
+[ext_resource type="PackedScene" uid="uid://o6rfn8s5ly44" path="res://Scenes/Particle/smoke.tscn" id="22_763pe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2oj5v"]
 size = Vector2(1392, 528)
@@ -52,11 +53,23 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="Curve2D" id="Curve2D_763pe"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 325, -314, -31.682, -7.75984, 31.682, 7.75984, 397, -312, -25.1816, -3.17047, 25.1816, 3.17047, 422, -192, -17.2509, -11.5085, 17.2509, 11.5085, 446, -138, 0, 0, 0, 0, 511, -122)
+}
+point_count = 5
+
 [sub_resource type="Curve2D" id="Curve2D_v7tvf"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 329, -306, 0, 0, 0, 0, 329, -231)
 }
 point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_45q5c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 418, 73, -15.2732, 3.42331, 15.2732, -3.42331, 437, 14, 0.263331, 22.3832, -0.263331, -22.3832, 482, -11, -3.94997, 18.9598, 3.94997, -18.9598, 483, -57, 0, 0, 0, 0, 517, -87)
+}
+point_count = 5
 
 [node name="Workshop" type="Node2D"]
 script = ExtResource("1_ra8wh")
@@ -131,7 +144,7 @@ polygon = PackedVector2Array(312, -336, 352, -336, 352, -328, 400, -328, 400, -3
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
-position = Vector2(354, -174)
+position = Vector2(348, -176)
 shape = SubResource("RectangleShape2D_2oj5v")
 disabled = true
 
@@ -140,10 +153,10 @@ physics_interpolation_mode = 1
 position = Vector2(440, -184)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 72
-limit_top = -392
-limit_right = 2488
-limit_bottom = 376
+limit_left = -348
+limit_top = -440
+limit_right = 1044
+limit_bottom = 88
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -262,24 +275,38 @@ metadata/_edit_group_ = true
 position = Vector2(651.5, -195.5)
 shape = SubResource("RectangleShape2D_mcm2u")
 
+[node name="FixedWheelPosition" type="Marker2D" parent="Events"]
+position = Vector2(532, -122)
+
 [node name="NPCS" type="Node2D" parent="."]
 
 [node name="Path" type="Node2D" parent="NPCS"]
 
-[node name="James_out" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path")]
+[node name="James_out" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path", "npc")]
 curve = SubResource("Curve2D_djqyw")
 script = ExtResource("21_v7tvf")
 path = NodePath("PathFollow2D")
+npc = NodePath("PathFollow2D/James")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/James_out"]
 position = Vector2(390, -203)
-rotation = -1.54196
+rotates = false
+loop = false
 
 [node name="James" parent="NPCS/Path/James_out/PathFollow2D" instance=ExtResource("20_djqyw")]
 position = Vector2(-4.99792, 0.144165)
-rotation = 1.54196
 npc_name = 2
 flip_sprite = true
+
+[node name="James_in" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path")]
+curve = SubResource("Curve2D_763pe")
+script = ExtResource("21_v7tvf")
+path = NodePath("PathFollow2D")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/James_in"]
+position = Vector2(325, -314)
+rotates = false
+loop = false
 
 [node name="Jonas_in" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path", "npc")]
 curve = SubResource("Curve2D_v7tvf")
@@ -297,5 +324,31 @@ loop = false
 [node name="Jonas" parent="NPCS/Path/Jonas_in/PathFollow2D" instance=ExtResource("20_djqyw")]
 npc_name = 3
 flip_sprite = true
+
+[node name="Guaed6_in" type="Path2D" parent="NPCS/Path" node_paths=PackedStringArray("path", "npc")]
+curve = SubResource("Curve2D_45q5c")
+script = ExtResource("21_v7tvf")
+path = NodePath("PathFollow2D")
+stop_points = 0.85
+speed = 0.2
+npc = NodePath("PathFollow2D/Guaed6")
+flip_sprite_on_end = true
+
+[node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/Guaed6_in"]
+position = Vector2(418, 73)
+rotates = false
+loop = false
+
+[node name="Guaed6" parent="NPCS/Path/Guaed6_in/PathFollow2D" instance=ExtResource("20_djqyw")]
+visible = false
+position = Vector2(-8, -1)
+npc_name = 11
+flip_sprite = true
+
+[node name="Particle" type="Node2D" parent="."]
+
+[node name="Smoke" parent="Particle" instance=ExtResource("22_763pe")]
+position = Vector2(330, -317)
+time_to_disable = 0.7
 
 [connection signal="body_entered" from="Events/Area2D" to="." method="_on_area_2d_body_entered"]

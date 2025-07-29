@@ -44,7 +44,9 @@ func _process(_delta: float) -> void:
 		sprite.play("normal")
 
 func _on_area_2d_mouse_entered() -> void:
+	Signals.set_coursor.emit(State.Coursors.USE)
 	mous_on = true
 
 func _on_area_2d_mouse_exited() -> void:
+	Signals.reset_coursor.emit()
 	mous_on = false

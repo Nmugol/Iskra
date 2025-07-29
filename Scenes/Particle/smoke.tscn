@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://o6rfn8s5ly44"]
+
+[ext_resource type="Texture2D" uid="uid://blrcfr1jqov1" path="res://Sprite/Particle/Smok.png" id="1_7b7pf"]
+[ext_resource type="Script" uid="uid://dxr8d3c5ay1q1" path="res://Script/Particle/smoke.gd" id="2_vrlq6"]
+
+[sub_resource type="Gradient" id="Gradient_hm3ph"]
+offsets = PackedFloat32Array(0.0727273, 0.2, 0.336364)
+colors = PackedColorArray(0.509286, 0.509286, 0.509286, 1, 0.336608, 0.336608, 0.336608, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q3lff"]
+gradient = SubResource("Gradient_hm3ph")
+
+[sub_resource type="Curve" id="Curve_5np2t"]
+_data = [Vector2(0.294118, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6k8uo"]
+curve = SubResource("Curve_5np2t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s3yin"]
+angle_min = -106.8
+angle_max = -106.8
+inherit_velocity_ratio = 0.205
+spread = 180.0
+initial_velocity_min = 7.0
+initial_velocity_max = 27.59
+gravity = Vector3(0, -19.1, 0)
+scale_min = 0.4
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_6k8uo")
+color_ramp = SubResource("GradientTexture1D_q3lff")
+
+[node name="Smoke" type="GPUParticles2D"]
+texture_filter = 1
+emitting = false
+amount = 90
+texture = ExtResource("1_7b7pf")
+process_material = SubResource("ParticleProcessMaterial_s3yin")
+script = ExtResource("2_vrlq6")

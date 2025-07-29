@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbhb2ux1k0epd"
-path="res://.godot/imported/RostaArrow.png-50dcb0a7da81c8baa5375ee8298f76fc.ctex"
+uid="uid://blrcfr1jqov1"
+path="res://.godot/imported/Smok.png-0c765bd8f10bb17c62875dfbcff84bb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/RostaArrow.png"
-dest_files=["res://.godot/imported/RostaArrow.png-50dcb0a7da81c8baa5375ee8298f76fc.ctex"]
+source_file="res://Sprite/Particle/Smok.png"
+dest_files=["res://.godot/imported/Smok.png-0c765bd8f10bb17c62875dfbcff84bb4.ctex"]
 
 [params]
 

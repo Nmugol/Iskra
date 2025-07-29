@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmyj5ngq83tr1"
-path="res://.godot/imported/Map.png-e73ef2b1f500064bea2929e01f15c23c.ctex"
+uid="uid://cayejyt3sudjl"
+path="res://.godot/imported/MiningAreaIcon.png-dba049797c4de20e5814d70577a0fc58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/Map.png"
-dest_files=["res://.godot/imported/Map.png-e73ef2b1f500064bea2929e01f15c23c.ctex"]
+source_file="res://Sprite/Map/MiningAreaIcon.png"
+dest_files=["res://.godot/imported/MiningAreaIcon.png-dba049797c4de20e5814d70577a0fc58.ctex"]
 
 [params]
 

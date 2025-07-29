@@ -1,12 +1,19 @@
 extends Node2D
 
-@onready var player: Player = $Player
 const  MainScene = "res://Scenes/World.tscn"
 
+@onready var player: Player = $Player
+
+#NPC
 @onready var jonas: NPC = $NPCS/Path/Jonas_in/PathFollow2D/Jonas
 @onready var james: NPC = $NPCS/Path/James_out/PathFollow2D/James
+@onready var guard6: NPC = $NPCS/Path/Guaed6_in/PathFollow2D/Guaed6
+
+#PATH
 @onready var James_out:PathControler = $NPCS/Path/James_out
-@onready var Jonas_in:PathControler =$NPCS/Path/Jonas_in
+@onready var Jonas_in:PathControler = $NPCS/Path/Jonas_in
+@onready var James_in:PathControler = $NPCS/Path/James_in
+@onready var Guard_in:PathControler = $NPCS/Path/Guaed6_in
 
 func set_up() -> void:
 	if State.StateNumber != 5:
@@ -28,9 +35,13 @@ func _process(_delta: float) -> void:
 					_first_dialog()
 				3:
 					jonas.show()
+					var smoke = $Particle/Smoke
+					smoke.play = true
 					Jonas_in._play()
 				4:
 					jonas.update_state("idle",true)
+				8:
+					James_out._play()
 				9:
 					State.StatePhase = 0
 					State.StateNumber = 6
@@ -39,14 +50,28 @@ func _process(_delta: float) -> void:
 		7:
 			match  State.StatePhase:
 				0:
+					james.reparent($NPCS/Path/James_in/PathFollow2D)
+					James_in.npc = james
 					_second_dialog()
 				1:
-					james.show()
+					
 					var blocking_areas = $BlockingAreas
 					if blocking_areas:
 						var area = blocking_areas.get_node_or_null("Area2D")
 						if area:
 							area.queue_free()
+				3:
+					james.show()
+					James_in._play()
+					player.nav.target_position = $Events/FixedWheelPosition.global_position
+				4:
+					player.global_position = $Events/FixedWheelPosition.global_position
+					James_in.path.progress_ratio = 1
+					james.update_state("Idle", true)
+					Guard_in.active = true
+				5:
+					Guard_in.path.progress_ratio = Guard_in.stop_points
+					guard6.update_state("Idle", true)
 				7:
 					State.StateNumber = 8
 					State.StatePhase = 0
@@ -160,7 +185,6 @@ func _second_dialog() -> void:
 	"
 	Good. Now back to the mine. We’ll be watching.
 	")
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and Save._is_in_equipment("Crystal shard") == true:

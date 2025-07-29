@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="1_1kp0f"]
 [ext_resource type="Script" uid="uid://d0jtxf8efshps" path="res://Script/Locations/candle_mini_game.gd" id="1_atxoi"]
 [ext_resource type="Texture2D" uid="uid://crnoou75tn1e8" path="res://Sprite/Items/CrystalShard.png" id="2_atxoi"]
-[ext_resource type="Texture2D" uid="uid://cbhb2ux1k0epd" path="res://Sprite/RostaArrow.png" id="3_1kp0f"]
+[ext_resource type="Texture2D" uid="uid://cbhb2ux1k0epd" path="res://Sprite/Map/RostaArrow.png" id="3_1kp0f"]
 [ext_resource type="Texture2D" uid="uid://bf1ppa5qx0ib6" path="res://Sprite/candle.png" id="3_bkgmx"]
 [ext_resource type="Texture2D" uid="uid://bx85ege1b8dp" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/BlackBigCircleBoxWithBorder_27x27.png" id="5_m0p6r"]
 [ext_resource type="Texture2D" uid="uid://fiin60vhfjga" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/LeftArrowButton_7x10.png" id="6_vgndv"]

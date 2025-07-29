@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cayejyt3sudjl"
-path="res://.godot/imported/MiningAreaIcon.png-24c84eea5a98408d666e056cbcfc2e7a.ctex"
+uid="uid://cgd0l4ybedpja"
+path="res://.godot/imported/TownIcon.png-9fb9d4bff129616a40fac9660f2318a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/MiningAreaIcon.png"
-dest_files=["res://.godot/imported/MiningAreaIcon.png-24c84eea5a98408d666e056cbcfc2e7a.ctex"]
+source_file="res://Sprite/Map/TownIcon.png"
+dest_files=["res://.godot/imported/TownIcon.png-9fb9d4bff129616a40fac9660f2318a0.ctex"]
 
 [params]
 
