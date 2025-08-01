@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-enum npc_names{
+enum Npc_names{
 	EMIL_SCHMIDT,
 	MIRIAM_SCHMIDT,
 	JAMES,
@@ -25,17 +25,17 @@ enum npc_names{
 	PATRYK,
 	PRZEMEK
 }
-@export var npc_name: npc_names = npc_names.GUARD_1:
+@export var npc_name: Npc_names = Npc_names.GUARD_1:
 	set(value):
 		npc_name = value
 		update_animation()
 	get: return npc_name
 
-enum  animation_mames{
+enum  Animation_names{
 	IDLE, WALK, UP, DOWN
 }
 
-@export var animation_name: animation_mames = animation_mames.IDLE:
+@export var animation_name: Animation_names = Animation_names.IDLE:
 	set(value):
 		animation_name = value
 		update_animation()
@@ -47,23 +47,23 @@ enum  animation_mames{
 	get: return flip_sprite
 
 func update_state(anim: String, flip: bool):
-	animation_name = animation_mames[anim.to_upper()]
+	animation_name = Animation_names[anim.to_upper()]
 	flip_sprite = flip
 
 func update_animation():
 	if not is_instance_valid(sprite) or not sprite.sprite_frames:
-		return  # Zabezpieczenie przed dostępem do niezainicjalizowanego węzła
+		return  # Zabezpieczenie przed dostępem do niezainicjowanego węzła
 	
-	var ak: String = npc_names.keys()[npc_names.values().find(npc_name)]
-	var ak2: String = animation_mames.keys()[animation_mames.values().find(animation_name)]
-	var target_animation = "%s_%s" % [ak.capitalize().replace(" ","_"), ak2.capitalize()]
+	var animation_character: String = Npc_names.keys()[Npc_names.values().find(npc_name)]
+	var animation_typ: String = Animation_names.keys()[Animation_names.values().find(animation_name)]
+	var target_animation = "%s_%s" % [animation_character.capitalize().replace(" ","_"), animation_typ.capitalize()]
 	
 	if sprite.sprite_frames.has_animation(target_animation):
 		
 		match animation_name:
-			animation_mames.IDLE: 
+			Animation_names.IDLE: 
 				sprite.scale = Vector2(0.5, 0.5)
-			animation_mames.WALK: 
+			Animation_names.WALK: 
 				sprite.scale = Vector2(0.667, 0.667)
 				
 		for i in 2:
@@ -71,7 +71,7 @@ func update_animation():
 	
 		sprite.play(str(target_animation))
 	else:
-		printerr("Brak animacji: ", target_animation)
+		print("Brak animacji: ", target_animation)
 
 func update_flip():
 	if is_instance_valid(sprite):
@@ -81,7 +81,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return  # Ignoruj w edytorze
 		
-	# Inicjalizacja po wszystkich węzłach
+	# Inicjacja po wszystkich węzłach
 	await get_tree().process_frame
 	update_animation()
 	update_flip()

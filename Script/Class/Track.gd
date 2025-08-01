@@ -59,7 +59,7 @@ func reparent_cart() -> void:
 	if cart.get_parent():
 		cart.get_parent().remove_child(cart)
 	
-	# Opoźnione dodawanie do nowego rodzica
+	# Opóźnione dodawanie do nowego rodzica
 	call_deferred("_deferred_reparent")
 
 func _deferred_reparent() -> void:

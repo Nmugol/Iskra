@@ -3,20 +3,20 @@ class_name ShowPointLight
 extends PointLight2D
 
 
-@export var ParenArea: Area2D
+@export var paren_area: Area2D
 
 func _ready() -> void:
 	
 	self.hide()
 	
-	ParenArea.mouse_entered.connect(func():
+	paren_area.mouse_entered.connect(func():
 		# czekanie na aktualizacje flag
 		for i in 2: await get_tree().process_frame
 		
-		if State.LevelIsLoad and State.IsRun:
+		if State.is_loading and State.is_running:
 			self.show()
 		)
 	
-	ParenArea.mouse_exited.connect(func ():
+	paren_area.mouse_exited.connect(func ():
 		self.hide()
 		)

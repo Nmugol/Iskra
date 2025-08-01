@@ -1,118 +1,118 @@
 extends Node2D
 
-@export var LevelLocation: Node
+@export var level_location: Node
 
-@onready var Dialog: Control = %Dialog
-@onready var Equipment: Control = %Equipment
-@onready var Map: Control = %Map
-@onready var Transition: AnimationPlayer = %Transition
-@onready var SettingsInGame: Control = %Setting
-@onready var ContronButton: Control = %UI
+@onready var dialog: Control = %dialog
+@onready var equipment: Control = %Equipment
+@onready var map: Control = %Map
+@onready var transition: AnimationPlayer = %transition
+@onready var settings_in_game: Control = %Setting
+@onready var contro_button: Control = %UI
 
 func _ready() -> void:
-	Transition.play("loading")
-	await Transition.animation_finished
+	transition.play("loading")
+	await transition.animation_finished
 	
 	_connect_signals()
-	LoadLevel()
+	load_level()
 
 func _connect_signals() -> void:
 	Signals.show_ui.connect(func():
-		SettingsInGame.show()
+		settings_in_game.show()
 		)
 	
-	Signals.show_dialog.connect(ShowDialog)
-	Signals.hide_dialog.connect(HideDialog)
+	Signals.show_dialog.connect(show_dialog)
+	Signals.hide_dialog.connect(hide_dialog)
 	
-	Signals.show_equipment.connect(ShowEquipment)
-	Signals.hide_equipment.connect(HideEquipment)
+	Signals.show_equipment.connect(show_equipment)
+	Signals.hide_equipment.connect(hide_equipment)
 	
-	Signals.show_map.connect(ShowMap)
-	Signals.hide_map.connect(HideMap)
+	Signals.show_map.connect(show_map)
+	Signals.hide_map.connect(hide_map)
 	
-	Signals.change_scene.connect(LoadLevel)
-	Signals.disabe_loadin_screen.connect(DisabeLoadinScreen)
-	Signals.enable_loadin_screen.connect(EnableLoadinScreen)
+	Signals.change_scene.connect(load_level)
+	Signals.disable_loading_screen.connect(disable_loading_screen)
+	Signals.enable_loading_screen.connect(enable_loading_screen)
 	
-	Signals.show_settin_in_game.connect(ShowSettinIngame)
-	Signals.hide_settin_in_game.connect(HideSettinIngame)
+	Signals.show_setting_in_game.connect(show_setting_in_game)
+	Signals.hide_setting_in_game.connect(hide_setting_in_game)
 	
-func LoadLevel() -> void:
-	State.IsRun = false
-	# Usunięcei cześniejszych załdowanych scen
-	for l in LevelLocation.get_children():
+func load_level() -> void:
+	State.is_running = false
+	# Usunięcie czelniejszych zładowanych scen
+	for l in level_location.get_children():
 		l.queue_free()
 	
-	# Załadowanie lewelu
-	var levelnode = load(Save.CurrentScenePath).instantiate()
-	LevelLocation.add_child(levelnode)
-	DisabeLoadinScreen()
+	# Załadowanie poziomu
+	var level_node = load(Save.current_scene_path).instantiate()
+	level_location.add_child(level_node)
+	disable_loading_screen()
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()
 
-func SaveLevel() -> void:
-	Save.CurrentScenePath = LevelLocation.get_child(0).get_path()
+func save_level() -> void:
+	Save.current_scene_path = level_location.get_child(0).get_path()
 
-func ShowDialog() -> void:
-	Signals.reset_coursor.emit()
-	State.IsRun = false
-	Dialog.show()
-	HideEquipment()
-	HideSettinIngame()
-	HideMap()
-	ContronButton.hide()
+func show_dialog() -> void:
+	Signals.reset_cursor.emit()
+	State.is_running = false
+	dialog.show()
+	hide_equipment()
+	hide_setting_in_game()
+	hide_map()
+	contro_button.hide()
 
-func HideDialog() -> void:
-	State.IsRun = true
-	Dialog.hide()
-	ContronButton.show()
-	SettingsInGame.show()
+func hide_dialog() -> void:
+	State.is_running = true
+	dialog.hide()
+	contro_button.show()
+	settings_in_game.show()
 
-func ShowEquipment() -> void:
-	State.IsRun = false
-	Signals.reset_coursor.emit()
+func show_equipment() -> void:
+	State.is_running = false
+	Signals.reset_cursor.emit()
 	
-	Equipment.show()
-	HideDialog()
-	HideMap()
-	HideSettinIngame()
+	equipment.show()
+	hide_dialog()
+	hide_map()
+	hide_setting_in_game()
 
-func HideEquipment() -> void:
-	State.IsRun = true
-	Equipment.hide()
+func hide_equipment() -> void:
+	State.is_running = true
+	equipment.hide()
 
-func ShowMap() -> void:
-	Signals.reset_coursor.emit()
-	State.IsRun = false
-	Map.show()
-	HideDialog()
-	HideEquipment()
-	HideSettinIngame()
+func show_map() -> void:
+	Signals.reset_cursor.emit()
+	State.is_running = false
+	map.show()
+	hide_dialog()
+	hide_equipment()
+	hide_setting_in_game()
 
-func HideMap() -> void:
-	State.IsRun = true
-	Map.hide()
+func hide_map() -> void:
+	State.is_running = true
+	map.hide()
 
-func DisabeLoadinScreen() -> void:
-	Transition.play("fade_in")
-	HideDialog()
-	HideEquipment()
-	HideMap()
+func disable_loading_screen() -> void:
+	transition.play("fade_in")
+	hide_dialog()
+	hide_equipment()
+	hide_map()
 	Signals.show_ui.emit()
-	await Transition.animation_finished
+	await transition.animation_finished
 	await get_tree().create_timer(0.2).timeout
-	State.LevelIsLoad = true
+	State.is_loading = true
 
-func EnableLoadinScreen() -> void:
-	Transition.play("fade_out")
-	await Transition.animation_finished
+func enable_loading_screen() -> void:
+	transition.play("fade_out")
+	await transition.animation_finished
 
-func ShowSettinIngame() -> void:
-	HideDialog()
-	HideEquipment()
-	HideMap()
-	SettingsInGame.show()
+func show_setting_in_game() -> void:
+	hide_dialog()
+	hide_equipment()
+	hide_map()
+	settings_in_game.show()
 
-func HideSettinIngame() -> void:
-	SettingsInGame.hide()
+func hide_setting_in_game() -> void:
+	settings_in_game.hide()
 	

@@ -1,20 +1,20 @@
 extends Node
 
-var LevelIsLoad: bool = false
-var IsRun: bool = true
+var is_loading: bool = false
+var is_running: bool = true
 
-var IsInArea: bool = false
+var is_in_area: bool = false
 
-var PickUpItems: Array[Item] = []
+var pick_up_items: Array[Item] = []
 
-var StateNumber: int = 0
-var StatePhase: int = 0
+var state_number: int = 0
+var state_phase: int = 0
 
-var ActiveItem: Item
-var SelectedItem: Item
+var active_item: Item
+var selected_item: Item
 
-enum Coursors {
-	DEFOULT,
+enum Cursors {
+	DEFAULT,
 	PICKUP,
 	USE,
 	WALK

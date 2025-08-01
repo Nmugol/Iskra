@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqfrqvxfkqppn"
-path="res://.godot/imported/SteelShet.png-79aad0778bd25b51419794cca2b61068.ctex"
+uid="uid://diymhc6chkxu2"
+path="res://.godot/imported/tile_0087.png-f74cc622ab31a4422d9faee5d1da8cbc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/Items/SteelShet.png"
-dest_files=["res://.godot/imported/SteelShet.png-79aad0778bd25b51419794cca2b61068.ctex"]
+source_file="res://Sprite/Cursors/tile_0087.png"
+dest_files=["res://.godot/imported/tile_0087.png-f74cc622ab31a4422d9faee5d1da8cbc.ctex"]
 
 [params]
 

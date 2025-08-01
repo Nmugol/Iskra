@@ -331,7 +331,7 @@ script = ExtResource("21_v7tvf")
 path = NodePath("PathFollow2D")
 stop_points = 0.85
 speed = 0.2
-npc = NodePath("PathFollow2D/Guaed6")
+npc = NodePath("PathFollow2D/Guard6")
 flip_sprite_on_end = true
 
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCS/Path/Guaed6_in"]
@@ -339,7 +339,7 @@ position = Vector2(418, 73)
 rotates = false
 loop = false
 
-[node name="Guaed6" parent="NPCS/Path/Guaed6_in/PathFollow2D" instance=ExtResource("20_djqyw")]
+[node name="Guard6" parent="NPCS/Path/Guaed6_in/PathFollow2D" instance=ExtResource("20_djqyw")]
 visible = false
 position = Vector2(-8, -1)
 npc_name = 11

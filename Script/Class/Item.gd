@@ -15,7 +15,7 @@ func _init(itemName: String, containsItems: Array[Item], isFinished: bool, small
 	full_sprite_path = fullSpritePath
 	connects_with = connectsWith
 
-func ToJson() -> Dictionary:
+func to_json() -> Dictionary:
 
 	var json_data := {
 		"item_name": item_name,
@@ -32,7 +32,7 @@ func ToJson() -> Dictionary:
 	return json_data
 
 
-static func FromJson(json_data: Dictionary) -> Item:
+static func from_json(json_data: Dictionary) -> Item:
 	# Prepare an empty Array[Item] for contains_items
 	var contains_items_arr: Array[Item] = []
 	
@@ -54,42 +54,42 @@ static func FromJson(json_data: Dictionary) -> Item:
 	
 	# Recursively populate contains_items
 	for item_data in json_data.get("contains_items", []):
-		item.contains_items.append(FromJson(item_data))
+		item.contains_items.append(from_json(item_data))
 	
 	return item
 
-func AddToEquipment() -> void:
-	Save.Equipment.append(self)
-	State.PickUpItems.append(self)
+func add_to_equipment() -> void:
+	Save.equipment.append(self)
+	State.pick_up_items.append(self)
 
-func RemoveFromEquipment() -> void:
-	Save.Equipment.erase(self)
+func remove_from_equipment() -> void:
+	Save.equipment.erase(self)
 
-func Assemble(itemToCombine: Item) -> void:
+func assemble(item_to_combine: Item) -> void:
 	# Zabezpieczenie przed null'em
-	if not is_instance_valid(itemToCombine):
+	if not is_instance_valid(item_to_combine):
 		print("pusty")
 		return
 	
 	# Zabezpieczenie przed łączeniem z samym sobą
-	if itemToCombine == self or itemToCombine.item_name == self.item_name:
+	if item_to_combine == self or item_to_combine.item_name == self.item_name:
 		print("samo ze sobą")
 		return
 	
 	# Zabezpieczenie przed duplikatami
-	if contains_items.has(itemToCombine):
+	if contains_items.has(item_to_combine):
 		print("zawiera siebie")
 		return
 	
-	if connects_with.has(itemToCombine.item_name) and is_finished:
-		contains_items.append(itemToCombine)
-		itemToCombine.RemoveFromEquipment()
+	if connects_with.has(item_to_combine.item_name) and is_finished:
+		contains_items.append(item_to_combine)
+		item_to_combine.remove_from_equipment()
 
-func Disassemble() -> void:
+func disassemble() -> void:
 	for item:Item in contains_items:
 		item.is_finished = true
-		Save.Equipment.push_back(item)
-	Save.Equipment.erase(self)
+		Save.equipment.push_back(item)
+	Save.equipment.erase(self)
 
-	Signals.load_equiment.emit()
-	Signals.look_at_item.emit(Save.Equipment[len(Save.Equipment)-1])
+	Signals.load_equipment.emit()
+	Signals.look_at_item.emit(Save.equipment[len(Save.equipment)-1])

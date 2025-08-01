@@ -5,7 +5,7 @@ extends Node2D
 
 @onready var path: PathFollow2D = $Path2D/PathFollow2D
 
-const  MainScene = "res://Scenes/World.tscn"
+const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 var speed_ratio = 0.1    # prędkość w jednostkach ratio na sekundę
 var target_ratio = 0.45   # gdzie ma się zatrzymać
@@ -13,13 +13,13 @@ var target_ratio = 0.45   # gdzie ma się zatrzymać
 var walk: bool = false
 
 func  _ready() -> void:
-	State.StatePhase = 0
+	State.state_phase = 0
 	path.progress_ratio = 0.0
 	guard7.update_state("Walk", false)
 	guard8.update_state("Walk", false)
 
 func _process(delta: float) -> void:
-	if not State.LevelIsLoad: return
+	if not State.is_loading: return
 	
 	if walk:
 		path.progress_ratio = move_toward(path.progress_ratio, target_ratio, speed_ratio*delta)
@@ -30,11 +30,11 @@ func _process(delta: float) -> void:
 		walk = false
 		
 	
-	match State.StateNumber:
+	match State.state_number:
 		0:
-			match State.StatePhase:
+			match State.state_phase:
 				0: 
-					State.IsRun = false
+					State.is_running = false
 					StartDialog();
 				4:
 					guard7.update_state("Walk", false)
@@ -52,18 +52,18 @@ func _process(delta: float) -> void:
 					walk = true
 				
 				9:
-					State.StateNumber = 1
-					State.StatePhase = 0
-					Save.PlayerPosition = Vector2(2120.0,-40)
-					Save.CurrentScenePath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
-					Signals.enable_loadin_screen.emit()
-					get_tree().change_scene_to_file(MainScene)
+					State.state_number = 1
+					State.state_phase = 0
+					Save.player_position = Vector2(2120.0,-40)
+					Save.current_scene_path = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
+					Signals.enable_loading_screen.emit()
+					get_tree().change_scene_to_file(MAIN_SCENE)
 
 func StartDialog() -> void:
-	State.IsRun = false
+	State.is_running = false
 	Signals.show_dialog.emit()
 	#1
-	Signals.peopel_message.emit("Peter", 
+	Signals.people_message.emit("Peter", 
 	"
 	Hey, Daniel! You're late again.
 	I wonder if we'll ever manage to be on time?
@@ -78,7 +78,7 @@ func StartDialog() -> void:
 	")
 	
 	#3
-	Signals.peopel_message.emit("Peter", 
+	Signals.people_message.emit("Peter", 
 	"
 	The guards are especially active today and aren't letting anyone off easy.
 	This morning they searched me too, and now I'm super stressed.
@@ -98,7 +98,7 @@ func StartDialog() -> void:
 	")
 	
 	#5
-	Signals.peopel_message.emit("Guard7",
+	Signals.people_message.emit("Guard7",
 	"
 	[b]Daniel and Peter, you're coming with us.[/b]
 	One of the loaded wagons derailed and is blocking the loading of the others.
@@ -106,13 +106,13 @@ func StartDialog() -> void:
 	")
 	
 	#6
-	Signals.peopel_message.emit("Peter", 
+	Signals.people_message.emit("Peter", 
 	"
 	[shake rate=15.0 level=2 connecter=1]Whaaa...? Whyyy usss?[/shake]
 	")
 	
 	#7
-	Signals.peopel_message.emit("Guard8",
+	Signals.people_message.emit("Guard8",
 	"
 	Your Sparks will come in handy for removing the wagon.
 	[b]Don't waste our time[/b] and move it.

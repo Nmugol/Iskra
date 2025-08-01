@@ -14,13 +14,13 @@ var exit_blocked_messages: Array = [
 
 func  _ready() -> void:
 	
-	if State.StateNumber not in active_on:
+	if State.state_number not in active_on:
 		self.queue_free()
 	
 	self.body_entered.connect(func (body:Node2D):
 		if body.is_in_group("Player"):
 			var pos: Vector2 = plyer.global_position
-			plyer.nav.target_position = pos
+			plyer.navigation.target_position = pos
 			plyer.sprite.play("idle")
 			Signals.show_dialog.emit()
 			Signals.player_message.emit("Daniel",

@@ -186,23 +186,23 @@ texture_filter = 1
 position = Vector2(225, 213)
 texture = ExtResource("3_bkgmx")
 
-[node name="CandleConteiner" type="Node2D" parent="."]
+[node name="CandleContainer" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="MaxLeft" type="Marker2D" parent="CandleConteiner"]
+[node name="MaxLeft" type="Marker2D" parent="CandleContainer"]
 position = Vector2(195, 216)
 
-[node name="Center" type="Marker2D" parent="CandleConteiner"]
+[node name="Center" type="Marker2D" parent="CandleContainer"]
 position = Vector2(225, 213)
 
-[node name="MaxRight" type="Marker2D" parent="CandleConteiner"]
+[node name="MaxRight" type="Marker2D" parent="CandleContainer"]
 position = Vector2(254, 216)
 
-[node name="MaxUp" type="Marker2D" parent="CandleConteiner"]
+[node name="MaxUp" type="Marker2D" parent="CandleContainer"]
 position = Vector2(253, 194)
 
-[node name="MaxDown" type="Marker2D" parent="CandleConteiner"]
+[node name="MaxDown" type="Marker2D" parent="CandleContainer"]
 position = Vector2(221, 233)
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -7,8 +7,8 @@ extends Node2D
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
-var mous_on: bool = false
-var mingame_is_runing: bool = false
+var mouse_on: bool = false
+var mini_game_is_running: bool = false
 
 func _rotate()-> void:
 	if track_to_rotate.is_empty(): return
@@ -17,36 +17,36 @@ func _rotate()-> void:
 		if t.global_rotation_degrees == 360:
 			t.global_rotation_degrees = 0
 
-func _flio_x()-> void:
+func _flip_x()-> void:
 	if track_to_flip_x.is_empty(): return
 	for t in track_to_flip_x:
 		t.flip_x = !t.flip_x
 		t.update_scale()
 
-func _flio_y()-> void:
+func _flip_y()-> void:
 	if track_to_flip_y.is_empty(): return
 	for t in track_to_flip_y:
 		t.flip_y = !t.flip_y
 		t.update_scale()
 
 func _ready() -> void:
-	Signals.cart_go.connect(func (): mingame_is_runing = true)
-	Signals.reparent_cart.connect(func (): mingame_is_runing = false)
+	Signals.cart_go.connect(func (): mini_game_is_running = true)
+	Signals.reparent_cart.connect(func (): mini_game_is_running = false)
 
 func _process(_delta: float) -> void:
-	if mingame_is_runing: return
-	if mous_on and Input.is_action_just_pressed("MovePlayer"):
+	if mini_game_is_running: return
+	if mouse_on and Input.is_action_just_pressed("MovePlayer"):
 		_rotate()
-		_flio_x()
-		_flio_y()
+		_flip_x()
+		_flip_y()
 		sprite.play("use")
 		await sprite.animation_finished
 		sprite.play("normal")
 
 func _on_area_2d_mouse_entered() -> void:
-	Signals.set_coursor.emit(State.Coursors.USE)
-	mous_on = true
+	Signals.set_cursor.emit(State.Cursors.USE)
+	mouse_on = true
 
 func _on_area_2d_mouse_exited() -> void:
-	Signals.reset_coursor.emit()
-	mous_on = false
+	Signals.reset_cursor.emit()
+	mouse_on = false

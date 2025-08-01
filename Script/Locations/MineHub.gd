@@ -1,29 +1,29 @@
 extends Node2D
 
 @onready var player: Player = $Player
-const  MainScene = "res://Scenes/World.tscn"
+const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 
 func _process(_delta: float) -> void:
-	match State.StateNumber:
+	match State.state_number:
 		8:
-			match State.StatePhase:
+			match State.state_phase:
 				0:
 					_first_dialog()
 				3:
-					State.StateNumber = 9
-					State.StatePhase = 0
-					Save.PlayerPosition = Vector2(704,-424) 
-					Save.CurrentScenePath = 'res://Scenes/Locations/Town/DanielHouse.tscn'
-					Signals.enable_loadin_screen.emit()
-					get_tree().change_scene_to_file(MainScene)
+					State.state_number = 9
+					State.state_phase = 0
+					Save.player_position = Vector2(704,-424) 
+					Save.current_scene_path = 'res://Scenes/Locations/Town/DanielHouse.tscn'
+					Signals.enable_loading_screen.emit()
+					get_tree().change_scene_to_file(MAIN_SCENE)
 
 
 func _first_dialog() -> void:
 	player.sprite.play("idle")
 	Signals.show_dialog.emit()
 	#1
-	Signals.peopel_message.emit("Guard7",
+	Signals.people_message.emit("Guard7",
 	"
 	Daniel, go home. There’s been a gas leak in the mine.
 	Your section has been closed until further notice.
@@ -38,7 +38,7 @@ func _first_dialog() -> void:
 	")
 
 	#2
-	Signals.peopel_message.emit("Guard7",
+	Signals.people_message.emit("Guard7",
 	"
 	No one was hurt. Everyone is safe.
 	Take my advice and go home. Now.

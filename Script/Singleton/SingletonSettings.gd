@@ -2,27 +2,27 @@ extends Node
 
 const DATA_PATH: String = "user://settings.json"
 
-var ScreenResolutionOptions: Array[String] = [
+var screen_resolution_options: Array[String] = [
 	"1280x720", 
 	"1600x1200", "1920x1080", "2560x1440", 
 	"3840x2160", "4096x2160"
 ]
 
-var ResolutionIndex: int = 0
+var resolution_index: int = 0
 
-var ScreenResolution: Vector2 = Vector2(1280, 720):
+var screen_resolution: Vector2 = Vector2(1280, 720):
 	set(value): 
-		ScreenResolution = value
+		screen_resolution = value
 		DisplayServer.window_set_size(value)
-	get: return ScreenResolution
+	get: return screen_resolution
 
-var WindowTypeOptions: Array[String] = [
+var window_type_options: Array[String] = [
 	"Windowed", "Fullscreen", "Borderless", "FullscreenBorderless"
 ]
 
-var WindowType: int = 0:
+var window_type: int = 0:
 	set(value): 
-		WindowType = value
+		window_type = value
 		
 		match value:
 			0: # Okienkowy
@@ -32,44 +32,44 @@ var WindowType: int = 0:
 			1: # Pełny ekran
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 				
-			2: # Bezramkowy
+			2: # Bez ramek
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 				DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 				
-			3: # Pełny ekran bezramkowy
+			3: # Pełny ekran bez ramek
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	get: return WindowType
+	get: return window_type
 
-var MasterVolume: float = 1.0:
+var master_volume: float = 1.0:
 	set(value):
-		MasterVolume = value
+		master_volume = value
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(value))
-	get: return MasterVolume
+	get: return master_volume
 
-var MusicVolume: float = 1.0:
+var music_volume: float = 1.0:
 	set(value):
-		MusicVolume = value
+		music_volume = value
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value))
-	get: return MusicVolume
+	get: return music_volume
 
-var SoundEffectsVolume: float = 1.0:
+var sound_effects_volume: float = 1.0:
 	set(value):
-		SoundEffectsVolume = value
+		sound_effects_volume = value
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundEffects"), linear_to_db(value))
-	get: return SoundEffectsVolume
+	get: return sound_effects_volume
 
 
-func saveSettings() -> void:
-	var date = {
-		"ResolutionIndex": ResolutionIndex,
-		"ScreenResolution": ScreenResolutionOptions[ResolutionIndex],
-		"WindowType": WindowType,
-		"MasterVolume": MasterVolume,
-		"MusicVolume": MusicVolume,
-		"SoundEffectsVolume": SoundEffectsVolume
+func save_settings() -> void:
+	var data = {
+		"resolution_index": resolution_index,
+		"screen_resolution": screen_resolution_options[resolution_index],
+		"window_type": window_type,
+		"master_volume": master_volume,
+		"music_volume": music_volume,
+		"sound_effects_volume": sound_effects_volume
 	}
 
-	var json = JSON.stringify(date, "\t")
+	var json = JSON.stringify(data, "\t")
 
 	var file = FileAccess.open(DATA_PATH, FileAccess.WRITE)
 	if file:
@@ -78,29 +78,29 @@ func saveSettings() -> void:
 	else:
 		print("Error")
 
-func loadSettings() -> void:
+func load_settings() -> void:
 
 	if not FileAccess.file_exists(DATA_PATH):
-		saveSettings()
+		save_settings()
 		return
 
 	var file = FileAccess.open(DATA_PATH, FileAccess.READ)
 	if file:
 		var data = JSON.parse_string(file.get_as_text())
 
-		var resindx = ScreenResolutionOptions.find(data["ScreenResolution"])
+		var _resolution_index = screen_resolution_options.find(data["screen_resolution"])
 		
-		var res = data["ScreenResolution"].split("x")
-		ScreenResolution = Vector2(int(res[0]), int(res[1]))
-		if resindx == data["ResolutionIndex"]:
-			ResolutionIndex = data["ResolutionIndex"]
+		var resolution = data["screen_resolution"].split("x")
+		screen_resolution = Vector2(int(resolution[0]), int(resolution[1]))
+		if _resolution_index == data["resolution_index"]:
+			resolution_index = data["resolution_index"]
 		else :
-			ResolutionIndex = resindx
-		WindowType = data["WindowType"]
+			resolution_index = _resolution_index
+		window_type = data["window_type"]
 
-		MasterVolume = data["MasterVolume"]
-		MusicVolume = data["MusicVolume"]
-		SoundEffectsVolume = data["SoundEffectsVolume"]
+		master_volume = data["master_volume"]
+		music_volume = data["music_volume"]
+		sound_effects_volume = data["sound_effects_volume"]
 
 		file.close()
 	else:
@@ -108,34 +108,34 @@ func loadSettings() -> void:
 
 func resetSettings() -> void:
 	
-	WindowType = 0
-	ScreenResolution = Vector2(1280, 720)
-	ResolutionIndex = 0	
+	window_type = 0
+	screen_resolution = Vector2(1280, 720)
+	resolution_index = 0	
 	
-	MasterVolume = 1.0
-	MusicVolume = 1.0
-	SoundEffectsVolume = 1.0
-	saveSettings()
+	master_volume = 1.0
+	music_volume = 1.0
+	sound_effects_volume = 1.0
+	save_settings()
 
-func _reset_coursor() -> void:
-	Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0177.png"),Input.CURSOR_ARROW,Vector2(8,8))
+func _reset_cursor() -> void:
+	Input.set_custom_mouse_cursor(load("res://Sprite/Cursors/tile_0177.png"),Input.CURSOR_ARROW,Vector2(8,8))
 
-func _set_coursor(cursor_name: State.Coursors = State.Coursors.DEFOULT) -> void:
+func _set_cursor(cursor_name: State.Cursors = State.Cursors.DEFAULT) -> void:
 	match  cursor_name:
-		State.Coursors.USE:
-			Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0132.png"),Input.CURSOR_ARROW,Vector2(8,8))
-		State.Coursors.PICKUP:
-			Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0135.png"),Input.CURSOR_ARROW,Vector2(8,8))
-		State.Coursors.WALK:
-			Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0098.png"),Input.CURSOR_ARROW,Vector2(8,8))
-		State.Coursors.DEFOULT:
-			Input.set_custom_mouse_cursor(load("res://Sprite/Coursors/tile_0177.png"),Input.CURSOR_ARROW,Vector2(8,8))
+		State.Cursors.USE:
+			Input.set_custom_mouse_cursor(load("res://Sprite/Cursors/tile_0132.png"),Input.CURSOR_ARROW,Vector2(8,8))
+		State.Cursors.PICKUP:
+			Input.set_custom_mouse_cursor(load("res://Sprite/Cursors/tile_0135.png"),Input.CURSOR_ARROW,Vector2(8,8))
+		State.Cursors.WALK:
+			Input.set_custom_mouse_cursor(load("res://Sprite/Cursors/tile_0098.png"),Input.CURSOR_ARROW,Vector2(8,8))
+		State.Cursors.DEFAULT:
+			Input.set_custom_mouse_cursor(load("res://Sprite/Cursors/tile_0177.png"),Input.CURSOR_ARROW,Vector2(8,8))
 		_:
-			_reset_coursor()
+			_reset_cursor()
 
 
 func _ready() -> void:
-	Signals.set_coursor.connect(_set_coursor)
-	Signals.reset_coursor.connect(_reset_coursor)
-	_reset_coursor()
-	loadSettings()
+	Signals.set_cursor.connect(_set_cursor)
+	Signals.reset_cursor.connect(_reset_cursor)
+	_reset_cursor()
+	load_settings()

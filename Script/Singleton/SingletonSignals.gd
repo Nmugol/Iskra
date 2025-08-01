@@ -13,13 +13,13 @@ signal show_dialog()
 signal hide_dialog()
 
 @warning_ignore("unused_signal")
-signal player_message(iconName: String, textToDisplay:String)
+signal player_message(iconName: String, textToDisplay: String)
 
 @warning_ignore("unused_signal")
-signal peopel_message(iconName: String, textToDisplay:String)
+signal people_message(iconName: String, textToDisplay: String)
 
 @warning_ignore("unused_signal")
-signal load_equiment()
+signal load_equipment()
 
 @warning_ignore("unused_signal")
 signal show_equipment()
@@ -32,7 +32,6 @@ signal look_at_item(item: Item)
 
 @warning_ignore("unused_signal")
 signal show_map()
-
 @warning_ignore("unused_signal")
 signal hide_map()
 
@@ -40,23 +39,23 @@ signal hide_map()
 signal change_scene()
 
 @warning_ignore("unused_signal")
-signal disabe_loadin_screen()
+signal disable_loading_screen()
 
 @warning_ignore("unused_signal")
-signal enable_loadin_screen()
+signal enable_loading_screen()
 
 
 @warning_ignore("unused_signal")
-signal show_settin_in_game()
+signal show_settings_in_game()
 
 @warning_ignore("unused_signal")
-signal hide_settin_in_game()
+signal hide_settings_in_game()
 
 @warning_ignore("unused_signal")
 signal show_ui()
 
 @warning_ignore("unused_signal")
-signal update_distanace()
+signal update_distance()
 
 @warning_ignore("unused_signal")
 signal delete_save()
@@ -89,13 +88,13 @@ signal reparent_cart()
 signal set_cart_pos(pos: Vector2) 
 
 @warning_ignore("unused_signal")
-signal get_cart(cart:Cart)
+signal get_cart(cart: Cart)
 
 @warning_ignore("unused_signal")
-signal  set_coursor(cursor_name: State.Coursors)
+signal  set_cursor(cursor_name: State.Cursors)
 
 @warning_ignore("unused_signal")
-signal reset_coursor()
+signal reset_cursor()
 
 @warning_ignore("unused_signal")
-signal reset_lool_at_item()
+signal reset_look_at_item()

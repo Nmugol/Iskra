@@ -2,13 +2,13 @@ class_name Player
 extends CharacterBody2D
 
 @export var speed: float = 100
-@onready var nav: NavigationAgent2D = $NavigationAgent2D
+@onready var navigation: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
-const distansToClick: float = 10
+const DISTANT_TO_CLICK: float = 10
 
 func _ready() -> void:
-	Signals.save_game.connect(SavePlayerData)
+	Signals.save_game.connect(func () -> void: Save.player_position = position)
 	sprite.scale = Vector2(0.5,0.5)
 	sprite.play("idle")
 	
@@ -20,22 +20,22 @@ func _physics_process(_delta: float) -> void:
 	if not is_inside_tree() or is_queued_for_deletion():
 		return  # Zabezpieczenie jeśli węzeł jest usuwany
 	
-	if not State.IsRun:
-		Signals.reset_coursor.emit()
+	if not State.is_running:
+		Signals.reset_cursor.emit()
 		return
 
-	if Input.is_action_pressed("MovePlayer") and State.IsInArea and DistaneToClick():
-		nav.target_position = get_global_mouse_position()
+	if Input.is_action_pressed("MovePlayer") and State.is_in_area and distance_to_click():
+		navigation.target_position = get_global_mouse_position()
 
-	if nav.is_navigation_finished():
+	if navigation.is_navigation_finished():
 		velocity = Vector2.ZERO
 		sprite.scale = Vector2(0.5,0.5)
 		sprite.play("idle")
-		Signals.update_distanace.emit()
+		Signals.update_distance.emit()
 	else:
-		var next_pos = nav.get_next_path_position()
+		var next_pos = navigation.get_next_path_position()
 		# Zabezpieczenie przed błędami nawigacji
-		if is_instance_valid(nav) and next_pos != Vector2.INF:
+		if is_instance_valid(navigation) and next_pos != Vector2.INF:
 			var direction = (next_pos - global_position).normalized()
 			velocity = direction * speed
 			sprite.scale = Vector2(0.667,0.667)
@@ -64,8 +64,5 @@ func update_animations(direction: Vector2) -> void:
 		else:
 			sprite.play("walk_up")
 
-func DistaneToClick() -> bool:
-	return global_position.distance_to(get_global_mouse_position()) >= distansToClick
-
-func SavePlayerData() -> void:
-	Save.PlayerPosition = position
+func distance_to_click() -> bool:
+	return global_position.distance_to(get_global_mouse_position()) >= DISTANT_TO_CLICK

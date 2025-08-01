@@ -1,24 +1,24 @@
 extends Node
 
-@export var Icons: Dictionary[String, CompressedTexture2D]
+@export var icons: Dictionary[String, CompressedTexture2D]
 
-@onready var peopelPanel: NinePatchRect = %PeopelPanel
-@onready var peopelIcons: TextureRect = %PeopleIcons
+@onready var people_panel: NinePatchRect = %PeoplePanel
+@onready var people_icons: TextureRect = %PeopleIcons
 
-@onready var playerPanel: NinePatchRect = %PlayerPanel
-@onready var playerIcons: TextureRect = %PlayerIcons
+@onready var player_panel: NinePatchRect = %PlayerPanel
+@onready var player_icons: TextureRect = %PlayerIcons
 
 @onready var scroll: ScrollContainer = %ScrollContainer
-@onready var Text: RichTextLabel = %Text
+@onready var text_to_display: RichTextLabel = %Text
 
 @onready var timer: Timer = $Timer
-@onready var closeButton: TextureButton = %CloseButton
+@onready var close_button: TextureButton = %CloseButton
 
-var displaySpeed: float = 0.1
+var display_speed: float = 0.1
 var queue: Array = []
 var is_talking: bool = false
 var text_is_end: bool = false
-var finus_statae: bool = true
+var finish_state: bool = true
 var current_text: String = ""
 var current_char_index: int = 0
 
@@ -26,10 +26,10 @@ signal text_finished
 signal talk_finished
 
 func _ready() -> void:
-	Text.bbcode_enabled = true
-	finus_statae = true
-	Signals.peopel_message.connect(func(icon, text): add_to_queue(PeopleTalk, icon, text))
-	Signals.player_message.connect(func(icon, text): add_to_queue(PlayerTalk, icon, text))
+	text_to_display.bbcode_enabled = true
+	finish_state = true
+	Signals.people_message.connect(func(icon, text): add_to_queue(people_talk, icon, text))
+	Signals.player_message.connect(func(icon, text): add_to_queue(player_talk, icon, text))
 	timer.timeout.connect(_on_timer_timeout)
 
 func _process(_delta: float) -> void:
@@ -39,7 +39,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("LoadText"):
 		if !text_is_end:  # Pierwsze kliknięcie - szybkie zakończenie tekstu
 			current_char_index = current_text.length()
-			Text.visible_characters = current_char_index
+			text_to_display.visible_characters = current_char_index
 			text_is_end = true
 			timer.stop()
 			text_finished.emit()
@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 			talk_finished.emit()
 	
 	if queue.is_empty() and not is_talking:
-		closeButton.show()
+		close_button.show()
 
 func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
 	queue.append([func_ref, iconName, textToDisplay])
@@ -55,47 +55,47 @@ func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
 
 func process_queue():
 	if is_talking or queue.is_empty():
-		if finus_statae:
-			State.StatePhase += 1
-			finus_statae = false
+		if finish_state:
+			State.state_phase += 1
+			finish_state = false
 		return
 	
 	is_talking = true
 	var item = queue.pop_front()
-	State.StatePhase += 1
+	State.state_phase += 1
 	item[0].call(item[1], item[2])
 
-func PeopleTalk(iconName: String="", textToDisplay:String="") -> void:
-	State.IsRun = false
-	playerPanel.hide()
-	closeButton.hide()
-	peopelIcons.texture = Icons[iconName]
-	peopelPanel.show()
-	LoadinText(textToDisplay)
+func people_talk(iconName: String="", textToDisplay:String="") -> void:
+	State.is_running = false
+	player_panel.hide()
+	close_button.hide()
+	people_icons.texture = icons[iconName]
+	people_panel.show()
+	loading_text(textToDisplay)
 	text_finished.connect(_on_text_finished, CONNECT_ONE_SHOT)
 
-func PlayerTalk(iconName: String="", textToDisplay:String="") -> void:
-	State.IsRun = false
-	peopelPanel.hide()
-	closeButton.hide()
-	playerIcons.texture = Icons[iconName]
-	playerPanel.show()
-	LoadinText(textToDisplay)
+func player_talk(iconName: String="", textToDisplay:String="") -> void:
+	State.is_running = false
+	people_panel.hide()
+	close_button.hide()
+	player_icons.texture = icons[iconName]
+	player_panel.show()
+	loading_text(textToDisplay)
 	text_finished.connect(_on_text_finished, CONNECT_ONE_SHOT)
 
-func LoadinText(text: String) -> void:
+func loading_text(text: String) -> void:
 	text_is_end = false
-	Text.clear()
-	Text.bbcode_text = text
-	Text.visible_characters = 0
+	text_to_display.clear()
+	text_to_display.bbcode_text = text
+	text_to_display.visible_characters = 0
 	current_text = text
 	current_char_index = 0
-	timer.wait_time = displaySpeed
+	timer.wait_time = display_speed
 	timer.start()
 
 func _on_timer_timeout() -> void:
 	if current_char_index < current_text.length():
-		Text.visible_characters += 1
+		text_to_display.visible_characters += 1
 		current_char_index += 1
 		scroll.scroll_vertical = floor(scroll.get_v_scroll_bar().max_value)
 		timer.start()
@@ -111,4 +111,4 @@ func _on_text_finished():
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
-	State.IsRun = true
+	State.is_running = true

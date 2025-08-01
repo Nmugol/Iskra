@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="16_bcjxh"]
 [ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
-[ext_resource type="Texture2D" uid="uid://8p1syjqyicg4" path="res://Sprite/Items/SteelShetSmal.png" id="19_egf6h"]
+[ext_resource type="Texture2D" uid="uid://8p1syjqyicg4" path="res://Sprite/Items/SteelSheetSmal.png" id="19_egf6h"]
 [ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/CartMiniGame/Cart1.png" id="20_egf6h"]
 [ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="21_h1ofm"]
 

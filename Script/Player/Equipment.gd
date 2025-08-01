@@ -1,37 +1,37 @@
 extends Control
 
-@onready var ItemBox: VBoxContainer = %ItemBox
-@onready var LoolAtItemTexture: TextureRect = %LoolAtItemTexture
-@export var UseButton: Button
-@export var DisassembleButton: Button
-@export var AssembleButton: Button
+@onready var item_box: VBoxContainer = %ItemBox
+@onready var look_at_item_texture: TextureRect = %LookAtItemTexture
+@export var use_button: Button
+@export var disassemble_button: Button
+@export var assemble_button: Button
 
 func _ready() -> void:
-	Signals.show_equipment.connect(ShowEquipment)
-	Signals.load_equiment.connect(CreateItem)
-	Signals.look_at_item.connect(LookAtItem)
-	Signals.reset_lool_at_item.connect(func () -> void: LoolAtItemTexture.texture = null)
-	SetUp()
-	CreateItem()
+	Signals.show_equipment.connect(show_equipment)
+	Signals.load_equipment.connect(create_item)
+	Signals.look_at_item.connect(look_at_item)
+	Signals.reset_look_at_item.connect(func () -> void: look_at_item_texture.texture = null)
+	set_up()
+	create_item()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Close") and visible:
-		_on_clouse_pressed()
+		_on_close_pressed()
 
-func SetUp() -> void:
-	UseButton.hide()
-	DisassembleButton.hide()
-	AssembleButton.hide()
+func set_up() -> void:
+	use_button.hide()
+	disassemble_button.hide()
+	assemble_button.hide()
 
-func CreateItem() -> void:
+func create_item() -> void:
 	
 	#Remove items
-	var children = ItemBox.get_children()
+	var children = item_box.get_children()
 	for c in children:
 		c.free()
 	
 	#Load items
-	for item: Item in Save.Equipment:
+	for item: Item in Save.equipment:
 		
 		var item_button: Button = Button.new()
 		item_button.flat = true
@@ -40,34 +40,34 @@ func CreateItem() -> void:
 		item_button.texture_filter = TEXTURE_FILTER_NEAREST
 		item_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		item_button.expand_icon = true
-		item_button.pressed.connect(self.LookAtItem.bind(item))
+		item_button.pressed.connect(self.look_at_item.bind(item))
 		
-		ItemBox.add_child(item_button)
+		item_box.add_child(item_button)
 
-func LookAtItem(item: Item) -> void:
-	State.ActiveItem = item
-	LoolAtItemTexture.texture = load(item.full_sprite_path)
+func look_at_item(item: Item) -> void:
+	State.active_item = item
+	look_at_item_texture.texture = load(item.full_sprite_path)
 	
-	UseButton.show()
-	if not State.ActiveItem.is_finished: DisassembleButton.show()
-	else: DisassembleButton.hide()
-	AssembleButton.show()
+	use_button.show()
+	if not State.active_item.is_finished: disassemble_button.show()
+	else: disassemble_button.hide()
+	assemble_button.show()
 
-func ShowEquipment() -> void:
-	State.IsRun = false
-	CreateItem()
+func show_equipment() -> void:
+	State.is_running = false
+	create_item()
 	show()
 
-func _on_clouse_pressed() -> void:
-	State.IsRun = true
+func _on_close_pressed() -> void:
+	State.is_running = true
 	Signals.show_ui.emit()
 	hide()
 
 func _on_use_pressed() -> void:
-	State.SelectedItem = State.ActiveItem
+	State.selected_item = State.active_item
 
 func _on_disassemble_pressed() -> void:
-	State.ActiveItem.Disassemble()
+	State.active_item.disassemble()
 
 func _on_assemble_pressed() -> void:
-	State.ActiveItem.Assemble(State.SelectedItem)
+	State.active_item.assemble(State.SelectedItem)

@@ -1,34 +1,34 @@
 extends Area2D
 
-@export var HightLight: PointLight2D
-@export var Player: CharacterBody2D
-@export var MinDistance: float = 100
-@export var LocationPath: String = "res://Scenes/Locations/Mines/Cave1.tscn"
-var MainScene = "res://Scenes/World.tscn"
+@export var hightLight: PointLight2D
+@export var player: Player
+@export var min_distance: float = 100
+@export var location_path: String = "res://Scenes/Locations/Mines/Cave1.tscn"
+var MAIN_SCEN = "res://Scenes/World.tscn"
 var dist
 var in_scene: bool = true
 
 func _ready() -> void:
 	in_scene = true
-	HightLight.hide()
+	hightLight.hide()
 
 func _process(_delta: float) -> void:
-	if HightLight.visible:
+	if hightLight.visible:
 
-		if Input.is_action_just_pressed("MovePlayer") and dist <= MinDistance:
+		if Input.is_action_just_pressed("MovePlayer") and dist <= min_distance:
 			
-			Save.CurrentScenePath = LocationPath
-			Save.PlayerPosition = Vector2(314,131)
-			get_tree().change_scene_to_file(MainScene)
+			Save.current_scene_path = location_path
+			Save.player_position = Vector2(314,131)
+			get_tree().change_scene_to_file(MAIN_SCEN)
 			in_scene = false
 			
-		if Input.is_action_just_pressed("MovePlayer") and dist > MinDistance and in_scene:
-			Player.nav.target_position = Vector2(1030, -150)
+		if Input.is_action_just_pressed("MovePlayer") and dist > min_distance and in_scene:
+			player.navigation.target_position = Vector2(1030, -150)
 
 func _on_mouse_entered() -> void:
-	HightLight.show()
-	dist = sqrt(pow(Player.position.x - position.x,2)+pow(Player.position.y - position.y,2))
+	hightLight.show()
+	dist = sqrt(pow(player.position.x - position.x,2)+pow(player.position.y - position.y,2))
 
 
 func _on_mouse_exited() -> void:
-	HightLight.hide()
+	hightLight.hide()

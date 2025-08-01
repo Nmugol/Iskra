@@ -1,6 +1,6 @@
 extends Control
 
-var MenuScen: String = "res://Scenes/Menu/MainMenu.tscn"
+const MENU_SCENE: String = "res://Scenes/Menu/MainMenu.tscn"
 
 func _on_save_pressed() -> void:
 	Signals.save_game.emit()
@@ -8,11 +8,11 @@ func _on_save_pressed() -> void:
 	
 func _on_exit_pressed() -> void:
 	_on_save_pressed()
-	get_tree().change_scene_to_file(MenuScen)
+	get_tree().change_scene_to_file(MENU_SCENE)
 
 func _on_mouse_entered() -> void:
-	State.IsRun = false
+	State.is_running = false
 
 
 func _on_mouse_exited() -> void:
-	State.IsRun = true
+	State.is_running = true

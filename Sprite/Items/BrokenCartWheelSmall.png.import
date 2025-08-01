@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkmhmg56tx7n7"
-path="res://.godot/imported/BrokenCartWhell.png-1a4e967769426405cb52575bb86b3946.ctex"
+uid="uid://bwukv581cogjr"
+path="res://.godot/imported/BrokenCartWheelSmall.png-ac2eba74e8283539674e454ab9dfa54c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/Items/BrokenCartWhell.png"
-dest_files=["res://.godot/imported/BrokenCartWhell.png-1a4e967769426405cb52575bb86b3946.ctex"]
+source_file="res://Sprite/Items/BrokenCartWheelSmall.png"
+dest_files=["res://.godot/imported/BrokenCartWheelSmall.png-ac2eba74e8283539674e454ab9dfa54c.ctex"]
 
 [params]
 

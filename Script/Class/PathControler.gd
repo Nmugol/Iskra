@@ -1,5 +1,5 @@
 extends Path2D
-class_name PathControler
+class_name PathController
 
 @export_group("Path settings")
 @export var path: PathFollow2D

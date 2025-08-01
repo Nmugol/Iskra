@@ -7,16 +7,16 @@ const  MainScene = "res://Scenes/World.tscn"
 #NPC
 @onready var jonas: NPC = $NPCS/Path/Jonas_in/PathFollow2D/Jonas
 @onready var james: NPC = $NPCS/Path/James_out/PathFollow2D/James
-@onready var guard6: NPC = $NPCS/Path/Guaed6_in/PathFollow2D/Guaed6
+@onready var guard6: NPC = $NPCS/Path/Guard6_in/PathFollow2D/Guard6
 
 #PATH
-@onready var James_out:PathControler = $NPCS/Path/James_out
-@onready var Jonas_in:PathControler = $NPCS/Path/Jonas_in
-@onready var James_in:PathControler = $NPCS/Path/James_in
-@onready var Guard_in:PathControler = $NPCS/Path/Guaed6_in
+@onready var james_out:PathController = $NPCS/Path/James_out
+@onready var jonas_in:PathController = $NPCS/Path/Jonas_in
+@onready var james_in:PathController = $NPCS/Path/James_in
+@onready var guard_in:PathController = $NPCS/Path/Guard6_in
 
 func set_up() -> void:
-	if State.StateNumber != 5:
+	if State.state_number != 5:
 		jonas.show()
 		james.show()
 	else:
@@ -27,9 +27,9 @@ func _ready() -> void:
 	set_up()
 
 func _process(_delta: float) -> void:
-	match State.StateNumber:
+	match State.state_number:
 		5:
-			match State.StatePhase:
+			match State.state_phase:
 				0:
 					jonas.hide()
 					_first_dialog()
@@ -37,21 +37,21 @@ func _process(_delta: float) -> void:
 					jonas.show()
 					var smoke = $Particle/Smoke
 					smoke.play = true
-					Jonas_in._play()
+					jonas_in._play()
 				4:
 					jonas.update_state("idle",true)
 				8:
-					James_out._play()
+					james_out._play()
 				9:
-					State.StatePhase = 0
-					State.StateNumber = 6
+					State.state_phase = 0
+					State.state_number = 6
 					james.hide()
-					Save._remove_item("Broken whell")
+					Save._remove_item("Broken wheel")
 		7:
-			match  State.StatePhase:
+			match  State.state_phase:
 				0:
 					james.reparent($NPCS/Path/James_in/PathFollow2D)
-					James_in.npc = james
+					james_in.npc = james
 					_second_dialog()
 				1:
 					
@@ -62,22 +62,23 @@ func _process(_delta: float) -> void:
 							area.queue_free()
 				3:
 					james.show()
-					James_in._play()
-					player.nav.target_position = $Events/FixedWheelPosition.global_position
+					james_in._play()
+					player.navigation.target_position = $Events/FixedWheelPosition.global_position
 				4:
 					player.global_position = $Events/FixedWheelPosition.global_position
-					James_in.path.progress_ratio = 1
+					james_in.path.progress_ratio = 1
 					james.update_state("Idle", true)
-					Guard_in.active = true
+					guard_in.active = true
+					guard6.show()
 				5:
-					Guard_in.path.progress_ratio = Guard_in.stop_points
+					guard_in.path.progress_ratio = guard_in.stop_points
 					guard6.update_state("Idle", true)
 				7:
-					State.StateNumber = 8
-					State.StatePhase = 0
-					Save.PlayerPosition = Vector2(792,1616) 
-					Save.CurrentScenePath = 'res://Scenes/Locations/Mines/MineHub.tscn'
-					Signals.enable_loadin_screen.emit()
+					State.state_number = 8
+					State.state_phase = 0
+					Save.player_position = Vector2(792,1616) 
+					Save.current_scene_path = 'res://Scenes/Locations/Mines/MineHub.tscn'
+					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(MainScene)
 
 func _first_dialog() -> void:
@@ -86,7 +87,7 @@ func _first_dialog() -> void:
 	Signals.show_dialog.emit()
 	
 	#1
-	Signals.peopel_message.emit("James",
+	Signals.people_message.emit("James",
 	"
 	Hey, Daniel! Do you have any idea why the patrols are checking every house and shop today?
 	")
@@ -99,21 +100,21 @@ func _first_dialog() -> void:
 	")
 
 	#3
-	Signals.peopel_message.emit("James",
+	Signals.people_message.emit("James",
 	"
 	A Resistance poster?! No wonder they're on edge...
 	Wait... do you hear that?
 	")
 
 	#4
-	Signals.peopel_message.emit("Jonas",
+	Signals.people_message.emit("Jonas",
 	"
 	[shake rate=10.0 level=2]Boom![/shake]
 	Dammit, James! Are you messing with my tools again?! I told you not to touch the compressor!
 	")
 
 	#5
-	Signals.peopel_message.emit("James",
+	Signals.people_message.emit("James",
 	"
 	Jonas! Calm down, it's not my fault!
 	Anyway, Daniel, what did you bring here?
@@ -126,7 +127,7 @@ func _first_dialog() -> void:
 	")
 
 	#7
-	Signals.peopel_message.emit("James",
+	Signals.people_message.emit("James",
 	"
 	Always those guys... Alright, give me the wheel. It'll take a minute.
 	Just... don't touch anything while you're waiting, okay?
@@ -156,20 +157,20 @@ func _second_dialog() -> void:
 	")
 
 	#3
-	Signals.peopel_message.emit("Jonas",
+	Signals.people_message.emit("Jonas",
 	"
 	No clue, kid. If it’s small and broken, it’s yours. I’ve got enough junk to deal with.
 	")
 
 	#4
-	Signals.peopel_message.emit("James",
+	Signals.people_message.emit("James",
 	"
 	Alright, here’s the wheel – fixed and ready. Get it out of here fast.
 	Look, the patrol is coming.
 	")
 
 	#5
-	Signals.peopel_message.emit("Guard6",
+	Signals.people_message.emit("Guard6",
 	"
 	The wheel. Give it to us.
 	")
@@ -181,13 +182,13 @@ func _second_dialog() -> void:
 	")
 
 	#7
-	Signals.peopel_message.emit("Guard6",
+	Signals.people_message.emit("Guard6",
 	"
 	Good. Now back to the mine. We’ll be watching.
 	")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and Save._is_in_equipment("Crystal shard") == true:
-		State.StatePhase = 0
-		State.StateNumber = 7
+		State.state_phase = 0
+		State.state_number = 7
 		$Events/Area2D.queue_free()

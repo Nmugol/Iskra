@@ -6,11 +6,11 @@ extends Node2D
 @onready var candle: Sprite2D = $Candle
 @onready var cristal: Sprite2D = $Cristal
 
-@onready var max_candle_left: Marker2D = $CandleConteiner/MaxLeft
-@onready var max_candle_right: Marker2D = $CandleConteiner/MaxRight
-@onready var max_candle_top: Marker2D = $CandleConteiner/MaxUp
-@onready var max_candle_bottom: Marker2D = $CandleConteiner/MaxDown
-@onready var candle_center: Marker2D = $CandleConteiner/Center
+@onready var max_candle_left: Marker2D = $CandleContainer/MaxLeft
+@onready var max_candle_right: Marker2D = $CandleContainer/MaxRight
+@onready var max_candle_top: Marker2D = $CandleContainer/MaxUp
+@onready var max_candle_bottom: Marker2D = $CandleContainer/MaxDown
+@onready var candle_center: Marker2D = $CandleContainer/Center
 
 enum above_button {
 	UP,

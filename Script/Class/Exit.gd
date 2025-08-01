@@ -3,7 +3,7 @@ class_name Exit
 
 @export var location_path: String
 
-@export_category("Arrea")
+@export_category("Area")
 @export var area_shape: CollisionShape2D
 @export var min_distance: float = 500
 
@@ -15,19 +15,19 @@ class_name Exit
 var start_point: Vector2 = Vector2(0,0)
 var dist: int
 var mouse_hover: bool = false
-const  MainScene = "res://Scenes/World.tscn"
+const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 var in_scene: bool = true
 
 func  _ready() -> void:
 	
-	Signals.update_distanace.connect(CalculateDistance)
+	Signals.update_distance.connect(calculate_distance)
 	
-	CalculateDistance()
+	calculate_distance()
 	
 	in_scene = true
 	mouse_entered.connect(func():
-		CalculateDistance()
+		calculate_distance()
 		mouse_hover = true
 		)
 
@@ -35,7 +35,7 @@ func  _ready() -> void:
 		mouse_hover = false
 		)
 
-func CalculateDistance() -> void:
+func calculate_distance() -> void:
 	
 	dist = floor(area_shape.global_position.distance_to(player.global_position))
 
@@ -45,10 +45,10 @@ func _process(_delta: float) -> void:
 
 			in_scene = false
 
-			Save.CurrentScenePath = location_path
-			Save.PlayerPosition = target_player_position
-			Signals.enable_loadin_screen.emit()
-			get_tree().change_scene_to_file(MainScene)
+			Save.current_scene_path = location_path
+			Save.player_position = target_player_position
+			Signals.enable_loading_screen.emit()
+			get_tree().change_scene_to_file(MAIN_SCENE)
 
 		if Input.is_action_just_pressed("MovePlayer") and dist > min_distance and in_scene:
 
