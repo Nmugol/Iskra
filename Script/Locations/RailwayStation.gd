@@ -28,7 +28,7 @@ func _ready() -> void:
 		cart.monitoring = false
 
 func _process(_delta: float) -> void:
-	if not State.is_load: return
+	if not State.is_loading: return
 	
 	if cart.overlaps_body(player) and State.state_number != 3: _on_cart_mouse_entered()
 	
@@ -197,7 +197,7 @@ func _first_task() -> void:
 	")
 
 func _second_task() -> void:
-	
+	print("ok")
 	Save.save_data_to_file()
 	Signals.show_dialog.emit()
 	#1

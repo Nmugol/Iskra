@@ -23,8 +23,8 @@ func _on_mapa_pressed() -> void:
 	hide()
 
 func _on_mouse_entered() -> void:
-	State.IsRun = false
+	State.is_running = false
 
 
 func _on_mouse_exited() -> void:
-	State.IsRun = true
+	State.is_running = true

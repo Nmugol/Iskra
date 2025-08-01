@@ -91,8 +91,8 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAANAAUAAAABAAMAAAANAAYAAAABAAMAAAAVAAUAAAACAAMAAAAVAAYAAAACAAMAAAAjAP//AAADAAMAAAAkAP//AAADAAMAAAAlAP//AAADAAMAAAAmAP//AAADAAMAAAAnAP//AAADAAMAAAAoAP//AAADAAMAAAAoAP3/AAADAAMAAAAnAP3/AAADAAMAAAAmAP3/AAADAAMAAAAlAP3/AAADAAMAAAAkAP3/AAADAAMAAAAjAP3/AAADAAMAAAAiAAMAAAAGAAEAAAAiAAQAAAAGAAEAAAAkAAMAAAAGAAEAAAAkAAQAAAAGAAEAAAAmAAMAAAAGAAEAAAAmAAQAAAAGAAEAAAAoAAMAAAAGAAEAAAAoAAQAAAAGAAEAAAAjAPL/AAAGAAMAAAAZAPn/AAAAAAkAAAAYAPn/AAAAAAkAAAAXAPn/AAAAAAkAAAAjAOz/AAAAAAkAAAAiAOz/AAAAAAkAAAA=")
 tile_set = ExtResource("5_8kkhh")
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("11_7vnyi")]
-CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("11_7vnyi")]
+collision_area = NodePath("Area2D2/CollisionPolygon2D")
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
@@ -111,10 +111,10 @@ physics_interpolation_mode = 1
 position = Vector2(280, 40)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 4
-limit_top = -384
-limit_right = 1488
-limit_bottom = 256
+limit_left = -40
+limit_top = -400
+limit_right = 1016
+limit_bottom = 160
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -155,10 +155,10 @@ target_player_position = Vector2(-8, 80)
 position = Vector2(280, 144)
 shape = SubResource("RectangleShape2D_1lcfl")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit" node_paths=PackedStringArray("paren_area")]
 position = Vector2(279.97, 126.362)
 rotation = -1.5708
 scale = Vector2(0.29463, 0.40108)
 texture = ExtResource("12_pj1h8")
 script = ExtResource("13_o8g02")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")

@@ -63,11 +63,14 @@ func _on_close_pressed() -> void:
 	Signals.show_ui.emit()
 	hide()
 
-func _on_use_pressed() -> void:
-	State.selected_item = State.active_item
+
 
 func _on_disassemble_pressed() -> void:
 	State.active_item.disassemble()
 
 func _on_assemble_pressed() -> void:
 	State.active_item.assemble(State.SelectedItem)
+
+
+func _on_use_pressed() -> void:
+	State.selected_item = State.active_item

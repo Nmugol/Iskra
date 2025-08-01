@@ -36,10 +36,10 @@ physics_interpolation_mode = 1
 position = Vector2(480, 240)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -472
-limit_top = -400
-limit_right = 808
-limit_bottom = 360
+limit_left = -920
+limit_top = -656
+limit_right = 1432
+limit_bottom = 720
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -141,12 +141,12 @@ y_sort_enabled = true
 texture_filter = 1
 tile_set = ExtResource("8_8dmtp")
 
-[node name="NavigationRegion" parent="Teren" node_paths=PackedStringArray("CollisionArea") instance=ExtResource("1_4xje0")]
-CollisionArea = NodePath("MovingArea/CollisionPolygon2D")
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("1_4xje0")]
+collision_area = NodePath("MovingArea/CollisionPolygon2D")
 
-[node name="MovingArea" type="Area2D" parent="Teren/NavigationRegion"]
+[node name="MovingArea" type="Area2D" parent="NavigationRegion"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Teren/NavigationRegion/MovingArea"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion/MovingArea"]
 position = Vector2(1, 0)
 polygon = PackedVector2Array(-440, -256, -440, -40, -336, -40, -336, 48, -368, 48, -368, 88, -384, 88, -384, 104, -440, 104, -440, 120, -408, 120, -408, 176, -440, 176, -440, 184, -264, 184, -232, 184, -232, 176, -264, 176, -264, 128, -272, 128, -272, 112, -264, 112, -264, 56, -232, 56, -232, 48, -288, 48, -288, -40, -192, -40, -192, -48, -240, -48, -240, -96, -256, -96, -256, -144, -240, -144, -240, -96, -232, -96, -232, -144, -224, -144, -224, -160, -208, -160, -208, -144, -192, -144, -192, -48, -192, -40, -160, -40, -160, -64, -144, -64, -144, -80, -128, -80, -128, -64, -112, -64, -112, -80, -96, -80, -96, -56, -112, -56, -112, -40, -80, -40, -80, -64, -64, -64, -64, -40, 128, -40, 128, -64, 160, -64, 160, -80, 208, -80, 208, -56, 160, -56, 160, -40, 512, -40, 512, 48, 408, 48, 408, 144, 360, 144, 360, 176, 432, 176, 432, 216, 416, 216, 416, 240, 432, 240, 432, 296, 416, 296, 416, 312, 408, 320, 408, 328, 448, 328, 448, 312, 512, 312, 512, 328, 776, 328, 776, 304, 728, 304, 728, 296, 704, 296, 704, 256, 720, 256, 720, 160, 768, 160, 776, 160, 776, 72, 752, 72, 752, 96, 760, 96, 760, 144, 728, 144, 728, 120, 720, 120, 720, 96, 736, 96, 736, 48, 640, 48, 640, -40, 776, -40, 776, -104, 592, -104, 592, -142, 598, -142, 598, -172, 600, -173, 608, -173, 608, -184, 616, -192, 616, -200, 624, -208, 632, -224, 664, -224, 672, -208, 680, -200, 696, -200, 696, -184, 688, -168, 605, -168, 605, -157, 620, -157, 620, -144, 640, -144, 640, -136, 688, -136, 688, -144, 774, -144, 774, -163, 756, -163, 756, -172, 758, -179, 758, -188, 774, -188, 774, -200, 768, -200, 768, -224, 752, -224, 752, -240, 776, -240, 776, -248, 704, -248, 704, -240, 720, -240, 720, -224, 704, -224, 704, -240, 704, -248, 664, -248, 592, -248, 592, -240, 576, -240, 576, -248, 560, -248, 560, -256, 408, -256, 400, -264, 384, -264, 384, -272, 352, -272, 352, -240, 336, -240, 336, -248, 320, -248, 320, -224, 288, -224, 288, -240, 272, -240, 272, -248, 216, -248, 216, -256, 176, -256, 176, -224, 160, -224, 160, -248, 144, -248, 128, -240, 32, -240, 32, -264, -48, -264, -64, -256, -64, -240, -160, -240, -160, -224, -208, -224, -208, -256, -288, -256, -288, -248, -304, -248, -320, -256, -320, -272, -376, -272, -376, -256)
 
@@ -171,13 +171,13 @@ player = NodePath("../../Player")
 stopping_point = Vector2(480, 304)
 target_player_position = Vector2(360, 579)
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit" node_paths=PackedStringArray("paren_area")]
 position = Vector2(480.139, 321.237)
 rotation = -1.5708
 scale = Vector2(0.232037, 0.398111)
 texture = ExtResource("15_ybn7d")
 script = ExtResource("16_7s5um")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Exit"]
 position = Vector2(480, 336)

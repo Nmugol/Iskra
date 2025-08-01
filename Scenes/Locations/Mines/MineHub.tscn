@@ -104,9 +104,9 @@ position = Vector2(664, 600)
 shape = SubResource("RectangleShape2D_5qlm5")
 disabled = true
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("8_5qlm5")]
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("8_5qlm5")]
 visible = false
-CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
+collision_area = NodePath("Area2D2/CollisionPolygon2D")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -123,10 +123,10 @@ physics_interpolation_mode = 1
 position = Vector2(792, 1616)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 392
-limit_top = -660
-limit_right = 920
-limit_bottom = -284
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -162,14 +162,14 @@ player = NodePath("../../Player")
 stopping_point = Vector2(1808, -88)
 target_player_position = Vector2(48, -80)
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines1" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines1" node_paths=PackedStringArray("paren_area")]
 texture_filter = 1
 position = Vector2(1848, -88)
 rotation = -3.14159
 scale = Vector2(0.213713, 1.35709)
 texture = ExtResource("10_4c4mo")
 script = ExtResource("14_5hspf")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Mines1"]
 position = Vector2(1836, -88)
@@ -188,12 +188,12 @@ target_player_position = Vector2(1112, -200)
 position = Vector2(-504, 688)
 shape = SubResource("RectangleShape2D_t2qt3")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Town" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Town" node_paths=PackedStringArray("paren_area")]
 position = Vector2(-504, 688)
 scale = Vector2(0.24, 0.8)
 texture = ExtResource("10_4c4mo")
 script = ExtResource("14_5hspf")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="RailwayStation" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("9_p4enp")
@@ -208,13 +208,13 @@ target_player_position = Vector2(1232, 384)
 position = Vector2(752, -833.5)
 shape = SubResource("RectangleShape2D_5hspf")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/RailwayStation" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/RailwayStation" node_paths=PackedStringArray("paren_area")]
 position = Vector2(752.111, -833.631)
 rotation = 1.5708
 scale = Vector2(0.174114, 0.959737)
 texture = ExtResource("10_4c4mo")
 script = ExtResource("14_5hspf")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="Mines2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("9_p4enp")
@@ -225,13 +225,13 @@ player = NodePath("../../Player")
 stopping_point = Vector2(1128, 2008)
 target_player_position = Vector2(-64, 72)
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines2" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Mines2" node_paths=PackedStringArray("paren_area")]
 position = Vector2(1127.77, 2032.68)
 rotation = -1.5708
 scale = Vector2(0.170278, 0.558817)
 texture = ExtResource("10_4c4mo")
 script = ExtResource("14_5hspf")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Mines2"]
 position = Vector2(1128, 2032)

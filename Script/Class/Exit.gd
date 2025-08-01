@@ -8,7 +8,7 @@ class_name Exit
 @export var min_distance: float = 500
 
 @export_category("Player")
-@export var player: CharacterBody2D
+@export var player: Player
 @export var stopping_point: Vector2
 @export var target_player_position : Vector2 = Vector2(0,0)
 
@@ -52,4 +52,4 @@ func _process(_delta: float) -> void:
 
 		if Input.is_action_just_pressed("MovePlayer") and dist > min_distance and in_scene:
 
-			player.nav.target_position = stopping_point
+			player.navigation.target_position = stopping_point

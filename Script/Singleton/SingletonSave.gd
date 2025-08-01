@@ -60,7 +60,7 @@ func load_data_from_file()->void:
 			var new_item = Item.from_json(item)
 			equipment.append(new_item)
 		
-		for item in data["PickUpItems"]:
+		for item in data["pick_up_items"]:
 			var new_item = Item.from_json(item)
 			State.pick_up_items.append(new_item)
 		
@@ -76,14 +76,14 @@ func save_data_to_file()->void:
 		"state_number": State.state_number,
 		"state_phase": State.state_phase, 
 		"equipment": [],
-		"PickUpItems": []
+		"pick_up_items": []
 	}
 	
 	for item in equipment:
 		data["equipment"].append(item.to_json())
 	
-	for item in State.PickUpItems:
-		data["PickUpItems"].append(item.to_json())
+	for item in State.pick_up_items:
+		data["pick_up_items"].append(item.to_json())
 		
 
 	var json = JSON.stringify(data, "\t")

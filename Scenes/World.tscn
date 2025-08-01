@@ -221,9 +221,9 @@ _data = {
 &"loading": SubResource("Animation_y7y61")
 }
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("LevelLocation")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("level_location")]
 script = ExtResource("1_23x67")
-LevelLocation = NodePath("Level")
+level_location = NodePath("Level")
 
 [node name="Level" type="Node" parent="."]
 

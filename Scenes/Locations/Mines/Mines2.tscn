@@ -42,10 +42,10 @@ physics_interpolation_mode = 1
 position = Vector2(1432, 304)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -920
-limit_top = -656
-limit_right = 1432
-limit_bottom = 720
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -147,8 +147,8 @@ position = Vector2(832, 296)
 shape = SubResource("RectangleShape2D_0xouq")
 disabled = true
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("14_ncjw1")]
-CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("14_ncjw1")]
+collision_area = NodePath("Area2D2/CollisionPolygon2D")
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
@@ -166,12 +166,12 @@ player = NodePath("../../Player")
 stopping_point = Vector2(-64, 72)
 target_player_position = Vector2(1128, 2008)
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/MinesHub" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/MinesHub" node_paths=PackedStringArray("paren_area")]
 position = Vector2(-96, 64)
 scale = Vector2(0.16, 0.64)
 texture = ExtResource("16_bqmar")
 script = ExtResource("17_l42c2")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/MinesHub"]
 position = Vector2(-96, 64)
@@ -190,9 +190,9 @@ target_player_position = Vector2(168, 32)
 position = Vector2(1432, 256)
 shape = SubResource("CapsuleShape2D_bqmar")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Cave2" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Cave2" node_paths=PackedStringArray("paren_area")]
 position = Vector2(1432, 256)
 scale = Vector2(0.335001, 0.45)
 texture = ExtResource("18_bqmar")
 script = ExtResource("17_l42c2")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")

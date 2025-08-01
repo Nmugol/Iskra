@@ -13,8 +13,8 @@ func _ready() -> void:
 	sprite.play("idle")
 	
 	# Zabezpieczenie przed pustą pozycją
-	if Save.PlayerPosition != Vector2.ZERO:
-		position = Save.PlayerPosition
+	if Save.player_position != Vector2.ZERO:
+		position = Save.player_position
 
 func _physics_process(_delta: float) -> void:
 	if not is_inside_tree() or is_queued_for_deletion():

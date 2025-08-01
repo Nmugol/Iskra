@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func change_visibility() -> void:
 	hide()
-	if location_active_on_stage.has(State.StateNumber):
+	if location_active_on_stage.has(State.state_number):
 		show()
 	if Save.current_scene_path == location_scene_path:
 		hide()

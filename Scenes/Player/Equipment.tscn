@@ -17,7 +17,7 @@ region = Rect2(0, 22, 21, 21)
 atlas = ExtResource("3_106t7")
 region = Rect2(0, 44, 21, 21)
 
-[node name="Equipment" type="Control" node_paths=PackedStringArray("UseButton", "DisassembleButton", "AssembleButton")]
+[node name="Equipment" type="Control" node_paths=PackedStringArray("use_button", "disassemble_button", "assemble_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,9 +27,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_mv6v0")
-UseButton = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Use")
-DisassembleButton = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Disassemble")
-AssembleButton = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Assemble")
+use_button = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Use")
+disassemble_button = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Disassemble")
+assemble_button = NodePath("MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Assemble")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -114,7 +114,7 @@ theme_override_constants/margin_top = 61
 theme_override_constants/margin_right = 62
 theme_override_constants/margin_bottom = 62
 
-[node name="LoolAtItemTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/NinePatchRect2/MarginContainer"]
+[node name="LookAtItemTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/NinePatchRect2/MarginContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -173,7 +173,7 @@ layout_mode = 2
 theme = ExtResource("2_ll5if")
 text = "Assemble"
 
-[node name="Clouse" type="TextureButton" parent="."]
+[node name="Close" type="TextureButton" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
@@ -194,4 +194,4 @@ stretch_mode = 4
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Use" to="." method="_on_use_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Disassemble" to="." method="_on_disassemble_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer2/NinePatchRect/MarginContainer/ItemOptions/Assemble" to="." method="_on_assemble_pressed"]
-[connection signal="pressed" from="Clouse" to="." method="_on_clouse_pressed"]
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

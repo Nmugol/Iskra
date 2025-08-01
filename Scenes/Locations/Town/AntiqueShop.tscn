@@ -131,8 +131,8 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AADw/xEAAAADAAQAAADu/w8AAAAAAAIAAADr/xAAAAAGAAAAAADq/xEAAAAGAAYAAAAHABEAAAAGAAAAAAAHAA8AAAAGAAYAAAAIABIAAAAAAAYAAAAyABQAAAAAAAYAAAAuABYAAAADAAAAAAAvABMAAAAGAAAAAAA1ABIAAAAAAAAAAAA4ABQAAAADAAQAAAA6ABQAAAAAAAQAAAA9ABMAAAADAAYAAAA+ABQAAAADAAAAAABAABQAAAADAAQAAABDABQAAAAGAAIAAABEABYAAAAAAAQAAAA=")
 tile_set = ExtResource("5_adn2u")
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("4_6u7lr")]
-CollisionArea = NodePath("MovingArea/CollisionPolygon2D")
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("4_6u7lr")]
+collision_area = NodePath("MovingArea/CollisionPolygon2D")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -172,13 +172,13 @@ metadata/_edit_group_ = true
 position = Vector2(284, 400)
 shape = SubResource("RectangleShape2D_dg87u")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit1" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit1" node_paths=PackedStringArray("paren_area")]
 position = Vector2(284.617, 388.098)
 rotation = -1.5708
 scale = Vector2(0.182063, 0.360604)
 texture = ExtResource("12_bpqe2")
 script = ExtResource("13_05tpc")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="Exit2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("11_wmiu7")
@@ -195,10 +195,9 @@ metadata/_edit_group_ = true
 position = Vector2(-84, 400)
 shape = SubResource("RectangleShape2D_qdckj")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit2" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit2"]
 position = Vector2(-83.8224, 388.098)
 rotation = -1.5708
 scale = Vector2(0.182063, 0.360369)
 texture = ExtResource("12_bpqe2")
 script = ExtResource("13_05tpc")
-ParenArea = NodePath("..")

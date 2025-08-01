@@ -43,8 +43,8 @@ func _remove_already_pickup_item() -> void:
 	var items_to_remove := []
 	# Sprawdź każdy przedmiot w scenie
 	for item in items_in_scen:
-		# Porównaj nazwę przedmiotu z tymi w State.PickUpItems
-		for picked_item in State.PickUpItems:
+		# Porównaj nazwę przedmiotu z tymi w State.pick_up_items
+		for picked_item in State.pick_up_items:
 			if picked_item.item_name == item.item_name:
 				items_to_remove.append(item)
 				break

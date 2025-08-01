@@ -131,8 +131,8 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AADw/+3/AAAJAAUAAADw/+7/AAAJAAYAAADx/+3/AAAKAAUAAADx/+7/AAAKAAYAAAD0//L/AAAJAAsAAAD0//P/AAAJAAwAAADv/+v/AAAJAA4AAADv/+z/AAAJAA8AAADv/+3/AAAJABAAAADz/+v/AAAFAAUAAAD3/+v/AAAFAAIAAAD2/+v/AAAGAAYAAADw/+//AAABAAUAAADw//D/AAAFAAgAAADw//L/AAAGAAcAAAD3//P/AAAEAAcAAAD7//P/AAAGAAIAAAD+//P/AAAFAAUAAADz/+j/AAAFAAQAAAD0/+j/AAACAAQAAAD1/+j/AAAEAAIAAAD2/+j/AAAFAAYAAAD4/+v/AAACAAgAAAD3/+j/AAACAAYAAAD7/+n/AAACAAcAAADz/+n/AAADAAMAAAD1/+n/AAAFAAMAAAD2/+n/AAADAAYAAAD3/+n/AAAEAAYAAAA0AOj/AAABAA8AAAA2AOj/AAABAAwAAAA3AOj/AAADAAMAAAA5AOj/AAACAAQAAAA6AOj/AAAEAAEAAAA6AOn/AAADAAIAAAA3AOn/AAAGABAAAAA4AOn/AAAEAAQAAAA1AOn/AAADAAwAAAA0AOn/AAAGAAUAAAAyAOz/AAAAAAEAAAA5AOz/AAADAAIAAAA4AOz/AAAEAAYAAAA+AOz/AAADAAUAAAA/AOz/AAADAAcAAAA9APD/AAACAAIAAAA+APD/AAADAAoAAAA4APD/AAABAAIAAAA6APD/AAAGAA4AAAAWAPL/AAAEAAcAAAAWAO//AAAEAAIAAAA0APD/AAACAAkAAAAzAPD/AAAEAAwAAAATAPL/AAAJAAUAAAATAPP/AAAJAAYAAAAUAPL/AAAKAAUAAAAUAPP/AAAKAAYAAAATAOf/AAAJAAMAAAATAOj/AAAJAAQAAAAUAOf/AAAKAAMAAAAUAOj/AAAKAAQAAAAVAOf/AAAJAAMAAAAVAOj/AAAJAAQAAAAWAOf/AAAKAAMAAAAWAOj/AAAKAAQAAAA=")
 tile_set = ExtResource("6_iib40")
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("7_djqyw")]
-CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("7_djqyw")]
+collision_area = NodePath("Area2D2/CollisionPolygon2D")
 metadata/_edit_lock_ = true
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
@@ -200,13 +200,13 @@ target_player_position = Vector2(-504, 545)
 position = Vector2(432, 76)
 shape = SubResource("RectangleShape2D_iib40")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit1" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit1" node_paths=PackedStringArray("paren_area")]
 position = Vector2(432.168, 66.6309)
 rotation = -1.5708
 scale = Vector2(0.203448, 0.401545)
 texture = ExtResource("13_wty3n")
 script = ExtResource("14_85ban")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="Exit2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("12_ia28m")
@@ -221,13 +221,13 @@ target_player_position = Vector2(-392, 544)
 position = Vector2(736, 76)
 shape = SubResource("RectangleShape2D_w0pg3")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit2" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit2" node_paths=PackedStringArray("paren_area")]
 position = Vector2(736.281, 66.3193)
 rotation = -1.5708
 scale = Vector2(0.216783, 0.399239)
 texture = ExtResource("13_wty3n")
 script = ExtResource("14_85ban")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="Item" type="Node2D" parent="." node_paths=PackedStringArray("player", "item_area")]
 script = ExtResource("16_1on6r")
@@ -239,8 +239,8 @@ item_area = {
 [node name="CrystalShard" type="Area2D" parent="Item"]
 position = Vector2(891, -245)
 script = ExtResource("17_mcm2u")
-aree_name = "crystal_shard"
-actibe_on = Array[int]([5, 6, 7])
+area_name = "crystal_shard"
+active_on = Array[int]([5, 6, 7])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Item/CrystalShard"]
@@ -349,6 +349,5 @@ flip_sprite = true
 
 [node name="Smoke" parent="Particle" instance=ExtResource("22_763pe")]
 position = Vector2(330, -317)
-time_to_disable = 0.7
 
 [connection signal="body_entered" from="Events/Area2D" to="." method="_on_area_2d_body_entered"]

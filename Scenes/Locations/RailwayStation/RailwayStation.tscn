@@ -142,10 +142,10 @@ physics_interpolation_mode = 1
 position = Vector2(2120, -40)
 zoom = Vector2(2.2, 2.2)
 process_callback = 0
-limit_left = 72
-limit_top = -392
-limit_right = 2488
-limit_bottom = 376
+limit_left = 4
+limit_top = -384
+limit_right = 1488
+limit_bottom = 256
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -168,8 +168,8 @@ dead_zone_height = 0.252
 draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("11_basko")]
-CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("11_basko")]
+collision_area = NodePath("Area2D2/CollisionPolygon2D")
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
@@ -194,13 +194,13 @@ target_player_position = Vector2(-568, -672)
 position = Vector2(176, 404)
 shape = SubResource("RectangleShape2D_5r2dp")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter1" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter1" node_paths=PackedStringArray("paren_area")]
 position = Vector2(176.191, 403.962)
 rotation = -1.5708
 scale = Vector2(0.118302, 0.480587)
 texture = ExtResource("12_5r2dp")
 script = ExtResource("15_ljs7w")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="Enter2" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("13_7y4t6")
@@ -215,13 +215,13 @@ target_player_position = Vector2(-568, -672)
 position = Vector2(560, 404)
 shape = SubResource("RectangleShape2D_gycxx")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter2" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter2" node_paths=PackedStringArray("paren_area")]
 position = Vector2(559.604, 404.227)
 rotation = -1.5708
 scale = Vector2(0.121866, 0.479823)
 texture = ExtResource("12_5r2dp")
 script = ExtResource("15_ljs7w")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="Enter3" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 script = ExtResource("13_7y4t6")
@@ -236,13 +236,13 @@ target_player_position = Vector2(760, -800)
 position = Vector2(1232, 404)
 shape = SubResource("RectangleShape2D_7y4t6")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter3" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Enter3" node_paths=PackedStringArray("paren_area")]
 position = Vector2(1232.06, 404.02)
 rotation = -1.5708
 scale = Vector2(0.11898, 0.479144)
 texture = ExtResource("12_5r2dp")
 script = ExtResource("15_ljs7w")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="NPC" type="Node2D" parent="."]
 
@@ -270,8 +270,8 @@ item_area = {
 [node name="SteelSheet" type="Area2D" parent="Items"]
 position = Vector2(1776, -264)
 script = ExtResource("18_pxp8k")
-aree_name = "steel_sheet"
-actibe_on = Array[int]([1, 2, 3])
+area_name = "steel_sheet"
+active_on = Array[int]([1, 2, 3])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Items/SteelSheet"]

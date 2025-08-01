@@ -117,9 +117,10 @@ texture_disabled = SubResource("AtlasTexture_8ll4j")
 texture_focused = SubResource("AtlasTexture_ktxul")
 stretch_mode = 4
 
-[node name="Cart" parent="." instance=ExtResource("4_0u0f4")]
+[node name="Cart" parent="." node_paths=PackedStringArray("main_parent") instance=ExtResource("4_0u0f4")]
 z_index = 1
 position = Vector2(-32, 88)
+main_parent = NodePath("..")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

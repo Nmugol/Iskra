@@ -2,10 +2,10 @@ extends Node2D
 
 @export var level_location: Node
 
-@onready var dialog: Control = %dialog
+@onready var dialog: Control = %Dialog
 @onready var equipment: Control = %Equipment
 @onready var map: Control = %Map
-@onready var transition: AnimationPlayer = %transition
+@onready var transition: AnimationPlayer = %Transition
 @onready var settings_in_game: Control = %Setting
 @onready var contro_button: Control = %UI
 
@@ -16,10 +16,9 @@ func _ready() -> void:
 	_connect_signals()
 	load_level()
 
+
 func _connect_signals() -> void:
-	Signals.show_ui.connect(func():
-		settings_in_game.show()
-		)
+	Signals.show_ui.connect(func(): settings_in_game.show())
 	
 	Signals.show_dialog.connect(show_dialog)
 	Signals.hide_dialog.connect(hide_dialog)
@@ -34,8 +33,8 @@ func _connect_signals() -> void:
 	Signals.disable_loading_screen.connect(disable_loading_screen)
 	Signals.enable_loading_screen.connect(enable_loading_screen)
 	
-	Signals.show_setting_in_game.connect(show_setting_in_game)
-	Signals.hide_setting_in_game.connect(hide_setting_in_game)
+	Signals.show_settings_in_game.connect(show_setting_in_game)
+	Signals.hide_settings_in_game.connect(hide_setting_in_game)
 	
 func load_level() -> void:
 	State.is_running = false
@@ -101,7 +100,6 @@ func disable_loading_screen() -> void:
 	Signals.show_ui.emit()
 	await transition.animation_finished
 	await get_tree().create_timer(0.2).timeout
-	State.is_loading = true
 
 func enable_loading_screen() -> void:
 	transition.play("fade_out")

@@ -16,9 +16,9 @@ var MainScene = "res://Scenes/Menu/MainMenu.tscn"
 @export var sound_effects_slider_label: Label
 
 func _ready() -> void:
-	setUp()
+	set_up()
 
-func setUp() -> void:
+func set_up() -> void:
 	for resolution in Settings.screen_resolution_options:
 		resolution_button.add_item(resolution)	
 	resolution_button.selected = Settings.resolution_index

@@ -6,7 +6,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnv33"]
 bg_color = Color(0.18037, 0.145036, 0.168606, 1)
 
-[node name="Settings" type="Control" node_paths=PackedStringArray("ResolutionButton", "WindowTypeButton", "MasterSlider", "MasterSliderLabel", "MusicSlider", "MusicSliderLabel", "SoundEffectsSlider", "SoundEffectsSliderLabel")]
+[node name="Settings" type="Control" node_paths=PackedStringArray("resolution_button", "window_type_button", "master_slider", "master_slider_label", "music_slider", "music_slider_label", "sound_effects_slider", "sound_effects_slider_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,14 +16,14 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_4yry0")
-ResolutionButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/Resolition/HboxContainer/ResolutionButton")
-WindowTypeButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/WindowType/HboxContainer/WindowTypeButton")
-MasterSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Master/HBoxContainer/MasterSlider")
-MasterSliderLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Master/HBoxContainer/Value")
-MusicSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Music/HBoxContainer/MusicSlider")
-MusicSliderLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Music/HBoxContainer/Value")
-SoundEffectsSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/SoundEffects/HBoxContainer/SoundEfectsSlider")
-SoundEffectsSliderLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/SoundEffects/HBoxContainer/Value")
+resolution_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/Resolition/HboxContainer/ResolutionButton")
+window_type_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/WindowType/HboxContainer/WindowTypeButton")
+master_slider = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Master/HBoxContainer/MasterSlider")
+master_slider_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Master/HBoxContainer/Value")
+music_slider = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Music/HBoxContainer/MusicSlider")
+music_slider_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/Music/HBoxContainer/Value")
+sound_effects_slider = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/SoundEffects/HBoxContainer/SoundEfectsSlider")
+sound_effects_slider_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/SoundEffects/HBoxContainer/Value")
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

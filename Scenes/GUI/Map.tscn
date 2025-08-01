@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://qmdgtogrjq2q"]
+[gd_scene load_steps=10 format=3 uid="uid://qmdgtogrjq2q"]
 
 [ext_resource type="Script" uid="uid://dhqh8gmth30vm" path="res://Script/GUI/Map.gd" id="1_y1ncg"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="2_cvhm5"]
@@ -6,11 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="3_4g1po"]
 [ext_resource type="Texture2D" uid="uid://dmyj5ngq83tr1" path="res://Sprite/Map/Map.png" id="3_skwkt"]
 [ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="5_skwkt"]
-[ext_resource type="Texture2D" uid="uid://cayejyt3sudjl" path="res://Sprite/Map/MiningAreaIcon.png" id="7_3da73"]
-[ext_resource type="Texture2D" uid="uid://cgd0l4ybedpja" path="res://Sprite/Map/TownIcon.png" id="7_dmvi7"]
-[ext_resource type="Texture2D" uid="uid://d2sosxpj6u0ml" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/CoinIcon(WithoutStroke)_16x18.png" id="8_dmvi7"]
-[ext_resource type="Texture2D" uid="uid://d28e2vcvm00vq" path="res://Sprite/Map/SpeepArea.png" id="9_u51vk"]
-[ext_resource type="Texture2D" uid="uid://c4ftwdikghkrm" path="res://Sprite/Map/TruckIcon.png" id="9_w6joy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0vta"]
 atlas = ExtResource("5_skwkt")
@@ -54,7 +49,7 @@ patch_margin_top = 26
 patch_margin_right = 27
 patch_margin_bottom = 27
 
-[node name="clousButton" type="TextureButton" parent="MarginContainer/Panel"]
+[node name="CloseButton" type="TextureButton" parent="MarginContainer/Panel"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
@@ -105,11 +100,6 @@ grow_vertical = 2
 text = "wdawda"
 icon = ExtResource("3_4g1po")
 expand_icon = true
-LocationSceenPath = "res://Scenes/Locations/Town/Town.tscn"
-LocationPosition = Vector2(0, -72)
-LocationName = "Town"
-LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
-LocationIcon = ExtResource("7_dmvi7")
 
 [node name="Mines" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 visible = true
@@ -128,11 +118,6 @@ grow_vertical = 2
 text = "lowdawdwda"
 icon = ExtResource("3_4g1po")
 expand_icon = true
-LocationSceenPath = "res://Scenes/Locations/Mines/MineHub.tscn"
-LocationPosition = Vector2(792, 1616)
-LocationName = "Mines"
-LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
-LocationIcon = ExtResource("7_3da73")
 
 [node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 visible = true
@@ -148,11 +133,6 @@ offset_right = -154.0
 offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
-LocationSceenPath = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
-LocationPosition = Vector2(1421, 121)
-LocationName = "Railway station"
-LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
-LocationIcon = ExtResource("9_w6joy")
 
 [node name="ResidentialArea" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 visible = true
@@ -169,11 +149,6 @@ offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_icon = true
-LocationSceenPath = "res://Scenes/Locations/Town/ResidentialHousesZone.tscn"
-LocationPosition = Vector2(360, -16)
-LocationName = "Residential area"
-LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
-LocationIcon = ExtResource("9_u51vk")
 
 [node name="ShoppingDistrict" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 visible = true
@@ -190,10 +165,5 @@ offset_bottom = 114.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_icon = true
-LocationSceenPath = "res://Scenes/Locations/Town/CommercialArea.tscn"
-LocationPosition = Vector2(296, 128)
-LocationName = "Shopping district"
-LocationActiveOnStage = Array[int]([0, 1, 2, 3, 4, 5])
-LocationIcon = ExtResource("8_dmvi7")
 
-[connection signal="pressed" from="MarginContainer/Panel/clousButton" to="." method="_on_clous_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/CloseButton" to="." method="_on_close_button_pressed"]

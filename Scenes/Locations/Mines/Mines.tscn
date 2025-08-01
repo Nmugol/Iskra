@@ -117,8 +117,8 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AABGAPP/AAAAAAIAAABMAPH/AAADAAYAAABHAPP/AAAAAAAAAABIAPL/AAADAAIAAABJAPL/AAAAAAYAAABLAPH/AAAAAAQAAABOAO7/AAADAAAAAABPAO7/AAAAAAYAAABPAO3/AAADAAQAAABSAPD/AAADAAAAAABRAPL/AAAAAAAAAABRAPD/AAAAAAIAAABQAO//AAAAAAAAAABRAO//AAAAAAYAAABRAO7/AAADAAAAAABWAOz/AAAAAAAAAAAgAO7/AAADAAYAAAAeAO7/AAADAAAAAAAdAO7/AAADAAYAAAAjAO3/AAAAAAAAAAAlAO3/AAAAAAQAAAAHAPb/AAADAAQAAAAIAPf/AAAAAAAAAAAIAPb/AAADAAQAAAAJAPT/AAAAAAYAAAAMAPT/AAADAAAAAAAlAO7/AAAPAAAAAAAoAO7/AAAPAAgAAAAuAAkAAAAVAAEAAAAvAAsAAAAXAAAAAAAsAAkAAAAUAAEAAAABAPT/AAAFAAkAAAADAPT/AAAFAAkAAAAEAPX/AAAAAAkAAAAGAPT/AAADAAoAAAAGAPX/AAABAAkAAAAKAPf/AAAFAAkAAAAbAPD/AAABAAkAAAAXAO7/AAACAAoAAAAZAO7/AAACAAkAAAAaAO7/AAADAAoAAAAbAO//AAACAAkAAAAaAPD/AAACAAkAAAAZAPD/AAAAAAkAAAAXAPH/AAAAAAkAAABWAPX/AAADAAkAAABYAPX/AAADAAoAAABUAPb/AAACAAkAAABSAPf/AAABAAoAAABQAPj/AAACAAoAAABTAPP/AAACAAkAAABUAPL/AAAAAAoAAABVAPL/AAAAAAkAAABXAPP/AAABAAkAAABWAPL/AAABAAkAAABWAPH/AAABAAoAAABVAPH/AAADAAoAAABUAO//AAAFAAkAAABPAPL/AAACAAkAAABSAOz/AAANABoAAABWAPD/AAAFABkAAABXAPH/AAAMABgAAABQAPP/AAABABcAAABRAPP/AAANABoAAABSAPT/AAANABcAAABSAPP/AAABABcAAABRAPT/AAAMABgAAABZAPX/AAALABkAAABRAO3/AAAAABoAAAAbAO7/AAAGABcAAAAWAPX/AAAGABgAAAALAPX/AAAIABgAAAAiAAAAAAAAABkAAAAnAP7/AAAFABgAAAAoAP7/AAAJABcAAAAoAP//AAAIABoAAAAqAAEAAAAGABkAAAAqAAMAAAAKABcAAAAqAAQAAAAGABkAAAAtAAsAAAAMABkAAAAyAA0AAAAGABcAAAAwAA0AAAAKABoAAABQAAsAAAAFABkAAABOAAwAAAABABoAAABRAA0AAAAEABgAAABWAAoAAAACABgAAABaAAgAAAAMABgAAAA=")
 tile_set = ExtResource("5_3ha0f")
 
-[node name="NavigationRegion" parent="." node_paths=PackedStringArray("CollisionArea") instance=ExtResource("12_43r8h")]
-CollisionArea = NodePath("Area2D2/CollisionPolygon2D")
+[node name="NavigationRegion" parent="." node_paths=PackedStringArray("collision_area") instance=ExtResource("12_43r8h")]
+collision_area = NodePath("Area2D2/CollisionPolygon2D")
 metadata/_edit_lock_ = true
 
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
@@ -146,14 +146,14 @@ metadata/_edit_lock_ = true
 position = Vector2(20, -88)
 shape = SubResource("RectangleShape2D_3ha0f")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit" node_paths=PackedStringArray("paren_area")]
 position = Vector2(32, -104)
 scale = Vector2(0.32, 1.24)
 color = Color(0.192877, 0.290344, 0.219017, 1)
 energy = 7.09
 texture = ExtResource("2_uv6ud")
 script = ExtResource("18_3ha0f")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="EntranceToTheMine" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
 position = Vector2(1032, -186)
@@ -171,13 +171,13 @@ metadata/_edit_lock_ = true
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_3ha0f")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/EntranceToTheMine" node_paths=PackedStringArray("ParenArea")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/EntranceToTheMine" node_paths=PackedStringArray("paren_area")]
 position = Vector2(0, -5)
 scale = Vector2(0.35, 0.35)
 energy = 2.85
 texture = ExtResource("18_pw3ey")
 script = ExtResource("18_3ha0f")
-ParenArea = NodePath("..")
+paren_area = NodePath("..")
 
 [node name="Player" parent="." instance=ExtResource("13_i1nue")]
 position = Vector2(56, -80)
@@ -187,10 +187,10 @@ physics_interpolation_mode = 1
 position = Vector2(217.333, -80)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -342
-limit_top = -438
-limit_right = 1050
-limit_bottom = 90
+limit_left = 4
+limit_top = -384
+limit_right = 1488
+limit_bottom = 256
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 			match State.state_phase:
 				0: 
 					State.is_running = false
-					StartDialog();
+					start_dialog();
 				4:
 					guard7.update_state("Walk", false)
 					guard8.update_state("Walk", false)
@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(MAIN_SCENE)
 
-func StartDialog() -> void:
+func start_dialog() -> void:
 	State.is_running = false
 	Signals.show_dialog.emit()
 	#1

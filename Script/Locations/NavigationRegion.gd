@@ -24,11 +24,12 @@ func _ready() -> void:
 
 
 
+
 func _on_area_2d_mouse_entered() -> void:
-	State.is_running = true
+	State.is_in_area = true
 	Signals.set_cursor.emit(State.Cursors.WALK)
 
 
 func _on_area_2d_mouse_exited() -> void:
-	State.is_running = false
+	State.is_in_area = false
 	Signals.reset_cursor.emit()
