@@ -20,7 +20,7 @@ func _ready() -> void:
 func _connect_signals() -> void:
 	Signals.show_ui.connect(func(): settings_in_game.show())
 	
-	Signals.show_dialog.connect(show_dialog)
+	Signals.show_dialog.connect(_show_dialog)
 	Signals.hide_dialog.connect(hide_dialog)
 	
 	Signals.show_equipment.connect(show_equipment)
@@ -38,6 +38,7 @@ func _connect_signals() -> void:
 	
 func load_level() -> void:
 	State.is_running = false
+	State.is_loading = true
 	# Usunięcie czelniejszych zładowanych scen
 	for l in level_location.get_children():
 		l.queue_free()
@@ -52,7 +53,8 @@ func load_level() -> void:
 func save_level() -> void:
 	Save.current_scene_path = level_location.get_child(0).get_path()
 
-func show_dialog() -> void:
+func _show_dialog() -> void:
+	print("dislog is showing")
 	Signals.reset_cursor.emit()
 	State.is_running = false
 	dialog.show()
@@ -100,6 +102,8 @@ func disable_loading_screen() -> void:
 	Signals.show_ui.emit()
 	await transition.animation_finished
 	await get_tree().create_timer(0.2).timeout
+	State.is_loading = false
+	State.is_running = true
 
 func enable_loading_screen() -> void:
 	transition.play("fade_out")

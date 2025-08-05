@@ -13,13 +13,13 @@ var target_ratio = 0.45   # gdzie ma się zatrzymać
 var walk: bool = false
 
 func  _ready() -> void:
-	State.state_phase = 0
+	print(State.state_phase)
 	path.progress_ratio = 0.0
 	guard7.update_state("Walk", false)
 	guard8.update_state("Walk", false)
 
 func _process(delta: float) -> void:
-	if not State.is_loading: return
+	if State.is_loading: return
 	
 	if walk:
 		path.progress_ratio = move_toward(path.progress_ratio, target_ratio, speed_ratio*delta)
@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 		0:
 			match State.state_phase:
 				0: 
-					State.is_running = false
+					print("ok")
 					start_dialog();
 				4:
 					guard7.update_state("Walk", false)
@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 					get_tree().change_scene_to_file(MAIN_SCENE)
 
 func start_dialog() -> void:
-	State.is_running = false
+	#State.is_running = false
 	Signals.show_dialog.emit()
 	#1
 	Signals.people_message.emit("Peter", 

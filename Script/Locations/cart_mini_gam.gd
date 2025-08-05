@@ -6,13 +6,20 @@ var mini_game_is_run: bool = false
 
 var main_cart: Cart
 
+@onready var level1 = $Node2D/Level1
+@onready var level2 = $Node2D/Level2
+@onready var level3 = $Node2D/Level3
+@onready var cart_position_1 = $Node2D/level2/Marker2D
+@onready var cart_position_2 = $Node2D/level3/Marker2D
+
 func _ready() -> void:
 	
 	Signals.reset_cursor.emit()
+	State.is_running = false
 	
-	$Node2D/Level1.show()
-	$Node2D/Level2.hide()
-	$Node2D/Level3.hide()
+	level1.show()
+	level2.hide()
+	level3.hide()
 	
 	Signals.cart_game_timer_on.connect(func (): 
 		$Timer.wait_time = 0.6
@@ -33,9 +40,9 @@ func _on_timer_timeout() -> void:
 		0:
 			return
 		1:
-			_load_next_mini_game_level([$Node2D/Level1, $Node2D/Level3], $Node2D/Level2, $Node2D/Level2/Marker2D)
+			_load_next_mini_game_level([level1, level3], level2, cart_position_1)
 		2:
-			_load_next_mini_game_level([$Node2D/Level1, $Node2D/Level2], $Node2D/Level3, $Node2D/Level3/Marker2D)
+			_load_next_mini_game_level([level1, level2], level3, cart_position_2)
 		3:
 			Signals.finish_cart_game.emit()
 			self.hide()

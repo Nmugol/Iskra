@@ -5,6 +5,7 @@ const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 
 func _process(_delta: float) -> void:
+	if State.is_loading: return
 	match State.state_number:
 		8:
 			match State.state_phase:

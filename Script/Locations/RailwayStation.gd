@@ -28,7 +28,7 @@ func _ready() -> void:
 		cart.monitoring = false
 
 func _process(_delta: float) -> void:
-	if not State.is_loading: return
+	if State.is_loading: return
 	
 	if cart.overlaps_body(player) and State.state_number != 3: _on_cart_mouse_entered()
 	
@@ -115,7 +115,7 @@ func _load_game()-> void:
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
 	game_load_finish = true
-	State.is_running = true
+	State.is_running = false
 
 func _finish_game()-> void:
 	$PhantomCamera2D.follow_target = player

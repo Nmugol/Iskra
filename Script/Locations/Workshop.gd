@@ -27,6 +27,8 @@ func _ready() -> void:
 	set_up()
 
 func _process(_delta: float) -> void:
+	if State.is_loading: return
+	
 	match State.state_number:
 		5:
 			match State.state_phase:
