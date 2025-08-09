@@ -73,8 +73,13 @@ height = 48.0
 atlas = ExtResource("10_43d8e")
 region = Rect2(0, 75, 64, 21)
 
-[node name="CartMiniGam" type="Node2D"]
+[node name="CartMiniGam" type="Node2D" node_paths=PackedStringArray("level1", "level2", "level3", "cart_position_1", "cart_position_2")]
 script = ExtResource("1_0tact")
+level1 = NodePath("Node2D/Level1")
+level2 = NodePath("Node2D/Level2")
+level3 = NodePath("Node2D/Level3")
+cart_position_1 = NodePath("Node2D/Level2/Marker2D")
+cart_position_2 = NodePath("Node2D/Level3/Marker2D")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -137,7 +142,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAAAAAEAAAAAAAE
 tile_set = SubResource("TileSet_43d8e")
 
 [node name="Level1" type="Node2D" parent="Node2D" node_paths=PackedStringArray("cart")]
-visible = false
 position = Vector2(16, 8)
 script = ExtResource("1_0u0f4")
 cart = NodePath("../../Cart")
@@ -338,6 +342,7 @@ rotation = 1.5708
 texture = SubResource("AtlasTexture_hv8rs")
 
 [node name="Level2" type="Node2D" parent="Node2D"]
+visible = false
 script = ExtResource("1_0u0f4")
 
 [node name="Marker2D" type="Marker2D" parent="Node2D/Level2"]
@@ -777,7 +782,7 @@ track_to_flip_y = [NodePath("../Level1/10"), NodePath("../Level2/14"), NodePath(
 
 [node name="Lever2" parent="Node2D" node_paths=PackedStringArray("track_to_rotate", "track_to_flip_x", "track_to_flip_y") instance=ExtResource("6_lsid1")]
 position = Vector2(48, 233)
-track_to_rotate = [NodePath("../Level1/29"), NodePath("../Level1/32"), NodePath("../Level2/14")]
+track_to_rotate = [NodePath("../Level1/29"), NodePath("../Level1/32"), NodePath("../Level2/14"), NodePath("../Level2/37")]
 track_to_flip_x = [NodePath("../Level1/24"), NodePath("../Level2/50"), NodePath("../Level3/5"), NodePath("../Level3/27"), NodePath("../Level3/3")]
 track_to_flip_y = [NodePath("../Level1/24"), NodePath("../Level2/3"), NodePath("../Level2/50"), NodePath("../Level3/30")]
 

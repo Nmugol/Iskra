@@ -71,8 +71,15 @@ _data = {
 }
 point_count = 5
 
-[node name="Workshop" type="Node2D"]
+[node name="Workshop" type="Node2D" node_paths=PackedStringArray("jonas", "james", "guard6", "james_out", "jonas_in", "james_in", "guard_in")]
 script = ExtResource("1_ra8wh")
+jonas = NodePath("NPCS/Path/Jonas_in/PathFollow2D/Jonas")
+james = NodePath("NPCS/Path/James_out/PathFollow2D/James")
+guard6 = NodePath("NPCS/Path/Guaed6_in/PathFollow2D/Guard6")
+james_out = NodePath("NPCS/Path/James_out")
+jonas_in = NodePath("NPCS/Path/Jonas_in")
+james_in = NodePath("NPCS/Path/James_in")
+guard_in = NodePath("NPCS/Path/Guaed6_in")
 
 [node name="Teren" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -153,10 +160,10 @@ physics_interpolation_mode = 1
 position = Vector2(440, -184)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -524
-limit_top = -850
-limit_right = 1852
-limit_bottom = 2050
+limit_left = -348
+limit_top = -440
+limit_right = 1044
+limit_bottom = 88
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -340,7 +347,6 @@ rotates = false
 loop = false
 
 [node name="Guard6" parent="NPCS/Path/Guaed6_in/PathFollow2D" instance=ExtResource("20_djqyw")]
-visible = false
 position = Vector2(-8, -1)
 npc_name = 11
 flip_sprite = true

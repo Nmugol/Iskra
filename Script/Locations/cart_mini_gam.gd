@@ -6,11 +6,11 @@ var mini_game_is_run: bool = false
 
 var main_cart: Cart
 
-@onready var level1 = $Node2D/Level1
-@onready var level2 = $Node2D/Level2
-@onready var level3 = $Node2D/Level3
-@export var cart_position_1 
-@export var cart_position_2 
+@export var level1: Node2D
+@export var level2: Node2D
+@export var level3: Node2D
+@export var cart_position_1: Marker2D
+@export var cart_position_2: Marker2D
 
 func _ready() -> void:
 	

@@ -78,8 +78,8 @@ func _process(_delta: float) -> void:
 				9:
 					State.state_number = 5
 					State.state_phase = 0
-					Save.PlayerPosition = Vector2(440,-184) 
-					Save.CurrentScenePath = 'res://Scenes/Locations/Town/Workshop.tscn'
+					Save.player_position = Vector2(440,-184) 
+					Save.current_scene_path = 'res://Scenes/Locations/Town/Workshop.tscn'
 					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(MAIN_SCENE)
 

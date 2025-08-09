@@ -4,18 +4,19 @@ const  MainScene = "res://Scenes/World.tscn"
 
 @onready var player: Player = $Player
 
-#NPC
-@onready var jonas: NPC = $NPCS/Path/Jonas_in/PathFollow2D/Jonas
-@onready var james: NPC = $NPCS/Path/James_out/PathFollow2D/James
-@onready var guard6: NPC = $NPCS/Path/Guard6_in/PathFollow2D/Guard6
+@export_category("NPCs")
+@export var jonas: NPC 
+@export var james: NPC
+@export var guard6: NPC
 
-#PATH
-@onready var james_out:PathController = $NPCS/Path/James_out
-@onready var jonas_in:PathController = $NPCS/Path/Jonas_in
-@onready var james_in:PathController = $NPCS/Path/James_in
-@onready var guard_in:PathController = $NPCS/Path/Guard6_in
+@export_category("Paths")
+@export var james_out:PathController 
+@export var jonas_in:PathController
+@export var james_in:PathController 
+@export var guard_in:PathController
 
 func set_up() -> void:
+	guard6.hide()
 	if State.state_number != 5:
 		jonas.show()
 		james.show()
@@ -70,7 +71,7 @@ func _process(_delta: float) -> void:
 					player.global_position = $Events/FixedWheelPosition.global_position
 					james_in.path.progress_ratio = 1
 					james.update_state("Idle", true)
-					guard_in.active = true
+					guard_in._play()
 					guard6.show()
 				5:
 					guard_in.path.progress_ratio = guard_in.stop_points
