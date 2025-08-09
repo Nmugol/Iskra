@@ -9,8 +9,8 @@ var main_cart: Cart
 @onready var level1 = $Node2D/Level1
 @onready var level2 = $Node2D/Level2
 @onready var level3 = $Node2D/Level3
-@onready var cart_position_1 = $Node2D/level2/Marker2D
-@onready var cart_position_2 = $Node2D/level3/Marker2D
+@export var cart_position_1 
+@export var cart_position_2 
 
 func _ready() -> void:
 	
