@@ -56,12 +56,12 @@ func _process(_delta: float) -> void:
 						$EventArea/GiveSTeelSheet/BrokenCart.hide()
 						$EventArea/GiveSTeelSheet.queue_free()
 						cart.show()
-						
 				8:
 					_load_game()
-					State.is_running = false
 					State.state_number = 3
 					State.state_phase = 0
+		3:
+			State.is_running = false
 		4:
 			match  State.state_phase:
 				0:

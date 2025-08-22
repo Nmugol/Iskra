@@ -28,7 +28,10 @@ func _ready() -> void:
 	candle.global_position = candle_center.global_position
 
 func _process(delta: float) -> void:
-	
+
+	if cursor_above_button == above_button.NONE: Signals.reset_cursor.emit()
+	else: Signals.set_cursor.emit(State.Cursors.USE)	
+
 	if Input.is_action_pressed("MovePlayer"):
 		match cursor_above_button:
 			above_button.UP: move_up()

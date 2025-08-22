@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://27dgkry1y8d6"]
+
+[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="1_i433i"]
+[ext_resource type="Script" uid="uid://btqwlchad8ibf" path="res://Script/Class/symbol.gd" id="1_sbms6"]
+
+[node name="Symbol" type="Node2D" node_paths=PackedStringArray("target", "symbol", "rotation_point", "target_rotation_point")]
+script = ExtResource("1_sbms6")
+symbol_icons = ExtResource("1_i433i")
+target = NodePath("TergetRotationPoint/TergetSymbolSprite")
+symbol = NodePath("RotatePoint/SymbolSprite")
+rotation_point = NodePath("RotatePoint")
+target_rotation_point = NodePath("TergetRotationPoint")
+
+[node name="RotatePoint" type="Marker2D" parent="."]
+
+[node name="SymbolSprite" type="Sprite2D" parent="RotatePoint"]
+texture_filter = 1
+texture = ExtResource("1_i433i")
+
+[node name="TergetRotationPoint" type="Marker2D" parent="."]
+
+[node name="TergetSymbolSprite" type="Sprite2D" parent="TergetRotationPoint"]
+texture_filter = 1
+texture = ExtResource("1_i433i")

@@ -1,6 +1,9 @@
 extends Node2D
 
 @onready var player: Player = $Player
+
+@export var guard7:NPC
+
 const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 
@@ -10,6 +13,7 @@ func _process(_delta: float) -> void:
 		8:
 			match State.state_phase:
 				0:
+					guard7.show()
 					_first_dialog()
 				3:
 					State.state_number = 9

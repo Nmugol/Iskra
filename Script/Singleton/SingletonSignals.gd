@@ -98,3 +98,21 @@ signal reset_cursor()
 
 @warning_ignore("unused_signal")
 signal reset_look_at_item()
+
+@warning_ignore("unused_signal")
+signal rotate_symbol(rotate_to_left: float)
+
+@warning_ignore("unused_signal")
+signal symbol_move_on_x_axis(left: bool)
+
+@warning_ignore("unused_signal")
+signal symbol_move_on_y_axis(up: bool)
+
+@warning_ignore("unused_signal")
+signal stop_moving_and_rotate_symbol()
+
+@warning_ignore("unused_signal")
+signal symbol_on_target()
+
+@warning_ignore("unused_signal")
+signal symbol_not_on_target()

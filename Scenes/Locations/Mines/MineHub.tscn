@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://culk15ib3i1ev"]
+[gd_scene load_steps=28 format=4 uid="uid://culk15ib3i1ev"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_cje54"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_wi3wh"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="10_4c4mo"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_5hspf"]
 [ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="15_wlgog"]
+[ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="17_4kh5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qlm5"]
 size = Vector2(2376, 2900)
@@ -50,8 +51,9 @@ size = Vector2(265, 66)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kri75"]
 size = Vector2(169, 98)
 
-[node name="MineHub" type="Node2D"]
+[node name="MineHub" type="Node2D" node_paths=PackedStringArray("guard7")]
 script = ExtResource("1_xox2l")
+guard7 = NodePath("NPCs/Guard7")
 
 [node name="Teren" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -261,3 +263,11 @@ shape = SubResource("RectangleShape2D_ckltd")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockingAreas/Area2D"]
 position = Vector2(1131.5, 1680)
 shape = SubResource("RectangleShape2D_kri75")
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Guard7" parent="NPCs" instance=ExtResource("17_4kh5g")]
+visible = false
+position = Vector2(760, 1640)
+npc_name = 12
+flip_sprite = true
