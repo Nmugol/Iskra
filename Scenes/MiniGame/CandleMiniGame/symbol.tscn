@@ -1,11 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://27dgkry1y8d6"]
 
-[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="1_i433i"]
 [ext_resource type="Script" uid="uid://btqwlchad8ibf" path="res://Script/Class/symbol.gd" id="1_sbms6"]
+[ext_resource type="Texture2D" uid="uid://bkmhmg56tx7n7" path="res://Sprite/Items/BrokenCartWheel.png" id="3_cv4w2"]
 
 [node name="Symbol" type="Node2D" node_paths=PackedStringArray("target", "symbol", "rotation_point", "target_rotation_point")]
 script = ExtResource("1_sbms6")
-symbol_icons = ExtResource("1_i433i")
+symbol_icons = ExtResource("3_cv4w2")
+offset_value = Vector2(50, 0)
+rotation_speed = 5.0
+target_offset_value = Vector2(150, 0)
+moving_distance = 30.0
+max_distance_tolerance = 5.0
+max_rotation_tolerance = 7.0
 target = NodePath("TergetRotationPoint/TergetSymbolSprite")
 symbol = NodePath("RotatePoint/SymbolSprite")
 rotation_point = NodePath("RotatePoint")
@@ -15,10 +21,12 @@ target_rotation_point = NodePath("TergetRotationPoint")
 
 [node name="SymbolSprite" type="Sprite2D" parent="RotatePoint"]
 texture_filter = 1
-texture = ExtResource("1_i433i")
+texture = ExtResource("3_cv4w2")
+offset = Vector2(50, 0)
 
 [node name="TergetRotationPoint" type="Marker2D" parent="."]
 
 [node name="TergetSymbolSprite" type="Sprite2D" parent="TergetRotationPoint"]
 texture_filter = 1
-texture = ExtResource("1_i433i")
+texture = ExtResource("3_cv4w2")
+offset = Vector2(113, 0)

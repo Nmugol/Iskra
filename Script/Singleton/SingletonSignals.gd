@@ -116,3 +116,6 @@ signal symbol_on_target()
 
 @warning_ignore("unused_signal")
 signal symbol_not_on_target()
+
+@warning_ignore("unused_signal")
+signal reset_symbol()
