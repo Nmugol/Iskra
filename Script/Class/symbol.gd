@@ -3,13 +3,13 @@ extends Node2D
 @export_category("Parameters")
 @export var symbol_icons: CompressedTexture2D # Ikona symbolu
 @export var offset_value: Vector2 = Vector2(0,0) # Początkowy offset symbolu
-@export var rotation_speed: float = 1.0 # Prędkość obrotu
+@export var rotation_speed: float = 4.0 # Prędkość obrotu
 @export_range(-1, 1, 2) var rotation_direction: float = 1 # Kierunek obrotu (-1 lub 1)
 @export var target_rotation_value: float = 0.0 # Docelowa wartość rotacji
 @export var target_offset_value: Vector2 = Vector2(0,0) # Docelowy offset
 @export var moving_distance: float = 10.0 # Prędkość przesuwania
 
-@export_range(0,200,1) var max_distance_tolerance: float = 50.0 # Maksymalna tolerancja odległości
+@export_range(0,50,0.5) var max_distance_tolerance: float = 1 # Maksymalna tolerancja odległości
 @export_range(0,180,1) var max_rotation_tolerance: float = 45.0 # Maksymalna tolerancja rotacji (w stopniach)
 
 @export_range(0,1,0.01) var toleration_procent: float = 0.95 # Procent tolerancji
@@ -119,17 +119,17 @@ func calculate_match_percentage() -> float:
 	var rotation_match = 1.0 - clamp(rotation_diff / max_rotation_tolerance, 0.0, 1.0)
 	
 	# Połącz oba współczynniki (średnia ważona)
-	var overall_match = (distance_match * 0.5 + rotation_match * 0.5)
+	var overall_match = (distance_match * 0.7 + rotation_match * 0.3)
 	
 	return overall_match
 
 # Sprawdź, czy symbol jest wystarczająco dopasowany do celu (>= 95%)
 func symbol_in_target_space() -> void:
-	if calculate_match_percentage() >= toleration_procent:
+	if calculate_match_percentage() >= toleration_procent and not in_target:
 		Signals.symbol_on_target.emit()
 		in_target = true
 		return
 
-	if in_target: 
+	if in_target and calculate_match_percentage() < toleration_procent: 
 		in_target = false
 		Signals.symbol_not_on_target.emit()

@@ -108,6 +108,10 @@ func _on_text_finished():
 	await self.talk_finished
 	is_talking = false
 	process_queue()
+	
+	# Dodane: pokaż przycisk zamknięcia, jeśli nie ma już dialogów
+	if queue.is_empty():
+		close_button.show()
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()

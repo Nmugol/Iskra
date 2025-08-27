@@ -15,11 +15,14 @@ func _ready() -> void:
 	# Zabezpieczenie przed pustą pozycją
 	if Save.player_position != Vector2.ZERO:
 		position = Save.player_position
+		# Resetuj animację i kierunek po wczytaniu
+		sprite.play("idle")
+		sprite.flip_h = false
 
 func _physics_process(_delta: float) -> void:
 	if not is_inside_tree() or is_queued_for_deletion():
-		return  # Zabezpieczenie jeśli węzeł jest usuwany
-	
+		return  # Zabezpieczenie jeśli węzeł jest usuwany		
+		
 	if not State.is_running:
 		Signals.reset_cursor.emit()
 		return

@@ -1,8 +1,9 @@
 extends Area2D
 
-@export var plyer: Player
-
+@export var player: Player
+@export var back_to_position: Marker2D
 @export var active_on: Array[int] = []
+
 
 var exit_blocked_messages: Array = [
 	"Daniel cannot leave this area right now.",
@@ -19,12 +20,11 @@ func  _ready() -> void:
 	
 	self.body_entered.connect(func (body:Node2D):
 		if body.is_in_group("Player"):
-			var pos: Vector2 = plyer.global_position
-			plyer.navigation.target_position = pos
-			plyer.sprite.play("idle")
+			player.navigation.target_position = back_to_position.global_position
+			player.sprite.play("idle")
 			Signals.show_dialog.emit()
 			Signals.player_message.emit("Daniel",
-			exit_blocked_messages[randi()%exit_blocked_messages.size()-1]
+			exit_blocked_messages[randi_range(0, exit_blocked_messages.size()-1)]
 			)
-			State.StatePhase -= 1
+			State.state_phase -= 1
 		)

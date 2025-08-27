@@ -62,7 +62,7 @@ region = Rect2(16, 6, 32, 26)
 radius = 72.4431
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egf6h"]
-size = Vector2(1370, 66)
+size = Vector2(176, 66)
 
 [node name="RailwayStation" type="Node2D"]
 script = ExtResource("1_gycxx")
@@ -142,10 +142,10 @@ physics_interpolation_mode = 1
 position = Vector2(2120, -40)
 zoom = Vector2(2.2, 2.2)
 process_callback = 0
-limit_left = -524
-limit_top = -850
-limit_right = 1852
-limit_bottom = 2050
+limit_left = 392
+limit_top = -660
+limit_right = 920
+limit_bottom = -284
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -315,15 +315,51 @@ shape = SubResource("CircleShape2D_h1ofm")
 [node name="CartMiniGamePos" type="Marker2D" parent="."]
 position = Vector2(1940, -234)
 
-[node name="BlokcinArea" type="Area2D" parent="." node_paths=PackedStringArray("plyer")]
+[node name="Blok" type="Node2D" parent="."]
+
+[node name="BlockingArea" type="Area2D" parent="Blok" node_paths=PackedStringArray("player", "back_to_position")]
 script = ExtResource("21_h1ofm")
-plyer = NodePath("../Player")
+player = NodePath("../../Player")
+back_to_position = NodePath("Marker2D")
 active_on = Array[int]([1, 2, 3, 4])
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlokcinArea"]
-position = Vector2(696, 232)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blok/BlockingArea"]
+position = Vector2(1232, 232)
 shape = SubResource("RectangleShape2D_egf6h")
+
+[node name="Marker2D" type="Marker2D" parent="Blok/BlockingArea"]
+position = Vector2(1232, 160)
+
+[node name="BlockingArea2" type="Area2D" parent="Blok" node_paths=PackedStringArray("player", "back_to_position")]
+position = Vector2(-672, 16)
+script = ExtResource("21_h1ofm")
+player = NodePath("../../Player")
+back_to_position = NodePath("Marker2D")
+active_on = Array[int]([1, 2, 3, 4])
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blok/BlockingArea2"]
+position = Vector2(1232, 232)
+shape = SubResource("RectangleShape2D_egf6h")
+
+[node name="Marker2D" type="Marker2D" parent="Blok/BlockingArea2"]
+position = Vector2(1232, 160)
+
+[node name="BlockingArea3" type="Area2D" parent="Blok" node_paths=PackedStringArray("player", "back_to_position")]
+position = Vector2(-1056, 16)
+script = ExtResource("21_h1ofm")
+player = NodePath("../../Player")
+back_to_position = NodePath("Marker2D")
+active_on = Array[int]([1, 2, 3, 4])
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blok/BlockingArea3"]
+position = Vector2(1232, 232)
+shape = SubResource("RectangleShape2D_egf6h")
+
+[node name="Marker2D" type="Marker2D" parent="Blok/BlockingArea3"]
+position = Vector2(1232, 160)
 
 [connection signal="body_entered" from="EventArea/GiveSTeelSheet" to="." method="_on_area_2d_body_entered"]
 [connection signal="mouse_entered" from="EventArea/Cart" to="." method="_on_cart_mouse_entered"]

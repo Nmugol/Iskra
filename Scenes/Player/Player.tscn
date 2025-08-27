@@ -164,7 +164,7 @@ script = ExtResource("1_lpgxi")
 texture_filter = 1
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_4wape")
-animation = &"walk_down"
+animation = &"walk_right"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -55,12 +55,30 @@ func _remove_already_pickup_item() -> void:
 
 func _process(_delta: float) -> void:
 	if pointing_on == Cursors_above.NONE: return
-	if Input.is_action_just_pressed("MovePlayer") and _distance_to_item():
-		match pointing_on:
-			Cursors_above.STEEL_SHEET:
-				_pick_up("steel_sheet",steel_sheet)
-			Cursors_above.CRYSTAL_SHARD:
-				_pick_up("crystal_shard", crystal_shard)
+	if Input.is_action_just_pressed("MovePlayer"):
+		if _distance_to_item():
+			match pointing_on:
+				Cursors_above.STEEL_SHEET:
+					_pick_up("steel_sheet",steel_sheet)
+				Cursors_above.CRYSTAL_SHARD:
+					_pick_up("crystal_shard", crystal_shard)
+		else:
+
+			var message: Array[String] = [
+				"It's too far away, I can't reach it.",
+				"I can't pick it up because it's out of my reach.",
+				"That object is beyond my grasp.",
+				"It's just a bit too far for me to get.",
+				"I wish I could grab it, but it's too far away.",
+				"I can't reach it from here.",
+				"It's just outside my reach.",
+				"I wish I could grab it, but it's too far away."
+			]
+
+			Signals.player_message.emit("Daniel",
+				message[randi_range(0, message.size() - 1)]
+			)
+			State.state_phase -= 1
 
 func _pick_up(item_name: String, _item: Item) -> void:
 	_item.add_to_equipment()

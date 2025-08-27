@@ -24,8 +24,19 @@ enum above_button {
 
 var cursor_above_button: above_button = above_button.NONE
 
+var temp = 0
+
 func _ready() -> void:
 	candle.global_position = candle_center.global_position
+	Signals.symbol_on_target.connect(func() -> void:
+		temp += 1
+		print(temp)
+		)
+
+	Signals.symbol_not_on_target.connect(func() -> void:
+		temp -= 1
+		print(temp)
+		)
 
 func _process(delta: float) -> void:
 

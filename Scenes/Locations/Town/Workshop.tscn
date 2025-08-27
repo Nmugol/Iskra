@@ -160,10 +160,10 @@ physics_interpolation_mode = 1
 position = Vector2(440, -184)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -348
-limit_top = -440
-limit_right = 1044
-limit_bottom = 88
+limit_left = 392
+limit_top = -660
+limit_right = 920
+limit_bottom = -284
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -262,16 +262,20 @@ texture = ExtResource("16_cdia6")
 
 [node name="BlockingAreas" type="Node2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="BlockingAreas" node_paths=PackedStringArray("plyer")]
+[node name="Area2D" type="Area2D" parent="BlockingAreas" node_paths=PackedStringArray("player", "back_to_position")]
 position = Vector2(350, -39)
 script = ExtResource("19_mcm2u")
-plyer = NodePath("../../Player")
+player = NodePath("../../Player")
+back_to_position = NodePath("Marker2D")
 active_on = Array[int]([5, 6, 7])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockingAreas/Area2D"]
 position = Vector2(219.5, -7)
 shape = SubResource("RectangleShape2D_djqyw")
+
+[node name="Marker2D" type="Marker2D" parent="BlockingAreas/Area2D"]
+position = Vector2(200, -49)
 
 [node name="Events" type="Node2D" parent="."]
 

@@ -27,6 +27,7 @@ offset = Vector2(50, 0)
 [node name="TergetRotationPoint" type="Marker2D" parent="."]
 
 [node name="TergetSymbolSprite" type="Sprite2D" parent="TergetRotationPoint"]
+modulate = Color(1, 1, 1, 0.054902)
 texture_filter = 1
 texture = ExtResource("3_cv4w2")
 offset = Vector2(113, 0)

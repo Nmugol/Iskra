@@ -27,6 +27,10 @@ func _ready() -> void:
 	if State.state_number >= 4:
 		cart.monitoring = false
 
+	# Dodane: automatyczne wznowienie mini-gry po powrocie do sceny
+	if State.state_number == 3 and game == null:
+		_load_game()
+
 func _process(_delta: float) -> void:
 	if State.is_loading: return
 	

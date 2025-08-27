@@ -218,7 +218,12 @@ metadata/_edit_lock_ = true
 
 [node name="Symbol" parent="CentralZone" node_paths=PackedStringArray("center_point") instance=ExtResource("8_bkgmx")]
 position = Vector2(80, -12)
+rotation_speed = 80.0
 target_offset_value = Vector2(100, 0)
+moving_distance = 100.0
+max_distance_tolerance = 7.5
+max_rotation_tolerance = 27.0
+toleration_procent = 0.85
 center_point = NodePath("../CentralPoint")
 
 [connection signal="mouse_entered" from="Buttons/RotateToRight" to="." method="_on_rotate_to_right_mouse_entered"]
