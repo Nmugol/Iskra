@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ch7ywbdvrm5ud"]
+[gd_scene load_steps=27 format=3 uid="uid://ch7ywbdvrm5ud"]
 
 [ext_resource type="Script" uid="uid://dgus4uexcarco" path="res://Script/GUI/Dialog.gd" id="1_0hepe"]
 [ext_resource type="Texture2D" uid="uid://glidwj223lpj" path="res://Sprite/Character/Guards/Guard Face.png" id="2_lu68g"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cqaoa43fo2d0v" path="res://Sprite/Character/Przemek/Przemek Face.png" id="20_yc2vb"]
 [ext_resource type="Texture2D" uid="uid://dpe2fyc4ogfcg" path="res://Sprite/Character/Zygmunt/Zygmunt Face.png" id="21_71ten"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="22_v3bn7"]
+[ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="23_1eixm"]
 [ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="23_h15r2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1eixm"]
@@ -140,6 +141,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("23_1eixm")
 scroll_following = true
 
 [node name="CloseButton" type="TextureButton" parent="Box/HBoxContainer/DialogPanel"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dvc7y03xy1xa2"]
+[gd_scene load_steps=24 format=4 uid="uid://dvc7y03xy1xa2"]
 
 [ext_resource type="Script" uid="uid://cp1idoalo0734" path="res://Script/Locations/cart_mini_gam.gd" id="1_0tact"]
 [ext_resource type="Script" uid="uid://bksi83yje0dv7" path="res://Script/Class/TracLoader.gd" id="1_0u0f4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bwde8lpg0womb" path="res://Scenes/MiniGame/CartMinGame/track_turn.tscn" id="3_iqlwr"]
 [ext_resource type="PackedScene" uid="uid://8nijol4503yx" path="res://Scenes/MiniGame/CartMinGame/cart.tscn" id="4_0u0f4"]
 [ext_resource type="PackedScene" uid="uid://djn710bebe8bt" path="res://Scenes/MiniGame/CartMinGame/track_turn_second.tscn" id="4_lsid1"]
+[ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="4_xcvqf"]
 [ext_resource type="PackedScene" uid="uid://gevsv0nxju2n" path="res://Scenes/MiniGame/CartMinGame/lever.tscn" id="6_lsid1"]
 [ext_resource type="Texture2D" uid="uid://beya1ewlw1uac" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Furniture.png" id="8_gps52"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="9_43d8e"]
@@ -121,6 +122,40 @@ texture_hover = SubResource("AtlasTexture_ktxul")
 texture_disabled = SubResource("AtlasTexture_8ll4j")
 texture_focused = SubResource("AtlasTexture_ktxul")
 stretch_mode = 4
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -357.0
+offset_right = -176.0
+offset_bottom = 108.0
+texture = ExtResource("9_43d8e")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 11
+
+[node name="Label" type="RichTextLabel" parent="Control/NinePatchRect2/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("4_xcvqf")
+theme_override_constants/line_separation = 5
+bbcode_enabled = true
+text = "Use the lever [img=16x16]res://Sprite/Informations/lever.png[/img] to turn the tracks so the mine cart [img=16x16]res://Sprite/Informations/cart.png[/img]  reaches its destination."
+vertical_alignment = 1
+text_direction = 1
 
 [node name="Cart" parent="." node_paths=PackedStringArray("main_parent") instance=ExtResource("4_0u0f4")]
 z_index = 1

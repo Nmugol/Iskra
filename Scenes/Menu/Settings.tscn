@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2altmlfejleb"]
+[gd_scene load_steps=5 format=3 uid="uid://c2altmlfejleb"]
 
 [ext_resource type="Script" uid="uid://dpg0kdqjgkirq" path="res://Script/Menu/Settings.gd" id="1_4yry0"]
 [ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="2_312i6"]
+[ext_resource type="FontFile" uid="uid://cygvvxmfes8o8" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="3_lnv33"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnv33"]
 bg_color = Color(0.18037, 0.145036, 0.168606, 1)
@@ -54,7 +55,8 @@ current_tab = 0
 
 [node name="Video" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
-tab_alignment = 1
+theme_override_fonts/font = ExtResource("3_lnv33")
+theme_override_font_sizes/font_size = 20
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Video"]
@@ -93,7 +95,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ResolutionButton" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/Resolition/HboxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tooltip_text = "Select resolutions"
 
@@ -118,7 +120,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="WindowTypeButton" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/VBoxContainer/WindowType/HboxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tooltip_text = "Select resolutions"
 

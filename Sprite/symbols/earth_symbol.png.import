@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf1ppa5qx0ib6"
-path="res://.godot/imported/candle.png-1ad8e47bbf3076823eddeaba940d4622.ctex"
+uid="uid://da38lnxfhwmos"
+path="res://.godot/imported/earth_symbol.png-10b8c127a85c484f27c1e8b1a9d96b52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/candle.png"
-dest_files=["res://.godot/imported/candle.png-1ad8e47bbf3076823eddeaba940d4622.ctex"]
+source_file="res://Sprite/symbols/earth_symbol.png"
+dest_files=["res://.godot/imported/earth_symbol.png-10b8c127a85c484f27c1e8b1a9d96b52.ctex"]
 
 [params]
 

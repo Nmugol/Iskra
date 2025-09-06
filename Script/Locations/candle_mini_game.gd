@@ -12,6 +12,19 @@ extends Node2D
 @onready var max_candle_bottom: Marker2D = $CandleContainer/MaxDown
 @onready var candle_center: Marker2D = $CandleContainer/Center
 
+@onready var level_1: Node2D = $CentralZone/Symbols/Level1
+@onready var level_2: Node2D = $CentralZone/Symbols/Level2
+@onready var level_3: Node2D = $CentralZone/Symbols/Level3
+
+@onready var symbol_counter: RichTextLabel = $Control/SymbolCounter/MarginContainer/RichTextLabel
+
+
+@export var symbols_in_level_one: Array[Symbol] = []
+@export var symbols_in_level_two: Array[Symbol] = []
+@export var symbols_in_level_three: Array[Symbol] = []
+
+var current_symbols: Array[Symbol] = []
+
 enum above_button {
 	UP,
 	DOWN,
@@ -24,19 +37,24 @@ enum above_button {
 
 var cursor_above_button: above_button = above_button.NONE
 
-var temp = 0
+var compleat_symbols: int = 0
+
+var current_level: int = 1
+
+var level_one_completed_count: int = 2
+var level_two_completed_count: int = 2
+var level_three_completed_count: int = 4
+
+var change_level: bool = false
 
 func _ready() -> void:
-	candle.global_position = candle_center.global_position
-	Signals.symbol_on_target.connect(func() -> void:
-		temp += 1
-		print(temp)
-		)
-
-	Signals.symbol_not_on_target.connect(func() -> void:
-		temp -= 1
-		print(temp)
-		)
+	candle.global_position = candle_center.global_position	
+	level_1.show()
+	level_2.hide()
+	level_3.hide()
+	current_symbols = symbols_in_level_one
+	check_symbol_position()
+	show_symbols()
 
 func _process(delta: float) -> void:
 
@@ -60,6 +78,64 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_released("MovePlayer"):
 		Signals.stop_moving_and_rotate_symbol.emit()
+
+	check_symbol_position()
+	check_level_completion()
+
+func check_symbol_position() -> void:
+	var count = 0
+	
+	for symbol in current_symbols:
+		if symbol.in_target:
+			count += 1 
+	compleat_symbols = count
+	
+	symbol_counter.text = "%d / %d [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]" % [count, current_symbols.size()]
+
+	
+	
+
+func check_level_completion() -> void:
+	if compleat_symbols == level_one_completed_count and current_level == 1:
+		change_level = true
+		compleat_symbols = 0  # Reset immediately
+		await get_tree().create_timer(0.2).timeout
+		current_level = 2
+		level_1.hide()
+		level_2.show()
+		level_3.hide()
+		current_symbols = symbols_in_level_two
+		show_symbols()
+		_on_texture_button_pressed() # Reset symbols and candle position
+		candle.global_position = candle_center.global_position
+		cristal.global_rotation = 0.0
+		change_level = false
+		return
+
+	if compleat_symbols == level_two_completed_count and current_level == 2:
+		change_level = true
+		compleat_symbols = 0  # Reset immediately
+		await get_tree().create_timer(0.2).timeout
+		current_level = 3
+		level_1.hide()
+		level_2.hide()
+		level_3.show()
+		current_symbols = symbols_in_level_three
+		show_symbols()
+		_on_texture_button_pressed() # Reset symbols and candle position
+		candle.global_position = candle_center.global_position
+		cristal.global_rotation = 0.0
+		change_level = false
+		return
+	
+	if compleat_symbols == level_three_completed_count and current_level == 3:
+		print("Game Completed")
+		return
+
+func show_symbols() -> void:
+	for symbol in current_symbols:
+		symbol.show()
+		symbol.is_active = true
 
 # Fixed movement functions with proper boundary checks
 func move_left() -> void:
@@ -134,3 +210,12 @@ func _on_right_mouse_entered() -> void:
 
 func _on_right_mouse_exited() -> void:
 	cursor_above_button = above_button.NONE
+
+
+func _on_texture_button_pressed() -> void:
+
+	for symbol in current_symbols:
+		symbol.set_up()
+	candle.global_position = candle_center.global_position
+	cristal.global_rotation = 0.0
+	compleat_symbols = 0

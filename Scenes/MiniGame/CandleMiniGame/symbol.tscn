@@ -1,33 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://27dgkry1y8d6"]
+[gd_scene load_steps=4 format=3 uid="uid://27dgkry1y8d6"]
 
-[ext_resource type="Script" uid="uid://btqwlchad8ibf" path="res://Script/Class/symbol.gd" id="1_sbms6"]
+[ext_resource type="Script" uid="uid://btqwlchad8ibf" path="res://Script/Class/Symbol.gd" id="1_sbms6"]
 [ext_resource type="Texture2D" uid="uid://bkmhmg56tx7n7" path="res://Sprite/Items/BrokenCartWheel.png" id="3_cv4w2"]
 
-[node name="Symbol" type="Node2D" node_paths=PackedStringArray("target", "symbol", "rotation_point", "target_rotation_point")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbms6"]
+
+[node name="Symbol" type="Node2D" node_paths=PackedStringArray("target", "symbol", "rotation_point", "target_rotation_point", "area_2d")]
 script = ExtResource("1_sbms6")
 symbol_icons = ExtResource("3_cv4w2")
-offset_value = Vector2(50, 0)
-rotation_speed = 5.0
-target_offset_value = Vector2(150, 0)
-moving_distance = 30.0
-max_distance_tolerance = 5.0
-max_rotation_tolerance = 7.0
-target = NodePath("TergetRotationPoint/TergetSymbolSprite")
+target = NodePath("TargetRotationPoint/TargetSymbolSprite")
 symbol = NodePath("RotatePoint/SymbolSprite")
 rotation_point = NodePath("RotatePoint")
-target_rotation_point = NodePath("TergetRotationPoint")
+target_rotation_point = NodePath("TargetRotationPoint")
+area_2d = NodePath("RotatePoint/SymbolSprite/Area2D")
 
 [node name="RotatePoint" type="Marker2D" parent="."]
 
 [node name="SymbolSprite" type="Sprite2D" parent="RotatePoint"]
 texture_filter = 1
 texture = ExtResource("3_cv4w2")
-offset = Vector2(50, 0)
+metadata/_edit_lock_ = true
 
-[node name="TergetRotationPoint" type="Marker2D" parent="."]
+[node name="Area2D" type="Area2D" parent="RotatePoint/SymbolSprite"]
 
-[node name="TergetSymbolSprite" type="Sprite2D" parent="TergetRotationPoint"]
-modulate = Color(1, 1, 1, 0.054902)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatePoint/SymbolSprite/Area2D"]
+shape = SubResource("CircleShape2D_sbms6")
+
+[node name="TargetRotationPoint" type="Marker2D" parent="."]
+
+[node name="TargetSymbolSprite" type="Sprite2D" parent="TargetRotationPoint"]
+modulate = Color(1, 1, 1, 0.156863)
 texture_filter = 1
 texture = ExtResource("3_cv4w2")
-offset = Vector2(113, 0)

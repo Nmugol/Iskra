@@ -1,7 +1,6 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://cn78im7s8t631"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://cn78im7s8t631"]
 
-[ext_resource type="FontFile" uid="uid://dxvntdaavs2jx" path="res://Fonts/Roboto-Bold.ttf" id="1_4as0w"]
-[ext_resource type="FontFile" uid="uid://dppfgkml3f0cj" path="res://Fonts/Roboto-Regular.ttf" id="2_yhag5"]
+[ext_resource type="FontFile" uid="uid://cygvvxmfes8o8" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="2_yhag5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhag5"]
 content_margin_left = 0.0
@@ -15,7 +14,6 @@ corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 expand_margin_top = 3.0
 expand_margin_bottom = 3.0
-shadow_color = Color(0, 0, 0, 0.34902)
 shadow_size = 1
 shadow_offset = Vector2(0, 2)
 
@@ -36,9 +34,9 @@ shadow_size = 1
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8s18r"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
+content_margin_left = 10.0
+content_margin_top = 12.0
+content_margin_right = 10.0
 content_margin_bottom = 0.0
 bg_color = Color(0.261799, 0.213784, 0.245822, 1)
 corner_radius_top_left = 7
@@ -46,10 +44,8 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 expand_margin_top = 3.0
-expand_margin_bottom = 3.0
-shadow_color = Color(0, 0, 0, 0.415686)
 shadow_size = 1
-shadow_offset = Vector2(0, 2)
+shadow_offset = Vector2(0, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4as0w"]
 bg_color = Color(0, 0, 0, 0.396078)
@@ -107,22 +103,34 @@ expand_margin_left = 2.0
 expand_margin_right = 2.0
 
 [resource]
+default_font = ExtResource("2_yhag5")
+default_font_size = 16
 Button/font_sizes/font_size = 17
-Button/fonts/font = ExtResource("1_4as0w")
+Button/fonts/font = ExtResource("2_yhag5")
 Button/styles/disabled = SubResource("StyleBoxFlat_yhag5")
 Button/styles/focus = SubResource("StyleBoxFlat_rfn4m")
 Button/styles/hover = SubResource("StyleBoxFlat_rfn4m")
 Button/styles/normal = SubResource("StyleBoxFlat_8s18r")
 Button/styles/pressed = SubResource("StyleBoxFlat_yhag5")
+CheckBox/constants/align_to_largest_stylebox = 1
+CheckBox/constants/check_v_offset = -1
+CheckBox/constants/h_separation = 5
+CheckBox/constants/icon_max_width = 16
+CheckBox/constants/outline_size = 0
+CheckButton/constants/align_to_largest_stylebox = 1
+CheckButton/constants/check_v_offset = 1
 Label/colors/font_outline_color = Color(0.223529, 0.223529, 0.223529, 1)
-Label/font_sizes/font_size = 18
+Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("2_yhag5")
+OptionButton/font_sizes/font_size = 24
 Panel/styles/panel = SubResource("StyleBoxFlat_4as0w")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_u23kh")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_n7spb")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_m2b53")
-TabContainer/font_sizes/font_size = 18
-TabContainer/fonts/font = ExtResource("1_4as0w")
+TabBar/fonts/font = ExtResource("2_yhag5")
+TabContainer/constants/side_margin = 21
+TabContainer/font_sizes/font_size = 36
+TabContainer/fonts/font = ExtResource("2_yhag5")
 TabContainer/styles/panel = SubResource("StyleBoxFlat_ogfsw")
 TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_6qad1")
 TabContainer/styles/tab_focus = SubResource("StyleBoxFlat_8twj1")
