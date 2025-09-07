@@ -129,7 +129,9 @@ func check_level_completion() -> void:
 		return
 	
 	if compleat_symbols == level_three_completed_count and current_level == 3:
-		print("Game Completed")
+		State.state_phase = 3
+		self.hide()
+		self.queue_free()
 		return
 
 func show_symbols() -> void:

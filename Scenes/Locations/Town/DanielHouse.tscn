@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=4 uid="uid://capoc2ep1dmtn"]
+[gd_scene load_steps=21 format=4 uid="uid://capoc2ep1dmtn"]
 
+[ext_resource type="Script" uid="uid://cintkfqkdptn8" path="res://Script/Locations/DanielHouse.gd" id="1_o2u0l"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="1_veld1"]
 [ext_resource type="TileSet" uid="uid://bq71cb3hyf62k" path="res://TileSet/Vegetation.tres" id="2_o2u0l"]
 [ext_resource type="TileSet" uid="uid://cbmrdwd2iym64" path="res://TileSet/Floor.tres" id="3_adlbn"]
@@ -13,9 +14,10 @@
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="11_vp4o5"]
 [ext_resource type="Texture2D" uid="uid://dnwm4kqc1pk4k" path="res://Sprite/LightShape/Light3.png" id="12_xp8dg"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="13_0sop7"]
+[ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="15_adlbn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7k7h"]
-size = Vector2(528, 376)
+size = Vector2(691, 473)
 
 [sub_resource type="Resource" id="Resource_wp5gu"]
 script = ExtResource("9_vq2lt")
@@ -23,10 +25,17 @@ duration = 1.0
 transition = 0
 ease = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui1yq"]
+size = Vector2(101, 50.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_secc0"]
 size = Vector2(64, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwym7"]
+size = Vector2(79, 79.5)
+
 [node name="DanielHouse" type="Node2D"]
+script = ExtResource("1_o2u0l")
 
 [node name="Teren" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -93,7 +102,7 @@ polygon = PackedVector2Array(456, -488, 456, -480, 504, -480, 504, -432, 440, -4
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
-position = Vector2(656, -472)
+position = Vector2(663, -516)
 shape = SubResource("RectangleShape2D_w7k7h")
 disabled = true
 
@@ -102,10 +111,10 @@ physics_interpolation_mode = 1
 position = Vector2(704, -424)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = 392
-limit_top = -660
-limit_right = 920
-limit_bottom = -284
+limit_left = 318
+limit_top = -753
+limit_right = 1009
+limit_bottom = -280
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -130,6 +139,21 @@ limit_target = NodePath("../Border/CollisionShape2D")
 
 [node name="Player" parent="." instance=ExtResource("10_lw3dt")]
 position = Vector2(704, -424)
+
+[node name="BlockinAreas" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="BlockinAreas" node_paths=PackedStringArray("player", "back_to_position")]
+script = ExtResource("15_adlbn")
+player = NodePath("../../Player")
+back_to_position = NodePath("Marker2D")
+active_on = Array[int]([9])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockinAreas/Area2D"]
+position = Vector2(820.5, -376.75)
+shape = SubResource("RectangleShape2D_ui1yq")
+
+[node name="Marker2D" type="Marker2D" parent="BlockinAreas/Area2D"]
+position = Vector2(759, -423)
 
 [node name="Passage" type="Node2D" parent="."]
 metadata/_edit_group_ = true
@@ -157,3 +181,21 @@ scale = Vector2(0.203448, 0.401545)
 texture = ExtResource("12_xp8dg")
 script = ExtResource("13_0sop7")
 paren_area = NodePath("..")
+
+[node name="Events" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CandleMiniGame" type="Area2D" parent="Events"]
+monitoring = false
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/CandleMiniGame"]
+position = Vector2(471, -453.75)
+shape = SubResource("RectangleShape2D_bwym7")
+
+[node name="Marker2D" type="Marker2D" parent="Events/CandleMiniGame"]
+position = Vector2(664, -603)
+
+[connection signal="body_entered" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_entered"]
+[connection signal="body_exited" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_exited"]

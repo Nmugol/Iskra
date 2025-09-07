@@ -16,18 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://bvolcov58w32a" path="res://Sprite/symbols/air_symbol.png" id="13_bsj2r"]
 [ext_resource type="Texture2D" uid="uid://da38lnxfhwmos" path="res://Sprite/symbols/earth_symbol.png" id="14_h32xv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgndv"]
-atlas = ExtResource("3_m0p6r")
-region = Rect2(44, 0, 21, 21)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wbpos"]
-atlas = ExtResource("3_m0p6r")
-region = Rect2(44, 22, 21, 21)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hw352"]
-atlas = ExtResource("3_m0p6r")
-region = Rect2(44, 44, 21, 21)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbpos"]
 texture = ExtResource("1_1kp0f")
 0:0/0 = 0
@@ -76,115 +64,23 @@ radius = 16.1555
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xeeyv"]
 size = Vector2(304, 208)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgndv"]
+atlas = ExtResource("3_m0p6r")
+region = Rect2(44, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbpos"]
+atlas = ExtResource("3_m0p6r")
+region = Rect2(44, 22, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw352"]
+atlas = ExtResource("3_m0p6r")
+region = Rect2(44, 44, 21, 21)
+
 [node name="CandleMiniGame" type="Node2D" node_paths=PackedStringArray("symbols_in_level_one", "symbols_in_level_two", "symbols_in_level_three")]
 script = ExtResource("1_atxoi")
 symbols_in_level_one = [NodePath("CentralZone/Symbols/Level1/Symbol1"), NodePath("CentralZone/Symbols/Level1/Symbol2")]
 symbols_in_level_two = [NodePath("CentralZone/Symbols/Level2/Symbol1"), NodePath("CentralZone/Symbols/Level2/Symbol2")]
 symbols_in_level_three = [NodePath("CentralZone/Symbols/Level3/Symbol1"), NodePath("CentralZone/Symbols/Level3/Symbol2"), NodePath("CentralZone/Symbols/Level3/Symbol3"), NodePath("CentralZone/Symbols/Level3/Symbol4")]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Button" type="NinePatchRect" parent="Control"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 272.0
-offset_top = -128.0
-offset_right = 352.0
-offset_bottom = -48.0
-texture = ExtResource("1_1kp0f")
-patch_margin_left = 26
-patch_margin_top = 26
-patch_margin_right = 27
-patch_margin_bottom = 27
-
-[node name="TextureButton" type="TextureButton" parent="Control/Button"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = SubResource("AtlasTexture_vgndv")
-texture_pressed = SubResource("AtlasTexture_wbpos")
-texture_hover = SubResource("AtlasTexture_hw352")
-texture_disabled = SubResource("AtlasTexture_wbpos")
-texture_focused = SubResource("AtlasTexture_hw352")
-stretch_mode = 4
-
-[node name="Info" type="NinePatchRect" parent="Control"]
-texture_filter = 1
-layout_mode = 0
-offset_left = -320.0
-offset_top = -128.0
-offset_right = -112.0
-offset_bottom = -24.0
-texture = ExtResource("1_1kp0f")
-patch_margin_left = 26
-patch_margin_top = 26
-patch_margin_right = 27
-patch_margin_bottom = 27
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/Info"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 13
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/Info/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("4_vgndv")
-bbcode_enabled = true
-text = "Rotate the crystal [img=16x16]res://Sprite/Items/CrystalShardSmall.png[/img] with the buttons [img=16x16]res://Sprite/Informations/arrow_button.png[/img] and change the candle's [img=11x16]res://Sprite/CandleMinGame/candle.png[/img] position. Find all the symbols [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]. "
-vertical_alignment = 1
-
-[node name="SymbolCounter" type="NinePatchRect" parent="Control"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 272.0
-offset_top = -32.0
-offset_right = 352.0
-offset_bottom = 21.0
-texture = ExtResource("1_1kp0f")
-patch_margin_left = 26
-patch_margin_top = 26
-patch_margin_right = 27
-patch_margin_bottom = 27
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/SymbolCounter"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/SymbolCounter/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("4_vgndv")
-bbcode_enabled = true
-text = "0 / 1 [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="BG" type="Node2D" parent="."]
 metadata/_edit_group_ = true
@@ -335,10 +231,6 @@ position = Vector2(253, 194)
 [node name="MaxDown" type="Marker2D" parent="CandleContainer"]
 position = Vector2(221, 233)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(80, 88)
-zoom = Vector2(1.5, 1.5)
-
 [node name="CentralZone" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="CentralZone" groups=["candle_mini_game_zone"]]
@@ -487,7 +379,110 @@ center_point = NodePath("../../../Points/BottomRightPoint")
 border_area = NodePath("../../../Area2D")
 target_rotation_point = NodePath("../../../Points/BottomRightPoint")
 
-[connection signal="pressed" from="Control/Button/TextureButton" to="." method="_on_texture_button_pressed"]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="NinePatchRect" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 272.0
+offset_top = -128.0
+offset_right = 352.0
+offset_bottom = -48.0
+texture = ExtResource("1_1kp0f")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="TextureButton" type="TextureButton" parent="Control/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_vgndv")
+texture_pressed = SubResource("AtlasTexture_wbpos")
+texture_hover = SubResource("AtlasTexture_hw352")
+texture_disabled = SubResource("AtlasTexture_wbpos")
+texture_focused = SubResource("AtlasTexture_hw352")
+stretch_mode = 4
+
+[node name="Info" type="NinePatchRect" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -320.0
+offset_top = -128.0
+offset_right = -112.0
+offset_bottom = -24.0
+texture = ExtResource("1_1kp0f")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 13
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Info/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_vgndv")
+bbcode_enabled = true
+text = "Rotate the crystal [img=16x16]res://Sprite/Items/CrystalShardSmall.png[/img] with the buttons [img=16x16]res://Sprite/Informations/arrow_button.png[/img] and change the candle's [img=11x16]res://Sprite/CandleMinGame/candle.png[/img] position. Find all the symbols [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]. "
+vertical_alignment = 1
+
+[node name="SymbolCounter" type="NinePatchRect" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 272.0
+offset_top = -32.0
+offset_right = 352.0
+offset_bottom = 21.0
+texture = ExtResource("1_1kp0f")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/SymbolCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/SymbolCounter/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_vgndv")
+bbcode_enabled = true
+text = "0 / 1 [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="mouse_entered" from="Buttons/RotateToRight" to="." method="_on_rotate_to_right_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/RotateToRight" to="." method="_on_rotate_to_right_mouse_exited"]
 [connection signal="mouse_entered" from="Buttons/RotateToLeft" to="." method="_on_rotate_to_left_mouse_entered"]
@@ -500,3 +495,4 @@ target_rotation_point = NodePath("../../../Points/BottomRightPoint")
 [connection signal="mouse_exited" from="Buttons/Down" to="." method="_on_down_mouse_exited"]
 [connection signal="mouse_entered" from="Buttons/Right" to="." method="_on_right_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/Right" to="." method="_on_right_mouse_exited"]
+[connection signal="pressed" from="Control/Button/TextureButton" to="." method="_on_texture_button_pressed"]
