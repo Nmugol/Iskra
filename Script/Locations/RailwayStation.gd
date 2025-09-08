@@ -137,114 +137,50 @@ func _first_task() -> void:
 	Signals.show_dialog.emit()
 	player.sprite.play("idle")
 	#1
-	Signals.people_message.emit("Guard7",
-	"
-	Here's the damaged cart.
-	It was too heavy, one of the wheels broke, and now it's blocking the track for the others.  
-	")
+	Signals.people_message.emit("Guard7","Here's the damaged cart.It was too heavy, one of the wheels broke, and now it's blocking the track for the others.  ")
 	
 	#2
-	Signals.people_message.emit("Guard8",
-	"
-	Clear it up as quickly as you can and return to the mine. 
-	")
-	
+	Signals.people_message.emit("Guard8","Clear it up as quickly as you can and return to the mine.")
+
 	#3
-	Signals.player_message.emit("Daniel",
-	"
-	Alright. We're on it, just give us a moment to examine what can be done about it. 
-	")
+	Signals.player_message.emit("Daniel","Alright. We're on it, just give us a moment to examine what can be done about it.")
+	
 	
 	#4
-	Signals.people_message.emit("Guard8",
-	"
-	Okay, okay, do what you have to do, just don't get in our way.
-	Understood?
-	")
-	
+	Signals.people_message.emit("Guard8","Okay, okay, do what you have to do, just don't get in our way.Understood?")
+
 	#5
-	Signals.player_message.emit("Daniel",
-	"
-	Understood.
-	
-	Peter, come on, let's see what we can do.
-	")
+	Signals.player_message.emit("Daniel","Understood. Peter, come on, let's see what we can do.")
 	
 	#6
-	Signals.people_message.emit("Peter",
-	"
-	The wheel is completely broken. I don't know if I can help here. 
-	")
-	
+	Signals.people_message.emit("Peter", "The wheel is completely broken. I don't know if I can help here.")
 	#7
-	Signals.people_message.emit("Guard7",
-	"
-	What do you mean? Your Spark lets you shape metal. Can't you form a new wheel? 
-	")
+	Signals.people_message.emit("Guard7", "What do you mean? Your Spark lets you shape metal. Can't you form a new wheel?")
 	
 	#8
-	Signals.people_message.emit("Peter",
-	"
-	My Spark has limitations. I can't freely reshape things.
-	I need the right amount of material to create something.
-	These pieces are too small for me to form a new wheel.
-	If I had a piece of sheet metal or a metal bar, I'd be able to create one.
-	
-	From these scraps, it's going to be hard to make a new, durable wheel.
-	")
+	Signals.people_message.emit("Peter", "My Spark has limitations. I can't freely reshape things. I need the right amount of material to create something. These pieces are too small for me to form a new wheel. If I had a piece of sheet metal or a metal bar, I'd be able to create one. From these scraps, it's going to be hard to make a new, durable wheel.")
 	
 	#9
-	Signals.player_message.emit("Daniel",
-	"
-	Peter, stay here. I'll look around the platform maybe I'll find something.
-	In the meantime, try to work on shaping a new wheel.
-	")
+	Signals.player_message.emit("Daniel", "Peter, stay here. I'll look around the platform maybe I'll find something. In the meantime, try to work on shaping a new wheel.")
 
 func _second_task() -> void:
-	print("ok")
 	Save.save_data_to_file()
 	Signals.show_dialog.emit()
 	#1
-	Signals.player_message.emit("Daniel",
-	"
-	Peter, will this sheet metal do?
-	")
+	Signals.player_message.emit("Daniel", "Peter, will this sheet metal do?")
 	#2
-	Signals.people_message.emit("Peter",
-	"
-	Yeah, I think I can make a wheel out of this.
-	")
+	Signals.people_message.emit("Peter", "Yeah, I think I can make a wheel out of this.")
 	#3
-	Signals.people_message.emit("Peter",
-	"
-	Alright. That’s the best wheel I can make.
-	Daniel, can you lift the cart a little?
-	")
+	Signals.people_message.emit("Peter", "Alright. That’s the best wheel I can make. Daniel, can you lift the cart a little?")
 	#4
-	Signals.player_message.emit("Daniel",
-	"
-	Alright, got it.
-	")
+	Signals.player_message.emit("Daniel", "Alright, got it.")
 	#5
-	Signals.people_message.emit("Guard8",
-	"
-	[b]Couldn't you be any slower?[/b]
-	And what is that supposed to be? Why is the wheel so uneven?
-	")
+	Signals.people_message.emit("Guard8", "Couldn't you be any slower? And what is that supposed to be? Why is the wheel so uneven?")
 	#6
-	Signals.people_message.emit("Peter",
-	"
-	Bbbbbut...
-	I-I-I d-don't... c-control the Spark that well.
-	I can reshape metal b-b-but... it doesn’t come out p-p-perfect...
-	")
+	Signals.people_message.emit("Peter", "Bbbbbut... I-I-I d-don't... c-control the Spark that well. I can reshape metal b-b-but... it doesn’t come out p-p-perfect...")
 	#7
-	Signals.people_message.emit("Guard7",
-	"
-	Alright, alright.
-	What matters is that you fixed it. But the loading is already way behind schedule.
-	Push the cart through the emergency track and get back to the mine.
-	")
+	Signals.people_message.emit("Guard7", "Alright, alright. What matters is that you fixed it. But the loading is already way behind schedule. Push the cart through the emergency track and get back to the mine.")
+	State.state_phase = 2
 
 func  _third_dialogue() -> void:
 	Save.save_data_to_file()
@@ -252,57 +188,20 @@ func  _third_dialogue() -> void:
 	player.sprite.play("idle")
 	
 	#1
-	Signals.people_message.emit("Peter",
-	"
-	Psst... Daniel, look what I found while we were moving the cart.
-	")
-	
+	Signals.people_message.emit("Peter", "Psst... Daniel, look what I found while we were moving the cart.")
 	#2
-	Signals.player_message.emit("Daniel",
-	"
-	Wait, what is this? A Resistance poster?! Hide it, or they'll do something to us!
-	")
-	
+	Signals.player_message.emit("Daniel", "Wait, what is this? A Resistance poster?! Hide it, or they'll do something to us!")
 	#3
-	Signals.people_message.emit("Guard8",
-	"
-	What's going on there? What do you have?
-	")
-	
+	Signals.people_message.emit("Guard8", "What's going on there? What do you have?")
 	#4
-	Signals.player_message.emit("Daniel",
-	"
-	I was just handing Peter a rag so he could wipe his forehead—he got all sweaty from the coal.
-	")
-	
+	Signals.player_message.emit("Daniel", "I was just handing Peter a rag so he could wipe his forehead—he got all sweaty from the coal.")
 	#5
-	Signals.people_message.emit("Guard7",
-	"
-	And are you done with that cart yet?
-	")
-	
+	Signals.people_message.emit("Guard7", "And are you done with that cart yet?")
 	#6
-	Signals.player_message.emit("Daniel",
-	"
-	Yes. We pushed the cart all the way through.
-	")
-	
+	Signals.player_message.emit("Daniel", "Yes. We pushed the cart all the way through.")
 	#7
-	Signals.people_message.emit("Guard7",
-	"
-	Peter, you go back to the mine, and Daniel, you take this broken wheel.
-	Go to the twins and ask them to repair it.
-	")
-	
+	Signals.people_message.emit("Guard7", "Peter, you go back to the mine, and Daniel, you take this broken wheel. Go to the twins and ask them to repair it.")
 	#8
-	Signals.player_message.emit("Daniel",
-	"
-	Okay. After I give it to them, should I return to the mine right away?
-	")
-	
+	Signals.player_message.emit("Daniel", "Okay. After I give it to them, should I return to the mine right away?")
 	#9
-	Signals.people_message.emit("Guard8",
-	"
-	No, wait there until they fix the wheel, and only then go back to the mine.
-	Don't waste time—go.
-	")
+	Signals.people_message.emit("Guard8", "No, wait there until they fix the wheel, and only then go back to the mine. Don't waste time—go.")

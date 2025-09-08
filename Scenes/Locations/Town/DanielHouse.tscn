@@ -198,16 +198,20 @@ shape = SubResource("RectangleShape2D_bwym7")
 [node name="Marker2D" type="Marker2D" parent="Events/CandleMiniGame"]
 position = Vector2(766, -636)
 
-[node name="InfoPanel" parent="." instance=ExtResource("16_bwym7")]
-offset_left = 554.0
-offset_top = -525.0
-offset_right = 554.0
-offset_bottom = -525.0
-width = 245.0
-height = 70.0
-text = "Use map [img]res://Sprite/Informations/mapa.png[/img] and select shopping area [img=16x16]res://Sprite/Map/ShoppingAreaIcon.png[/img] to fast travel "
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("16_bwym7")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+grow_horizontal = 1
+width = 250.0
+height = 100.0
+text_to_display = "Use map [img]res://Sprite/Informations/mapa.png[/img] and select shopping area [img=16x16]res://Sprite/Map/ShoppingAreaIcon.png[/img] to fast travel"
 is_visible_flag = true
 active_on_stages = Array[int]([13])
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_entered"]
 [connection signal="body_exited" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_exited"]

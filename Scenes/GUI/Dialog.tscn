@@ -143,6 +143,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("23_1eixm")
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 scroll_following = true
 

@@ -3,7 +3,8 @@ extends Node2D
 @onready var mini_game_position: Marker2D = $Events/CandleMiniGame/Marker2D
 @onready var cart_mini_game_area: Area2D = $Events/CandleMiniGame
 @onready var player: Player = $Player
-@onready var info_panel: InfoPanel = $InfoPanel
+@onready var info_panel: InfoPanel = $CanvasLayer/InfoPanel
+@onready var exit: Area2D = $Passage/Exit1
 
 var mini_game = load("res://Scenes/MiniGame/CandleMiniGame/candle_mini_game.tscn")
 
@@ -12,7 +13,7 @@ var mini_game_is_running: bool = false
 
 
 func _ready():
-
+	info_panel.is_visible_flag = false
 	if State.state_number == 9:
 		cart_mini_game_area.monitoring = true
 		cart_mini_game_area.monitorable = true
@@ -35,12 +36,17 @@ func _process(_delta: float) -> void:
 			match State.state_phase:
 				0:
 					_second_dialog()
+					exit.monitoring = false
+					exit.monitorable = false
 					init_candle_mini_game()
+
 
 		11:
 			match State.state_phase:
 				0:
 					_finish_candle_mini_game()
+					exit.monitoring = true
+					exit.monitorable = true
 		12:
 			match State.state_phase:
 				0:
@@ -63,6 +69,7 @@ func init_candle_mini_game() -> void:
 	$PhantomCamera2D.follow_target = game
 	$PhantomCamera2D.zoom = Vector2(1.4, 1.4)
 	player.hide()
+	State.is_running = false
 
 
 func _finish_candle_mini_game() -> void:
@@ -70,6 +77,9 @@ func _finish_candle_mini_game() -> void:
 	$PhantomCamera2D.zoom = Vector2(3, 3)
 	State.state_number = 12
 	State.state_phase = 0
+	mini_game_is_running = false
+	State.is_running = true
+
 
 	player.show()
 	State.is_running = true

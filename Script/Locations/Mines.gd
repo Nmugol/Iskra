@@ -60,68 +60,12 @@ func _process(delta: float) -> void:
 					get_tree().change_scene_to_file(MAIN_SCENE)
 
 func start_dialog() -> void:
-	#State.is_running = false
 	Signals.show_dialog.emit()
-	#1
-	Signals.people_message.emit("Peter", 
-	"
-	Hey, Daniel! You're late again.
-	I wonder if we'll ever manage to be on time?
-	")
-	
-	#2
-	Signals.player_message.emit("Daniel",
-	"
-	Don't even get me started. On the way here, I got stopped for a check.
-	They thought I was carrying contraband.
-	And you know how long their personal searches take.
-	")
-	
-	#3
-	Signals.people_message.emit("Peter", 
-	"
-	The guards are especially active today and aren't letting anyone off easy.
-	This morning they searched me too, and now I'm super stressed.
-	You know I don't want any trouble with the authorities.
-	")
-	
-	#4
-	Signals.player_message.emit("Daniel",
-	"
-	[i]I know you don't want any trouble, and you want to do everything you can to 
-	increase your chances of transferring camps.[/i]
-		
-	But did you hear?
-	The resistance gave them a hard time again.
-	They scattered posters around the camp calling for a rebellion.
-	And apparently, they also stole some of the guards' uniforms.
-	")
-	
-	#5
-	Signals.people_message.emit("Guard7",
-	"
-	[b]Daniel and Peter, you're coming with us.[/b]
-	One of the loaded wagons derailed and is blocking the loading of the others.
-	You have been chosen to help clear the tracks.
-	")
-	
-	#6
-	Signals.people_message.emit("Peter", 
-	"
-	[shake rate=15.0 level=2 connecter=1]Whaaa...? Whyyy usss?[/shake]
-	")
-	
-	#7
-	Signals.people_message.emit("Guard8",
-	"
-	Your Sparks will come in handy for removing the wagon.
-	[b]Don't waste our time[/b] and move it.
-	")
-	
-	#8
-	Signals.player_message.emit("Daniel",
-	"
-	[b]Alright, we're coming.[/b]
-		
-	[font_size=16]Peter, calm down and don't panic.[/font_size]
-	")
+	Signals.people_message.emit("Peter", "Hey, Daniel! You're late again. I wonder if we'll ever manage to be on time?")
+	Signals.player_message.emit("Daniel", "Don't even get me started. On the way here, I got stopped for a check. They thought I was carrying contraband. And you know how long their personal searches take.")
+	Signals.people_message.emit("Peter", "The guards are especially active today and aren't letting anyone off easy. This morning they searched me too, and now I'm super stressed. You know I don't want any trouble with the authorities.")
+	Signals.player_message.emit("Daniel", "I know you don't want any trouble, and you want to do everything you can to increase your chances of transferring camps. But did you hear? The resistance gave them a hard time again. They scattered posters around the camp calling for a rebellion. And apparently, they also stole some of the guards' uniforms.")
+	Signals.people_message.emit("Guard7", "Daniel and Peter, you're coming with us. One of the loaded wagons derailed and is blocking the loading of the others. You have been chosen to help clear the tracks.")
+	Signals.people_message.emit("Peter", "[shake rate=15.0 level=2 connecter=1]Whaaa...? Whyyy usss?[/shake]")
+	Signals.people_message.emit("Guard8", "Your Sparks will come in handy for removing the wagon. Don't waste our time and move it.")
+	Signals.player_message.emit("Daniel", "Alright, we're coming. Peter, calm down and don't panic.")

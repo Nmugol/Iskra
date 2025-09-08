@@ -91,7 +91,6 @@ grow_vertical = 2
 texture = ExtResource("3_skwkt")
 
 [node name="Town" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -104,7 +103,7 @@ offset_right = 91.0
 offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "wdawda"
+text = "Town"
 icon = ExtResource("6_u51vk")
 expand_icon = true
 location_scene_path = "res://Scenes/Locations/Town/Town.tscn"
@@ -113,7 +112,6 @@ location_name = "Town"
 location_icon = ExtResource("6_u51vk")
 
 [node name="Mines" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -126,7 +124,7 @@ offset_right = 329.0
 offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "lowdawdwda"
+text = "Mines"
 icon = ExtResource("7_w6joy")
 expand_icon = true
 location_scene_path = "res://Scenes/Locations/Mines/MineHub.tscn"
@@ -135,7 +133,6 @@ location_name = "Mines"
 location_icon = ExtResource("7_w6joy")
 
 [node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -148,6 +145,7 @@ offset_right = -154.0
 offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "Railway station"
 icon = ExtResource("8_uw5t2")
 expand_icon = true
 location_scene_path = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
@@ -156,7 +154,6 @@ location_name = "Railway station"
 location_icon = ExtResource("8_uw5t2")
 
 [node name="ResidentialArea" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -169,6 +166,7 @@ offset_right = -125.0
 offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "Residential area"
 icon = ExtResource("9_lubcl")
 expand_icon = true
 location_scene_path = "res://Scenes/Locations/Town/ResidentialHousesZone.tscn"
@@ -177,7 +175,6 @@ location_name = "Residential area"
 location_icon = ExtResource("9_lubcl")
 
 [node name="ShoppingDistrict" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
-visible = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -190,6 +187,7 @@ offset_right = -338.0
 offset_bottom = 114.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "Shopping area"
 icon = ExtResource("10_u51vk")
 expand_icon = true
 location_scene_path = "res://Scenes/Locations/Town/CommercialArea.tscn"

@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vy1nj")
+text_to_display = null
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
