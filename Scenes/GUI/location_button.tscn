@@ -4,17 +4,17 @@
 [ext_resource type="Script" uid="uid://dtwf85cx4u2gn" path="res://Script/GUI/LocationButton.gd" id="2_x3qbw"]
 
 [node name="LocationButton" type="Button"]
-visible = false
 offset_left = 33.0
 offset_top = 26.0
 offset_right = 169.0
 offset_bottom = 208.0
 theme = ExtResource("1_kdsr0")
-text = "Location"
+text = "wdawd"
 autowrap_mode = 3
 clip_text = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 script = ExtResource("2_x3qbw")
+location_name = "wdawd"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

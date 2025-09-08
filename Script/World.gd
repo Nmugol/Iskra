@@ -54,7 +54,6 @@ func save_level() -> void:
 	Save.current_scene_path = level_location.get_child(0).get_path()
 
 func _show_dialog() -> void:
-	print("dislog is showing")
 	Signals.reset_cursor.emit()
 	State.is_running = false
 	dialog.show()

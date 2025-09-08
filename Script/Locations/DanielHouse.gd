@@ -3,11 +3,12 @@ extends Node2D
 @onready var mini_game_position: Marker2D = $Events/CandleMiniGame/Marker2D
 @onready var cart_mini_game_area: Area2D = $Events/CandleMiniGame
 @onready var player: Player = $Player
+@onready var info_panel: InfoPanel = $InfoPanel
 
 var mini_game = load("res://Scenes/MiniGame/CandleMiniGame/candle_mini_game.tscn")
 
 var in_candle_mini_game_area: bool = false
-
+var mini_game_is_running: bool = false
 
 
 func _ready():
@@ -33,22 +34,26 @@ func _process(_delta: float) -> void:
 		10:
 			match State.state_phase:
 				0:
-					init_candle_mini_game()
 					_second_dialog()
-				3:
-					_finish_candle_mini_game()
+					init_candle_mini_game()
+
 		11:
 			match State.state_phase:
 				0:
+					_finish_candle_mini_game()
+		12:
+			match State.state_phase:
+				0:
 					_three_dialog()
-					State.state_number = 12
+					info_panel.is_visible_flag = true
+					State.state_number = 13
 					State.state_phase = 0
 	
 
-	if in_candle_mini_game_area and State.selected_item.item_name == "Crystal shard" and State.selected_item != null:
-		init_candle_mini_game()
+	if in_candle_mini_game_area and State.selected_item != null and State.selected_item.item_name == "Crystal shard" and not mini_game_is_running:
 		State.state_number = 10
 		State.state_phase = 0
+		mini_game_is_running = true
 
 func init_candle_mini_game() -> void:
 	var game = mini_game.instantiate()
@@ -56,13 +61,14 @@ func init_candle_mini_game() -> void:
 	game.global_position = mini_game_position.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
+	$PhantomCamera2D.zoom = Vector2(1.4, 1.4)
 	player.hide()
-	State.is_running = false
 
 
 func _finish_candle_mini_game() -> void:
 	$PhantomCamera2D.follow_target = player
-	State.state_number = 11
+	$PhantomCamera2D.zoom = Vector2(3, 3)
+	State.state_number = 12
 	State.state_phase = 0
 
 	player.show()
@@ -71,27 +77,24 @@ func _finish_candle_mini_game() -> void:
 func _first_dialog() -> void:
 	Signals.show_dialog.emit()
 	#1
-	Signals.people_message.emit("Daniel","Skoro kopalnie zostały zamknięte co mam teraz zrobić? Oj zapomniałem o tym krysztale, mogę go na spokojnie obejrzeć ale jest już późno, ledwie co widzę. Może światło świecy pomoże mi coś zobaczyć.")
+	Signals.player_message.emit("Daniel","Since the mines have been closed, what should I do now? Oh, I forgot about this crystal. I can examine it calmly, but it's already late, I can barely see. Maybe the candlelight will help me see something.")
 
 	#2
-	Signals.player_message.emit("Daniel","Tylko gdzie ja odłożyłem tą świecę? Chyba odłożyłem ją na stół.")
-	
+	Signals.player_message.emit("Daniel","But where did I put that candle? I think I left it on the table.")
 
 func _second_dialog() -> void:
 	Signals.show_dialog.emit()
 	#1
-	Signals.people_message.emit("Daniel","O tak, świeca! Teraz mogę coś zobaczyć. Co to jest na tej scianie? Czy to z tego kryształu? Wyglada jak jakieś runy, symbole...")
+	Signals.player_message.emit("Daniel","Oh yes, the candle! Now I can see something. What is that on the wall? Is it from this crystal? It looks like some runes, symbols...")
 	#2
-	Signals.player_message.emit("Daniel","Ciekawe co to może być... Może powinienem to narysować?")
-	State.state_phase = 1
+	Signals.player_message.emit("Daniel","I wonder what it could be... Maybe I should draw it?")
 
 func _three_dialog() -> void:
 	Signals.show_dialog.emit()
 	#1
-	Signals.people_message.emit("Daniel","Muszę to zanieść do Emila, on na pewno będzie wiedział co to znaki.")
-
+	Signals.player_message.emit("Daniel","I need to take this to Emil. He will surely know what these signs mean.")
 	#2
-	Signals.player_message.emit("Daniel","Cholera, jest już późno, muszę się śpieszyć zanim będzie cisza nocna.")
+	Signals.player_message.emit("Daniel","Damn, it's already late. I need to hurry before the nighttime curfew.")
 
 func _on_candle_mini_game_body_entered(body:Node2D) -> void:
 	if body.is_in_group("Player"):

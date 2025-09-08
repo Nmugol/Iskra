@@ -143,8 +143,8 @@ position = Vector2(2120, -40)
 zoom = Vector2(2.2, 2.2)
 process_callback = 0
 limit_left = 318
-limit_top = -753
-limit_right = 1009
+limit_top = -847
+limit_right = 1256
 limit_bottom = -280
 editor_draw_limits = true
 

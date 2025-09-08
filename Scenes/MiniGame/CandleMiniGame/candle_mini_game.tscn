@@ -263,12 +263,11 @@ position = Vector2(232, 96)
 [node name="Level1" type="Node2D" parent="CentralZone/Symbols"]
 
 [node name="Symbol1" parent="CentralZone/Symbols/Level1" node_paths=PackedStringArray("center_point", "border_area") instance=ExtResource("8_bkgmx")]
-top_level = true
 position = Vector2(80, -12)
 symbol_icons = ExtResource("11_hw352")
-offset_value = Vector2(0, 50)
+offset_value = Vector2(50, 70)
 rotation_speed = 0.0
-target_offset_value = Vector2(100, 50)
+target_offset_value = Vector2(150, 70)
 moving_distance_y = 50.0
 moving_distance_x = 200.0
 max_distance_tolerance = 7.5

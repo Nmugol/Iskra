@@ -129,7 +129,8 @@ func check_level_completion() -> void:
 		return
 	
 	if compleat_symbols == level_three_completed_count and current_level == 3:
-		State.state_phase = 3
+		State.state_phase = 0
+		State.state_number = 11
 		self.hide()
 		self.queue_free()
 		return

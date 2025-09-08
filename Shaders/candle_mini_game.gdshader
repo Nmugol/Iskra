@@ -17,29 +17,29 @@ float rand(vec2 co) {
 void fragment() {
     // Bazowy kolor tekstury
     vec4 base_color = texture(TEXTURE, UV);
-    
+
     // Oblicz dystans od centrum światła
     float dist = distance(UV, light_center);
-    
+
     // Tworzenie falistych zniekształceń
-    float wave = sin(UV.x * wave_frequency + TIME * wave_speed) * 
-                 cos(UV.y * wave_frequency + TIME * wave_speed * 0.7) * 
+    float wave = sin(UV.x * wave_frequency + TIME * wave_speed) *
+                 cos(UV.y * wave_frequency + TIME * wave_speed * 0.7) *
                  distortion_intensity;
-    
+
     // Generowanie szumu dla organicznego wyglądu
     vec2 noise_uv = UV * 5.0 + vec2(TIME * 0.2);
     float noise_value = texture(noise_texture, noise_uv).r;
-    
+
     // Łączenie zniekształceń
     vec2 distorted_uv = UV + vec2(wave, wave * 0.5) + (noise_value - 0.5) * distortion_intensity;
-    
+
     // Pobranie koloru ze zniekształconych współrzędnych
     vec4 distorted_color = texture(TEXTURE, distorted_uv);
-    
+
     // Tworzenie efektu świetlnego (im bliżej centrum, tym jaśniej)
     float light_factor = 1.0 - smoothstep(0.0, light_size, dist);
     vec4 light_effect = light_color * light_factor;
-    
+
     // Mieszanie kolorów - światło przepuszczane przez kryształ
     COLOR = mix(base_color, distorted_color + light_effect, 0.3 * light_factor);
     COLOR.a = base_color.a; // Zachowaj oryginalną przezroczystość
