@@ -115,7 +115,7 @@ func _on_cart_mouse_entered() -> void:
 func _load_game()-> void:
 	game = mini_game.instantiate()
 	game.z_index = 1
-	game.global_position = $CartMiniGamePos.global_position
+	game.global_position = $PhantomCamera2D.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
 	game_load_finish = true

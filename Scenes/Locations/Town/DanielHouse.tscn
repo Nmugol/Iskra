@@ -210,8 +210,5 @@ metadata/_edit_lock_ = true
 position = Vector2(471, -453.75)
 shape = SubResource("RectangleShape2D_bwym7")
 
-[node name="Marker2D" type="Marker2D" parent="Events/CandleMiniGame"]
-position = Vector2(766, -636)
-
 [connection signal="body_entered" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_entered"]
 [connection signal="body_exited" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_exited"]

@@ -142,10 +142,10 @@ physics_interpolation_mode = 1
 position = Vector2(2120, -40)
 zoom = Vector2(2.2, 2.2)
 process_callback = 0
-limit_left = 318
-limit_top = -847
-limit_right = 1256
-limit_bottom = -280
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -311,9 +311,6 @@ texture = SubResource("AtlasTexture_nv2js")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/Cart"]
 shape = SubResource("CircleShape2D_h1ofm")
-
-[node name="CartMiniGamePos" type="Marker2D" parent="."]
-position = Vector2(2122, -234)
 
 [node name="Blok" type="Node2D" parent="."]
 

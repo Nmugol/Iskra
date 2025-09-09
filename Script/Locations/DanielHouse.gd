@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var mini_game_position: Marker2D = $Events/CandleMiniGame/Marker2D
 @onready var cart_mini_game_area: Area2D = $Events/CandleMiniGame
 @onready var player: Player = $Player
 @onready var info_panel: InfoPanel = $CanvasLayer/InfoPanel
@@ -35,6 +34,7 @@ func _process(_delta: float) -> void:
 		10:
 			match State.state_phase:
 				0:
+					Signals.save_to_file.emit()
 					_second_dialog()
 					exit.monitoring = false
 					exit.monitorable = false
@@ -54,6 +54,7 @@ func _process(_delta: float) -> void:
 					info_panel.is_visible_flag = true
 					State.state_number = 13
 					State.state_phase = 0
+					Signals.save_to_file.emit()
 	
 
 	if in_candle_mini_game_area and State.selected_item != null and State.selected_item.item_name == "Crystal shard" and not mini_game_is_running:
@@ -64,7 +65,7 @@ func _process(_delta: float) -> void:
 func init_candle_mini_game() -> void:
 	var game = mini_game.instantiate()
 	game.z_index = 1
-	game.global_position = mini_game_position.global_position
+	game.global_position = $PhantomCamera2D.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
 	$PhantomCamera2D.zoom = Vector2(1.4, 1.4)

@@ -27,6 +27,10 @@ class_name Symbol
 @export var target_rotation_point: Marker2D # Docelowy punkt obrotu
 @export var area_2d: Area2D 
 
+@export var target_delay_time: float = 0.5  # Czas w sekundach wymagany do uznania symbolu za w miejscu
+var target_timer: float = 0.0  # Timer do śledzenia czasu w miejscu docelowym
+var was_in_target: bool = false  # Poprzedni stan
+
 var rotate_flag: bool = false # Czy obracać symbol
 var rotate_to_left_flag: bool = false # Czy obracać w lewo
 
@@ -136,9 +140,9 @@ func _process(delta: float) -> void:
 			symbol.offset.y += moving_distance_y * delta
 	area_2d.global_position = symbol.global_position
 	area_2d.position += symbol.offset
+	symbol_in_target_space(delta)
 	update_symbol_opacity()
-	symbol_in_target_space()
-
+	
 func update_symbol_opacity() -> void:
 
 	if not in_border_area:
@@ -163,11 +167,26 @@ func calculate_match_percentage() -> float:
 	return overall_match
 
 # Sprawdź, czy symbol jest wystarczająco dopasowany do celu (>= 95%)
-func symbol_in_target_space() -> void:
-	if calculate_match_percentage() >= toleration_procent and not in_target:
-		in_target = true
-		return
+func symbol_in_target_space(delta: float) -> void:
+	var current_match = calculate_match_percentage()
+	var is_currently_in_target = current_match >= toleration_procent
+	
+	if is_currently_in_target and not in_target:
+		# Zaczynamy liczyć czas gdy symbol jest w docelowej pozycji
+		target_timer += delta
+		
+		# Jeśli symbol był w docelowej pozycji wystarczająco długo
+		if target_timer >= target_delay_time:
+			in_target = true
+			target_timer = 0.0  # Resetujemy timer
 
-	if in_target and calculate_match_percentage() < toleration_procent: 
+	elif not is_currently_in_target and in_target:
+		# Symbol opuścił docelową pozycję - natychmiastowo ustawiamy flagę
 		in_target = false
-		return
+		target_timer = 0.0  # Resetujemy timer
+	elif not is_currently_in_target:
+		# Symbol nie jest w docelowej pozycji - resetujemy timer
+		target_timer = 0.0
+	
+	# Zapamiętujemy obecny stan dla następnej klatki
+	was_in_target = in_target

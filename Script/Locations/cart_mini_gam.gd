@@ -13,7 +13,7 @@ var main_cart: Cart
 @export var cart_position_2: Marker2D
 
 func _ready() -> void:
-	
+
 	Signals.reset_cursor.emit()
 	State.is_running = false
 	
