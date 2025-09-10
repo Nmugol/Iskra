@@ -1,6 +1,6 @@
 extends Node2D
 
-const  MainScene = "res://Scenes/World.tscn"
+const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 @onready var player: Player = $Player
 
@@ -82,7 +82,7 @@ func _process(_delta: float) -> void:
 					Save.player_position = Vector2(792,1616) 
 					Save.current_scene_path = 'res://Scenes/Locations/Mines/MineHub.tscn'
 					Signals.enable_loading_screen.emit()
-					get_tree().change_scene_to_file(MainScene)
+					get_tree().change_scene_to_file(MAIN_SCENE)
 
 func _first_dialog() -> void:
 

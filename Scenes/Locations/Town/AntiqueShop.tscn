@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=4 uid="uid://ba0jygl6vl482"]
+[gd_scene load_steps=23 format=4 uid="uid://ba0jygl6vl482"]
 
+[ext_resource type="Script" uid="uid://cfq7kqclb7bgt" path="res://Script/Locations/AntiqueShop.gd" id="1_dg87u"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_hopxg"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_alnei"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_adn2u"]
@@ -43,7 +44,14 @@ _data = {
 }
 point_count = 11
 
-[node name="AntiqueShop" type="Node2D"]
+[node name="AntiqueShop" type="Node2D" node_paths=PackedStringArray("player", "emil", "miriam", "miriam_path", "emil_path")]
+script = ExtResource("1_dg87u")
+player = NodePath("Player")
+emil = NodePath("NPCs/EmilPath/PathFollow2D/Emil")
+miriam = NodePath("NPCs/MirialPath/PathFollow2D/Miriam")
+miriam_path = NodePath("NPCs/MirialPath")
+emil_path = NodePath("NPCs/EmilPath")
+player_pos = Vector2(224, 360)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
@@ -226,9 +234,11 @@ npc = NodePath("PathFollow2D/Miriam")
 metadata/_custom_type_script = "uid://c2tymt362682o"
 
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCs/MirialPath"]
+position = Vector2(280, 288)
+rotates = false
+loop = false
 
 [node name="Miriam" parent="NPCs/MirialPath/PathFollow2D" instance=ExtResource("14_05tpc")]
-position = Vector2(280, 304)
 npc_name = 1
 flip_sprite = true
 
@@ -238,6 +248,8 @@ script = ExtResource("15_dg87u")
 metadata/_custom_type_script = "uid://c2tymt362682o"
 
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCs/EmilPath"]
+position = Vector2(312, 272)
+rotates = false
+loop = false
 
 [node name="Emil" parent="NPCs/EmilPath/PathFollow2D" instance=ExtResource("14_05tpc")]
-position = Vector2(312, 280)
