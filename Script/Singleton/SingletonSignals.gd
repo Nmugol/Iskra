@@ -119,3 +119,9 @@ signal symbol_not_on_target()
 
 @warning_ignore("unused_signal")
 signal reset_symbol()
+
+@warning_ignore("unused_signal")
+signal move_player_to_point(point: Vector2)
+
+@warning_ignore("unused_signal")
+signal disabe_stop_point()
