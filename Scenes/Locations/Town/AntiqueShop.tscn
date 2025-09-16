@@ -44,14 +44,16 @@ _data = {
 }
 point_count = 11
 
-[node name="AntiqueShop" type="Node2D" node_paths=PackedStringArray("player", "emil", "miriam", "miriam_path", "emil_path")]
+[node name="AntiqueShop" type="Node2D" node_paths=PackedStringArray("player", "emil", "miriam", "miriam_path", "emil_path", "exit_1", "exit_2")]
 script = ExtResource("1_dg87u")
 player = NodePath("Player")
 emil = NodePath("NPCs/EmilPath/PathFollow2D/Emil")
 miriam = NodePath("NPCs/MirialPath/PathFollow2D/Miriam")
 miriam_path = NodePath("NPCs/MirialPath")
 emil_path = NodePath("NPCs/EmilPath")
-player_pos = Vector2(224, 360)
+exit_1 = NodePath("Passage/Exit1")
+exit_2 = NodePath("Passage/Exit2")
+player_pos = Vector2(336, 112)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
@@ -217,12 +219,13 @@ metadata/_edit_group_ = true
 position = Vector2(-84, 400)
 shape = SubResource("RectangleShape2D_qdckj")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit2"]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Exit2" node_paths=PackedStringArray("paren_area")]
 position = Vector2(-83.8224, 388.098)
 rotation = -1.5708
 scale = Vector2(0.182063, 0.360369)
 texture = ExtResource("12_bpqe2")
 script = ExtResource("13_05tpc")
+paren_area = NodePath("..")
 
 [node name="NPCs" type="Node2D" parent="."]
 
@@ -230,6 +233,7 @@ script = ExtResource("13_05tpc")
 curve = SubResource("Curve2D_qdckj")
 script = ExtResource("15_dg87u")
 path = NodePath("PathFollow2D")
+speed = 5.0
 npc = NodePath("PathFollow2D/Miriam")
 metadata/_custom_type_script = "uid://c2tymt362682o"
 
@@ -239,12 +243,16 @@ rotates = false
 loop = false
 
 [node name="Miriam" parent="NPCs/MirialPath/PathFollow2D" instance=ExtResource("14_05tpc")]
+visible = false
 npc_name = 1
 flip_sprite = true
 
-[node name="EmilPath" type="Path2D" parent="NPCs"]
+[node name="EmilPath" type="Path2D" parent="NPCs" node_paths=PackedStringArray("path", "npc")]
 curve = SubResource("Curve2D_05tpc")
 script = ExtResource("15_dg87u")
+path = NodePath("PathFollow2D")
+speed = 1.0
+npc = NodePath("PathFollow2D/Emil")
 metadata/_custom_type_script = "uid://c2tymt362682o"
 
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCs/EmilPath"]
@@ -253,3 +261,4 @@ rotates = false
 loop = false
 
 [node name="Emil" parent="NPCs/EmilPath/PathFollow2D" instance=ExtResource("14_05tpc")]
+visible = false

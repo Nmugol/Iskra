@@ -4,12 +4,14 @@ extends Node2D
 @onready var player: Player = $Player
 @onready var info_panel: InfoPanel = $CanvasLayer/InfoPanel
 @onready var exit: Area2D = $Passage/Exit1
+@onready var mini_game_pos: Marker2D = $Events/CandleMiniGame/Marker2D
 
 var mini_game = load("res://Scenes/MiniGame/CandleMiniGame/candle_mini_game.tscn")
 
 var in_candle_mini_game_area: bool = false
 var mini_game_is_running: bool = false
 
+var game: Node
 
 func _ready():
 	info_panel.is_visible_flag = false
@@ -19,7 +21,11 @@ func _ready():
 	else:
 		cart_mini_game_area.monitoring = false
 		cart_mini_game_area.monitorable = false
-		
+	
+	# Automatyczne wznowienie mini-gry po powrocie do sceny
+	if State.state_number == 10 and game == null:
+		init_candle_mini_game()
+
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
@@ -29,16 +35,17 @@ func _process(_delta: float) -> void:
 			match State.state_phase:
 				0:
 					_first_dialog()
-				
+					Signals.save_game.emit()
+					Signals.save_to_file.emit()
 		
 		10:
 			match State.state_phase:
 				0:
-					Signals.save_to_file.emit()
-					_second_dialog()
-					exit.monitoring = false
-					exit.monitorable = false
-					init_candle_mini_game()
+					if game == null:
+						_second_dialog()
+						exit.monitoring = false
+						exit.monitorable = false
+						init_candle_mini_game()
 
 
 		11:
@@ -47,6 +54,7 @@ func _process(_delta: float) -> void:
 					_finish_candle_mini_game()
 					exit.monitoring = true
 					exit.monitorable = true
+					Signals.save_to_file.emit()
 		12:
 			match State.state_phase:
 				0:
@@ -63,24 +71,26 @@ func _process(_delta: float) -> void:
 		mini_game_is_running = true
 
 func init_candle_mini_game() -> void:
-	var game = mini_game.instantiate()
+	game = mini_game.instantiate()
 	game.z_index = 1
-	game.global_position = $PhantomCamera2D.global_position
+	game.scale = Vector2(0.7,0.7)
+	game.global_position = mini_game_pos.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
-	$PhantomCamera2D.zoom = Vector2(1.4, 1.4)
 	player.hide()
 	State.is_running = false
 
 
 func _finish_candle_mini_game() -> void:
 	$PhantomCamera2D.follow_target = player
-	$PhantomCamera2D.zoom = Vector2(3, 3)
 	State.state_number = 12
 	State.state_phase = 0
 	mini_game_is_running = false
 	State.is_running = true
 
+	if game != null:
+		game.queue_free()
+		game = null
 
 	player.show()
 	State.is_running = true

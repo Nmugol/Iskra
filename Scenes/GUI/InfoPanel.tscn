@@ -42,6 +42,7 @@ theme_override_constants/margin_bottom = 10
 [node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("3_isemo")
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "Info text"
 vertical_alignment = 1

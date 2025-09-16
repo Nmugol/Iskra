@@ -62,7 +62,7 @@ radius = 16.1245
 radius = 16.1555
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xeeyv"]
-size = Vector2(304, 208)
+size = Vector2(320, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgndv"]
 atlas = ExtResource("3_m0p6r")
@@ -83,6 +83,7 @@ symbols_in_level_two = [NodePath("CentralZone/Symbols/Level2/Symbol1"), NodePath
 symbols_in_level_three = [NodePath("CentralZone/Symbols/Level3/Symbol1"), NodePath("CentralZone/Symbols/Level3/Symbol2"), NodePath("CentralZone/Symbols/Level3/Symbol3"), NodePath("CentralZone/Symbols/Level3/Symbol4")]
 
 [node name="BG" type="Node2D" parent="."]
+position = Vector2(-79, -16)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -90,6 +91,7 @@ metadata/_edit_lock_ = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAKABEAAAAAAAUAAAALABEAAAACAAUAAAAMABEAAAACAAUAAAANABEAAAACAAUAAAAKABAAAAAAAAIAAAAKAA8AAAAAAAIAAAAKAA4AAAAAAAIAAAAKAA0AAAAAAAIAAAAKAAwAAAAAAAIAAAAKAAsAAAAAAAIAAAAKAAoAAAAAAAIAAAAKAAkAAAAAAAAAAAAOABEAAAACAAUAAAAPABEAAAACAAUAAAAQABEAAAADAAUAAAARABEAAAAFAAUAAAARAAkAAAAFAAAAAAARAA8AAAAFAAIAAAARABAAAAAFAAMAAAARAA0AAAAFAAIAAAARAA4AAAAFAAMAAAARAAoAAAAFAAIAAAARAAsAAAAFAAIAAAARAAwAAAAFAAMAAAALAAkAAAACAAAAAAAMAAkAAAACAAAAAAANAAkAAAACAAAAAAAOAAkAAAACAAAAAAAPAAkAAAACAAAAAAAQAAkAAAACAAAAAAALAAoAAAABAAEAAAALAAsAAAABAAEAAAALAAwAAAABAAEAAAALAA0AAAABAAEAAAALAA4AAAABAAEAAAALAA8AAAABAAEAAAALABAAAAABAAEAAAAMAAoAAAABAAEAAAAMAAsAAAABAAEAAAAMAAwAAAABAAEAAAAMAA0AAAABAAEAAAAMAA4AAAABAAEAAAAMAA8AAAABAAEAAAAMABAAAAABAAEAAAANAAoAAAABAAEAAAANAAsAAAABAAEAAAANAAwAAAABAAEAAAANAA0AAAABAAEAAAANAA4AAAABAAEAAAANAA8AAAABAAEAAAANABAAAAABAAEAAAAOAAoAAAABAAEAAAAOAAsAAAABAAEAAAAOAAwAAAABAAEAAAAOAA0AAAABAAEAAAAOAA4AAAABAAEAAAAOAA8AAAABAAEAAAAOABAAAAABAAEAAAAPAAoAAAABAAEAAAAPAAsAAAABAAEAAAAPAAwAAAABAAEAAAAPAA0AAAABAAEAAAAPAA4AAAABAAEAAAAPAA8AAAABAAEAAAAPABAAAAABAAEAAAAQAAoAAAABAAEAAAAQAAsAAAABAAEAAAAQAAwAAAABAAEAAAAQAA0AAAABAAEAAAAQAA4AAAABAAEAAAAQAA8AAAABAAEAAAAQABAAAAABAAEAAAD4/wkAAAAAAAAAAAD4/woAAAAAAAIAAAD4/wsAAAAAAAIAAAD4/wwAAAAAAAIAAAD4/w0AAAAAAAIAAAD4/w4AAAAAAAIAAAD4/w8AAAAAAAIAAAD4/xAAAAAAAAIAAAD4/xEAAAAAAAUAAAD5/wkAAAACAAAAAAD5/woAAAABAAEAAAD5/wsAAAABAAEAAAD5/wwAAAABAAEAAAD5/w0AAAABAAEAAAD5/w4AAAABAAEAAAD5/w8AAAABAAEAAAD5/xAAAAABAAEAAAD5/xEAAAACAAUAAAD6/wkAAAACAAAAAAD6/woAAAABAAEAAAD6/wsAAAABAAEAAAD6/wwAAAABAAEAAAD6/w0AAAABAAEAAAD6/w4AAAABAAEAAAD6/w8AAAABAAEAAAD6/xAAAAABAAEAAAD6/xEAAAACAAUAAAD7/wkAAAACAAAAAAD7/woAAAABAAEAAAD7/wsAAAABAAEAAAD7/wwAAAABAAEAAAD7/w0AAAABAAEAAAD7/w4AAAABAAEAAAD7/w8AAAABAAEAAAD7/xAAAAABAAEAAAD7/xEAAAACAAUAAAD8/wkAAAACAAAAAAD8/woAAAABAAEAAAD8/wsAAAABAAEAAAD8/wwAAAABAAEAAAD8/w0AAAABAAEAAAD8/w4AAAABAAEAAAD8/w8AAAABAAEAAAD8/xAAAAABAAEAAAD8/xEAAAACAAUAAAD9/wkAAAACAAAAAAD9/woAAAABAAEAAAD9/wsAAAABAAEAAAD9/wwAAAABAAEAAAD9/w0AAAABAAEAAAD9/w4AAAABAAEAAAD9/w8AAAABAAEAAAD9/xAAAAABAAEAAAD9/xEAAAACAAUAAAD+/wkAAAACAAAAAAD+/woAAAABAAEAAAD+/wsAAAABAAEAAAD+/wwAAAABAAEAAAD+/w0AAAABAAEAAAD+/w4AAAABAAEAAAD+/w8AAAABAAEAAAD+/xAAAAABAAEAAAD+/xEAAAADAAUAAAD//wkAAAAFAAAAAAD//woAAAAFAAIAAAD//wsAAAAFAAIAAAD//wwAAAAFAAMAAAD//w0AAAAFAAIAAAD//w4AAAAFAAMAAAD//w8AAAAFAAIAAAD//xAAAAAFAAMAAAD//xEAAAAFAAUAAAA=")
 tile_set = SubResource("TileSet_hw352")
+metadata/_edit_lock_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="BG"]
 texture_filter = 1
@@ -98,7 +100,7 @@ tile_set = SubResource("TileSet_hw352")
 metadata/_edit_lock_ = true
 
 [node name="Buttons" type="Node2D" parent="."]
-position = Vector2(8, 4)
+position = Vector2(-71, -12)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -204,40 +206,42 @@ shape = SubResource("CircleShape2D_33vw1")
 
 [node name="Cristal" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-65, 217)
+position = Vector2(-144, 201)
 texture = ExtResource("2_atxoi")
 
 [node name="Candle" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(225, 213)
+position = Vector2(146, 197)
 texture = ExtResource("3_bkgmx")
 
 [node name="CandleContainer" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="MaxLeft" type="Marker2D" parent="CandleContainer"]
-position = Vector2(195, 216)
+position = Vector2(114, 200)
 
 [node name="Center" type="Marker2D" parent="CandleContainer"]
-position = Vector2(225, 213)
+position = Vector2(144, 197)
 
 [node name="MaxRight" type="Marker2D" parent="CandleContainer"]
-position = Vector2(254, 216)
+position = Vector2(173, 200)
 
 [node name="MaxUp" type="Marker2D" parent="CandleContainer"]
-position = Vector2(253, 194)
+position = Vector2(172, 178)
 
 [node name="MaxDown" type="Marker2D" parent="CandleContainer"]
-position = Vector2(221, 233)
+position = Vector2(140, 217)
 
 [node name="CentralZone" type="Node2D" parent="."]
+position = Vector2(-79, -16)
+metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="CentralZone" groups=["candle_mini_game_zone"]]
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CentralZone/Area2D"]
-position = Vector2(80, 8)
+position = Vector2(80, 12)
 shape = SubResource("RectangleShape2D_xeeyv")
 
 [node name="Points" type="Node2D" parent="CentralZone"]
@@ -300,8 +304,8 @@ offset_value = Vector2(60, 50)
 rotation_speed = 80.0
 target_rotation_value = -75.0
 target_offset_value = Vector2(105, 82)
-moving_distance_y = 50.0
-moving_distance_x = 50.0
+moving_distance_y = 150.0
+moving_distance_x = 150.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
 toleration_procent = 0.8
@@ -315,8 +319,8 @@ offset_value = Vector2(-60, 50)
 rotation_speed = -80.0
 target_rotation_value = 75.0
 target_offset_value = Vector2(-15, 82)
-moving_distance_y = 50.0
-moving_distance_x = 50.0
+moving_distance_y = 150.0
+moving_distance_x = 150.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
 toleration_procent = 0.8
@@ -332,11 +336,11 @@ symbol_icons = ExtResource("9_xeeyv")
 rotation_speed = 80.0
 rotation_direction = -1.0
 target_offset_value = Vector2(152, 88)
-moving_distance_y = -170.0
-moving_distance_x = 170.0
+moving_distance_y = -340.0
+moving_distance_x = 340.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.8
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/TopLeftPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -345,11 +349,11 @@ position = Vector2(80, -12)
 symbol_icons = ExtResource("9_xeeyv")
 rotation_speed = 80.0
 target_offset_value = Vector2(152, -88)
-moving_distance_y = 170.0
-moving_distance_x = 170.0
+moving_distance_y = 340.0
+moving_distance_x = 340.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.8
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/BottomLeftPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -357,11 +361,11 @@ border_area = NodePath("../../../Area2D")
 symbol_icons = ExtResource("9_xeeyv")
 rotation_speed = 80.0
 target_offset_value = Vector2(-152, 88)
-moving_distance_y = -170.0
-moving_distance_x = -170.0
+moving_distance_y = -340.0
+moving_distance_x = -340.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.8
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/TopRightPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -369,11 +373,11 @@ border_area = NodePath("../../../Area2D")
 symbol_icons = ExtResource("9_xeeyv")
 rotation_speed = -80.0
 target_offset_value = Vector2(-152, -88)
-moving_distance_y = 170.0
-moving_distance_x = -170.0
+moving_distance_y = 340.0
+moving_distance_x = -340.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.8
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/BottomRightPoint")
 border_area = NodePath("../../../Area2D")
 target_rotation_point = NodePath("../../../Points/BottomRightPoint")
@@ -381,8 +385,10 @@ target_rotation_point = NodePath("../../../Points/BottomRightPoint")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -79.0
+offset_top = -16.0
+offset_right = -39.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -457,19 +463,21 @@ vertical_alignment = 1
 
 [node name="Info" type="NinePatchRect" parent="CanvasLayer"]
 texture_filter = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
+offset_left = -336.0
 offset_top = -52.0
-offset_right = 208.0
-offset_bottom = 52.0
+offset_bottom = 112.0
+grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("1_1kp0f")
 patch_margin_left = 26
 patch_margin_top = 26
 patch_margin_right = 27
 patch_margin_bottom = 27
-metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Info"]
 layout_mode = 1
@@ -486,7 +494,7 @@ theme_override_constants/margin_bottom = 10
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Info/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("4_vgndv")
-theme_override_font_sizes/normal_font_size = 0
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "Rotate the crystal [img=16x16]res://Sprite/Items/CrystalShardSmall.png[/img] with the buttons [img=16x16]res://Sprite/Informations/arrow_button.png[/img] and change the candle's [img=11x16]res://Sprite/CandleMinGame/candle.png[/img] position. Find all the symbols [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]. "
 vertical_alignment = 1

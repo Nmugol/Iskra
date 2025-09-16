@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5jhvegysctic"]
+[gd_scene load_steps=13 format=3 uid="uid://c5jhvegysctic"]
 
 [ext_resource type="Script" uid="uid://cr8dggt4fem8f" path="res://Script/World.gd" id="1_23x67"]
 [ext_resource type="PackedScene" uid="uid://ctwgijy445nx2" path="res://Scenes/GUI/Setting.tscn" id="2_45d1s"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dny7k62r5c16u" path="res://Scenes/Player/Equipment.tscn" id="3_5nsto"]
 [ext_resource type="PackedScene" uid="uid://qmdgtogrjq2q" path="res://Scenes/GUI/Map.tscn" id="4_gjpho"]
 [ext_resource type="PackedScene" uid="uid://do87224qs6nh6" path="res://Scenes/GUI/UI.tscn" id="5_p70al"]
+[ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="7_y7y61"]
 
 [sub_resource type="Animation" id="Animation_p70al"]
 length = 0.001
@@ -278,8 +279,10 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -117.0
-offset_top = -48.0
+offset_top = -49.0
+offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_font_sizes/font_size = 27
+theme = ExtResource("7_y7y61")
+theme_override_font_sizes/font_size = 48
 text = "Loading"

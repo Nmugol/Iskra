@@ -10,11 +10,11 @@ extends Node2D
 @onready var contro_button: Control = %UI
 
 func _ready() -> void:
+
 	transition.play("loading")
-	await transition.animation_finished
-	
 	_connect_signals()
 	load_level()
+	await transition.animation_finished
 
 
 func _connect_signals() -> void:

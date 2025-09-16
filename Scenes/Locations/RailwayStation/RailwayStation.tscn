@@ -142,10 +142,10 @@ physics_interpolation_mode = 1
 position = Vector2(2120, -40)
 zoom = Vector2(2.2, 2.2)
 process_callback = 0
-limit_left = 72
-limit_top = -392
-limit_right = 2488
-limit_bottom = 376
+limit_left = -368
+limit_top = -200
+limit_right = 1040
+limit_bottom = 424
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -302,6 +302,7 @@ position = Vector2(-6, 14)
 texture = SubResource("AtlasTexture_1s613")
 
 [node name="Cart" type="Area2D" parent="EventArea"]
+visible = false
 position = Vector2(2130, -112)
 metadata/_edit_group_ = true
 
@@ -311,6 +312,8 @@ texture = SubResource("AtlasTexture_nv2js")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/Cart"]
 shape = SubResource("CircleShape2D_h1ofm")
+
+[node name="Marker2D" type="Marker2D" parent="EventArea/Cart"]
 
 [node name="Blok" type="Node2D" parent="."]
 

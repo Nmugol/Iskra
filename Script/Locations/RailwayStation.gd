@@ -8,6 +8,7 @@ extends Node2D
 
 @onready var cart: Area2D = $EventArea/Cart
 @onready var give_sheet: Area2D = $EventArea/GiveSTeelSheet
+@onready var mini_game_pos: Marker2D = $EventArea/Cart/Marker2D
 
 @onready var mini_game = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
 const  MAIN_SCENE = "res://Scenes/World.tscn"
@@ -115,7 +116,7 @@ func _on_cart_mouse_entered() -> void:
 func _load_game()-> void:
 	game = mini_game.instantiate()
 	game.z_index = 1
-	game.global_position = $PhantomCamera2D.global_position
+	game.global_position = mini_game_pos.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
 	game_load_finish = true

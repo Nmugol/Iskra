@@ -75,6 +75,8 @@ func _process(_delta: float) -> void:
 				"I wish I could grab it, but it's too far away."
 			]
 
+			Signals.show_dialog.emit()
+
 			Signals.player_message.emit("Daniel",
 				message[randi_range(0, message.size() - 1)]
 			)

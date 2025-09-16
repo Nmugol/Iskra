@@ -27,10 +27,6 @@ class_name Symbol
 @export var target_rotation_point: Marker2D # Docelowy punkt obrotu
 @export var area_2d: Area2D 
 
-@export var target_delay_time: float = 0.5  # Czas w sekundach wymagany do uznania symbolu za w miejscu
-var target_timer: float = 0.0  # Timer do śledzenia czasu w miejscu docelowym
-var was_in_target: bool = false  # Poprzedni stan
-
 var rotate_flag: bool = false # Czy obracać symbol
 var rotate_to_left_flag: bool = false # Czy obracać w lewo
 
@@ -44,6 +40,13 @@ var in_target: bool = false #Czy jest w docelowym punkcie
 
 var in_border_area: bool = false
 var is_active: bool = false # Czy symbol jest aktywny
+
+@onready var timer: Timer = $Timer
+var start_timer: float = false
+
+func start_timer_func() -> void:
+	timer.start()
+	start_timer = false
 
 func _ready() -> void:
 
@@ -122,25 +125,25 @@ func _process(delta: float) -> void:
 		if move_left_flag:
 			if moving_distance_x == 0:
 				return
-			symbol.offset.x += -moving_distance_x * delta
+			symbol.offset.x += round(-moving_distance_x * delta)
 		else:
 			if moving_distance_x == 0:
 				return
-			symbol.offset.x -= -moving_distance_x * delta
+			symbol.offset.x -= round(-moving_distance_x * delta)
 
 	# Obsługa przesuwania po osi Y
 	if move_on_y_axis:
 		if move_up_flag:
 			if moving_distance_y == 0:
 				return
-			symbol.offset.y -= moving_distance_y * delta
+			symbol.offset.y -= round(moving_distance_y * delta)
 		else:
 			if moving_distance_y == 0:
 				return
-			symbol.offset.y += moving_distance_y * delta
+			symbol.offset.y += round(moving_distance_y * delta)
 	area_2d.global_position = symbol.global_position
 	area_2d.position += symbol.offset
-	symbol_in_target_space(delta)
+	symbol_in_target_space()
 	update_symbol_opacity()
 	
 func update_symbol_opacity() -> void:
@@ -151,6 +154,7 @@ func update_symbol_opacity() -> void:
 
 	# Ustaw przezroczystość symbolu na podstawie dopasowania do celu
 	symbol.modulate = Color(1, 1, 1, calculate_match_percentage())
+
 
 func calculate_match_percentage() -> float:
 	# Oblicz dopasowanie odległości (0.0 - 1.0)
@@ -166,27 +170,25 @@ func calculate_match_percentage() -> float:
 	
 	return overall_match
 
-# Sprawdź, czy symbol jest wystarczająco dopasowany do celu (>= 95%)
-func symbol_in_target_space(delta: float) -> void:
-	var current_match = calculate_match_percentage()
-	var is_currently_in_target = current_match >= toleration_procent
-	
-	if is_currently_in_target and not in_target:
-		# Zaczynamy liczyć czas gdy symbol jest w docelowej pozycji
-		target_timer += delta
-		
-		# Jeśli symbol był w docelowej pozycji wystarczająco długo
-		if target_timer >= target_delay_time:
-			in_target = true
-			target_timer = 0.0  # Resetujemy timer
+func symbol_in_target_space() -> void:
+	var is_in_toleration_zone = (calculate_match_percentage() >= toleration_procent)
 
-	elif not is_currently_in_target and in_target:
-		# Symbol opuścił docelową pozycję - natychmiastowo ustawiamy flagę
-		in_target = false
-		target_timer = 0.0  # Resetujemy timer
-	elif not is_currently_in_target:
-		# Symbol nie jest w docelowej pozycji - resetujemy timer
-		target_timer = 0.0
+	if is_in_toleration_zone and not timer.is_stopped():
+		return # Timer już działa
+
+	if is_in_toleration_zone and not in_target:
+		timer.start() # Rozpoczyna odliczanie
+
+	elif not is_in_toleration_zone and timer.is_stopped():
+		in_target = false # Resetuje flagę
 	
-	# Zapamiętujemy obecny stan dla następnej klatki
-	was_in_target = in_target
+	elif not is_in_toleration_zone and not timer.is_stopped():
+		timer.stop() # Przerywa odliczanie
+
+
+func _on_timer_timeout() -> void:
+	if calculate_match_percentage() >= toleration_procent:
+		in_target = true
+		return
+	
+	in_target = false

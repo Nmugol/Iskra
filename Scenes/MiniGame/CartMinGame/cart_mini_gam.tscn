@@ -86,19 +86,21 @@ cart_position_2 = NodePath("Node2D/Level3/Marker2D")
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer"]
 texture_filter = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
+offset_left = -404.0
 offset_top = -54.0
-offset_right = 181.0
-offset_bottom = 54.0
+offset_bottom = 86.0
+grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("9_43d8e")
 patch_margin_left = 26
 patch_margin_top = 26
 patch_margin_right = 27
 patch_margin_bottom = 27
-metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/NinePatchRect2"]
 layout_mode = 1
@@ -117,6 +119,7 @@ texture_filter = 1
 layout_mode = 2
 theme = ExtResource("4_xcvqf")
 theme_override_constants/line_separation = 5
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "Use the lever [img=16x16]res://Sprite/Informations/lever.png[/img] to turn the tracks so the mine cart [img=16x16]res://Sprite/Informations/cart.png[/img]  reaches its destination."
 vertical_alignment = 1
@@ -175,6 +178,7 @@ wait_time = 0.5
 position = Vector2(-88, -97)
 
 [node name="BG" type="Node2D" parent="Node2D"]
+position = Vector2(1, 0)
 metadata/_edit_group_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Node2D/BG"]
