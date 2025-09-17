@@ -3,6 +3,7 @@ class_name StopPoint
 
 @export var neighbor_point: Array[StopPoint] = []
 @export var is_active: bool = false
+@export var is_finish: bool = false
 
 @onready var sprite: Sprite2D = $Area2D/Sprite2D
 
@@ -12,9 +13,10 @@ var player_on_point: bool = false
 var mouse_on: bool = false
 
 func _ready():
-	Signals.disabe_stop_point.connect(func () -> void: 
-		is_active = false
-		player_on_point = false
+	Signals.disabe_stop_point.connect(
+		func (): 
+			player_on_point = false
+			is_active = false
 	)
 
 func _process(_delta: float) -> void:
@@ -28,6 +30,9 @@ func _process(_delta: float) -> void:
 		for nightbor in neighbor_point:
 			nightbor.is_active = true
 		player_on_point = true
+	
+	if is_finish and player_on_point :
+		print("wygrana")
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_on = true

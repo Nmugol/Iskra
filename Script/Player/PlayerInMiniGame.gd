@@ -3,7 +3,7 @@ class_name PlayerInMiniGame
 
 @export var speed: float = 100
 
-var position_to_move: Vector2 = Vector2.ZERO
+var position_to_move: Vector2 = Vector2(70,87)
 const MIN_DISTANCE: float = 5.0
 
 func _ready() -> void:
