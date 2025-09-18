@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvpm72ybxkc3e"]
+
+[ext_resource type="PackedScene" uid="uid://dtkwjlv4gidxq" path="res://Scenes/MiniGame/PatrolMiniGame/stop_point.tscn" id="1_n4ys1"]
+[ext_resource type="PackedScene" uid="uid://c1544mlp1r1yr" path="res://Scenes/MiniGame/PatrolMiniGame/patrol.tscn" id="2_y62ny"]
+[ext_resource type="PackedScene" uid="uid://chmoeowym2hhd" path="res://Scenes/Player/PlayerInMiniGame.tscn" id="3_u7p48"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="Point_1" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+neighbor_point = [NodePath("../Point_2"), NodePath("../Point_3"), NodePath("../Point_4"), NodePath("../Point_5")]
+
+[node name="Point_2" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(-64, 0)
+neighbor_point = [NodePath("../Point_1"), NodePath("../Point_6"), NodePath("../Point_3"), NodePath("../Point_9"), NodePath("../Point_5")]
+is_active = true
+
+[node name="Point_3" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(0, -64)
+neighbor_point = [NodePath("../Point_1"), NodePath("../Point_2"), NodePath("../Point_6"), NodePath("../Point_8"), NodePath("../Point_4")]
+is_active = true
+
+[node name="Point_4" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(64, 0)
+neighbor_point = [NodePath("../Point_1"), NodePath("../Point_3"), NodePath("../Point_8"), NodePath("../Point_5"), NodePath("../Point_7")]
+is_active = true
+
+[node name="Point_5" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(0, 64)
+neighbor_point = [NodePath("../Point_1"), NodePath("../Point_2"), NodePath("../Point_4"), NodePath("../Point_9"), NodePath("../Point_7")]
+is_active = true
+
+[node name="Point_6" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(-80, -80)
+neighbor_point = [NodePath("../Point_2"), NodePath("../Point_3")]
+
+[node name="Point_7" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(80, 80)
+neighbor_point = [NodePath("../Point_5"), NodePath("../Point_4")]
+is_finish = true
+
+[node name="Point_8" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(80, -80)
+neighbor_point = [NodePath("../Point_3"), NodePath("../Point_4")]
+
+[node name="Point_9" parent="." node_paths=PackedStringArray("neighbor_point") instance=ExtResource("1_n4ys1")]
+position = Vector2(-80, 80)
+neighbor_point = [NodePath("../Point_2"), NodePath("../Point_5")]
+
+[node name="Patrol2" parent="." instance=ExtResource("2_y62ny")]
+position = Vector2(-80, 80)
+speed = 5000.0
+position_to_move = Vector2(-80, 80)
+
+[node name="Patrol3" parent="." instance=ExtResource("2_y62ny")]
+position = Vector2(80, -80)
+speed = 5000.0
+position_to_move = Vector2(80, -80)
+
+[node name="Player" parent="." instance=ExtResource("3_u7p48")]
+speed = 5000.0
+position_to_move = Vector2(0, 0)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-80, 80, 0, 64, 80, 80, 64, 0, 80, -80, 0, -64, -80, -80, -64, 0, -80, 80, 0, 64, 64, 0, 0, -64, -64, 0, 0, 64, 0, -64, -64, 0, 64, 0)
+width = 5.0

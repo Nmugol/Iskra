@@ -1,44 +1,50 @@
 extends Node2D
 
-@onready var level1: Node2D = $StopPoints/Level1
-@onready var level2: Node2D = $StopPoints/Level2
-@onready var level3: Node2D = $StopPoints/Level3
+
+@export_category("Player start points")
+@export var player_start_points: Array[StopPoint] = []
+
+@export_category("Patrol start points")
+@export var patrol_start_points: Array[StopPoint] = []
+
+@onready var level_loader_node: Node2D = $StopPoints
+
+var level_1: PackedScene = preload("res://Scenes/MiniGame/PatrolMiniGame/level_1.tscn")
+var level_2: PackedScene = preload("res://Scenes/MiniGame/PatrolMiniGame/level_2.tscn")
+var level_3: PackedScene = preload("res://Scenes/MiniGame/PatrolMiniGame/level_3.tscn")
+
+var current_level: int = 1
 
 func _ready() -> void:
+	print(current_level)
+	level_loader()
+	connect_signals()
+func _process(delta: float) -> void:
+	print(current_level)
+
+func connect_signals() -> void:
+	Signals.reset_level.connect(reset_level)
+	Signals.next_level.connect(func():
+		current_level += 1
+		level_loader()
+	)
+
+func level_loader() -> void: 
 	
-	level1.show()
-	level2.hide()
-	level3.hide()
+	for c in level_loader_node.get_children():
+		c.queue_free()
+	
+	var level: Node = null
+	
+	match current_level:
+		1:
+			level = level_1.instantiate()
+		2: 
+			level = level_2.instantiate()
+		3:
+			level = level_3.instantiate() 
+	if level != null:
+		level_loader_node.add_child(level)
 
-
-	drawing_path(level1)
-
-func drawing_path(level: Node2D) -> void:
-	var points: Array[Node] =         level.find_children("*", "StopPoint", false, false)
-	var all_connections: Dictionary = {}
-
-	for point in points:
-		for neighbor in point.neighbor_point:
-			var pair: Array[StopPoint] = [point, neighbor]
-			# Używamy sort_custom do sortowania na podstawie nazw węzłów
-			pair.sort_custom(func(a, b): return a.name < b.name)
-
-			# Tworzymy unikalny klucz ze stringów, aby go zahasować
-			var key: String = "%s-%s" % [pair[0].name, pair[1].name]
-
-			# Przypisujemy parę jako wartość, używając stringowego klucza do deduplikacji
-			all_connections[key] = pair
-
-	# Iterujemy po wartościach słownika, które zawierają unikalne pary
-	for connection_pair in all_connections.values():
-		var line: Line2D = Line2D.new()
-		var start_point: StopPoint = connection_pair[0]
-		var end_point: StopPoint = connection_pair[1]
-
-		# Rysujemy linię, używając globalnych pozycji i odejmując pozycję rodzica
-		line.add_point(start_point.global_position - level.global_position)
-		line.add_point(end_point.global_position - level.global_position)
-		line.width = 5
-		line.default_color = Color(0.6392157, 0.19215687, 0.19215687)
-
-		level.add_child(line)
+func reset_level() -> void:
+	level_loader()

@@ -91,7 +91,7 @@ signal set_cart_pos(pos: Vector2)
 signal get_cart(cart: Cart)
 
 @warning_ignore("unused_signal")
-signal  set_cursor(cursor_name: State.Cursors)
+signal set_cursor(cursor_name: State.Cursors)
 
 @warning_ignore("unused_signal")
 signal reset_cursor()
@@ -124,4 +124,28 @@ signal reset_symbol()
 signal move_player_to_point(point: Vector2)
 
 @warning_ignore("unused_signal")
-signal disabe_stop_point()
+signal disable_stop_point()
+
+@warning_ignore("unused_signal")
+signal player_in_stop_point(pos: Vector2)
+
+@warning_ignore("unused_signal")
+signal move_patrol_to_point(patrol_id: String, pos: Vector2)
+
+@warning_ignore("unused_signal")
+signal patrol_in_stop_point(patrol_id: String, pos: Vector2)
+
+@warning_ignore("unused_signal")
+signal patrol_left_point(patrol_id: String, pos: Vector2)
+
+@warning_ignore("unused_signal")
+signal reset_level()
+
+@warning_ignore("unused_signal")
+signal next_level()
+	
+@warning_ignore("unused_signal")
+signal set_player_pos(pos: Vector2)
+
+@warning_ignore("unused_signal")
+signal disable_all_stop_points

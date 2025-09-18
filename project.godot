@@ -53,6 +53,7 @@ import/blender/enabled=false
 Player=""
 Cart=""
 candle_mini_game_zone=""
+TurnManager=""
 
 [input]
 
