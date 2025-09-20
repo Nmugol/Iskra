@@ -7,7 +7,7 @@ class_name StopPoint
 @export var is_finish: bool = false
 @export var starting_patrols: Array[NodePath] = []  # Ścieżki do patroli które startują z tego punktu
 
-@onready var sprite: Sprite2D = $Area2D/Sprite2D
+@onready var sprite: AnimatedSprite2D = $Area2D/Sprite2D
 
 # Słowniki do śledzenia wielu patroli
 var patrols_on_point: Dictionary = {}  # {patrol_id: bool}
@@ -20,6 +20,8 @@ var finish: bool = false
 func _ready():
 	# Inicjalizuj patrole startujące z tego punktu
 	initialize_starting_patrols()
+	
+	
 
 	Signals.disable_stop_point.connect(
 		func ():
@@ -61,6 +63,14 @@ func initialize_starting_patrols() -> void:
 			patrol_next_move(patrol.patrol_id, self.global_position)
 
 func _process(_delta: float) -> void:
+	if not is_active:
+		sprite.play("disable")
+	else:
+		sprite.play("default")
+	
+	if is_finish:
+		sprite.play("home")
+	
 	# Sprawdź kolizję z dowolnym patrolem
 	if player_on_point and not patrols_on_point.is_empty():
 		Signals.reset_level.emit()
@@ -76,16 +86,14 @@ func _process(_delta: float) -> void:
 
 	# Aktualizuj kolor sprite'a jeśli którykolwiek patrol zmierza do tego punktu
 	if not patrols_going_to_point.is_empty():
-		sprite.modulate = Color(1, 0, 0)
+		sprite.play("patrol")
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_on = true
-	if is_active:
-		sprite.modulate = Color(0.29803923, 0.80784315, 0.40392157)
 
 func _on_area_2d_mouse_exited() -> void:
 	mouse_on = false
-	sprite.modulate = Color(1, 1, 1, 1)
+	sprite.play("default")
 
 func patrol_next_move(patrol_id: String, pos: Vector2) -> void:
 	if not pos == self.global_position: return
@@ -94,7 +102,7 @@ func patrol_next_move(patrol_id: String, pos: Vector2) -> void:
 	patrols_going_to_point.erase(patrol_id)
 
 	if patrols_going_to_point.is_empty():
-		sprite.modulate = Color(1, 1, 1, 1)
+		sprite.play("default")
 
 	await get_tree().create_timer(0.5).timeout
 
@@ -112,4 +120,4 @@ func patrol_left_point(patrol_id: String, pos: Vector2) -> void:
 		patrols_on_point.erase(patrol_id)
 		patrols_going_to_point.erase(patrol_id)
 		if patrols_going_to_point.is_empty():
-			sprite.modulate = Color(1, 1, 1, 1)
+			sprite.play("default")

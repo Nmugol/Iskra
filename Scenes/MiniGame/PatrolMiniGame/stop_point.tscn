@@ -1,7 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtkwjlv4gidxq"]
+[gd_scene load_steps=9 format=3 uid="uid://dtkwjlv4gidxq"]
 
 [ext_resource type="Script" uid="uid://cipfoyqqlj8o3" path="res://Script/Class/StopPoint.gd" id="1_cikq4"]
-[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_oaycu"]
+[ext_resource type="Texture2D" uid="uid://cnbygm435feql" path="res://Sprite/PatrolMiniGame/StopPoint.png" id="2_oaycu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_006jq"]
+atlas = ExtResource("2_oaycu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h18b3"]
+atlas = ExtResource("2_oaycu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rcy7"]
+atlas = ExtResource("2_oaycu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40emu"]
+atlas = ExtResource("2_oaycu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1av3w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_006jq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h18b3")
+}],
+"loop": true,
+"name": &"disable",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rcy7")
+}],
+"loop": true,
+"name": &"home",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40emu")
+}],
+"loop": true,
+"name": &"patrol",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oaycu"]
 size = Vector2(26, 26)
@@ -13,9 +64,8 @@ script = ExtResource("1_cikq4")
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_oaycu")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_1av3w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_oaycu")
