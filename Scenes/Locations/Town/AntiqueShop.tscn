@@ -44,9 +44,10 @@ _data = {
 }
 point_count = 11
 
-[node name="AntiqueShop" type="Node2D" node_paths=PackedStringArray("player", "emil", "miriam", "miriam_path", "emil_path", "exit_1", "exit_2")]
+[node name="AntiqueShop" type="Node2D" node_paths=PackedStringArray("player", "mini_game_position", "emil", "miriam", "miriam_path", "emil_path", "exit_1", "exit_2")]
 script = ExtResource("1_dg87u")
 player = NodePath("Player")
+mini_game_position = NodePath("Events/MiniGamePos")
 emil = NodePath("NPCs/EmilPath/PathFollow2D/Emil")
 miriam = NodePath("NPCs/MirialPath/PathFollow2D/Miriam")
 miriam_path = NodePath("NPCs/MirialPath")
@@ -60,10 +61,10 @@ physics_interpolation_mode = 1
 position = Vector2(-84, 304)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -368
-limit_top = -200
-limit_right = 1040
-limit_bottom = 424
+limit_left = 359
+limit_top = -705
+limit_right = 1049
+limit_bottom = -229
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -262,3 +263,8 @@ loop = false
 
 [node name="Emil" parent="NPCs/EmilPath/PathFollow2D" instance=ExtResource("14_05tpc")]
 visible = false
+
+[node name="Events" type="Node2D" parent="."]
+
+[node name="MiniGamePos" type="Marker2D" parent="Events"]
+position = Vector2(200, 136)

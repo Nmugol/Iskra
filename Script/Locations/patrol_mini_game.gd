@@ -19,8 +19,6 @@ func _ready() -> void:
 	print(current_level)
 	level_loader()
 	connect_signals()
-func _process(delta: float) -> void:
-	print(current_level)
 
 func connect_signals() -> void:
 	Signals.reset_level.connect(reset_level)
@@ -43,6 +41,9 @@ func level_loader() -> void:
 			level = level_2.instantiate()
 		3:
 			level = level_3.instantiate() 
+		4:
+			Signals.finish_patrol_game.emit()
+
 	if level != null:
 		level_loader_node.add_child(level)
 

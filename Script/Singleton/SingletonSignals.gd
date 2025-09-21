@@ -149,3 +149,6 @@ signal set_player_pos(pos: Vector2)
 
 @warning_ignore("unused_signal")
 signal disable_all_stop_points
+
+@warning_ignore("unused_signal")
+signal finish_patrol_game()

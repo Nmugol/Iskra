@@ -65,12 +65,6 @@ func _on_master_slider_value_changed(value:float) -> void:
 	updateLabels()
 
 
-func _on_sound_effects_slider_value_changed(value:float) -> void:
-	Settings.sound_effects_volume = value
-	Settings.save_settings()
-	updateLabels()
-
-
 func _on_music_slider_value_changed(value:float) -> void:
 	Settings.music_volume = value
 	Settings.save_settings()
@@ -85,6 +79,7 @@ func updateLabels() -> void:
 func _on_button_button_down() -> void:
 	Signals.delete_save.emit()
 
-
-func _on_sound_effects_slider_changed() -> void:
-	pass # Replace with function body.
+func _on_sound_effects_slider_value_changed(value:float) -> void:
+	Settings.sound_effects_volume = value
+	Settings.save_settings()
+	updateLabels()

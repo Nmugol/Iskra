@@ -37,6 +37,7 @@ func _connect_signals() -> void:
 	Signals.hide_settings_in_game.connect(hide_setting_in_game)
 	
 func load_level() -> void:
+	print( "Phase: ", State.state_phase, "Number: ",State.state_number)
 	State.is_running = false
 	State.is_loading = true
 	# Usunięcie czelniejszych zładowanych scen

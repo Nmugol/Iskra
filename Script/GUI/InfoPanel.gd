@@ -36,7 +36,7 @@ var height: float = 150.0:
 			else:
 				hide()
 
-@export var active_on_stages: Array[int] = []
+@export var active_on_stages: Array[int]
 
 func _ready() -> void:
 	# Ustaw początkowe wartości po załadowaniu węzłów
@@ -63,3 +63,10 @@ func _ready() -> void:
 		if is_visible_flag and active_on_stages.has(State.state_number): 
 			show()
 	)
+
+func _process(_delta: float) -> void:
+	print(State.state_number)
+	if active_on_stages.has(State.state_number) and is_visible_flag:
+		show()
+	else:
+		hide()

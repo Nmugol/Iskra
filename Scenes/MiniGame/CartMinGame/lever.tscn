@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://gevsv0nxju2n"]
+[gd_scene load_steps=5 format=3 uid="uid://gevsv0nxju2n"]
 
 [ext_resource type="Script" uid="uid://cdawyo11jgq44" path="res://Script/Class/Lever.gd" id="1_8iida"]
+[ext_resource type="AudioStream" uid="uid://jsfgt8mtp3kg" path="res://Sound/JDSherbert - Ultimate UI SFX Pack/Free/Mono/ogg/JDSherbert - Ultimate UI SFX Pack - Swipe - 1.ogg" id="2_4xou6"]
 [ext_resource type="SpriteFrames" uid="uid://b87yfb15yp4t0" path="res://lever.tres" id="2_8iida"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8iida"]
 size = Vector2(16, 16)
 
-[node name="Lever" type="Node2D"]
+[node name="Lever" type="Node2D" node_paths=PackedStringArray("sound_player")]
 script = ExtResource("1_8iida")
+sound_player = NodePath("AudioStreamPlayer")
+lever_sfx = ExtResource("2_4xou6")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -21,6 +24,8 @@ frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_8iida")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

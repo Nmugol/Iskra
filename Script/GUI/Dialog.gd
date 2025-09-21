@@ -1,5 +1,6 @@
 extends Node
 
+@export_category("Icons")
 @export var icons: Dictionary[String, CompressedTexture2D]
 
 @onready var people_panel: NinePatchRect = %PeoplePanel
@@ -13,6 +14,15 @@ extends Node
 
 @onready var timer: Timer = $Timer
 @onready var close_button: TextureButton = %CloseButton
+
+@export_category("Text")
+@export var info_text: Label
+@export var info_timer: Timer
+
+@export_category("Audio")
+@export var sound_player: AudioStreamPlayer
+@export var typewriter_sfx: AudioStream
+
 
 var display_speed: float = 0.1
 var queue: Array = []
@@ -30,6 +40,7 @@ func _ready() -> void:
 	finish_state = true
 	Signals.people_message.connect(func(icon, text): add_to_queue(people_talk, icon, text))
 	Signals.player_message.connect(func(icon, text): add_to_queue(player_talk, icon, text))
+	Signals.show_dialog.connect(func()-> void: info_timer.start())
 	timer.timeout.connect(_on_timer_timeout)
 
 func _process(_delta: float) -> void:
@@ -98,6 +109,11 @@ func _on_timer_timeout() -> void:
 		text_to_display.visible_characters += 1
 		current_char_index += 1
 		scroll.scroll_vertical = floor(scroll.get_v_scroll_bar().max_value)
+		var current_char = current_text[current_char_index-1]
+		var pitch: float = randf_range(0.15, 0.25)
+		if not current_char in ["a", "o", "u", "d", "p"]:  pitch += 0.2
+		
+		play_sound(typewriter_sfx, pitch)
 		timer.start()
 	else:
 		text_is_end = true
@@ -116,3 +132,14 @@ func _on_text_finished():
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
 	State.is_running = true
+
+
+func _on_info_timeout() -> void:
+	info_text.show()
+
+func play_sound(stream: AudioStream, pitch_scale: float = 1.0) -> void:
+	if stream != null and sound_player != null:
+		sound_player.stream = stream
+		sound_player.pitch_scale = pitch_scale
+		sound_player.volume_db = -15
+		sound_player.play()

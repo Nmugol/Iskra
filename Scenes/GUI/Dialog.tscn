@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ch7ywbdvrm5ud"]
+[gd_scene load_steps=28 format=3 uid="uid://ch7ywbdvrm5ud"]
 
 [ext_resource type="Script" uid="uid://dgus4uexcarco" path="res://Script/GUI/Dialog.gd" id="1_0hepe"]
 [ext_resource type="Texture2D" uid="uid://glidwj223lpj" path="res://Sprite/Character/Guards/Guard Face.png" id="2_lu68g"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://ri4xkks1ar6" path="res://Sprite/Character/Peter/Peter Face.png" id="19_sflmd"]
 [ext_resource type="Texture2D" uid="uid://cqaoa43fo2d0v" path="res://Sprite/Character/Przemek/Przemek Face.png" id="20_yc2vb"]
 [ext_resource type="Texture2D" uid="uid://dpe2fyc4ogfcg" path="res://Sprite/Character/Zygmunt/Zygmunt Face.png" id="21_71ten"]
+[ext_resource type="AudioStream" uid="uid://d1lmmktfigqan" path="res://Sound/mixkit-single-key-type-2533.wav" id="22_tnyw7"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="22_v3bn7"]
 [ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="23_1eixm"]
 [ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="23_h15r2"]
@@ -33,7 +34,7 @@ region = Rect2(0, 44, 21, 21)
 atlas = ExtResource("23_h15r2")
 region = Rect2(0, 22, 21, 21)
 
-[node name="Dialog" type="Control"]
+[node name="Dialog" type="Control" node_paths=PackedStringArray("info_text", "info_timer", "sound_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +64,10 @@ icons = Dictionary[String, CompressedTexture2D]({
 "Przemek": ExtResource("20_yc2vb"),
 "Zygmunt": ExtResource("21_71ten")
 })
+info_text = NodePath("Box/HBoxContainer/DialogPanel/InfoText")
+info_timer = NodePath("Info")
+sound_player = NodePath("AudioStreamPlayer")
+typewriter_sfx = ExtResource("22_tnyw7")
 
 [node name="Box" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -166,6 +171,18 @@ texture_disabled = SubResource("AtlasTexture_h15r2")
 texture_focused = SubResource("AtlasTexture_1eixm")
 stretch_mode = 4
 
+[node name="InfoText" type="Label" parent="Box/HBoxContainer/DialogPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -30.0
+offset_bottom = -4.0
+grow_horizontal = 2
+theme = ExtResource("23_1eixm")
+text = "Press SPACE to speed up text or skip to the next dialog."
+horizontal_alignment = 1
+
 [node name="PlayerPanel" type="NinePatchRect" parent="Box/HBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
@@ -196,4 +213,12 @@ layout_mode = 2
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="Info" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SoundEffects"
+
 [connection signal="pressed" from="Box/HBoxContainer/DialogPanel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="timeout" from="Info" to="." method="_on_info_timeout"]

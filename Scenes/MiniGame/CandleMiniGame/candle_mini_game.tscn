@@ -276,7 +276,7 @@ moving_distance_y = 50.0
 moving_distance_x = 200.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.9
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/TopLeftPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -291,6 +291,7 @@ moving_distance_y = 0.0
 moving_distance_x = 0.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/BottomRightPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -308,7 +309,7 @@ moving_distance_y = 150.0
 moving_distance_x = 150.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.8
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/BottomLeftPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -323,7 +324,7 @@ moving_distance_y = 150.0
 moving_distance_x = 150.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.8
+toleration_procent = 0.78
 center_point = NodePath("../../../Points/TopRightPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -469,8 +470,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -336.0
-offset_top = -52.0
-offset_bottom = 112.0
+offset_top = -82.0
+offset_bottom = 82.0
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("1_1kp0f")

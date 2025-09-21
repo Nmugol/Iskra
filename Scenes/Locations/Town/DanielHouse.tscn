@@ -50,7 +50,7 @@ width = 330.0
 height = 140.0
 text_to_display = "Use map [img]res://Sprite/Informations/mapa.png[/img] and select shopping area [img=16x16]res://Sprite/Map/ShoppingAreaIcon.png[/img] to fast travel"
 is_visible_flag = true
-active_on_stages = Array[int]([13])
+active_on_stages = Array[int]([13, 14])
 metadata/_edit_use_anchors_ = true
 
 [node name="Teren" type="Node2D" parent="."]
@@ -124,7 +124,7 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(704, -424)
+position = Vector2(729, -465)
 zoom = Vector2(2, 2)
 process_callback = 0
 limit_left = 359
@@ -140,7 +140,7 @@ script = ExtResource("7_hshii")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(704, -424)
+position = Vector2(729, -465)
 script = ExtResource("8_lesih")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -154,7 +154,7 @@ draw_limits = true
 limit_target = NodePath("../Border/CollisionShape2D")
 
 [node name="Player" parent="." instance=ExtResource("10_lw3dt")]
-position = Vector2(704, -424)
+position = Vector2(791, -465)
 
 [node name="BlockinAreas" type="Node2D" parent="."]
 

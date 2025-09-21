@@ -40,15 +40,12 @@ patrol_start_points = [null, null, null, null, null, null]
 
 [node name="Info" type="NinePatchRect" parent="CanvasLayer"]
 texture_filter = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -336.0
-offset_top = -52.0
-offset_bottom = 112.0
-grow_horizontal = 0
+offset_top = -82.0
+offset_right = 394.0
+offset_bottom = 82.0
 grow_vertical = 2
 texture = ExtResource("1_yhm1h")
 patch_margin_left = 26
@@ -73,7 +70,7 @@ layout_mode = 2
 theme = ExtResource("2_2ato4")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "Rotate the crystal [img=16x16]res://Sprite/Items/CrystalShardSmall.png[/img] with the buttons [img=16x16]res://Sprite/Informations/arrow_button.png[/img] and change the candle's [img=11x16]res://Sprite/CandleMinGame/candle.png[/img] position. Find all the symbols [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]. "
+text = "Lead Daniel [img=32x32]res://Sprite/PatrolMiniGame/Daniel.png[/img] home [img=32x32]res://Sprite/Informations/Home_stop_point.png[/img] by choosing the spot [img=32x32]res://Sprite/Informations/Stop_point.png[/img] to which he should go. Avoid arrest by patrols [img=32x32]res://Sprite/PatrolMiniGame/Patrol.png[/img]"
 vertical_alignment = 1
 
 [node name="BG" type="Node2D" parent="."]

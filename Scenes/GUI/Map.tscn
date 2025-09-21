@@ -35,6 +35,16 @@ size_flags_vertical = 4
 script = ExtResource("1_y1ncg")
 metadata/_edit_use_anchors_ = true
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -110,6 +120,7 @@ location_scene_path = "res://Scenes/Locations/Town/Town.tscn"
 location_position = Vector2(0, -72)
 location_name = "Town"
 location_icon = ExtResource("6_u51vk")
+disable_on_state = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 [node name="Mines" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 layout_mode = 1
@@ -131,6 +142,7 @@ location_scene_path = "res://Scenes/Locations/Mines/MineHub.tscn"
 location_position = Vector2(-460, 687)
 location_name = "Mines"
 location_icon = ExtResource("7_w6joy")
+disable_on_state = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 [node name="RailwayStation" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 layout_mode = 1
@@ -152,6 +164,7 @@ location_scene_path = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn
 location_position = Vector2(176, 384)
 location_name = "Railway station"
 location_icon = ExtResource("8_uw5t2")
+disable_on_state = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 [node name="ResidentialArea" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 layout_mode = 1
@@ -173,6 +186,7 @@ location_scene_path = "res://Scenes/Locations/Town/ResidentialHousesZone.tscn"
 location_position = Vector2(656, -560)
 location_name = "Residential area"
 location_icon = ExtResource("9_lubcl")
+disable_on_state = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 [node name="ShoppingDistrict" parent="MarginContainer/Panel" instance=ExtResource("2_ercyb")]
 layout_mode = 1
@@ -194,5 +208,6 @@ location_scene_path = "res://Scenes/Locations/Town/CommercialArea.tscn"
 location_position = Vector2(1392, 128)
 location_name = "Shopping area"
 location_icon = ExtResource("10_u51vk")
+disable_on_state = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 [connection signal="pressed" from="MarginContainer/Panel/CloseButton" to="." method="_on_close_button_pressed"]

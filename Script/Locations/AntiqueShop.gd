@@ -1,7 +1,11 @@
 extends Node2D
 
+const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 @export var player: Player
+
+@export_category("Mini game")
+@export var mini_game_position: Marker2D
 
 @export_category("NPC")
 @export var emil: NPC
@@ -19,13 +23,21 @@ extends Node2D
 @export var player_pos: Vector2
 
 
+var game: Node = null
+var mini_game = load("res://Scenes/MiniGame/PatrolMiniGame/patrol_mini_game.tscn")
+
+
 func _ready() -> void:
+
+	Signals.finish_patrol_game.connect(finish_patrol_mini_game)
+
 	if State.state_number == 13:
 		emil.show()
 		miriam.show()
 
 		player.navigation.target_position = player_pos
 		player.global_position = player_pos
+		player.position = player_pos
 
 		exit_1.monitorable = false
 		exit_1.monitoring = false
@@ -40,16 +52,16 @@ func _ready() -> void:
 		exit_2.monitorable = false        
 		exit_2.monitoring = false
 	
-
+	if State.state_number == 14 and game == null:
+		init_patrol_mini_game()
 
 
 func _process(_delta: float) -> void:
-	if State.is_loading: return
 
 	match State.state_number:
 		13:
 			match State.state_phase:
-				0:
+				1:
 					first_dialogue()
 				9:
 					miriam_path._play()
@@ -68,6 +80,39 @@ func _process(_delta: float) -> void:
 					emil_path._play()
 				9:
 					emil_path._finish_play()
+					State.state_phase = 0
+					State.state_number = 15
+		15:
+			match State.state_phase:
+				1:
+					Save.player_position = Vector2(791,-465) 
+					Save.current_scene_path = 'res://Scenes/Locations/Town/DanielHouse.tscn'
+					Signals.enable_loading_screen.emit()
+					get_tree().change_scene_to_file(MAIN_SCENE)
+
+func init_patrol_mini_game() -> void:
+	game = mini_game.instantiate()
+	game.z_index = 1
+	game.global_position = mini_game_position.global_position
+
+	add_child(game)
+	$PhantomCamera2D.follow_target = game
+	player.hide()
+	State.is_running = false
+
+func finish_patrol_mini_game() -> void:
+	$PhantomCamera2D.follow_target = player
+	
+	State.state_number = 15
+	State.state_phase = 1
+	
+
+	if game != null:
+		game.queue_free()
+		game = null
+
+	player.show()
+	State.is_running = true
 
 
 func first_dialogue() -> void:

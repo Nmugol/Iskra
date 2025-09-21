@@ -11,7 +11,7 @@ var mini_game = load("res://Scenes/MiniGame/CandleMiniGame/candle_mini_game.tscn
 var in_candle_mini_game_area: bool = false
 var mini_game_is_running: bool = false
 
-var game: Node
+var game: Node = null
 
 func _ready():
 	info_panel.is_visible_flag = false
@@ -21,6 +21,9 @@ func _ready():
 	else:
 		cart_mini_game_area.monitoring = false
 		cart_mini_game_area.monitorable = false
+	
+	if State.state_number >= 12:
+		info_panel.is_visible_flag = true
 	
 	# Automatyczne wznowienie mini-gry po powrocie do sceny
 	if State.state_number == 10 and game == null:

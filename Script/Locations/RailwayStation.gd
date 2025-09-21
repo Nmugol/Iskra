@@ -120,6 +120,7 @@ func _load_game()-> void:
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
 	game_load_finish = true
+	player.hide()
 	State.is_running = false
 
 func _finish_game()-> void:

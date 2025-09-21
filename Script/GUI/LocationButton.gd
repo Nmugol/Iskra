@@ -17,10 +17,18 @@ extends Button
 	set(value):
 		location_icon = value
 		icon = location_icon
+
+@export_category("Visibility")
+@export var disable_on_state: Array[int] = []
 		
 const  MAIN_SCENE = "res://Scenes/World.tscn"
+
 
 func _on_pressed() -> void:
 	Save.player_position = location_position
 	Save.current_scene_path = location_scene_path
 	get_tree().change_scene_to_file(MAIN_SCENE)
+
+func _pressed() -> void:
+	if disable_on_state.has(State.state_number):
+		self.hide()

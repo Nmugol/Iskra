@@ -41,6 +41,7 @@ folder_colors={
 "res://Script/GUI/": "green",
 "res://Script/Singleton/": "red",
 "res://Shaders/": "purple",
+"res://Sound/": "pink",
 "res://Sprite/": "blue"
 }
 
