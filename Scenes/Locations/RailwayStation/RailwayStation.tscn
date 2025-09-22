@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=32 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -17,8 +17,7 @@
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_ljs7w"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="16_bcjxh"]
 [ext_resource type="Script" uid="uid://cnfl0y7s5el55" path="res://Script/Class/ItemsOnScene.gd" id="17_mva2b"]
-[ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="18_pxp8k"]
-[ext_resource type="Texture2D" uid="uid://8p1syjqyicg4" path="res://Sprite/Items/SteelSheetSmal.png" id="19_egf6h"]
+[ext_resource type="PackedScene" uid="uid://b18j64xa02d8y" path="res://Scenes/Item.tscn" id="20_1s613"]
 [ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/CartMiniGame/Cart1.png" id="20_egf6h"]
 [ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="21_h1ofm"]
 
@@ -39,9 +38,6 @@ size = Vector2(96, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y4t6"]
 size = Vector2(96, 24)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mva2b"]
-radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxp8k"]
 radius = 40.0125
@@ -142,10 +138,10 @@ physics_interpolation_mode = 1
 position = Vector2(2120, -40)
 zoom = Vector2(2.2, 2.2)
 process_callback = 0
-limit_left = -368
-limit_top = -200
-limit_right = 1040
-limit_bottom = 424
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -174,7 +170,7 @@ collision_area = NodePath("Area2D2/CollisionPolygon2D")
 [node name="Area2D2" type="Area2D" parent="NavigationRegion"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion/Area2D2"]
-polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 136, 136, 136, 392, 216, 392, 216, 136, 520, 136, 520, 392, 600, 392, 600, 136, 1192, 136, 1192, 392, 1272, 392, 1272, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 1784, 312, 1968, 312, 2112, 312, 2256, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2320, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2336, 96, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 96, 2336, 40, 2368, 24, 2368, 0, 2392, 0, 2392, -136, 2336, -136, 2256, -136, 2256, -168, 2336, -168, 2336, -136, 2392, -136, 2392, -184, 2336, -184, 2256, -184, 2256, -216, 2336, -216, 2336, -184, 2392, -184, 2392, -280, 2216, -280, 2216, -264, 2088, -264, 2088, -280, 2088, -160, 2096, -160, 2096, -136, 2096, -120, 2080, -112, 2096, -112, 2112, -112, 2128, -128, 2144, -128, 2152, -120, 2152, -104, 2144, -96, 2116.76, -96, 2112, -112, 2112, -94.9182, 2112, -80, 2096, -80, 2096, -112, 2080, -112, 2064, -112, 2064, -160, 2088, -160, 2088, -264, 2088, -280, 1992, -280, 1920, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -208, 1888, -208, 1888, -192, 1904, -192, 1904, -152, 1856, -152, 1824, -176, 1768, -176, 1768, -192, 1816, -216, 1840, -232, 1840, -256, 1824, -280, 1800, -240, 1776, -232, 1760, -248, 1760, -280, 1648, -280, 1648, -208, 1544, -208, 1544, -200, 1496, -200, 1496, -112, 1536, -112, 1536, -192, 1568, -192, 1568, -168, 1552, -168, 1552, -144, 1584, -144, 1584, -128, 1568, -128, 1568, -112, 1536, -112, 1496, -112, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1568, -8, 1552, -8, 1552, 16, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
+polygon = PackedVector2Array(24, 72, 24, 112, 48, 112, 48, 136, 136, 136, 136, 392, 216, 392, 216, 136, 520, 136, 520, 392, 600, 392, 600, 136, 1192, 136, 1192, 392, 1272, 392, 1272, 136, 1544, 136, 1544, 184, 1592, 184, 1592, 216, 1544, 216, 1544, 248, 1592, 248, 1592, 280, 1544, 280, 1544, 312, 1616, 312, 1616, 296, 1664, 296, 1664, 312, 1784, 312, 1968, 312, 2112, 312, 2256, 312, 2392, 312, 2392, 184, 2304, 184, 2248, 184, 2248, 160, 2264, 144, 2272, 120, 2320, 120, 2320, 152, 2304, 184, 2392, 184, 2392, 128, 2336, 96, 2256, 64, 2240, 64, 2240, 40, 2224, 40, 2224, -24, 2240, -40, 2256, -40, 2272, -24, 2272, -8, 2256, 16, 2256, 64, 2336, 96, 2336, 40, 2368, 24, 2368, 0, 2392, 0, 2392, -136, 2336, -136, 2256, -136, 2256, -168, 2336, -168, 2336, -136, 2392, -136, 2392, -184, 2336, -184, 2256, -184, 2256, -216, 2336, -216, 2336, -184, 2392, -184, 2392, -280, 2216, -280, 2216, -264, 2088, -264, 2088, -280, 2088, -160, 2096, -160, 2096, -136, 2096, -120, 2080, -112, 2096, -112, 2112, -112, 2128, -128, 2144, -128, 2152, -120, 2152, -104, 2144, -96, 2116.76, -96, 2112, -112, 2112, -94.9182, 2112, -80, 2096, -80, 2096, -112, 2080, -112, 2064, -112, 2064, -160, 2088, -160, 2088, -264, 2088, -280, 1992, -280, 1920, -280, 1824, -280, 1840, -256, 1872, -256, 1872, -208, 1888, -208, 1888, -192, 1904, -192, 1904, -152, 1856, -152, 1824, -176, 1768, -176, 1768, -192, 1800, -200, 1824, -216, 1840, -232, 1840, -256, 1824, -280, 1816, -248, 1800, -240, 1776, -232, 1760, -248, 1760, -256, 1768, -256, 1768, -270.805, 1784, -280, 1648, -280, 1648, -208, 1544, -208, 1544, -200, 1496, -200, 1496, -112, 1536, -112, 1536, -192, 1568, -192, 1568, -168, 1552, -168, 1552, -144, 1584, -144, 1584, -128, 1568, -128, 1568, -112, 1536, -112, 1496, -112, 1496, 16, 1536, 16, 1536, -32, 1568, -32, 1568, -8, 1552, -8, 1552, 16, 1536, 16, 1496, 16, 1496, 80, 1344, 80, 1344, 72, 1296, 72, 1280, 88, 1272, 104, 1264, 72, 1192, 72, 600, 72, 520, 72, 216, 72, 136, 72)
 metadata/_edit_group_ = true
 
 [node name="Passage" type="Node2D" parent="."]
@@ -264,22 +260,65 @@ flip_sprite = true
 script = ExtResource("17_mva2b")
 player = NodePath("../Player")
 item_area = {
-"steel_sheet": NodePath("SteelSheet")
+"steel_sheet": null
 }
 
-[node name="SteelSheet" type="Area2D" parent="Items"]
+[node name="SteelSheet" parent="Items" instance=ExtResource("20_1s613")]
 position = Vector2(1776, -264)
-script = ExtResource("18_pxp8k")
 area_name = "steel_sheet"
 active_on = Array[int]([1, 2, 3])
-metadata/_edit_group_ = true
+is_item = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Items/SteelSheet"]
-shape = SubResource("CircleShape2D_mva2b")
+[node name="Fake" type="Node2D" parent="Items"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Items/SteelSheet"]
-texture_filter = 1
-texture = ExtResource("19_egf6h")
+[node name="Item" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(1552, -128)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item2" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(2272, -152)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item3" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(2240, -16)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item4" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(1600, -232)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item5" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(1832, -184)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item6" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(1888, -176)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item7" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(2368, 72)
+scale = Vector2(4, 4)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item8" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(2272, 168)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item9" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(1576, 264)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
+
+[node name="Item10" parent="Items/Fake" instance=ExtResource("20_1s613")]
+position = Vector2(1552, 200)
+scale = Vector2(2, 2)
+active_on = Array[int]([1, 2, 3])
 
 [node name="EventArea" type="Node2D" parent="."]
 metadata/_edit_lock_ = true

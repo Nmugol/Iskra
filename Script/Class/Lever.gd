@@ -7,14 +7,13 @@ extends Node2D
 @export var track_to_flip_y: Array[Track] = []
 
 @export_category("Audio")
-@export var sound_player: AudioStreamPlayer
 @export var lever_sfx: AudioStream
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
-var animation_is_finished: bool = false
 var mouse_on: bool = false
 var mini_game_is_running: bool = false
+var lever_finish: bool = true
 
 func _rotate()-> void:
 	if track_to_rotate.is_empty(): return
@@ -40,17 +39,18 @@ func _ready() -> void:
 	Signals.reparent_cart.connect(func (): mini_game_is_running = false)
 
 func _process(_delta: float) -> void:
-	if mini_game_is_running or animation_is_finished: return
-	if mouse_on and Input.is_action_just_pressed("MovePlayer"):
+	if mini_game_is_running: return
+	if mouse_on and Input.is_action_just_pressed("MovePlayer") and lever_finish:
+		lever_finish = false
 		_rotate()
 		_flip_x()
 		_flip_y()
 		sprite.play("use")
-		animation_is_finished = false
-		play_sound(lever_sfx, randf_range(0.8, 1.2))
+		Signals.play_sound.emit(State.AudioType.Effect, lever_sfx, randf_range(0.8, 1.2), -15)
 		await sprite.animation_finished
+		lever_finish = true
 		sprite.play("normal")
-		animation_is_finished = true
+		
 
 func _on_area_2d_mouse_entered() -> void:
 	Signals.set_cursor.emit(State.Cursors.USE)
@@ -59,10 +59,3 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	Signals.reset_cursor.emit()
 	mouse_on = false
-
-func play_sound(stream: AudioStream, pitch_scale: float = 1.0) -> void:
-	if stream != null and sound_player != null:
-		sound_player.stream = stream
-		sound_player.pitch_scale = pitch_scale
-		sound_player.volume_db = -15
-		sound_player.play()

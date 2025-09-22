@@ -3,7 +3,7 @@ extends Node
 @export var player: Player
 const PICK_UP_DISTANCE: float = 40
 
-@export var item_area: Dictionary[String,Area2D]
+@export var item_area: Dictionary[String, ItemArea]
 var items_in_scen: Dictionary[Item, Area2D]
 
 enum Cursors_above{
@@ -50,7 +50,8 @@ func _remove_already_pickup_item() -> void:
 				break
 	# Usuń znalezione przedmioty
 	for item in items_to_remove:
-		items_in_scen[item].free()
+		if items_in_scen[item] == null: continue
+		items_in_scen[item].queue_free()
 		items_in_scen.erase(item)
 
 func _process(_delta: float) -> void:
@@ -59,9 +60,9 @@ func _process(_delta: float) -> void:
 		if _distance_to_item():
 			match pointing_on:
 				Cursors_above.STEEL_SHEET:
-					_pick_up("steel_sheet",steel_sheet)
+					_pick_up(steel_sheet)
 				Cursors_above.CRYSTAL_SHARD:
-					_pick_up("crystal_shard", crystal_shard)
+					_pick_up(crystal_shard)
 		else:
 
 			var message: Array[String] = [
@@ -82,12 +83,12 @@ func _process(_delta: float) -> void:
 			)
 			State.state_phase -= 1
 
-func _pick_up(item_name: String, _item: Item) -> void:
+func _pick_up(_item: Item) -> void:
 	_item.add_to_equipment()
 	pointing_on = Cursors_above.NONE
-	item_area[item_name].queue_free()
 
 
-func _above_item(area: String) -> void:
+
+func _above_item(area: String, pos: Vector2) -> void:
 	pointing_on = Cursors_above.get(area.to_upper())
-	item_position = item_area[area].global_position
+	item_position = pos

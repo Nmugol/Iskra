@@ -19,3 +19,8 @@ enum Cursors {
 	USE,
 	WALK
 }
+
+enum AudioType {
+    Effect,
+    Music
+}

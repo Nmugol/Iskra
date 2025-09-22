@@ -20,7 +20,6 @@ extends Node
 @export var info_timer: Timer
 
 @export_category("Audio")
-@export var sound_player: AudioStreamPlayer
 @export var typewriter_sfx: AudioStream
 
 
@@ -113,7 +112,7 @@ func _on_timer_timeout() -> void:
 		var pitch: float = randf_range(0.15, 0.25)
 		if not current_char in ["a", "o", "u", "d", "p"]:  pitch += 0.2
 		
-		play_sound(typewriter_sfx, pitch)
+		Signals.play_sound.emit(State.AudioType.Effect, typewriter_sfx, pitch, -15)
 		timer.start()
 	else:
 		text_is_end = true
@@ -136,10 +135,3 @@ func _on_close_button_pressed() -> void:
 
 func _on_info_timeout() -> void:
 	info_text.show()
-
-func play_sound(stream: AudioStream, pitch_scale: float = 1.0) -> void:
-	if stream != null and sound_player != null:
-		sound_player.stream = stream
-		sound_player.pitch_scale = pitch_scale
-		sound_player.volume_db = -15
-		sound_player.play()

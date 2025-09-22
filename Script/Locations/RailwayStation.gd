@@ -56,11 +56,13 @@ func _process(_delta: float) -> void:
 			match  State.state_phase:
 				1:
 					_second_task()
+					Signals.remove_items_from_scene.emit()
 				5:
 					if get_node_or_null("EventArea/GiveSTeelSheet") != null:
 						$EventArea/GiveSTeelSheet/BrokenCart.hide()
 						$EventArea/GiveSTeelSheet.queue_free()
 						cart.show()
+						
 				8:
 					_load_game()
 					State.state_number = 3

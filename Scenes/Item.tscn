@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://b18j64xa02d8y"]
+
+[ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="1_2oiv6"]
+[ext_resource type="Texture2D" uid="uid://dg868rg52ddw3" path="res://Sprite/Particle/Stat.png" id="2_2oiv6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cdia6"]
+radius = 8.0
+
+[sub_resource type="Curve" id="Curve_08o4a"]
+_data = [Vector2(0.023273, 0.11135), 0.0, 0.0, 0, 0, Vector2(0.227755, 0.557892), 0.0, 0.0, 0, 0, Vector2(0.386678, 0.316757), 0.0, 0.0, 0, 0, Vector2(0.68382, 0.581373), 0.0, 0.0, 0, 0, Vector2(0.82609, 0.206241), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_6oc8a"]
+curve = SubResource("Curve_08o4a")
+
+[sub_resource type="Curve" id="Curve_o34di"]
+_data = [Vector2(0, 0.407698), 0.0, 0.0, 0, 0, Vector2(0.936164, 0.578432), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rgxu5"]
+curve = SubResource("Curve_o34di")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_so34g"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 0.0
+emission_ring_inner_radius = 5.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, -2, 0)
+scale_min = 0.1
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_rgxu5")
+alpha_curve = SubResource("CurveTexture_6oc8a")
+turbulence_enabled = true
+turbulence_noise_speed_random = 0.96
+turbulence_influence_min = 0.252
+turbulence_influence_max = 0.43
+turbulence_initial_displacement_min = -52.9
+turbulence_initial_displacement_max = 10.9
+
+[node name="Item" type="Area2D"]
+script = ExtResource("1_2oiv6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cdia6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+amount = 4
+texture = ExtResource("2_2oiv6")
+process_material = SubResource("ParticleProcessMaterial_so34g")

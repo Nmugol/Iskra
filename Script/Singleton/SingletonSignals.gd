@@ -61,7 +61,7 @@ signal update_distance()
 signal delete_save()
 
 @warning_ignore("unused_signal")
-signal mouse_above_item(area: String)
+signal mouse_above_item(area: String, pos: Vector2)
 
 @warning_ignore("unused_signal")
 signal mouse_off_item()
@@ -152,3 +152,9 @@ signal disable_all_stop_points
 
 @warning_ignore("unused_signal")
 signal finish_patrol_game()
+
+@warning_ignore("unused_signal")
+signal play_sound(audio_type: State.AudioType, audio_stream: AudioStream, pitch_scale: float, volume_db: float)
+
+@warning_ignore("unused_signal")
+signal remove_items_from_scene()

@@ -231,6 +231,43 @@ layout_mode = 2
 text = "100"
 horizontal_alignment = 1
 
+[node name="Info" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Info/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_312i6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Autor: 
+	Norbert Muzolf
+
+Graphics:
+	Anokolisa - AnomalyPixel@gmail.com
+	etahoshi - [url] https://x.com/12HoshiNoUtau [/url]
+	Kenney - [url] www.kenney.nl [/url]
+	Pablo Rodriguez - reffpixels@gmail.com
+
+Audio:
+	JDSherbert - JDSherbert@outlook.com
+	Some of the sounds taken from [url] https://mixkit.co/free-sound-effects/ [/url]
+	"
+
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
