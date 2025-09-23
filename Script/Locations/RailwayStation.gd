@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var info_panel: InfoPanel
+
 @onready var guard7: NPC = $NPC/Guard7
 @onready var guard8: NPC = $NPC/Guard8
 @onready var peter: NPC = $NPC/Peter
@@ -14,6 +16,8 @@ extends Node2D
 const  MAIN_SCENE = "res://Scenes/World.tscn"
 var game:Node = null
 var game_load_finish: bool = false
+
+var player_find_steel_sheet: bool = false
 
 func _ready() -> void:
 	camer.global_position = player.global_position 
@@ -34,11 +38,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
-	
-	if cart.overlaps_body(player) and State.state_number != 3: _on_cart_mouse_entered()
-	
-	if give_sheet != null:
-		if give_sheet.overlaps_area(player) and State.selected_item != null and State.selected_item.item_name == "Steel sheet": _reper_cart()
+
+	if player_find_steel_sheet and State.selected_item != null and State.selected_item.item_name == "Steel sheet":
+		_reper_cart()
 	
 	match State.state_number:
 		1:
@@ -50,6 +52,9 @@ func _process(_delta: float) -> void:
 					player.sprite.flip_h = false
 					for i in 2:
 						await get_tree().process_frame
+					
+					Signals.change_info_panel_visibility.emit(true)
+
 					State.state_number = 2
 					State.state_phase = 0
 		2:
@@ -58,9 +63,9 @@ func _process(_delta: float) -> void:
 					_second_task()
 					Signals.remove_items_from_scene.emit()
 				5:
-					if get_node_or_null("EventArea/GiveSTeelSheet") != null:
-						$EventArea/GiveSTeelSheet/BrokenCart.hide()
-						$EventArea/GiveSTeelSheet.queue_free()
+					if get_node_or_null("EventArea/GiveSteelSheet") != null:
+						$EventArea/GiveSteelSheet/BrokenCart.hide()
+						$EventArea/GiveSteelSheet.queue_free()
 						cart.show()
 						
 				8:
@@ -90,10 +95,13 @@ func _process(_delta: float) -> void:
 					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(MAIN_SCENE)
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	Signals.set_cursor.emit(State.Cursors.USE)
-	if body.is_in_group("Player") and State.selected_item != null and State.selected_item.item_name == "Steel sheet":
-		_reper_cart()
+func _on_give_steel_sheet_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		player_find_steel_sheet = true
+
+func _on_give_steel_sheet_body_exited(body:Node2D) -> void:
+	if body.is_in_group("Player"):
+		player_find_steel_sheet = false
 
 func  _reper_cart() -> void:
 	State.state_phase = 1

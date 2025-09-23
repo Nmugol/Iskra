@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://dvc7y03xy1xa2"]
+[gd_scene load_steps=25 format=4 uid="uid://dvc7y03xy1xa2"]
 
 [ext_resource type="Script" uid="uid://cp1idoalo0734" path="res://Script/Locations/cart_mini_gam.gd" id="1_0tact"]
 [ext_resource type="Script" uid="uid://bksi83yje0dv7" path="res://Script/Class/TracLoader.gd" id="1_0u0f4"]
 [ext_resource type="PackedScene" uid="uid://cx6sp18rv53ci" path="res://Scenes/MiniGame/CartMinGame/V_track_straight.tscn" id="1_x0d2a"]
+[ext_resource type="AudioStream" uid="uid://dxpsu2oolpwyh" path="res://Sound/JDSherbert - Ultimate UI SFX Pack/Free/Mono/ogg/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.ogg" id="2_hv8rs"]
 [ext_resource type="PackedScene" uid="uid://b046ajchlgrbc" path="res://Scenes/MiniGame/CartMinGame/H_track_straight.tscn" id="2_sg5nt"]
 [ext_resource type="PackedScene" uid="uid://bwde8lpg0womb" path="res://Scenes/MiniGame/CartMinGame/track_turn.tscn" id="3_iqlwr"]
 [ext_resource type="PackedScene" uid="uid://8nijol4503yx" path="res://Scenes/MiniGame/CartMinGame/cart.tscn" id="4_0u0f4"]
@@ -81,6 +82,7 @@ level2 = NodePath("Node2D/Level2")
 level3 = NodePath("Node2D/Level3")
 cart_position_1 = NodePath("Node2D/Level2/Marker2D")
 cart_position_2 = NodePath("Node2D/Level3/Marker2D")
+play_button_sfx = ExtResource("2_hv8rs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

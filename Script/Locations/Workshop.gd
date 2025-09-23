@@ -15,6 +15,8 @@ const  MAIN_SCENE = "res://Scenes/World.tscn"
 @export var james_in:PathController 
 @export var guard_in:PathController
 
+var player_in_area: bool = false
+
 func set_up() -> void:
 	guard6.hide()
 	if State.state_number != 5:
@@ -29,6 +31,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
+
+	if player_in_area and Save._is_in_equipment("Crystal shard") == true:
+		State.state_phase = 0
+		State.state_number = 7
+		$Events/Area2D.queue_free()
 	
 	match State.state_number:
 		5:
@@ -191,7 +198,9 @@ func _second_dialog() -> void:
 	")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player") and Save._is_in_equipment("Crystal shard") == true:
-		State.state_phase = 0
-		State.state_number = 7
-		$Events/Area2D.queue_free()
+	if body.is_in_group("Player"):
+		player_in_area = true
+
+func _on_area_2d_body_exited(body:Node2D) -> void:
+	if body.is_in_group("Player"):
+		player_in_area = false

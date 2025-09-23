@@ -1,7 +1,16 @@
 extends Node2D
 
+@export_category("Movement")
 @export var move_distance: float = 0.5
 @export var rotate_speed: float = 30.0  # Added rotation speed
+
+@export_category("Levels")
+@export var symbols_in_level_one: Array[Symbol] = []
+@export var symbols_in_level_two: Array[Symbol] = []
+@export var symbols_in_level_three: Array[Symbol] = []
+
+@export_category("Audio")
+@export var button_sfx: AudioStream
 
 @onready var candle: Sprite2D = $Candle
 @onready var cristal: Sprite2D = $Cristal
@@ -19,9 +28,7 @@ extends Node2D
 @onready var symbol_counter: RichTextLabel = $Control/SymbolCounter/MarginContainer/RichTextLabel
 
 
-@export var symbols_in_level_one: Array[Symbol] = []
-@export var symbols_in_level_two: Array[Symbol] = []
-@export var symbols_in_level_three: Array[Symbol] = []
+
 
 var current_symbols: Array[Symbol] = []
 
@@ -64,6 +71,7 @@ func _process(delta: float) -> void:
 	else: Signals.set_cursor.emit(State.Cursors.USE)	
 
 	if Input.is_action_pressed("MovePlayer"):
+		Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
 		match cursor_above_button:
 			above_button.UP: move_up()
 			above_button.DOWN: move_down()
@@ -222,3 +230,4 @@ func _on_texture_button_pressed() -> void:
 	candle.global_position = candle_center.global_position
 	cristal.global_rotation = 0.0
 	compleat_symbols = 0
+	Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)

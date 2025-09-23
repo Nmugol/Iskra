@@ -1,4 +1,3 @@
-@tool
 extends Control
 class_name InfoPanel
 
@@ -7,66 +6,57 @@ class_name InfoPanel
 
 @export_category("Panel size")
 @export_range(55, 1000, 5)
-var width: float = 300.0:
-	set(value):
-		width = value
-		if panel != null:
-			panel.size.x = value
+var width: float = 300.0
 @export_range(55, 1000, 5)
-var height: float = 150.0:
-	set(value):
-		height = value
-		if panel != null:
-			panel.size.y = value
+var height: float = 150.0
 
 @export_category("Text")
-@export var text_to_display: String = "Info text":
-	set(value):
-		text_to_display = value
-		if info_text != null:
-			info_text.text = text_to_display
+@export var text_to_display: String = "Info text"
 
 @export_category("Visibility")
-@export var is_visible_flag: bool = false:
-	set(value):
-		is_visible_flag = value
-		if is_inside_tree():  # Sprawdź czy obiekt jest już w scenie
-			if is_visible_flag:
-				show()
-			else:
-				hide()
+@export var is_visible_flag: bool = false
 
 @export var active_on_stages: Array[int]
 
+const MINIMAL_SIZE: Vector2 = Vector2(60, 53)
+var is_in_minimal_size: bool = false
+
 func _ready() -> void:
 	# Ustaw początkowe wartości po załadowaniu węzłów
-	if panel != null:
-		panel.size = Vector2(width, height)
-	if info_text != null:
-		info_text.text = text_to_display
-	
+	panel.size = Vector2(width, height)
+	info_text.text = text_to_display
+
 	# Ustaw początkową widoczność
-	if is_visible_flag and active_on_stages.has(State.state_number):
-		show()
-	else:
-		hide()
+	change_visibility()
 	
 	# Połącz sygnały
 	Signals.show_map.connect(func (): hide())
-	Signals.hide_map.connect(func (): 
-		if is_visible_flag and active_on_stages.has(State.state_number): 
-			show()
-	)
+	Signals.hide_map.connect(change_visibility)
 
 	Signals.show_equipment.connect(func (): hide())
-	Signals.hide_equipment.connect(func (): 
-		if is_visible_flag and active_on_stages.has(State.state_number): 
-			show()
-	)
+	Signals.hide_equipment.connect(change_visibility)
 
-func _process(_delta: float) -> void:
-	print(State.state_number)
-	if active_on_stages.has(State.state_number) and is_visible_flag:
-		show()
+	Signals.change_info_panel_visibility.connect(func (v) -> void:
+		is_visible_flag = v
+		change_visibility()
+		)
+	Signals.change_info_panel_text.connect(change_text)
+
+func change_text(new_text: String) -> void:
+	info_text.text = new_text
+
+func change_visibility() -> void:
+	if is_visible_flag and active_on_stages.has(State.state_number): show()
+	else: hide()
+
+func _on_texture_button_pressed() -> void:
+	if is_in_minimal_size:
+		panel.size = Vector2(width, height)
+		is_in_minimal_size = false
+		info_text.text = text_to_display
+		info_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	else:
-		hide()
+		panel.size = MINIMAL_SIZE
+		is_in_minimal_size = true
+		info_text.text = "?"
+		info_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

@@ -41,7 +41,7 @@ size = Vector2(64, 40)
 size = Vector2(521, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcm2u"]
-size = Vector2(679, 55)
+size = Vector2(584, 195)
 
 [sub_resource type="Curve2D" id="Curve2D_djqyw"]
 _data = {
@@ -235,7 +235,7 @@ paren_area = NodePath("..")
 script = ExtResource("16_1on6r")
 player = NodePath("../Player")
 item_area = {
-"crystal_shard": NodePath("")
+"crystal_shard": null
 }
 
 [node name="CrystalShard" parent="Item" instance=ExtResource("19_45q5c")]
@@ -267,7 +267,7 @@ position = Vector2(200, -49)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Area2D"]
-position = Vector2(651.5, -195.5)
+position = Vector2(754, -244.5)
 shape = SubResource("RectangleShape2D_mcm2u")
 
 [node name="FixedWheelPosition" type="Marker2D" parent="Events"]
@@ -345,3 +345,4 @@ flip_sprite = true
 position = Vector2(330, -317)
 
 [connection signal="body_entered" from="Events/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Events/Area2D" to="." method="_on_area_2d_body_exited"]

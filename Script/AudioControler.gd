@@ -7,6 +7,7 @@ extends Node
 
 func _ready() -> void:
     Signals.play_sound.connect(play_audio)
+    Signals.stop_play_sound.connect(stop_audio)
 
 func play_audio(audio_type: State.AudioType, audio_stream: AudioStream, pitch_scale: float = 1.0, volume_db: float = 0) -> void:
 
@@ -22,3 +23,8 @@ func play_audio(audio_type: State.AudioType, audio_stream: AudioStream, pitch_sc
         player.pitch_scale = pitch_scale
         player.volume_db = volume_db
         player.play()
+
+func stop_audio(audio_type: State.AudioType) -> void:
+    match audio_type:
+        State.AudioType.Effect: sfx_player.stop()
+        State.AudioType.Music: music_player.stop()

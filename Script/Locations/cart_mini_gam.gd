@@ -6,11 +6,15 @@ var mini_game_is_run: bool = false
 
 var main_cart: Cart
 
+@export_category("Levels")
 @export var level1: Node2D
 @export var level2: Node2D
 @export var level3: Node2D
 @export var cart_position_1: Marker2D
 @export var cart_position_2: Marker2D
+
+@export_category("Audio")
+@export var play_button_sfx: AudioStream
 
 func _ready() -> void:
 
@@ -66,6 +70,7 @@ func _process(_delta: float) -> void:
 	if mini_game_is_run: return
 	if start_cart and Input.is_action_just_pressed("MovePlayer"):
 		Signals.cart_go.emit()
+		Signals.play_sound.emit(State.AudioType.Effect, play_button_sfx, 1, -15)
 		mini_game_is_run = true
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
@@ -86,6 +91,7 @@ func _on_finish_2_body_entered(_body: Node2D) -> void:
 func _on_texture_button_pressed() -> void:
 	Signals.load_cart_game.emit()
 	self.queue_free()
+	Signals.play_sound.emit(State.AudioType.Effect, play_button_sfx, 1, -15)
 
 func _on_finish_3_body_entered(_body: Node2D) -> void:
 	coalpit_level = 3

@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=4 uid="uid://b1n26tyweoifq"]
+[gd_scene load_steps=29 format=4 uid="uid://b1n26tyweoifq"]
 
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="1_1kp0f"]
 [ext_resource type="Script" uid="uid://d0jtxf8efshps" path="res://Script/Locations/candle_mini_game.gd" id="1_atxoi"]
 [ext_resource type="Texture2D" uid="uid://crnoou75tn1e8" path="res://Sprite/Items/CrystalShard.png" id="2_atxoi"]
+[ext_resource type="AudioStream" uid="uid://dxpsu2oolpwyh" path="res://Sound/JDSherbert - Ultimate UI SFX Pack/Free/Mono/ogg/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.ogg" id="2_h32xv"]
 [ext_resource type="Texture2D" uid="uid://cbhb2ux1k0epd" path="res://Sprite/Map/RostaArrow.png" id="3_1kp0f"]
 [ext_resource type="Texture2D" uid="uid://bf1ppa5qx0ib6" path="res://Sprite/CandleMinGame/candle.png" id="3_bkgmx"]
 [ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="3_m0p6r"]
@@ -81,6 +82,7 @@ script = ExtResource("1_atxoi")
 symbols_in_level_one = [NodePath("CentralZone/Symbols/Level1/Symbol1"), NodePath("CentralZone/Symbols/Level1/Symbol2")]
 symbols_in_level_two = [NodePath("CentralZone/Symbols/Level2/Symbol1"), NodePath("CentralZone/Symbols/Level2/Symbol2")]
 symbols_in_level_three = [NodePath("CentralZone/Symbols/Level3/Symbol1"), NodePath("CentralZone/Symbols/Level3/Symbol2"), NodePath("CentralZone/Symbols/Level3/Symbol3"), NodePath("CentralZone/Symbols/Level3/Symbol4")]
+button_sfx = ExtResource("2_h32xv")
 
 [node name="BG" type="Node2D" parent="."]
 position = Vector2(-79, -16)

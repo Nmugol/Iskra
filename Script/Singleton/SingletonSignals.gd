@@ -158,3 +158,12 @@ signal play_sound(audio_type: State.AudioType, audio_stream: AudioStream, pitch_
 
 @warning_ignore("unused_signal")
 signal remove_items_from_scene()
+
+@warning_ignore("unused_signal")
+signal change_info_panel_visibility(visible: bool)
+
+@warning_ignore("unused_signal")
+signal change_info_panel_text(text: String)
+
+@warning_ignore("unused_signal")
+signal stop_play_sound( type: State.AudioType)

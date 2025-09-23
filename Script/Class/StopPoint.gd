@@ -2,10 +2,14 @@
 extends Node2D
 class_name StopPoint
 
+@export_category("Movement")
 @export var neighbor_point: Array[StopPoint] = []
 @export var is_active: bool = false
 @export var is_finish: bool = false
 @export var starting_patrols: Array[NodePath] = []  # Ścieżki do patroli które startują z tego punktu
+
+@export_category("Audio")
+@export var button_sfx: AudioStream
 
 @onready var sprite: AnimatedSprite2D = $Area2D/Sprite2D
 
@@ -21,8 +25,6 @@ func _ready():
 	# Inicjalizuj patrole startujące z tego punktu
 	initialize_starting_patrols()
 	
-	
-
 	Signals.disable_stop_point.connect(
 		func ():
 			player_on_point = false
@@ -78,6 +80,7 @@ func _process(_delta: float) -> void:
 	# Usunięto aktywację sąsiadów przy kliknięciu - teraz dzieje się to po dotarciu gracza
 	if mouse_on and Input.is_action_just_pressed("MovePlayer") and is_active:
 		Signals.move_player_to_point.emit(self.global_position)
+		Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
 
 	if is_finish and player_on_point:
 		if finish: return

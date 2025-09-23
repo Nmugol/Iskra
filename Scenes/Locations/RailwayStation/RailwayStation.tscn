@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=33 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="1_sycnr"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="2_8f76d"]
 [ext_resource type="TileSet" uid="uid://cg1e6gkobylhf" path="res://TileSet/Furniture.tres" id="2_ektoh"]
+[ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="2_h1ofm"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_sycnr"]
 [ext_resource type="TileSet" uid="uid://b8x4hwflm7x23" path="res://TileSet/Resources.tres" id="4_2siod"]
 [ext_resource type="TileSet" uid="uid://csy50abvjovkn" path="res://TileSet/Rock.tres" id="4_bmnd2"]
@@ -60,8 +61,9 @@ radius = 72.4431
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egf6h"]
 size = Vector2(176, 66)
 
-[node name="RailwayStation" type="Node2D"]
+[node name="RailwayStation" type="Node2D" node_paths=PackedStringArray("info_panel")]
 script = ExtResource("1_gycxx")
+info_panel = NodePath("CanvasLayer/InfoPanel")
 
 [node name="Teren" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -324,19 +326,19 @@ active_on = Array[int]([1, 2, 3])
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="GiveSTeelSheet" type="Area2D" parent="EventArea"]
+[node name="GiveSteelSheet" type="Area2D" parent="EventArea"]
 position = Vector2(13, -8)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/GiveSTeelSheet"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/GiveSteelSheet"]
 position = Vector2(2116, -95)
 shape = SubResource("CircleShape2D_pxp8k")
 
-[node name="BrokenCart" type="Sprite2D" parent="EventArea/GiveSTeelSheet"]
+[node name="BrokenCart" type="Sprite2D" parent="EventArea/GiveSteelSheet"]
 texture_filter = 1
 position = Vector2(2117, -103)
 texture = SubResource("AtlasTexture_h1ofm")
 
-[node name="Sprite2D" type="Sprite2D" parent="EventArea/GiveSTeelSheet/BrokenCart"]
+[node name="Sprite2D" type="Sprite2D" parent="EventArea/GiveSteelSheet/BrokenCart"]
 position = Vector2(-6, 14)
 texture = SubResource("AtlasTexture_1s613")
 
@@ -400,5 +402,20 @@ shape = SubResource("RectangleShape2D_egf6h")
 [node name="Marker2D" type="Marker2D" parent="Blok/BlockingArea3"]
 position = Vector2(1232, 160)
 
-[connection signal="body_entered" from="EventArea/GiveSTeelSheet" to="." method="_on_area_2d_body_entered"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("2_h1ofm")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -104.0
+offset_bottom = -104.0
+grow_vertical = 2
+width = 355.0
+text_to_display = "Find something at the station that Piter can use to repair the wagon"
+is_visible_flag = false
+active_on_stages = Array[int]([1, 2, 3])
+
+[connection signal="body_entered" from="EventArea/GiveSteelSheet" to="." method="_on_give_steel_sheet_body_entered"]
+[connection signal="body_exited" from="EventArea/GiveSteelSheet" to="." method="_on_give_steel_sheet_body_exited"]
 [connection signal="mouse_entered" from="EventArea/Cart" to="." method="_on_cart_mouse_entered"]

@@ -130,6 +130,7 @@ func _on_text_finished():
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
+	Signals.stop_play_sound.emit(State.AudioType.Effect)
 	State.is_running = true
 
 
