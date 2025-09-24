@@ -13,6 +13,7 @@ var player_position: Vector2 = Vector2(254,-75):
 
 var equipment: Array[Item] = []:
 	set(value): 
+		if value == null: value = []
 		equipment = value
 		Signals.load_equipment.emit()
 	get: return equipment

@@ -27,7 +27,7 @@ func to_json() -> Dictionary:
 	}
 	
 	for item in contains_items:
-		json_data["contains_items"].append(item.ToJson()) 
+		json_data["contains_items"].append(item.to_json()) 
 	
 	return json_data
 

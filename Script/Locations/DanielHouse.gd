@@ -23,7 +23,7 @@ func _ready():
 		cart_mini_game_area.monitorable = false
 	
 	if State.state_number >= 12:
-		info_panel.is_visible_flag = true
+		Signals.change_info_panel_visibility.emit(true)
 	
 	# Automatyczne wznowienie mini-gry po powrocie do sceny
 	if State.state_number == 10 and game == null:
@@ -62,11 +62,17 @@ func _process(_delta: float) -> void:
 			match State.state_phase:
 				0:
 					_three_dialog()
-					info_panel.is_visible_flag = true
+					Signals.change_info_panel_visibility.emit(true)
 					State.state_number = 13
 					State.state_phase = 0
 					Signals.save_to_file.emit()
-	
+		16:
+			match State.state_phase:
+				0:
+					_four_dialog()
+					State.state_number = 17
+					State.state_phase = 0
+					Signals.save_to_file.emit()
 
 	if in_candle_mini_game_area and State.selected_item != null and State.selected_item.item_name == "Crystal shard" and not mini_game_is_running:
 		State.state_number = 10
@@ -101,24 +107,24 @@ func _finish_candle_mini_game() -> void:
 func _first_dialog() -> void:
 	Signals.show_dialog.emit()
 	#1
-	Signals.player_message.emit("Daniel","Since the mines have been closed, what should I do now? Oh, I forgot about this crystal. I can examine it calmly, but it's already late, I can barely see. Maybe the candlelight will help me see something.")
+	Signals.player_message.emit("Daniel","Since the mines have been closed, what should I do now? Oh, I forgot about this crystal. I can examine it calmly, but it's already late, I can barely see. Maybe the candlelight will help me see something.", true)
 
 	#2
-	Signals.player_message.emit("Daniel","But where did I put that candle? I think I left it on the table.")
+	Signals.player_message.emit("Daniel","But where did I put that candle? I think I left it on the table.", true)
 
 func _second_dialog() -> void:
 	Signals.show_dialog.emit()
 	#1
-	Signals.player_message.emit("Daniel","Oh yes, the candle! Now I can see something. What is that on the wall? Is it from this crystal? It looks like some runes, symbols...")
+	Signals.player_message.emit("Daniel","Oh yes, the candle! Now I can see something. What is that on the wall? Is it from this crystal? It looks like some runes, symbols...", true)
 	#2
-	Signals.player_message.emit("Daniel","I wonder what it could be... Maybe I should draw it?")
+	Signals.player_message.emit("Daniel","I wonder what it could be... Maybe I should draw it?", true)
 
 func _three_dialog() -> void:
 	Signals.show_dialog.emit()
 	#1
-	Signals.player_message.emit("Daniel","I need to take this to Emil. He will surely know what these signs mean.")
+	Signals.player_message.emit("Daniel","I need to take this to Emil. He will surely know what these signs mean.", true)
 	#2
-	Signals.player_message.emit("Daniel","Damn, it's already late. I need to hurry before the nighttime curfew.")
+	Signals.player_message.emit("Daniel","Damn, it's already late. I need to hurry before the nighttime curfew.", true)
 
 func _on_candle_mini_game_body_entered(body:Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -128,3 +134,10 @@ func _on_candle_mini_game_body_entered(body:Node2D) -> void:
 func _on_candle_mini_game_body_exited(body:Node2D) -> void:
 	if body.is_in_group("Player"):
 		in_candle_mini_game_area = false
+
+func _four_dialog() -> void:
+	Signals.show_dialog.emit()
+	#1
+	Signals.player_message.emit("Daniel","Udało się, nikt mnie nie zauważył.", true)
+	#2
+	Signals.player_message.emit("Daniel","To był dość intensywny dzień. Jestem wykończony. Oby jutro było spokojniej.", true)

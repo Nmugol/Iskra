@@ -13,10 +13,10 @@ signal show_dialog()
 signal hide_dialog()
 
 @warning_ignore("unused_signal")
-signal player_message(iconName: String, textToDisplay: String)
+signal player_message(iconName: String, textToDisplay: String, increase_stage_phase: bool)
 
 @warning_ignore("unused_signal")
-signal people_message(iconName: String, textToDisplay: String)
+signal people_message(iconName: String, textToDisplay: String, increase_stage_phase: bool)
 
 @warning_ignore("unused_signal")
 signal load_equipment()
@@ -61,7 +61,7 @@ signal update_distance()
 signal delete_save()
 
 @warning_ignore("unused_signal")
-signal mouse_above_item(area: String, pos: Vector2)
+signal mouse_above_item(area: State.Cursors_above)
 
 @warning_ignore("unused_signal")
 signal mouse_off_item()
@@ -157,7 +157,11 @@ signal finish_patrol_game()
 signal play_sound(audio_type: State.AudioType, audio_stream: AudioStream, pitch_scale: float, volume_db: float)
 
 @warning_ignore("unused_signal")
-signal remove_items_from_scene()
+signal remove_items_from_scene( items:State.Cursors_above)
+
+@warning_ignore("unused_signal")
+signal remove_all_items_from_scene()
+
 
 @warning_ignore("unused_signal")
 signal change_info_panel_visibility(visible: bool)

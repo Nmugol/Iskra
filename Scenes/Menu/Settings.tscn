@@ -265,8 +265,8 @@ Graphics:
 
 Audio:
 	JDSherbert - JDSherbert@outlook.com
-	Some of the sounds taken from [url] https://mixkit.co/free-sound-effects/ [/url]
-	"
+	Kistol - [url] https://opengameart.org/content/forget-me-not [/url]
+	Some of the sounds taken from [url] https://mixkit.co/free-sound-effects/ [/url]"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

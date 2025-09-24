@@ -1,6 +1,10 @@
 extends Node2D
 
+@export_category("Scenes")
 @export var level_location: Node
+
+@export_category("Audio")
+@export var music: AudioStream
 
 @onready var dialog: Control = %Dialog
 @onready var equipment: Control = %Equipment
@@ -12,6 +16,7 @@ extends Node2D
 func _ready() -> void:
 
 	transition.play("loading")
+	Signals.play_sound.emit(State.AudioType.Music, music, 1, -15)
 	_connect_signals()
 	load_level()
 	await transition.animation_finished
@@ -108,6 +113,7 @@ func disable_loading_screen() -> void:
 func enable_loading_screen() -> void:
 	transition.play("fade_out")
 	await transition.animation_finished
+	
 
 func show_setting_in_game() -> void:
 	hide_dialog()

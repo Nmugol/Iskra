@@ -125,10 +125,10 @@ physics_interpolation_mode = 1
 position = Vector2(792, 1616)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -524
-limit_top = -850
-limit_right = 1852
-limit_bottom = 2050
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -241,9 +241,8 @@ shape = SubResource("RectangleShape2D_wlgog")
 
 [node name="BlockingAreas" type="Node2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="BlockingAreas" node_paths=PackedStringArray("plyer")]
+[node name="Area2D" type="Area2D" parent="BlockingAreas"]
 script = ExtResource("15_wlgog")
-plyer = NodePath("../../Player")
 active_on = Array[int]([8])
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true

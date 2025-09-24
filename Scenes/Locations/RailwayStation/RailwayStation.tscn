@@ -266,10 +266,10 @@ item_area = {
 }
 
 [node name="SteelSheet" parent="Items" instance=ExtResource("20_1s613")]
-position = Vector2(1776, -264)
-area_name = "steel_sheet"
+position = Vector2(1776, -256)
+scale = Vector2(2, 2)
+area_name = 0
 active_on = Array[int]([1, 2, 3])
-is_item = true
 
 [node name="Fake" type="Node2D" parent="Items"]
 

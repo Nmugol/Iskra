@@ -156,10 +156,10 @@ physics_interpolation_mode = 1
 position = Vector2(440, -184)
 zoom = Vector2(3, 3)
 process_callback = 0
-limit_left = -348
-limit_top = -440
-limit_right = 1044
-limit_bottom = 88
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -240,7 +240,7 @@ item_area = {
 
 [node name="CrystalShard" parent="Item" instance=ExtResource("19_45q5c")]
 position = Vector2(892, -244)
-area_name = "crystal_shard"
+area_name = 1
 active_on = Array[int]([5, 6, 7])
 is_item = true
 

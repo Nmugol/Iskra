@@ -73,6 +73,9 @@ func _process(_delta: float) -> void:
 	if is_finish:
 		sprite.play("home")
 	
+	if Input.is_action_just_pressed("MovePlayer") and State.can_play_sfx:
+		Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
+
 	# Sprawdź kolizję z dowolnym patrolem
 	if player_on_point and not patrols_on_point.is_empty():
 		Signals.reset_level.emit()
@@ -80,7 +83,7 @@ func _process(_delta: float) -> void:
 	# Usunięto aktywację sąsiadów przy kliknięciu - teraz dzieje się to po dotarciu gracza
 	if mouse_on and Input.is_action_just_pressed("MovePlayer") and is_active:
 		Signals.move_player_to_point.emit(self.global_position)
-		Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
+		
 
 	if is_finish and player_on_point:
 		if finish: return

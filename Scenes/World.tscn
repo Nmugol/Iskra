@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5jhvegysctic"]
+[gd_scene load_steps=15 format=3 uid="uid://c5jhvegysctic"]
 
 [ext_resource type="Script" uid="uid://cr8dggt4fem8f" path="res://Script/World.gd" id="1_23x67"]
 [ext_resource type="PackedScene" uid="uid://ctwgijy445nx2" path="res://Scenes/GUI/Setting.tscn" id="2_45d1s"]
 [ext_resource type="PackedScene" uid="uid://ch7ywbdvrm5ud" path="res://Scenes/GUI/Dialog.tscn" id="2_j0p05"]
 [ext_resource type="Script" uid="uid://bpd3eh0fwysg" path="res://Script/AudioControler.gd" id="2_q2d71"]
+[ext_resource type="AudioStream" uid="uid://5y6scdph77t0" path="res://Sound/forget_me_not_in_f_major_looped.ogg" id="2_uo7di"]
 [ext_resource type="PackedScene" uid="uid://dny7k62r5c16u" path="res://Scenes/Player/Equipment.tscn" id="3_5nsto"]
 [ext_resource type="PackedScene" uid="uid://qmdgtogrjq2q" path="res://Scenes/GUI/Map.tscn" id="4_gjpho"]
 [ext_resource type="PackedScene" uid="uid://do87224qs6nh6" path="res://Scenes/GUI/UI.tscn" id="5_p70al"]
@@ -226,6 +227,7 @@ _data = {
 [node name="World" type="Node2D" node_paths=PackedStringArray("level_location")]
 script = ExtResource("1_23x67")
 level_location = NodePath("Level")
+music = ExtResource("2_uo7di")
 
 [node name="AudioControler" type="Node" parent="." node_paths=PackedStringArray("sfx_player", "music_player")]
 script = ExtResource("2_q2d71")

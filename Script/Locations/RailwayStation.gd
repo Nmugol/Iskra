@@ -9,7 +9,7 @@ extends Node2D
 @onready var camer: PhantomCamera2D = $PhantomCamera2D
 
 @onready var cart: Area2D = $EventArea/Cart
-@onready var give_sheet: Area2D = $EventArea/GiveSTeelSheet
+@onready var give_sheet: Area2D = $EventArea/GiveSteelSheet
 @onready var mini_game_pos: Marker2D = $EventArea/Cart/Marker2D
 
 @onready var mini_game = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
@@ -18,6 +18,7 @@ var game:Node = null
 var game_load_finish: bool = false
 
 var player_find_steel_sheet: bool = false
+var steel_sheet_picked_up: bool = false
 
 func _ready() -> void:
 	camer.global_position = player.global_position 
@@ -28,18 +29,25 @@ func _ready() -> void:
 	
 	if State.state_number >= 3:
 		cart.show()
+		Signals.change_info_panel_visibility.emit(true)
 	
 	if State.state_number >= 4:
 		cart.monitoring = false
+		Signals.change_info_panel_visibility.emit(false)
 
 	# Dodane: automatyczne wznowienie mini-gry po powrocie do sceny
 	if State.state_number == 3 and game == null:
 		_load_game()
+		Signals.change_info_panel_visibility.emit(false)
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
 
-	if player_find_steel_sheet and State.selected_item != null and State.selected_item.item_name == "Steel sheet":
+	# Sprawdzamy czy gracz ma steel_sheet w ekwipunku
+	if Save._is_in_equipment("Steel sheet") and not steel_sheet_picked_up:
+		steel_sheet_picked_up = true
+	
+	if player_find_steel_sheet and steel_sheet_picked_up and State.selected_item != null and State.selected_item.item_name == "Steel sheet":
 		_reper_cart()
 	
 	match State.state_number:
@@ -59,9 +67,6 @@ func _process(_delta: float) -> void:
 					State.state_phase = 0
 		2:
 			match  State.state_phase:
-				1:
-					_second_task()
-					Signals.remove_items_from_scene.emit()
 				5:
 					if get_node_or_null("EventArea/GiveSteelSheet") != null:
 						$EventArea/GiveSteelSheet/BrokenCart.hide()
@@ -79,12 +84,7 @@ func _process(_delta: float) -> void:
 				0:
 					_third_dialogue()
 				1:
-					var broken_wheel: Item = Item.new("Broken wheel",
-						[],
-						true,
-						"res://Sprite/Items/BrokenCartWheelSmall.png",
-						"res://Sprite/Items/BrokenCartWheel.png",
-						[])
+					var broken_wheel: Item = Item.new("Broken wheel",[],true,"res://Sprite/Items/BrokenCartWheelSmall.png","res://Sprite/Items/BrokenCartWheel.png",[])
 					if not Save._is_in_equipment(broken_wheel.item_name):
 						broken_wheel.add_to_equipment()
 				9:
@@ -112,6 +112,7 @@ func  _reper_cart() -> void:
 	State.selected_item.remove_from_equipment()
 	State.active_item = null
 	Signals.reset_look_at_item.emit()
+	_second_task()  # Teraz _second_task wywoła się dopiero po użyciu przedmiotu
 
 func _on_cart_mouse_entered() -> void:
 	
@@ -149,49 +150,41 @@ func _first_task() -> void:
 	Signals.show_dialog.emit()
 	player.sprite.play("idle")
 	#1
-	Signals.people_message.emit("Guard7","Here's the damaged cart.It was too heavy, one of the wheels broke, and now it's blocking the track for the others.  ")
-	
+	Signals.people_message.emit("Guard7","Here's the damaged cart.It was too heavy, one of the wheels broke, and now it's blocking the track for the others.", true)
 	#2
-	Signals.people_message.emit("Guard8","Clear it up as quickly as you can and return to the mine.")
-
+	Signals.people_message.emit("Guard8","Clear it up as quickly as you can and return to the mine.", true)
 	#3
-	Signals.player_message.emit("Daniel","Alright. We're on it, just give us a moment to examine what can be done about it.")
-	
-	
+	Signals.player_message.emit("Daniel","Alright. We're on it, just give us a moment to examine what can be done about it.", true)
 	#4
-	Signals.people_message.emit("Guard8","Okay, okay, do what you have to do, just don't get in our way.Understood?")
-
+	Signals.people_message.emit("Guard8","Okay, okay, do what you have to do, just don't get in our way. Understood?", true)
 	#5
-	Signals.player_message.emit("Daniel","Understood. Peter, come on, let's see what we can do.")
-	
+	Signals.player_message.emit("Daniel","Understood. Peter, come on, let's see what we can do.", true)
 	#6
-	Signals.people_message.emit("Peter", "The wheel is completely broken. I don't know if I can help here.")
+	Signals.people_message.emit("Peter", "The wheel is completely broken. I don't know if I can help here.", true)
 	#7
-	Signals.people_message.emit("Guard7", "What do you mean? Your Spark lets you shape metal. Can't you form a new wheel?")
-	
+	Signals.people_message.emit("Guard7", "What do you mean? Your Spark lets you shape metal. Can't you form a new wheel?", true)
 	#8
-	Signals.people_message.emit("Peter", "My Spark has limitations. I can't freely reshape things. I need the right amount of material to create something. These pieces are too small for me to form a new wheel. If I had a piece of sheet metal or a metal bar, I'd be able to create one. From these scraps, it's going to be hard to make a new, durable wheel.")
-	
+	Signals.people_message.emit("Peter", "My Spark has limitations. I can't freely reshape things. I need the right amount of material to create something. These pieces are too small for me to form a new wheel. If I had a piece of sheet metal or a metal bar, I'd be able to create one. From these scraps, it's going to be hard to make a new, durable wheel.", true)
 	#9
-	Signals.player_message.emit("Daniel", "Peter, stay here. I'll look around the platform maybe I'll find something. In the meantime, try to work on shaping a new wheel.")
+	Signals.player_message.emit("Daniel", "Peter, stay here. I'll look around the platform maybe I'll find something. In the meantime, try to work on shaping a new wheel.", true)
 
 func _second_task() -> void:
 	Save.save_data_to_file()
 	Signals.show_dialog.emit()
 	#1
-	Signals.player_message.emit("Daniel", "Peter, will this sheet metal do?")
+	Signals.player_message.emit("Daniel", "Peter, will this sheet metal do?", true)
 	#2
-	Signals.people_message.emit("Peter", "Yeah, I think I can make a wheel out of this.")
+	Signals.people_message.emit("Peter", "Yeah, I think I can make a wheel out of this.", true)
 	#3
-	Signals.people_message.emit("Peter", "Alright. That’s the best wheel I can make. Daniel, can you lift the cart a little?")
+	Signals.people_message.emit("Peter", "Alright. That’s the best wheel I can make. Daniel, can you lift the cart a little?", true)
 	#4
-	Signals.player_message.emit("Daniel", "Alright, got it.")
+	Signals.player_message.emit("Daniel", "Alright, got it.", true)
 	#5
-	Signals.people_message.emit("Guard8", "Couldn't you be any slower? And what is that supposed to be? Why is the wheel so uneven?")
+	Signals.people_message.emit("Guard8", "Couldn't you be any slower? And what is that supposed to be? Why is the wheel so uneven?", true)
 	#6
-	Signals.people_message.emit("Peter", "Bbbbbut... I-I-I d-don't... c-control the Spark that well. I can reshape metal b-b-but... it doesn’t come out p-p-perfect...")
+	Signals.people_message.emit("Peter", "BBBBBbut... I-I-I d-don't... c-control the Spark that well. I can reshape metal b-b-but... it doesn’t come out p-p-perfect...", true)
 	#7
-	Signals.people_message.emit("Guard7", "Alright, alright. What matters is that you fixed it. But the loading is already way behind schedule. Push the cart through the emergency track and get back to the mine.")
+	Signals.people_message.emit("Guard7", "Alright, alright. What matters is that you fixed it. But the loading is already way behind schedule. Push the cart through the emergency track and get back to the mine.", true)
 	State.state_phase = 2
 
 func  _third_dialogue() -> void:
@@ -200,20 +193,20 @@ func  _third_dialogue() -> void:
 	player.sprite.play("idle")
 	
 	#1
-	Signals.people_message.emit("Peter", "Psst... Daniel, look what I found while we were moving the cart.")
+	Signals.people_message.emit("Peter", "Psst... Daniel, look what I found while we were moving the cart.", true)
 	#2
-	Signals.player_message.emit("Daniel", "Wait, what is this? A Resistance poster?! Hide it, or they'll do something to us!")
+	Signals.player_message.emit("Daniel", "Wait, what is this? A Resistance poster?! Hide it, or they'll do something to us!", true)
 	#3
-	Signals.people_message.emit("Guard8", "What's going on there? What do you have?")
+	Signals.people_message.emit("Guard8", "What's going on there? What do you have?", true)
 	#4
-	Signals.player_message.emit("Daniel", "I was just handing Peter a rag so he could wipe his forehead—he got all sweaty from the coal.")
+	Signals.player_message.emit("Daniel", "I was just handing Peter a rag so he could wipe his forehead—he got all sweaty from the coal.", true)
 	#5
-	Signals.people_message.emit("Guard7", "And are you done with that cart yet?")
+	Signals.people_message.emit("Guard7", "And are you done with that cart yet?", true)
 	#6
-	Signals.player_message.emit("Daniel", "Yes. We pushed the cart all the way through.")
+	Signals.player_message.emit("Daniel", "Yes. We pushed the cart all the way through.", true)
 	#7
-	Signals.people_message.emit("Guard7", "Peter, you go back to the mine, and Daniel, you take this broken wheel. Go to the twins and ask them to repair it.")
+	Signals.people_message.emit("Guard7", "Peter, you go back to the mine, and Daniel, you take this broken wheel. Go to the twins and ask them to repair it.", true)
 	#8
-	Signals.player_message.emit("Daniel", "Okay. After I give it to them, should I return to the mine right away?")
+	Signals.player_message.emit("Daniel", "Okay. After I give it to them, should I return to the mine right away?", true)
 	#9
-	Signals.people_message.emit("Guard8", "No, wait there until they fix the wheel, and only then go back to the mine. Don't waste time—go.")
+	Signals.people_message.emit("Guard8", "No, wait there until they fix the wheel, and only then go back to the mine. Don't waste time—go.", true)

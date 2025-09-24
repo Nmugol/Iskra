@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b18j64xa02d8y"]
+[gd_scene load_steps=11 format=3 uid="uid://b18j64xa02d8y"]
 
 [ext_resource type="Script" uid="uid://chrlg53ub6b58" path="res://Script/Class/ItemArea.gd" id="1_2oiv6"]
 [ext_resource type="Texture2D" uid="uid://dg868rg52ddw3" path="res://Sprite/Particle/Stat.png" id="2_2oiv6"]
+[ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="3_6oc8a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdia6"]
 radius = 8.0
@@ -39,6 +40,9 @@ turbulence_influence_max = 0.43
 turbulence_initial_displacement_min = -52.9
 turbulence_initial_displacement_max = 10.9
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2oiv6"]
+radius = 18.0278
+
 [node name="Item" type="Area2D"]
 script = ExtResource("1_2oiv6")
 metadata/_edit_group_ = true
@@ -51,3 +55,18 @@ texture_filter = 1
 amount = 4
 texture = ExtResource("2_2oiv6")
 process_material = SubResource("ParticleProcessMaterial_so34g")
+
+[node name="Distance" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Distance"]
+shape = SubResource("CircleShape2D_2oiv6")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+enabled = false
+color = Color(0.638066, 0.668915, 0.247923, 1)
+energy = 2.78
+texture = ExtResource("3_6oc8a")
+texture_scale = 0.12
+
+[connection signal="body_entered" from="Distance" to="." method="_on_distance_body_entered"]
+[connection signal="body_exited" from="Distance" to="." method="_on_distance_body_exited"]

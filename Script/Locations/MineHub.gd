@@ -28,14 +28,14 @@ func _first_dialog() -> void:
 	player.sprite.play("idle")
 	Signals.show_dialog.emit()
 	#1
-	Signals.people_message.emit("Guard7", "Daniel, go home. There’s been a gas leak in the mine. Your section has been closed until further notice. You’ll receive a new assignment tomorrow.")
+	Signals.people_message.emit("Guard7", "Daniel, go home. There’s been a gas leak in the mine. Your section has been closed until further notice. You’ll receive a new assignment tomorrow.", true)
 	
 	#1
-	Signals.player_message.emit("Daniel", "Wait, what?!... Is everyone okay?")
+	Signals.player_message.emit("Daniel", "Wait, what?!... Is everyone okay?", true)
 
 	#2
-	Signals.people_message.emit("Guard7", "No one was hurt. Everyone is safe. Take my advice and go home. Now. Understood.")
+	Signals.people_message.emit("Guard7", "No one was hurt. Everyone is safe. Take my advice and go home. Now. Understood.", true)
 
 	#3
-	Signals.player_message.emit("Daniel", "Phew... Alright, I’m going.")
+	Signals.player_message.emit("Daniel", "Phew... Alright, I’m going.", true)
 	

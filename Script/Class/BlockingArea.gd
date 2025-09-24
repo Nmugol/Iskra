@@ -24,7 +24,8 @@ func  _ready() -> void:
 			player.sprite.play("idle")
 			Signals.show_dialog.emit()
 			Signals.player_message.emit("Daniel",
-			exit_blocked_messages[randi_range(0, exit_blocked_messages.size()-1)]
+			exit_blocked_messages.pick_random(),
+			false
 			)
-			State.state_phase -= 1
+			
 		)

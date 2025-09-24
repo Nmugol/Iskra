@@ -37,8 +37,8 @@ signal talk_finished
 func _ready() -> void:
 	text_to_display.bbcode_enabled = true
 	finish_state = true
-	Signals.people_message.connect(func(icon, text): add_to_queue(people_talk, icon, text))
-	Signals.player_message.connect(func(icon, text): add_to_queue(player_talk, icon, text))
+	Signals.people_message.connect(func(icon, text, increase): add_to_queue(people_talk, icon, text, increase))
+	Signals.player_message.connect(func(icon, text, increase): add_to_queue(player_talk, icon, text, increase))
 	Signals.show_dialog.connect(func()-> void: info_timer.start())
 	timer.timeout.connect(_on_timer_timeout)
 
@@ -55,18 +55,21 @@ func _process(_delta: float) -> void:
 			text_finished.emit()
 		else:  # Drugie kliknięcie - następny dialog
 			talk_finished.emit()
+			Signals.stop_play_sound.emit(State.AudioType.Effect)
 	
 	if queue.is_empty() and not is_talking:
 		close_button.show()
+		queue.clear()
+		Signals.stop_play_sound.emit(State.AudioType.Effect)
 
-func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String):
+func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String, increase_stage_phase: bool = true) -> void:
 	queue.append([func_ref, iconName, textToDisplay])
-	process_queue()
+	process_queue(increase_stage_phase)
 
-func process_queue():
+func process_queue(increase_stage_phase: bool = true) -> void:
 	if is_talking or queue.is_empty():
 		if finish_state:
-			State.state_phase += 1
+			if increase_stage_phase: State.state_phase += 1
 			finish_state = false
 		return
 	
@@ -132,6 +135,7 @@ func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
 	Signals.stop_play_sound.emit(State.AudioType.Effect)
 	State.is_running = true
+	queue.clear()
 
 
 func _on_info_timeout() -> void:
