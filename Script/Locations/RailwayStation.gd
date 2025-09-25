@@ -20,25 +20,31 @@ var game_load_finish: bool = false
 var player_find_steel_sheet: bool = false
 var steel_sheet_picked_up: bool = false
 
+var dialog_is_running: bool = false
+
 func _ready() -> void:
 	camer.global_position = player.global_position 
 	camer.follow_target = player
 	
 	Signals.load_cart_game.connect(_load_game)
 	Signals.finish_cart_game.connect(_finish_game)
-	
+
+	if State.state_number >= 1 and State.state_phase >= 10:
+		Signals.change_info_panel_visibility.emit(true)
+
 	if State.state_number >= 3:
 		cart.show()
-		Signals.change_info_panel_visibility.emit(true)
 	
 	if State.state_number >= 4:
 		cart.monitoring = false
-		Signals.change_info_panel_visibility.emit(false)
-
+	
 	# Dodane: automatyczne wznowienie mini-gry po powrocie do sceny
 	if State.state_number == 3 and game == null:
 		_load_game()
 		Signals.change_info_panel_visibility.emit(false)
+	
+	if State.state_number >= 7:
+		give_sheet.monitoring = false
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
@@ -48,46 +54,50 @@ func _process(_delta: float) -> void:
 		steel_sheet_picked_up = true
 	
 	if player_find_steel_sheet and steel_sheet_picked_up and State.selected_item != null and State.selected_item.item_name == "Steel sheet":
+		player_find_steel_sheet = false
 		_reper_cart()
 	
 	match State.state_number:
 		1:
 			match State.state_phase:
 				0: 
-					_first_task()
-					player.sprite.flip_h = true
+					if not dialog_is_running:
+						dialog_is_running = true
+						_first_task()
+						player.sprite.flip_h = true
 				10:
 					player.sprite.flip_h = false
 					for i in 2:
 						await get_tree().process_frame
 					
+					dialog_is_running = false
 					Signals.change_info_panel_visibility.emit(true)
-
 					State.state_number = 2
 					State.state_phase = 0
 		2:
 			match  State.state_phase:
-				5:
+				6:
 					if get_node_or_null("EventArea/GiveSteelSheet") != null:
 						$EventArea/GiveSteelSheet/BrokenCart.hide()
 						$EventArea/GiveSteelSheet.queue_free()
 						cart.show()
 						
-				8:
-					_load_game()
-					State.state_number = 3
-					State.state_phase = 0
-		3:
-			State.is_running = false
+						_load_game()
+						State.state_number = 3
+						State.state_phase = 0
+						Signals.change_info_panel_visibility.emit(false)
 		4:
 			match  State.state_phase:
 				0:
-					_third_dialogue()
+					if not dialog_is_running:
+						dialog_is_running = true
+						_third_dialogue()
 				1:
 					var broken_wheel: Item = Item.new("Broken wheel",[],true,"res://Sprite/Items/BrokenCartWheelSmall.png","res://Sprite/Items/BrokenCartWheel.png",[])
 					if not Save._is_in_equipment(broken_wheel.item_name):
 						broken_wheel.add_to_equipment()
 				9:
+					dialog_is_running = false
 					State.state_number = 5
 					State.state_phase = 0
 					Save.player_position = Vector2(440,-184) 
@@ -104,7 +114,6 @@ func _on_give_steel_sheet_body_exited(body:Node2D) -> void:
 		player_find_steel_sheet = false
 
 func  _reper_cart() -> void:
-	State.state_phase = 1
 	var stop_point: Vector2 = Vector2(2127,-54)
 	player.global_position = stop_point
 	player.navigation.target_position = stop_point
@@ -185,7 +194,6 @@ func _second_task() -> void:
 	Signals.people_message.emit("Peter", "BBBBBbut... I-I-I d-don't... c-control the Spark that well. I can reshape metal b-b-but... it doesn’t come out p-p-perfect...", true)
 	#7
 	Signals.people_message.emit("Guard7", "Alright, alright. What matters is that you fixed it. But the loading is already way behind schedule. Push the cart through the emergency track and get back to the mine.", true)
-	State.state_phase = 2
 
 func  _third_dialogue() -> void:
 	Save.save_data_to_file()

@@ -23,10 +23,10 @@ func play_audio(audio_type: State.AudioType, audio_stream: AudioStream, pitch_sc
         player.stream = audio_stream
         player.pitch_scale = pitch_scale
         player.volume_db = volume_db
+        player.stop()
         player.play()
-        await player.finished
-        
         if audio_type == State.AudioType.Effect:
+            await player.finished
             State.can_play_sfx = true
 
 func stop_audio(audio_type: State.AudioType) -> void:
@@ -34,4 +34,5 @@ func stop_audio(audio_type: State.AudioType) -> void:
         State.AudioType.Effect: 
             sfx_player.stop()
             State.can_play_sfx = true
-        State.AudioType.Music: music_player.stop()
+        State.AudioType.Music: 
+            music_player.stop()

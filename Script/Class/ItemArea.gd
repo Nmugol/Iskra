@@ -1,13 +1,30 @@
+@tool
 extends Area2D
 class_name ItemArea
-
-
 
 @export_category("Item")
 @export var area_name: State.Cursors_above = State.Cursors_above.NONE
 @export var active_on: Array[int] = []
 
+@export_category("Detection")
+@export_range(0, 30, 0.2) var item_area_size: float = 8:
+	set(value):
+		item_area_size = value
+		_update_area()
+	get:
+		return item_area_size
+
+
+@export_range(10, 40, 0.2) var distance_to_item: float = 10:
+	set(value):
+		distance_to_item = value
+		_update_area()
+	get:
+		return distance_to_item
+
 @onready var light: PointLight2D = $PointLight2D
+@onready var item_area: CollisionShape2D = $CollisionShape2D
+@onready var distance_area: CollisionShape2D = $Distance/CollisionShape2D
 
 var player_in_item_area: bool = false
 var mouse_on: bool = false
@@ -59,8 +76,18 @@ func _ready() -> void:
 	Signals.remove_items_from_scene.connect(remove_form_scene)
 	Signals.remove_all_items_from_scene.connect(func(): if State.state_number not in active_on: self.queue_free())
 
-	if State.state_number not in active_on: 
-		self.queue_free()
+	if item_area and item_area.shape: item_area.shape = item_area.shape.duplicate()
+	if distance_area and distance_area.shape: distance_area.shape = distance_area.shape.duplicate()
+	
+	_update_area()
+
+	if State.state_number not in active_on: self.queue_free()
+
+func _update_area() -> void:
+	if not item_area or not distance_area: return
+	
+	if item_area.shape: item_area.shape.radius = item_area_size
+	if distance_area.shape: distance_area.shape.radius = distance_to_item
 
 func remove_form_scene(item: State.Cursors_above) -> void:
 	if area_name == item: 
@@ -71,7 +98,7 @@ func _pick_up() -> void:
 	mouse_on = true
 	message_sent = false
 	light.enabled = true
-	# Dodaj bezpośrednie wywołanie sygnału
+	
 	Signals.mouse_above_item.emit(area_name)
 
 func _on_mouse_exited() -> void:

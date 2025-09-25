@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://df5xt02musp5d"]
+[gd_scene load_steps=9 format=3 uid="uid://df5xt02musp5d"]
 
 [ext_resource type="Script" uid="uid://ctpcoofjwfx7c" path="res://Script/GUI/InfoPanel.gd" id="1_vy1nj"]
+[ext_resource type="AudioStream" uid="uid://ckgiw6nuee4qu" path="res://Sound/JDSherbert - Ultimate UI SFX Pack/Free/Mono/ogg/JDSherbert - Ultimate UI SFX Pack - Cursor - 4.ogg" id="2_isemo"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="2_jru14"]
 [ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="3_isemo"]
 [ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="4_jru14"]
@@ -23,7 +24,7 @@ layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 0
 script = ExtResource("1_vy1nj")
-is_visible_flag = null
+button_sfx = ExtResource("2_isemo")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1

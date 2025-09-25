@@ -140,10 +140,10 @@ physics_interpolation_mode = 1
 position = Vector2(2120, -40)
 zoom = Vector2(2.2, 2.2)
 process_callback = 0
-limit_left = 72
-limit_top = -392
-limit_right = 2488
-limit_bottom = 376
+limit_left = -368
+limit_top = -200
+limit_right = 1040
+limit_bottom = 424
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -267,60 +267,55 @@ item_area = {
 
 [node name="SteelSheet" parent="Items" instance=ExtResource("20_1s613")]
 position = Vector2(1776, -256)
-scale = Vector2(2, 2)
 area_name = 0
 active_on = Array[int]([1, 2, 3])
+item_area_size = 21.6
+distance_to_item = 32.6
 
 [node name="Fake" type="Node2D" parent="Items"]
 
 [node name="Item" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(1552, -128)
-scale = Vector2(2, 2)
+position = Vector2(1808, -192)
 active_on = Array[int]([1, 2, 3])
+item_area_size = 16.8
+distance_to_item = 27.2
 
 [node name="Item2" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(2272, -152)
+position = Vector2(1888, -168)
+monitoring = false
 active_on = Array[int]([1, 2, 3])
+item_area_size = 21.0
+distance_to_item = 33.8
 
 [node name="Item3" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(2240, -16)
-scale = Vector2(2, 2)
+position = Vector2(2272, -200)
 active_on = Array[int]([1, 2, 3])
+item_area_size = 13.0
+distance_to_item = 23.0
 
 [node name="Item4" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(1600, -232)
-scale = Vector2(2, 2)
+position = Vector2(2360, 72)
 active_on = Array[int]([1, 2, 3])
+item_area_size = 29.4
+distance_to_item = 40.0
 
 [node name="Item5" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(1832, -184)
-scale = Vector2(2, 2)
+position = Vector2(2264, 168)
 active_on = Array[int]([1, 2, 3])
+item_area_size = 16.2
+distance_to_item = 27.0
 
 [node name="Item6" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(1888, -176)
-scale = Vector2(2, 2)
+position = Vector2(2304, 128)
 active_on = Array[int]([1, 2, 3])
+item_area_size = 17.4
+distance_to_item = 28.4
 
 [node name="Item7" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(2368, 72)
-scale = Vector2(4, 4)
+position = Vector2(1560, -136)
 active_on = Array[int]([1, 2, 3])
-
-[node name="Item8" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(2272, 168)
-scale = Vector2(2, 2)
-active_on = Array[int]([1, 2, 3])
-
-[node name="Item9" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(1576, 264)
-scale = Vector2(2, 2)
-active_on = Array[int]([1, 2, 3])
-
-[node name="Item10" parent="Items/Fake" instance=ExtResource("20_1s613")]
-position = Vector2(1552, 200)
-scale = Vector2(2, 2)
-active_on = Array[int]([1, 2, 3])
+item_area_size = 13.8
+distance_to_item = 25.0
 
 [node name="EventArea" type="Node2D" parent="."]
 metadata/_edit_lock_ = true

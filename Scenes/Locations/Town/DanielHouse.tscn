@@ -43,14 +43,13 @@ script = ExtResource("1_o2u0l")
 [node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("16_bwym7")]
 anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.0
 anchor_bottom = 0.5
-grow_horizontal = 1
+grow_vertical = 2
 width = 330.0
 height = 140.0
 text_to_display = "Use map [img]res://Sprite/Informations/mapa.png[/img] and select shopping area [img=16x16]res://Sprite/Map/ShoppingAreaIcon.png[/img] to fast travel"
 is_visible_flag = true
-active_on_stages = Array[int]([13, 14])
+active_on_stages = Array[int]([13, 14, 12])
 metadata/_edit_use_anchors_ = true
 
 [node name="Teren" type="Node2D" parent="."]
@@ -127,10 +126,10 @@ physics_interpolation_mode = 1
 position = Vector2(729, -465)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 359
-limit_top = -705
-limit_right = 1049
-limit_bottom = -229
+limit_left = -368
+limit_top = -200
+limit_right = 1040
+limit_bottom = 424
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

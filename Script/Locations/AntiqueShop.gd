@@ -26,6 +26,8 @@ const  MAIN_SCENE = "res://Scenes/World.tscn"
 var game: Node = null
 var mini_game = load("res://Scenes/MiniGame/PatrolMiniGame/patrol_mini_game.tscn")
 
+var dialog_is_running: bool = false
+
 
 func _ready() -> void:
 
@@ -61,34 +63,41 @@ func _process(_delta: float) -> void:
 	match State.state_number:
 		13:
 			match State.state_phase:
-				0:
-					first_dialogue()
+				1:
+					if not dialog_is_running:
+						dialog_is_running = true
+						first_dialogue()
 				9:
 					miriam_path._play()
 				11:
 					miriam_path._finish_play()
 					
 				12:
+					dialog_is_running = false
 					State.state_phase = 0
 					State.state_number = 14
 					Signals.save_to_file.emit()
+
 		14:
 			match State.state_phase:
 				0:
-					second_dialogue()
+					if not dialog_is_running:
+						dialog_is_running = true
+						second_dialogue()
 				6:
 					emil_path._play()
 				9:
 					emil_path._finish_play()
-				16:
+				15:
+					dialog_is_running = false
 					if game == null:
 						init_patrol_mini_game()
-				17:
-					State.state_phase = 0
 					State.state_number = 15
-		15:
+					State.state_phase = 0
+
+		16:
 			match State.state_phase:
-				1:
+				0:
 					State.state_phase = 0
 					State.state_number = 16
 					Save.player_position = Vector2(791,-465) 
@@ -103,14 +112,15 @@ func init_patrol_mini_game() -> void:
 
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
+	
 	player.hide()
 	State.is_running = false
 
 func finish_patrol_mini_game() -> void:
 	$PhantomCamera2D.follow_target = player
 	
-	State.state_number = 15
-	State.state_phase = 1
+	State.state_number = 16
+	State.state_phase = 0
 	
 
 	if game != null:

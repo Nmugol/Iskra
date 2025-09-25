@@ -6,6 +6,7 @@ extends Node2D
 
 const  MAIN_SCENE = "res://Scenes/World.tscn"
 
+var dialog_is_running: bool = false
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
@@ -14,8 +15,11 @@ func _process(_delta: float) -> void:
 			match State.state_phase:
 				0:
 					guard7.show()
-					_first_dialog()
+					if not dialog_is_running:
+						dialog_is_running = true
+						_first_dialog()
 				3:
+					dialog_is_running = false
 					State.state_number = 9
 					State.state_phase = 0
 					Save.player_position = Vector2(704,-424) 

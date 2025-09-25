@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="3_6oc8a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdia6"]
-radius = 8.0
+radius = 11.4
 
 [sub_resource type="Curve" id="Curve_08o4a"]
 _data = [Vector2(0.023273, 0.11135), 0.0, 0.0, 0, 0, Vector2(0.227755, 0.557892), 0.0, 0.0, 0, 0, Vector2(0.386678, 0.316757), 0.0, 0.0, 0, 0, Vector2(0.68382, 0.581373), 0.0, 0.0, 0, 0, Vector2(0.82609, 0.206241), 0.0, 0.0, 0, 0]
@@ -41,7 +41,7 @@ turbulence_initial_displacement_min = -52.9
 turbulence_initial_displacement_max = 10.9
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2oiv6"]
-radius = 18.0278
+radius = 25.0
 
 [node name="Item" type="Area2D"]
 script = ExtResource("1_2oiv6")

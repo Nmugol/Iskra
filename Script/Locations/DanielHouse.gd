@@ -10,6 +10,7 @@ var mini_game = load("res://Scenes/MiniGame/CandleMiniGame/candle_mini_game.tscn
 
 var in_candle_mini_game_area: bool = false
 var mini_game_is_running: bool = false
+var dialog_is_running: bool = false
 
 var game: Node = null
 
@@ -31,20 +32,26 @@ func _ready():
 
 
 func _process(_delta: float) -> void:
+	print("State.state_number: ", State.state_number," State.state_phase: " ,State.state_phase)
+
 	if State.is_loading: return
 
 	match State.state_number:
 		9:
 			match State.state_phase:
 				0:
-					_first_dialog()
-					Signals.save_game.emit()
-					Signals.save_to_file.emit()
-		
+					if not dialog_is_running:
+						dialog_is_running = true
+						_first_dialog()
+						Signals.save_game.emit()
+						Signals.save_to_file.emit()
+				
 		10:
 			match State.state_phase:
 				0:
-					if game == null:
+					dialog_is_running = false
+					if game == null and not dialog_is_running:
+						dialog_is_running = true
 						_second_dialog()
 						exit.monitoring = false
 						exit.monitorable = false
@@ -54,6 +61,7 @@ func _process(_delta: float) -> void:
 		11:
 			match State.state_phase:
 				0:
+					dialog_is_running = false
 					_finish_candle_mini_game()
 					exit.monitoring = true
 					exit.monitorable = true
@@ -61,18 +69,28 @@ func _process(_delta: float) -> void:
 		12:
 			match State.state_phase:
 				0:
-					_three_dialog()
+					if not dialog_is_running:
+						dialog_is_running = true
+						_three_dialog()
 					Signals.change_info_panel_visibility.emit(true)
 					State.state_number = 13
 					State.state_phase = 0
 					Signals.save_to_file.emit()
+				1:
+					dialog_is_running = false
 		16:
 			match State.state_phase:
 				0:
-					_four_dialog()
+					if not dialog_is_running:
+						dialog_is_running = true
+						_four_dialog()
+					
+				1:
+					dialog_is_running = false
 					State.state_number = 17
 					State.state_phase = 0
 					Signals.save_to_file.emit()
+
 
 	if in_candle_mini_game_area and State.selected_item != null and State.selected_item.item_name == "Crystal shard" and not mini_game_is_running:
 		State.state_number = 10
@@ -92,10 +110,10 @@ func init_candle_mini_game() -> void:
 
 func _finish_candle_mini_game() -> void:
 	$PhantomCamera2D.follow_target = player
-	State.state_number = 12
-	State.state_phase = 0
 	mini_game_is_running = false
 	State.is_running = true
+	State.state_number = 12
+	State.state_phase = 0
 
 	if game != null:
 		game.queue_free()

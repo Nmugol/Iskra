@@ -311,7 +311,7 @@ moving_distance_y = 150.0
 moving_distance_x = 150.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.78
+toleration_procent = 0.7
 center_point = NodePath("../../../Points/BottomLeftPoint")
 border_area = NodePath("../../../Area2D")
 
@@ -326,7 +326,7 @@ moving_distance_y = 150.0
 moving_distance_x = 150.0
 max_distance_tolerance = 7.5
 max_rotation_tolerance = 27.0
-toleration_procent = 0.78
+toleration_procent = 0.7
 center_point = NodePath("../../../Points/TopRightPoint")
 border_area = NodePath("../../../Area2D")
 

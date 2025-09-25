@@ -70,9 +70,6 @@ func _process(delta: float) -> void:
 		Signals.stop_moving_and_rotate_symbol.emit()
 	else: Signals.set_cursor.emit(State.Cursors.USE)	
 
-	if Input.is_action_just_pressed("MovePlayer") and State.can_play_sfx:
-		Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
-
 	if Input.is_action_pressed("MovePlayer"):
 		match cursor_above_button:
 			above_button.UP: move_up()

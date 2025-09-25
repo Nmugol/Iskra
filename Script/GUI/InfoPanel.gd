@@ -3,10 +3,13 @@ class_name InfoPanel
 
 @onready var panel: NinePatchRect = $NinePatchRect
 @onready var info_text: RichTextLabel = $NinePatchRect/MarginContainer/RichTextLabel
+@onready var button: TextureButton = $NinePatchRect/TextureButton
 
 @export_category("Panel size")
+
 @export_range(55, 1000, 5)
 var width: float = 300.0
+
 @export_range(55, 1000, 5)
 var height: float = 150.0
 
@@ -15,8 +18,10 @@ var height: float = 150.0
 
 @export_category("Visibility")
 @export var is_visible_flag: bool = false
-
 @export var active_on_stages: Array[int]
+
+@export_category("Audio")
+@export var button_sfx: AudioStream
 
 const MINIMAL_SIZE: Vector2 = Vector2(60, 53)
 var is_in_minimal_size: bool = false
@@ -41,6 +46,9 @@ func _ready() -> void:
 		change_visibility()
 		)
 	Signals.change_info_panel_text.connect(change_text)
+	
+	Signals.show_dialog.connect(func () -> void: set_process_input(false))
+	Signals.hide_dialog.connect(func () -> void:set_process_input(true))
 
 func change_text(new_text: String) -> void:
 	info_text.text = new_text
@@ -58,5 +66,8 @@ func _on_texture_button_pressed() -> void:
 	else:
 		panel.size = MINIMAL_SIZE
 		is_in_minimal_size = true
-		info_text.text = "?"
+		info_text.text = ""
 		info_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	
+	Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
+	button.release_focus()
