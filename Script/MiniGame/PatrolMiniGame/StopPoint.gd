@@ -40,7 +40,7 @@ func _ready():
 
 	Signals.player_in_stop_point.connect(
 		func(pos):
-			if pos == self.global_position:
+			if pos == self.position:
 				player_on_point = true
 				# Aktywuj sąsiednie punkty dopiero po dotarciu gracza
 				for neighbor in neighbor_point:
@@ -59,10 +59,10 @@ func initialize_starting_patrols() -> void:
 			patrol.activate()
 			patrols_on_point[patrol.patrol_id] = true
 			# Ustaw pozycję patrolu na tym punkcie
-			patrol.global_position = self.global_position
+			patrol.position = self.position
 			# Rozpocznij ruch po krótkim opóźnieniu
 			await get_tree().create_timer(0.5).timeout
-			patrol_next_move(patrol.patrol_id, self.global_position)
+			patrol_next_move(patrol.patrol_id, self.position)
 
 func _process(_delta: float) -> void:
 	if not is_active:
@@ -74,7 +74,7 @@ func _process(_delta: float) -> void:
 		sprite.play("home")
 	
 	if Input.is_action_just_pressed("MovePlayer") and State.can_play_sfx:
-		Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
+		Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -5)
 
 	# Sprawdź kolizję z dowolnym patrolem
 	if player_on_point and not patrols_on_point.is_empty():
@@ -82,7 +82,7 @@ func _process(_delta: float) -> void:
 
 	# Usunięto aktywację sąsiadów przy kliknięciu - teraz dzieje się to po dotarciu gracza
 	if mouse_on and Input.is_action_just_pressed("MovePlayer") and is_active:
-		Signals.move_player_to_point.emit(self.global_position)
+		Signals.move_player_to_point.emit(self.position)
 		
 
 	if is_finish and player_on_point:
@@ -102,7 +102,7 @@ func _on_area_2d_mouse_exited() -> void:
 	sprite.play("default")
 
 func patrol_next_move(patrol_id: String, pos: Vector2) -> void:
-	if not pos == self.global_position: return
+	if not pos == self.position: return
 
 	patrols_on_point[patrol_id] = true
 	patrols_going_to_point.erase(patrol_id)
@@ -117,12 +117,12 @@ func patrol_next_move(patrol_id: String, pos: Vector2) -> void:
 		var next_point: StopPoint = neighbor_point[random_index]
 
 		next_point.patrols_going_to_point[patrol_id] = true
-		Signals.move_patrol_to_point.emit(patrol_id, next_point.global_position)
+		Signals.move_patrol_to_point.emit(patrol_id, next_point.position)
 		Signals.patrol_left_point.emit(patrol_id, self.global_position)
 		patrols_on_point.erase(patrol_id)
 
 func patrol_left_point(patrol_id: String, pos: Vector2) -> void:
-	if pos == self.global_position:
+	if pos == self.position:
 		patrols_on_point.erase(patrol_id)
 		patrols_going_to_point.erase(patrol_id)
 		if patrols_going_to_point.is_empty():

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://8nijol4503yx"]
 
-[ext_resource type="Script" uid="uid://cnpsuedpbnh12" path="res://Script/Class/Cart.gd" id="2_iod86"]
+[ext_resource type="Script" uid="uid://cnpsuedpbnh12" path="res://Script/MiniGame/CartMinGame/Cart.gd" id="2_iod86"]
 [ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/CartMiniGame/Cart1.png" id="2_wvsi2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_quf3t"]

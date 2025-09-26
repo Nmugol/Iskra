@@ -75,8 +75,6 @@ func save_settings() -> void:
 	if file:
 		file.store_string(json)
 		file.close()
-	else:
-		print("Error")
 
 func load_settings() -> void:
 
@@ -103,8 +101,6 @@ func load_settings() -> void:
 		sound_effects_volume = data["sound_effects_volume"]
 
 		file.close()
-	else:
-		print("Error")
 
 func resetSettings() -> void:
 	

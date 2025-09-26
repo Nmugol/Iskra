@@ -70,7 +70,6 @@ func _pick_up(_item: Item) -> void:
 func _above_item(area: State.Cursors_above) -> void:
 	pointing_on = area
 	player_pick_up_item = true
-	print("Mouse above item: ", area)
 
 # Pomocnicza funkcja do mapowania przedmiotu na typ enum
 func _get_item_type(item: Item) -> State.Cursors_above:

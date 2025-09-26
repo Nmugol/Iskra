@@ -64,9 +64,6 @@ func load_data_from_file()->void:
 		for item in data["pick_up_items"]:
 			var new_item = Item.from_json(item)
 			State.pick_up_items.append(new_item)
-		
-	else:
-		print("Błąd otwarcia pliku")
 	file.close()
 
 func save_data_to_file()->void:
@@ -94,8 +91,6 @@ func save_data_to_file()->void:
 	if file:
 		file.store_string(json)
 		file.close()
-	else:
-		print("Błąd otwarcia pliku i zapisu")
 
 
 func delete_save_file() -> void:
@@ -110,6 +105,3 @@ func delete_save_file() -> void:
 			if error == OK:
 				default_data()
 				save_data_to_file()
-			else: print("Błąd podczas usuwania pliku: ", error)
-		else: print("Błąd dostępu do katalogu.")
-	else: print("Plik nie istnieje.")

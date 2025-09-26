@@ -16,7 +16,6 @@ var level_3: PackedScene = preload("res://Scenes/MiniGame/PatrolMiniGame/level_3
 var current_level: int = 1
 
 func _ready() -> void:
-	print(current_level)
 	level_loader()
 	connect_signals()
 

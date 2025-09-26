@@ -32,8 +32,6 @@ func _ready():
 
 
 func _process(_delta: float) -> void:
-	print("State.state_number: ", State.state_number," State.state_phase: " ,State.state_phase)
-
 	if State.is_loading: return
 
 	match State.state_number:

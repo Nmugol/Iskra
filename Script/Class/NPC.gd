@@ -65,13 +65,7 @@ func update_animation():
 				sprite.scale = Vector2(0.5, 0.5)
 			Animation_names.WALK: 
 				sprite.scale = Vector2(0.667, 0.667)
-				
-		for i in 2:
-			await get_tree().process_frame
-	
 		sprite.play(str(target_animation))
-	else:
-		print("Brak animacji: ", target_animation)
 
 func update_flip():
 	if is_instance_valid(sprite):
@@ -79,9 +73,7 @@ func update_flip():
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
-		return  # Ignoruj w edytorze
+		return
 		
-	# Inicjacja po wszystkich węzłach
-	await get_tree().process_frame
 	update_animation()
 	update_flip()

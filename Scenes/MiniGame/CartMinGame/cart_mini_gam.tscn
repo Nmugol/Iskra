@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=4 uid="uid://dvc7y03xy1xa2"]
 
-[ext_resource type="Script" uid="uid://cp1idoalo0734" path="res://Script/Locations/cart_mini_gam.gd" id="1_0tact"]
-[ext_resource type="Script" uid="uid://bksi83yje0dv7" path="res://Script/Class/TracLoader.gd" id="1_0u0f4"]
+[ext_resource type="Script" uid="uid://cp1idoalo0734" path="res://Script/MiniGame/CartMinGame/CartMiniGam.gd" id="1_0tact"]
+[ext_resource type="Script" uid="uid://bksi83yje0dv7" path="res://Script/MiniGame/CartMinGame/TracLoader.gd" id="1_0u0f4"]
 [ext_resource type="PackedScene" uid="uid://cx6sp18rv53ci" path="res://Scenes/MiniGame/CartMinGame/V_track_straight.tscn" id="1_x0d2a"]
 [ext_resource type="AudioStream" uid="uid://dxpsu2oolpwyh" path="res://Sound/JDSherbert - Ultimate UI SFX Pack/Free/Mono/ogg/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.ogg" id="2_hv8rs"]
 [ext_resource type="PackedScene" uid="uid://b046ajchlgrbc" path="res://Scenes/MiniGame/CartMinGame/H_track_straight.tscn" id="2_sg5nt"]

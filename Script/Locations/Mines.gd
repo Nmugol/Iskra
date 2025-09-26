@@ -13,7 +13,6 @@ var target_ratio = 0.45   # gdzie ma się zatrzymać
 var walk: bool = false
 
 func  _ready() -> void:
-	print(State.state_phase)
 	path.progress_ratio = 0.0
 	guard7.update_state("Walk", false)
 	guard8.update_state("Walk", false)
@@ -34,7 +33,6 @@ func _process(delta: float) -> void:
 		0:
 			match State.state_phase:
 				0: 
-					print("ok")
 					start_dialog();
 				4:
 					guard7.update_state("Walk", false)

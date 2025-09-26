@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dtkwjlv4gidxq"]
 
-[ext_resource type="Script" uid="uid://cipfoyqqlj8o3" path="res://Script/Class/StopPoint.gd" id="1_cikq4"]
+[ext_resource type="Script" uid="uid://cipfoyqqlj8o3" path="res://Script/MiniGame/PatrolMiniGame/StopPoint.gd" id="1_cikq4"]
 [ext_resource type="Texture2D" uid="uid://cnbygm435feql" path="res://Sprite/PatrolMiniGame/StopPoint.png" id="2_oaycu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_006jq"]

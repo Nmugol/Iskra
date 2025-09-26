@@ -68,17 +68,14 @@ func remove_from_equipment() -> void:
 func assemble(item_to_combine: Item) -> void:
 	# Zabezpieczenie przed null'em
 	if not is_instance_valid(item_to_combine):
-		print("pusty")
 		return
 	
 	# Zabezpieczenie przed łączeniem z samym sobą
 	if item_to_combine == self or item_to_combine.item_name == self.item_name:
-		print("samo ze sobą")
 		return
 	
 	# Zabezpieczenie przed duplikatami
 	if contains_items.has(item_to_combine):
-		print("zawiera siebie")
 		return
 	
 	if connects_with.has(item_to_combine.item_name) and is_finished:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://chmoeowym2hhd"]
 
-[ext_resource type="Script" uid="uid://r1tsxfokkaq7" path="res://Script/Player/PlayerInMiniGame.gd" id="1_5nj6k"]
+[ext_resource type="Script" uid="uid://r1tsxfokkaq7" path="res://Script/MiniGame/PatrolMiniGame/PlayerInMiniGame.gd" id="1_5nj6k"]
 [ext_resource type="Texture2D" uid="uid://dbxncmvrq00kv" path="res://Sprite/PatrolMiniGame/Daniel.png" id="2_5nj6k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uel2x"]

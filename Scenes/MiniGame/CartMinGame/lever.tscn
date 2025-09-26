@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://gevsv0nxju2n"]
 
-[ext_resource type="Script" uid="uid://cdawyo11jgq44" path="res://Script/Class/Lever.gd" id="1_8iida"]
+[ext_resource type="Script" uid="uid://cdawyo11jgq44" path="res://Script/MiniGame/CartMinGame/Lever.gd" id="1_8iida"]
 [ext_resource type="AudioStream" uid="uid://jsfgt8mtp3kg" path="res://Sound/JDSherbert - Ultimate UI SFX Pack/Free/Mono/ogg/JDSherbert - Ultimate UI SFX Pack - Swipe - 1.ogg" id="2_4xou6"]
 [ext_resource type="SpriteFrames" uid="uid://b87yfb15yp4t0" path="res://lever.tres" id="2_8iida"]
 

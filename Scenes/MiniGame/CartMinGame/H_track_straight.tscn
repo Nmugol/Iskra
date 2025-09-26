@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b046ajchlgrbc"]
 
-[ext_resource type="Script" uid="uid://dj6p1laukgb3r" path="res://Script/Class/Track.gd" id="1_iqyfg"]
+[ext_resource type="Script" uid="uid://dj6p1laukgb3r" path="res://Script/MiniGame/CartMinGame/Track.gd" id="1_iqyfg"]
 [ext_resource type="Texture2D" uid="uid://beya1ewlw1uac" path="res://Sprite/Pixel Crawler - Free Pack/Environment/Props/Static/Furniture.png" id="2_suxe8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ulcbf"]

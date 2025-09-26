@@ -1,6 +1,6 @@
 [gd_scene load_steps=270 format=3 uid="uid://csxu2selp6avn"]
 
-[ext_resource type="Script" uid="uid://baej2hq68u8ig" path="res://Script/NPC.gd" id="1_ri8vb"]
+[ext_resource type="Script" uid="uid://baej2hq68u8ig" path="res://Script/Class/NPC.gd" id="1_ri8vb"]
 [ext_resource type="Texture2D" uid="uid://daccc6dxn0hy6" path="res://Sprite/Character/EmilSchmidt/EmilSchmidt Fight.png" id="2_u75bn"]
 [ext_resource type="Texture2D" uid="uid://bbdpxrej0kiur" path="res://Sprite/Character/EmilSchmidt/$EmilSchmidt Other.png" id="3_u4vjm"]
 [ext_resource type="Texture2D" uid="uid://dfyrjrnthorgq" path="res://Sprite/Character/MiriamSchmidt/MiriamSchmidt Fight.png" id="4_37ake"]
