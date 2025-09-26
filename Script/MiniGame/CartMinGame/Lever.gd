@@ -35,6 +35,8 @@ func _flip_y()-> void:
 		t.update_scale()
 
 func _ready() -> void:
+	set_up()
+
 	Signals.cart_go.connect(func (): mini_game_is_running = true)
 	Signals.reparent_cart.connect(func (): mini_game_is_running = false)
 
@@ -59,3 +61,10 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	Signals.reset_cursor.emit()
 	mouse_on = false
+
+func set_up() -> void:
+	track_to_flip_x = []
+	track_to_flip_y = []
+	track_to_rotate = []
+	lever_finish = true
+	mini_game_is_running = false

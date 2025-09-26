@@ -4,27 +4,30 @@ var coalpit_level: int = 0
 var start_cart: bool = false
 var mini_game_is_run: bool = false
 
-var main_cart: Cart
-
-@export_category("Levels")
-@export var level1: Node2D
-@export var level2: Node2D
-@export var level3: Node2D
-@export var cart_position_1: Marker2D
-@export var cart_position_2: Marker2D
-
 @export_category("Audio")
 @export var play_button_sfx: AudioStream
 
+@export_category("Level loader")
+@export var level_loader: Node2D
+
+@export_category("Levers")
+@export var lever_1: Lever
+@export var lever_2: Lever
+@export var lever_3: Lever
+@export var lever_4: Lever
+
+#Levels
+var level_1: PackedScene = preload("res://Scenes/MiniGame/CartMinGame/level_1.tscn")
+var level_2: PackedScene = preload("res://Scenes/MiniGame/CartMinGame/level_2.tscn")
+var level_3: PackedScene = preload("res://Scenes/MiniGame/CartMinGame/level_3.tscn")
+
+
 func _ready() -> void:
+	print(coalpit_level, " level")
 
 	Signals.reset_cursor.emit()
 	State.is_running = false
-	
-	level1.show()
-	level2.hide()
-	level3.hide()
-	
+
 	Signals.cart_game_timer_on.connect(func (): 
 		$Timer.wait_time = 0.6
 		$Timer.one_shot = true
@@ -33,48 +36,79 @@ func _ready() -> void:
 	Signals.cart_game_timer_off.connect(func ():
 		$Timer.stop()
 	)
-	
-	Signals.get_cart.connect(func (c: Cart):
-		main_cart = c
-		)
 
+	Signals.increase_cart_stage.connect(increase_coalpit_level)
+
+	call_deferred("loading_level")
+
+func increase_coalpit_level()-> void:
+	print(coalpit_level, " level")
+	coalpit_level += 1
+	print(coalpit_level, " level")
+	call_deferred("loading_level")
 
 func _on_timer_timeout() -> void:
+	call_deferred("loading_level")
+	
+func loading_level() -> void:
+	$Timer.stop()
+	for c in level_loader.get_children():
+		c.queue_free()
+	
+	call_deferred("_add_level_after_clearing")
+
+func _add_level_after_clearing () -> void:
+	var level: Node = null
+
 	match coalpit_level:
 		0:
-			return
+			level = level_1.instantiate()
 		1:
-			_load_next_mini_game_level([level1, level3], level2, cart_position_1)
+			level = level_2.instantiate()
 		2:
-			_load_next_mini_game_level([level1, level2], level3, cart_position_2)
+			level = level_3.instantiate()
 		3:
 			Signals.finish_cart_game.emit()
 			self.hide()
 			self.queue_free()
-		_:
-			Signals.load_cart_game.emit()
-			self.queue_free()
-
-func _load_next_mini_game_level(level_to_hide: Array[Node2D], level_to_show:Node2D, cart_position_mark: Marker2D) -> void:
-	for l in level_to_hide:
-		l.hide()
+			return
 	
-	level_to_show.show()
-	Signals.reparent_cart.emit()
-	Signals.set_cart_pos.emit(cart_position_mark.global_position)
-	level_to_show.cart = main_cart
-	level_to_show._update_cart()
+	if level != null:
+		level_loader.add_child(level)
+		load_tracks(level)
+	
 	mini_game_is_run = false
+
+
+func load_tracks(level: Node)-> void:
+	lever_1.set_up()
+	lever_2.set_up()
+	lever_3.set_up()
+	lever_4.set_up()
+
+	lever_1.track_to_rotate = level.track_to_rotate_L1
+	lever_1.track_to_flip_x = level.track_to_flip_on_x_L1
+	lever_1.track_to_flip_y = level.track_to_flip_on_y_L1
+
+	lever_2.track_to_rotate = level.track_to_rotate_L2
+	lever_2.track_to_flip_x = level.track_to_flip_on_x_L2
+	lever_2.track_to_flip_y = level.track_to_flip_on_y_L2
+
+	lever_3.track_to_rotate = level.track_to_rotate_L3
+	lever_3.track_to_flip_x = level.track_to_flip_on_x_L3
+	lever_3.track_to_flip_y = level.track_to_flip_on_y_L3
+
+	lever_4.track_to_rotate = level.track_to_rotate_L4
+	lever_4.track_to_flip_x = level.track_to_flip_on_x_L4
+	lever_4.track_to_flip_y = level.track_to_flip_on_y_L4
+	
 
 func _process(_delta: float) -> void:
 	if mini_game_is_run: return
 	if start_cart and Input.is_action_just_pressed("MovePlayer"):
 		Signals.cart_go.emit()
-		Signals.play_sound.emit(State.AudioType.Effect, play_button_sfx, 1, -15)
+		Signals.play_sound.emit(State.AudioType.Effect, play_button_sfx)
 		mini_game_is_run = true
-
-func _on_area_2d_body_entered(_body: Node2D) -> void:
-	coalpit_level = 1
 
 func _on_start_cart_mouse_entered() -> void:
 	Signals.set_cursor.emit(State.Cursors.USE)
@@ -84,14 +118,6 @@ func _on_start_cart_mouse_exited() -> void:
 	Signals.reset_cursor.emit()
 	start_cart = false
 
-func _on_finish_2_body_entered(_body: Node2D) -> void:
-	coalpit_level = 2
-
-
 func _on_texture_button_pressed() -> void:
-	Signals.load_cart_game.emit()
-	self.queue_free()
+	loading_level()
 	Signals.play_sound.emit(State.AudioType.Effect, play_button_sfx, 1, -15)
-
-func _on_finish_3_body_entered(_body: Node2D) -> void:
-	coalpit_level = 3

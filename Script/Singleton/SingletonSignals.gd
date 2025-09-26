@@ -171,3 +171,6 @@ signal change_info_panel_text(text: String)
 
 @warning_ignore("unused_signal")
 signal stop_play_sound( type: State.AudioType)
+
+@warning_ignore("unused_signal")
+signal increase_cart_stage()
