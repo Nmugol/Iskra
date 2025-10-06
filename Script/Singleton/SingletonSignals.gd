@@ -100,7 +100,7 @@ signal reset_cursor()
 signal reset_look_at_item()
 
 @warning_ignore("unused_signal")
-signal rotate_symbol(rotate_to_left: float)
+signal rotate_symbol(rotate_to_left: bool)
 
 @warning_ignore("unused_signal")
 signal symbol_move_on_x_axis(left: bool)

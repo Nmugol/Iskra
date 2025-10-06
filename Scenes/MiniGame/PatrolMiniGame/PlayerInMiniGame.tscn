@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://chmoeowym2hhd"]
+
+[ext_resource type="Script" uid="uid://r1tsxfokkaq7" path="res://Script/MiniGame/PatrolMiniGame/PlayerInMiniGame.gd" id="1_5nj6k"]
+[ext_resource type="Texture2D" uid="uid://dbxncmvrq00kv" path="res://Sprite/PatrolMiniGame/Daniel.png" id="2_5nj6k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uog5x"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m80yl"]
+radius = 8.0
+
+[node name="Player_in_mini_game" type="CharacterBody2D"]
+z_index = 2
+texture_filter = 1
+collision_layer = 0
+script = ExtResource("1_5nj6k")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5nj6k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+shape = SubResource("CircleShape2D_uog5x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_m80yl")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

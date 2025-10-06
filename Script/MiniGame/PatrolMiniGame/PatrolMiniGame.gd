@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @export_category("Player start points")
 @export var player_start_points: Array[StopPoint] = []
 
@@ -27,7 +26,6 @@ func connect_signals() -> void:
 	)
 
 func level_loader() -> void: 
-	
 	for c in level_loader_node.get_children():
 		c.queue_free()
 	
@@ -45,6 +43,17 @@ func level_loader() -> void:
 
 	if level != null:
 		level_loader_node.add_child(level)
+	
+	# Zresetuj pozycję gracza po załadowaniu poziomu
+	await get_tree().create_timer(0.1).timeout
 
 func reset_level() -> void:
+	# Najpierw wyślij sygnał resetu do wszystkich punktów
+	print("Reset level")
+	#Signals.reset_level.emit()
+	
+	# Poczekaj chwilę żeby punkty się zresetowały
+	await get_tree().create_timer(0.1).timeout
+	
+	# Dopiero potem załaduj poziom
 	level_loader()

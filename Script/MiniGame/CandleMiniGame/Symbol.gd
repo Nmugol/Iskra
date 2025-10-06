@@ -42,46 +42,41 @@ var in_border_area: bool = false
 var is_active: bool = false # Czy symbol jest aktywny
 
 @onready var timer: Timer = $Timer
-var start_timer: float = false
-
-func start_timer_func() -> void:
-	timer.start()
-	start_timer = false
+var start_timer: bool = false
 
 func _ready() -> void:
-
 	global_position = center_point.global_position
-
 	connect_signals()
-
 	set_up()
-	
 	update_symbol_opacity()
 
 func set_up() -> void:
-	# Inicializacja tekstur i wartości początkowych
-	target.texture = symbol_icons
-	target.offset = target_offset_value
-	target_rotation_point.rotation_degrees = target_rotation_value
-	symbol.texture = symbol_icons
-	symbol.offset = offset_value
 	in_target = false
 	rotate_flag = false
 	move_on_x_axis = false
 	move_on_y_axis = false
+	in_border_area = true 
+
+	# Resetuj transformacje
+	global_position = center_point.global_position
+	symbol.offset = offset_value
+	rotation_point.rotation_degrees = 0  # Resetuj rotację punktu obrotu
+
+	# Ustaw tekstury
+	target.texture = symbol_icons
+	target.offset = target_offset_value
+	target_rotation_point.rotation_degrees = target_rotation_value
+	symbol.texture = symbol_icons
+	area_2d.global_position = symbol.global_position + symbol.offset
+
 	self.show()
 
-	area_2d.area_exited.connect(func(area: Area2D) -> void:
-		if area == border_area:
-			in_border_area = false
-			self.hide()
-			)
-	
-	area_2d.area_entered.connect(func(area: Area2D) -> void:
-		if area == border_area:
-			in_border_area = true
-			self.show()
-			)
+	update_symbol_opacity()
+
+func force_show() -> void:
+	in_border_area = true
+	self.show()
+	update_symbol_opacity()
 
 func connect_signals() -> void:
 	Signals.rotate_symbol.connect(func(left: bool) -> void:
@@ -104,6 +99,21 @@ func connect_signals() -> void:
 		move_on_x_axis = false
 		move_on_y_axis = false
 		)
+	
+	if not area_2d.area_exited.is_connected(_on_area_exited):
+		area_2d.area_exited.connect(_on_area_exited)
+	if not area_2d.area_entered.is_connected(_on_area_entered):
+		area_2d.area_entered.connect(_on_area_entered)
+
+func _on_area_exited(area: Area2D) -> void:
+	if area == border_area:
+		in_border_area = false
+		self.hide()
+
+func _on_area_entered(area: Area2D) -> void:
+	if area == border_area:
+		in_border_area = true
+		self.show()
 
 func _process(delta: float) -> void:
 	if not is_active:
@@ -141,8 +151,7 @@ func _process(delta: float) -> void:
 			if moving_distance_y == 0:
 				return
 			symbol.offset.y += round(moving_distance_y * delta)
-	area_2d.global_position = symbol.global_position
-	area_2d.position += symbol.offset
+	area_2d.global_position = symbol.global_position + symbol.offset
 	symbol_in_target_space()
 	update_symbol_opacity()
 	

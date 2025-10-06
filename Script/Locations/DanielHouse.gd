@@ -107,6 +107,14 @@ func init_candle_mini_game() -> void:
 
 
 func _finish_candle_mini_game() -> void:
+
+	var symbol_note: Item = Item.new("Symbol note",[],true,"res://Sprite/Items/SymbolNoteSmall.png","res://Sprite/Items/SymbolNote.png",[])
+
+	symbol_note.add_to_equipment()
+
+	Signals.save_game.emit()
+	Signals.save_to_file.emit()
+
 	$PhantomCamera2D.follow_target = player
 	mini_game_is_running = false
 	State.is_running = true

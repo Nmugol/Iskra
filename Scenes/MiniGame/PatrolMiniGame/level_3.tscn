@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dtkwjlv4gidxq" path="res://Scenes/MiniGame/PatrolMiniGame/stop_point.tscn" id="1_x50bk"]
 [ext_resource type="PackedScene" uid="uid://c1544mlp1r1yr" path="res://Scenes/MiniGame/PatrolMiniGame/patrol.tscn" id="2_th5ag"]
-[ext_resource type="PackedScene" uid="uid://chmoeowym2hhd" path="res://Scenes/Player/PlayerInMiniGame.tscn" id="3_0t6sl"]
+[ext_resource type="PackedScene" uid="uid://chmoeowym2hhd" path="res://Scenes/MiniGame/PatrolMiniGame/PlayerInMiniGame.tscn" id="3_0t6sl"]
 [ext_resource type="Texture2D" uid="uid://b7o12gk4adl16" path="res://Sprite/PatrolMiniGame/Path.png" id="4_th5ag"]
 
 [node name="Level3" type="Node2D"]
@@ -62,8 +62,7 @@ position_to_move = Vector2(88, 88)
 
 [node name="Player" parent="." instance=ExtResource("3_0t6sl")]
 position = Vector2(0, -32)
-speed = 5000.0
-position_to_move = Vector2(0, -32)
+_position_to_move = Vector2(0, -32)
 
 [node name="Line2D" type="Line2D" parent="."]
 texture_filter = 1

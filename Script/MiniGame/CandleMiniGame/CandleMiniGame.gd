@@ -44,7 +44,7 @@ enum above_button {
 
 var cursor_above_button: above_button = above_button.NONE
 
-var compleat_symbols: int = 0
+var complete_symbols: int = 0
 
 var current_level: int = 1
 
@@ -95,7 +95,7 @@ func check_symbol_position() -> void:
 	for symbol in current_symbols:
 		if symbol.in_target:
 			count += 1 
-	compleat_symbols = count
+	complete_symbols = count
 	
 	symbol_counter.text = "%d / %d [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]" % [count, current_symbols.size()]
 
@@ -103,44 +103,47 @@ func check_symbol_position() -> void:
 	
 
 func check_level_completion() -> void:
-	if compleat_symbols == level_one_completed_count and current_level == 1:
+	if change_level:  return
+    
+	if complete_symbols == level_one_completed_count and current_level == 1:
 		change_level = true
-		compleat_symbols = 0  # Reset immediately
-		await get_tree().create_timer(0.2).timeout
-		current_level = 2
-		level_1.hide()
-		level_2.show()
-		level_3.hide()
-		current_symbols = symbols_in_level_two
-		show_symbols()
-		_on_texture_button_pressed() # Reset symbols and candle position
-		candle.global_position = candle_center.global_position
-		cristal.global_rotation = 0.0
-		change_level = false
+		complete_symbols = 0
+		_change_to_level(2, symbols_in_level_two)
 		return
-
-	if compleat_symbols == level_two_completed_count and current_level == 2:
+		
+	if complete_symbols == level_two_completed_count and current_level == 2:
 		change_level = true
-		compleat_symbols = 0  # Reset immediately
-		await get_tree().create_timer(0.2).timeout
-		current_level = 3
-		level_1.hide()
-		level_2.hide()
-		level_3.show()
-		current_symbols = symbols_in_level_three
-		show_symbols()
-		_on_texture_button_pressed() # Reset symbols and candle position
-		candle.global_position = candle_center.global_position
-		cristal.global_rotation = 0.0
-		change_level = false
+		complete_symbols = 0
+		_change_to_level(3, symbols_in_level_three)
 		return
-	
-	if compleat_symbols == level_three_completed_count and current_level == 3:
+    
+	if complete_symbols == level_three_completed_count and current_level == 3:
 		State.state_phase = 0
 		State.state_number = 11
 		self.hide()
 		self.queue_free()
 		return
+
+func _change_to_level(level: int, symbols: Array[Symbol]) -> void:
+	await get_tree().create_timer(0.2).timeout
+	
+	current_level = level
+	level_1.hide()
+	level_2.hide()
+	level_3.hide()
+	
+	match level:
+		1: level_1.show()
+		2: level_2.show()
+		3: level_3.show()
+    
+	current_symbols = symbols
+	show_symbols()
+	_on_texture_button_pressed()
+	candle.global_position = candle_center.global_position
+	cristal.global_rotation = 0.0
+	change_level = false
+
 
 func show_symbols() -> void:
 	for symbol in current_symbols:
@@ -223,10 +226,14 @@ func _on_right_mouse_exited() -> void:
 
 
 func _on_texture_button_pressed() -> void:
-
-	for symbol in current_symbols:
-		symbol.set_up()
+	# Zresetuj pozycję świecy i kryształu
 	candle.global_position = candle_center.global_position
 	cristal.global_rotation = 0.0
-	compleat_symbols = 0
+	
+	# Zresetuj wszystkie symbole
+	for symbol in current_symbols:
+		symbol.set_up()
+		symbol.force_show()  # DODAJ: wymuś pokazanie
+	
+	complete_symbols = 0
 	Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)

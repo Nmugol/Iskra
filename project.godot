@@ -58,6 +58,7 @@ Player=""
 Cart=""
 candle_mini_game_zone=""
 TurnManager=""
+Patrol=""
 
 [input]
 
