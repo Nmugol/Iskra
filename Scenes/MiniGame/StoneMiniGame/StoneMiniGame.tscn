@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://c6uo4qfqfq76a"]
+[gd_scene load_steps=10 format=4 uid="uid://c6uo4qfqfq76a"]
 
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="1_g8y6w"]
 [ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="2_fok47"]
+[ext_resource type="PackedScene" uid="uid://ut1632cioumy" path="res://Scenes/MiniGame/StoneMiniGame/Stone.tscn" id="3_fok47"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cfou3"]
 texture = ExtResource("1_g8y6w")
@@ -29,6 +30,18 @@ texture = ExtResource("1_g8y6w")
 
 [sub_resource type="TileSet" id="TileSet_hhx80"]
 sources/0 = SubResource("TileSetAtlasSource_cfou3")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fok47"]
+size = Vector2(370, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfou3"]
+size = Vector2(368, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhx80"]
+size = Vector2(24, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5byx"]
+size = Vector2(16, 224)
 
 [node name="StoneMiniGame" type="Node2D"]
 
@@ -80,3 +93,54 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="UP" type="StaticBody2D" parent="." groups=["Stone"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Up" type="CollisionShape2D" parent="UP"]
+position = Vector2(55, -121)
+shape = SubResource("RectangleShape2D_fok47")
+
+[node name="Down" type="StaticBody2D" parent="." groups=["Stone"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Down"]
+position = Vector2(56, 120)
+shape = SubResource("RectangleShape2D_cfou3")
+
+[node name="Left" type="StaticBody2D" parent="." groups=["Stone"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+position = Vector2(-124, 0)
+shape = SubResource("RectangleShape2D_hhx80")
+
+[node name="Right" type="StaticBody2D" parent="." groups=["Stone"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+position = Vector2(232, 0)
+shape = SubResource("RectangleShape2D_j5byx")
+
+[node name="Stone" parent="." instance=ExtResource("3_fok47")]
+position = Vector2(-88, -72)
+id = 1
+
+[node name="Stone2" parent="." instance=ExtResource("3_fok47")]
+position = Vector2(8, -8)
+id = 2
+size = 1
+
+[node name="Stone3" parent="." instance=ExtResource("3_fok47")]
+position = Vector2(104, -72)
+id = 3
+size = 2
+
+[node name="Stone4" parent="." instance=ExtResource("3_fok47")]
+position = Vector2(144, 56)
+id = 4
+size = 3

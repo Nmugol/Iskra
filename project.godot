@@ -59,6 +59,7 @@ Cart=""
 candle_mini_game_zone=""
 TurnManager=""
 Patrol=""
+Stone=""
 
 [input]
 

@@ -224,4 +224,3 @@ func second_dialogue() -> void:
 
 	#17
 	Signals.player_message.emit("Daniel", "Thanks, Emil, see you. You should head home too and watch out for the night watch.", true)
-

@@ -162,7 +162,6 @@ signal remove_items_from_scene( items:State.Cursors_above)
 @warning_ignore("unused_signal")
 signal remove_all_items_from_scene()
 
-
 @warning_ignore("unused_signal")
 signal change_info_panel_visibility(visible: bool)
 
@@ -174,3 +173,9 @@ signal stop_play_sound( type: State.AudioType)
 
 @warning_ignore("unused_signal")
 signal increase_cart_stage()
+
+@warning_ignore("unused_signal")
+signal move_stone(vector: Vector2, stone: int)
+
+@warning_ignore("unused_signal")
+signal stone_not_moving()
