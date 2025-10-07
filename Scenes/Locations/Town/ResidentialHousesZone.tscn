@@ -38,7 +38,7 @@ height = 48.0
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(360, -32)
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 process_callback = 0
 limit_left = -1016
 limit_top = -600
@@ -57,7 +57,7 @@ position = Vector2(360, -32)
 script = ExtResource("11_r08l3")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_w173l")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)

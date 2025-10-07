@@ -294,12 +294,12 @@ position = Vector2(296, 128)
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(296, 128)
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 359
-limit_top = -705
-limit_right = 1049
-limit_bottom = -229
+limit_left = -920
+limit_top = -656
+limit_right = 1432
+limit_bottom = 720
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -313,7 +313,7 @@ position = Vector2(296, 128)
 script = ExtResource("3_osjfl")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_8s6ho")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)

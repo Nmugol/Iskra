@@ -90,12 +90,12 @@ polygon = PackedVector2Array(40, 16, 40, 128, 80, 128, 80, 112, 96, 112, 96, 128
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(314, 131)
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -368
-limit_top = -200
-limit_right = 1040
-limit_bottom = 424
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -109,7 +109,7 @@ position = Vector2(314, 131)
 script = ExtResource("9_v2ujh")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_v8sys")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)

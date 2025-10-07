@@ -136,13 +136,13 @@ position = Vector2(168, 24)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(168, 24)
-zoom = Vector2(3, 3)
+position = Vector2(168, 68)
+zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -368
-limit_top = -200
-limit_right = 1040
-limit_bottom = 424
+limit_left = -848
+limit_top = -112
+limit_right = 1376
+limit_bottom = 1688
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -152,11 +152,11 @@ script = ExtResource("2_kyn8g")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(168, 24)
+position = Vector2(168, 68)
 script = ExtResource("3_raeev")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_bama8")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)

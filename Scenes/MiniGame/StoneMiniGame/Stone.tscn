@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ut1632cioumy"]
+
+[ext_resource type="Script" uid="uid://jgmbvn7ovn8h" path="res://Script/MiniGame/StoneMiniGame/Stone.gd" id="1_2ivqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s150w"]
+
+[node name="Stone" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_2ivqs")
+sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s150w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="1_yhm1h"]
 [ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="2_2ato4"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ato4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wps68"]
 texture = ExtResource("1_yhm1h")
 0:0/0 = 0
 0:1/0 = 0
@@ -29,7 +29,7 @@ texture = ExtResource("1_yhm1h")
 0:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_wps68"]
-sources/0 = SubResource("TileSetAtlasSource_2ato4")
+sources/0 = SubResource("TileSetAtlasSource_wps68")
 
 [node name="PatrolMiniGame" type="Node2D" node_paths=PackedStringArray("player_start_points", "patrol_start_points")]
 script = ExtResource("1_lhlqp")

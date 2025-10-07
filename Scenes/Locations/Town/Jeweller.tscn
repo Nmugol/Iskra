@@ -108,8 +108,8 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(280, 40)
-zoom = Vector2(3, 3)
+position = Vector2(280, -20)
+zoom = Vector2(2, 2)
 process_callback = 0
 limit_left = -40
 limit_top = -400
@@ -124,11 +124,11 @@ script = ExtResource("2_6etbg")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(280, 40)
+position = Vector2(280, -20)
 script = ExtResource("3_448ay")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_8kkhh")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)

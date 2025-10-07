@@ -40,12 +40,12 @@ height = 64.0
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(1432, 304)
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -368
-limit_top = -200
-limit_right = 1040
-limit_bottom = 424
+limit_left = -112
+limit_top = -256
+limit_right = 1776
+limit_bottom = 848
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -59,7 +59,7 @@ position = Vector2(1432, 304)
 script = ExtResource("2_a7glv")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_ikvpf")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)

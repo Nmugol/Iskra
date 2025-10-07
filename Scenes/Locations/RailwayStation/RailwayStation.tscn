@@ -138,12 +138,12 @@ position = Vector2(2120, -40)
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(2120, -40)
-zoom = Vector2(2.2, 2.2)
+zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -368
-limit_top = -200
-limit_right = 1040
-limit_bottom = 424
+limit_left = 72
+limit_top = -392
+limit_right = 2488
+limit_bottom = 376
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -157,7 +157,7 @@ position = Vector2(2120, -40)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(2.2, 2.2)
+zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_bmnd2")
 follow_damping = true
 follow_damping_value = Vector2(0.25, 0.25)
@@ -408,7 +408,6 @@ offset_bottom = -104.0
 grow_vertical = 2
 width = 355.0
 text_to_display = "Find something at the station that Piter can use to repair the wagon"
-is_visible_flag = false
 active_on_stages = Array[int]([1, 2, 3])
 
 [connection signal="body_entered" from="EventArea/GiveSteelSheet" to="." method="_on_give_steel_sheet_body_entered"]
