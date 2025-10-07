@@ -18,8 +18,14 @@ func  _ready() -> void:
 	if State.state_number not in active_on:
 		self.queue_free()
 	
+	
+
 	self.body_entered.connect(func (body:Node2D):
 		if body.is_in_group("Player"):
+			var temp_state_number = State.state_number
+			var temp_state_phase = State.state_phase
+			
+				
 			player.navigation.target_position = back_to_position.global_position
 			player.sprite.play("idle")
 			Signals.show_dialog.emit()
@@ -27,5 +33,8 @@ func  _ready() -> void:
 			exit_blocked_messages.pick_random(),
 			false
 			)
-			
+			State.state_number = temp_state_number
+			State.state_phase = temp_state_phase
 		)
+
+	

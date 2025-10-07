@@ -63,6 +63,7 @@ texture_filter = 1
 script = ExtResource("1_cikq4")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_1av3w")

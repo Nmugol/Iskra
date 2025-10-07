@@ -51,8 +51,7 @@ func _process(_delta: float) -> void:
 					if game == null and not dialog_is_running:
 						dialog_is_running = true
 						_second_dialog()
-						exit.monitoring = false
-						exit.monitorable = false
+						exit.hide()
 						init_candle_mini_game()
 
 
@@ -61,8 +60,7 @@ func _process(_delta: float) -> void:
 				0:
 					dialog_is_running = false
 					_finish_candle_mini_game()
-					exit.monitoring = true
-					exit.monitorable = true
+					exit.show()
 					Signals.save_to_file.emit()
 		12:
 			match State.state_phase:
@@ -79,6 +77,7 @@ func _process(_delta: float) -> void:
 		16:
 			match State.state_phase:
 				0:
+					exit.hide()
 					if not dialog_is_running:
 						dialog_is_running = true
 						_four_dialog()

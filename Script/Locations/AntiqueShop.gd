@@ -31,9 +31,12 @@ var dialog_is_running: bool = false
 
 func _ready() -> void:
 
+	
+
 	Signals.finish_patrol_game.connect(finish_patrol_mini_game)
 
 	if State.state_number == 13:
+		
 		emil.show()
 		miriam.show()
 
@@ -41,11 +44,9 @@ func _ready() -> void:
 		player.global_position = player_pos
 		player.position = player_pos
 
-		exit_1.monitorable = false
-		exit_1.monitoring = false
-		exit_2.monitorable = false        
-		exit_2.monitoring = false
-	
+		exit_1.hide()        
+		exit_2.hide()
+
 	if State.state_number == 14:
 		emil.show()
 
@@ -63,6 +64,10 @@ func _process(_delta: float) -> void:
 	match State.state_number:
 		13:
 			match State.state_phase:
+				0:
+					if not dialog_is_running:
+						dialog_is_running = true
+						first_dialogue()
 				1:
 					if not dialog_is_running:
 						dialog_is_running = true
