@@ -178,4 +178,4 @@ signal increase_cart_stage()
 signal move_stone(vector: Vector2, stone: int)
 
 @warning_ignore("unused_signal")
-signal stone_not_moving()
+signal stone_not_moving(stone_id: int)

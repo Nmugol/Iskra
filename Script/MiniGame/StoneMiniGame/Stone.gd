@@ -100,4 +100,4 @@ func _stop_movement() -> void:
 	velocity = Vector2.ZERO
 	vel = Vector2.ZERO
 	is_moving = false
-	Signals.stone_not_moving.emit()
+	Signals.stone_not_moving.emit(id)
