@@ -126,30 +126,72 @@ collision_mask = 3
 position = Vector2(232, 0)
 shape = SubResource("RectangleShape2D_j5byx")
 
-[node name="Stone" parent="." instance=ExtResource("3_fok47")]
-position = Vector2(-80, -80)
-id = 1
-size = 3
-
-[node name="Stone2" parent="." instance=ExtResource("3_fok47")]
-position = Vector2(-16, -80)
-id = 2
-size = 3
-
-[node name="Stone3" parent="." instance=ExtResource("3_fok47")]
-position = Vector2(48, -80)
-id = 3
-size = 3
-
-[node name="Stone4" parent="." instance=ExtResource("3_fok47")]
-position = Vector2(112, -80)
-id = 4
-size = 3
-
-[node name="Stone5" parent="." instance=ExtResource("3_fok47")]
-position = Vector2(176, -80)
-size = 3
-
 [node name="LevelLocation" type="Node2D" parent="."]
 
 [node name="level1" type="Node2D" parent="LevelLocation"]
+
+[node name="Stone" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(-80, -80)
+size = 3
+
+[node name="Stone2" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(80, -48)
+size = 3
+
+[node name="Stone3" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(16, -80)
+size = 3
+
+[node name="Stone4" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(192, -96)
+size = 2
+
+[node name="Stone5" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(192, -64)
+size = 2
+
+[node name="Stone6" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(208, -16)
+size = 1
+
+[node name="Stone7" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(176, -32)
+
+[node name="Stone8" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(176, 16)
+size = 1
+
+[node name="Stone9" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(128, 32)
+size = 2
+
+[node name="Stone10" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(112, 0)
+
+[node name="Stone11" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(16, 16)
+size = 3
+
+[node name="Stone12" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(-32, -16)
+size = 1
+
+[node name="Stone13" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(-64, -16)
+size = 1
+
+[node name="Stone14" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(-48, 48)
+size = 3
+
+[node name="Stone16" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(16, 96)
+size = 2
+
+[node name="Stone15" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(-96, 80)
+size = 1
+
+[node name="Stone17" parent="LevelLocation/level1" instance=ExtResource("3_fok47")]
+position = Vector2(192, 80)
+size = 3
