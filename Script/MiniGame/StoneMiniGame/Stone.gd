@@ -19,13 +19,22 @@ var sprite_size_big: CompressedTexture2D = preload("res://Sprite/StoneMiniGame/s
 @export var sprite: Sprite2D 
 @export var collision: CollisionShape2D
 @export var logical_collision: CollisionShape2D
-@export var detection_area: Area2D  # Referencja do Area2D
 
 @export var size: StoneSize = StoneSize.SMALL:
 	set(value):
 		size = value
 		
-		match size:
+		update_sprite()
+
+var vel: Vector2 = Vector2.ZERO
+var is_moving: bool = false
+
+
+
+const SPEED: int = 100
+
+func update_sprite()->void:
+	match size:
 			StoneSize.SMALL:
 				sprite.texture = sprite_size_small
 				collision.shape.size = Vector2(30,30)
@@ -43,58 +52,33 @@ var sprite_size_big: CompressedTexture2D = preload("res://Sprite/StoneMiniGame/s
 				collision.shape.size = Vector2(62,62)
 				logical_collision.shape.size = Vector2(64,64)
 
-var vel: Vector2 = Vector2.ZERO
-var is_moving: bool = false
-
-const SPEED: int = 100
-
 func _ready() -> void:
 	Signals.move_stone.connect(_on_move_stone)
 	
-	# KONFIGURACJA AREA2D
-	if detection_area:
-		# Użyj area_entered zamiast body_entered dla Area2D
-		detection_area.area_entered.connect(_on_area_entered)
-		detection_area.body_entered.connect(_on_body_entered)
-		
-		# Konfiguracja warstw kolizji
-		detection_area.collision_mask = 1  # Wykrywa obiekty na warstwie 1
-		detection_area.collision_layer = 2  # Sam jest na warstwie 2
-		
-		# CharacterBody2D też musi mieć ustawione warstwy
-		collision_layer = 1  # Kamienie są na warstwie 1
-		collision_mask = 0   # Nie wykrywa kolizji z innymi CharacterBody2D
+	update_sprite()
+
+	# KONFIGURACJA KOLIZJI - kamienie wykrywają się nawzajem
+	collision_layer = 2  # Kamienie są na warstwie 2
+	collision_mask = 2   # Kamienie wykrywają kolizje z warstwą 2 (inne kamienie)
+	
+	# Dodaj do grupy Stone dla łatwej identyfikacji
+	add_to_group("Stone")
+
 
 func _physics_process(delta: float) -> void:
 	if is_moving and vel != Vector2.ZERO:
 		velocity = vel * SPEED
 		var collision_info = move_and_collide(velocity * delta)
 		if collision_info:
-			# Kolizja wykryta przez move_and_collide
-			_handle_collision(collision_info.get_collider())
+			var collider = collision_info.get_collider()
+			# Sprawdź czy kolizja jest z innym kamieniem
+			if collider and collider.is_in_group("Stone"):
+				_stop_movement()
 
 func _on_move_stone(v: Vector2, s: int) -> void:
 	if s == id:
 		vel = v
 		is_moving = true
-
-func _on_area_entered(area: Area2D) -> void:
-	# Wykrywa wejście innego Area2D (z innych kamieni)
-	if area.get_parent().is_in_group("Stone"):
-		print("Area collision with stone")
-		_stop_movement()
-
-func _on_body_entered(body: Node2D) -> void:
-	# Wykrywa wejście Body (CharacterBody2D, RigidBody2D)
-	if body.is_in_group("Stone"):
-		print("Body collision with stone")
-		_stop_movement()
-
-func _handle_collision(collider: Node) -> void:
-	# Obsługa kolizji z move_and_collide
-	if collider.is_in_group("Stone"):
-		print("Move_and_collide detected stone")
-		_stop_movement()
 
 func _stop_movement() -> void:
 	velocity = Vector2.ZERO

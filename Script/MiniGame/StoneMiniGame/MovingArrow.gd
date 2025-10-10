@@ -21,11 +21,10 @@ func _ready() -> void:
 	self.mouse_exited.connect(_on_mouse_exited)
 	
 	Signals.move_stone.connect(_on_move_stone)
-	
 	Signals.stone_not_moving.connect(_on_stone_not_moving)
 	
 	# Konfiguracja warstw kolizji dla disable_area
-	disabe_area.collision_mask = 1  # Wykrywa kamienie na warstwie 1
+	disabe_area.collision_mask = 2  # Wykrywa kamienie na warstwie 2
 	disabe_area.collision_layer = 0  # Nie musi być na żadnej warstwie
 	
 	# Sprawdzamy czy już są obiekty w kolizji przy starcie
@@ -59,9 +58,7 @@ func _on_move_stone(move_velocity: Vector2, moved_stone_id: int) -> void:
 
 func _on_stone_not_moving(stopped_stone_id: int) -> void:
 	# Aktywujemy WSZYSTKIE strzałki gdy jakikolwiek kamień się zatrzyma
-	# (każda strzałka i tak sprawdzi czy jest zablokowana)
 	is_active = true
-	# Odraczamy sprawdzenie stanu, aby kolizje były aktualne
 	call_deferred("_update_blocked_state")
 
 func _update_blocked_state() -> void:
@@ -84,10 +81,7 @@ func _update_blocked_state() -> void:
 			break
 	
 	is_blocked = has_stone
-	
-	# Debug info
-	print("Arrow for stone ", stone_to_move.id, " - is_active: ", is_active, " is_blocked: ", is_blocked, " mouse_on: ", mouse_on)
-	
+		
 	# Aktualizujemy wygląd strzałki
 	_update_sprite_visibility()
 
@@ -97,7 +91,7 @@ func _update_sprite_visibility() -> void:
 	else:
 		sprite.hide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_active and not is_blocked and mouse_on and Input.is_action_just_pressed("MovePlayer"):
 		Signals.move_stone.emit(velocity, stone_to_move.id)
 

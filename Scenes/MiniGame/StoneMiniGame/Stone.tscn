@@ -7,7 +7,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s150w"]
 resource_local_to_scene = true
-size = Vector2(32, 32)
+size = Vector2(30, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ei545"]
 resource_local_to_scene = true
@@ -29,12 +29,11 @@ size = Vector2(28, 16)
 resource_local_to_scene = true
 size = Vector2(40, 40)
 
-[node name="Stone" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collision", "logical_collision", "detection_area") groups=["Stone"]]
+[node name="Stone" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collision", "logical_collision") groups=["Stone"]]
 script = ExtResource("1_2ivqs")
 sprite = NodePath("Sprite2D")
 collision = NodePath("CollisionShape2D")
 logical_collision = NodePath("Area2D/CollisionShape2D")
-detection_area = NodePath("Area2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -56,7 +55,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="ControlAreas/up"]
 position = Vector2(0, -28)
-polygon = PackedVector2Array(0, 28, 16, 12, -16, 12)
+polygon = PackedVector2Array(0, 26, 14, 12, -14, 12)
 
 [node name="Sprite2D" type="Sprite2D" parent="ControlAreas/up"]
 texture_filter = 1
@@ -81,7 +80,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="ControlAreas/right"]
 position = Vector2(28, 0)
-polygon = PackedVector2Array(-28, 0, -12, -16, -12, 16)
+polygon = PackedVector2Array(-26, 0, -12, -14, -12, 14)
 
 [node name="Sprite2D" type="Sprite2D" parent="ControlAreas/right"]
 texture_filter = 1
@@ -106,7 +105,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="ControlAreas/down"]
 position = Vector2(0, 28)
-polygon = PackedVector2Array(0, -28, -16, -12, 16, -12)
+polygon = PackedVector2Array(0, -26, -14, -12, 14, -12)
 
 [node name="Sprite2D" type="Sprite2D" parent="ControlAreas/down"]
 texture_filter = 1
@@ -131,7 +130,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="ControlAreas/left"]
 position = Vector2(-28, 0)
-polygon = PackedVector2Array(12, -16, 12, 16, 28, 0)
+polygon = PackedVector2Array(12, -14, 12, 14, 26, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ControlAreas/left"]
 texture_filter = 1
