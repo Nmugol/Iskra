@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://c6uo4qfqfq76a"]
+[gd_scene load_steps=21 format=4 uid="uid://c6uo4qfqfq76a"]
 
 [ext_resource type="Script" uid="uid://r46qgx325lmd" path="res://Script/MiniGame/StoneMiniGame/StoneMiniGame.gd" id="1_cfou3"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="1_g8y6w"]
@@ -78,11 +78,15 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kannr"]
 size = Vector2(16, 24)
 
-[node name="StoneMiniGame" type="Node2D" node_paths=PackedStringArray("level_position", "path_to_follow", "detect_area")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ho5aj"]
+size = Vector2(32, 32)
+
+[node name="StoneMiniGame" type="Node2D" node_paths=PackedStringArray("level_position", "path_to_follow", "detect_area", "daniel_zone")]
 script = ExtResource("1_cfou3")
 level_position = NodePath("LevelLocation")
 path_to_follow = NodePath("Path2D/PathFollow2D")
 detect_area = NodePath("Path2D/PathFollow2D/Daniel/Area2D")
+daniel_zone = NodePath("Path2D/PathFollow2D/Daniel/StaticBody2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -256,11 +260,20 @@ rotation = -1.5708
 texture = ExtResource("4_cfou3")
 
 [node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/Daniel"]
+collision_layer = 3
+collision_mask = 3
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Daniel/Area2D"]
 position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_kannr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Path2D/PathFollow2D/Daniel" groups=["Stone"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Daniel/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ho5aj")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/PlayButton/MarginContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ResetButton/MarginContainer/Reset" to="." method="_on_reset_pressed"]

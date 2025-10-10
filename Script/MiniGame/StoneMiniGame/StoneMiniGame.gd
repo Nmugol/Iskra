@@ -12,6 +12,7 @@ var current_level: int = 1
 @export_category("Player")
 @export var path_to_follow: PathFollow2D
 @export var detect_area: Area2D
+@export var daniel_zone: StaticBody2D
 
 var daniel_is_moving: bool = false
 
@@ -32,6 +33,7 @@ func _process(_delta: float) -> void:
 		level_loader()
 
 func level_loader() -> void:
+	daniel_zone.show()
 	for c in level_position.get_children(): 
 		c.queue_free()
 	
@@ -58,6 +60,7 @@ func _deferred_disable_monitoring() -> void:
 
 
 func _on_play_pressed() -> void:
+	daniel_zone.hide()
 	daniel_is_moving = true
 	# Use call_deferred here as well
 	call_deferred("_deferred_enable_monitoring")
