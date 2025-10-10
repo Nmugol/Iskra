@@ -28,20 +28,20 @@ var sprite_size_big: CompressedTexture2D = preload("res://Sprite/StoneMiniGame/s
 		match size:
 			StoneSize.SMALL:
 				sprite.texture = sprite_size_small
-				collision.shape.size = Vector2(32,32)
-				logical_collision.shape.size = Vector2(40,40)
+				collision.shape.size = Vector2(30,30)
+				logical_collision.shape.size = Vector2(32,32)
 			StoneSize.LARGE_VERTICAL:
 				sprite.texture = sprite_size_large_vertical
-				collision.shape.size = Vector2(32,64)
-				logical_collision.shape.size = Vector2(40,72)
+				collision.shape.size = Vector2(30,62)
+				logical_collision.shape.size = Vector2(32,64)
 			StoneSize.LARGE_HORIZONTAL:
 				sprite.texture = sprite_size_large_horizontal
-				collision.shape.size = Vector2(64,32)
-				logical_collision.shape.size = Vector2(72,40)
+				collision.shape.size = Vector2(62,30)
+				logical_collision.shape.size = Vector2(64,32)
 			StoneSize.BIG:
 				sprite.texture = sprite_size_big
-				collision.shape.size = Vector2(64,64)
-				logical_collision.shape.size = Vector2(72,72)
+				collision.shape.size = Vector2(62,62)
+				logical_collision.shape.size = Vector2(64,64)
 
 var vel: Vector2 = Vector2.ZERO
 var is_moving: bool = false

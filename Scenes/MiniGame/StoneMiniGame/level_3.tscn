@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://2eb5acsx5n4e"]
+
+[ext_resource type="Script" uid="uid://bicat4jt777eg" path="res://Script/MiniGame/StoneMiniGame/StonIndexer.gd" id="1_4npyp"]
+[ext_resource type="PackedScene" uid="uid://ut1632cioumy" path="res://Scenes/MiniGame/StoneMiniGame/Stone.tscn" id="1_vopoo"]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource("1_4npyp")
+
+[node name="Stone" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-80, -96)
+size = 2
+
+[node name="Stone2" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-64, -64)
+
+[node name="Stone3" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-48, -32)
+size = 2
+
+[node name="Stone4" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-96, -32)
+
+[node name="Stone5" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-80, 0)
+size = 2
+
+[node name="Stone6" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-80, 80)
+size = 3
+
+[node name="Stone7" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-32, 96)
+
+[node name="Stone8" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-32, 48)
+size = 1
+
+[node name="Stone9" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(-16, -80)
+size = 3
+
+[node name="Stone10" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(0, -32)
+
+[node name="Stone11" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(32, -32)
+
+[node name="Stone12" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(64, -32)
+
+[node name="Stone13" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(80, -80)
+size = 3
+
+[node name="Stone14" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(176, -80)
+size = 3
+
+[node name="Stone15" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(160, -16)
+size = 1
+
+[node name="Stone16" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(112, -16)
+size = 3
+
+[node name="Stone17" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(64, 16)
+size = 1
+
+[node name="Stone18" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(16, 16)
+size = 3
+
+[node name="Stone19" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(16, 96)
+size = 2
+
+[node name="Stone20" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(64, 80)
+size = 1
+
+[node name="Stone21" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(96, 96)
+
+[node name="Stone22" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(128, 64)
+
+[node name="Stone23" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(96, 48)
+size = 1
+
+[node name="Stone24" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(176, 80)
+size = 3
+
+[node name="Stone25" parent="." instance=ExtResource("1_vopoo")]
+position = Vector2(128, 32)
