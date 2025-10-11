@@ -32,6 +32,7 @@ signal look_at_item(item: Item)
 
 @warning_ignore("unused_signal")
 signal show_map()
+
 @warning_ignore("unused_signal")
 signal hide_map()
 
@@ -143,7 +144,7 @@ signal reset_level()
 
 @warning_ignore("unused_signal")
 signal next_level()
-	
+
 @warning_ignore("unused_signal")
 signal set_player_pos(pos: Vector2)
 
@@ -182,3 +183,6 @@ signal stone_not_moving(stone_id: int)
 
 @warning_ignore("unused_signal")
 signal finish_stone_min_game()
+
+@warning_ignore("unused_signal")
+signal simon_button_is_pressed(id:int)

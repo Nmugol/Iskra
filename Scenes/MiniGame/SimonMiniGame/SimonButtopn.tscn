@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck6c1y4kjgnof"]
+
+[ext_resource type="Script" uid="uid://b7ulhl8qvgkvn" path="res://Script/MiniGame/SimonMiniGame/SimonButtopn.gd" id="1_anefk"]
+[ext_resource type="Texture2D" uid="uid://bvqbad5ggxnpf" path="res://Sprite/SimonMiniGame/Brick.png" id="2_2juu1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2juu1"]
+size = Vector2(112, 80)
+
+[node name="SimonButtopn" type="Node2D"]
+script = ExtResource("1_anefk")
+
+[node name="BG" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_2juu1")
+
+[node name="Symbol" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_2juu1")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

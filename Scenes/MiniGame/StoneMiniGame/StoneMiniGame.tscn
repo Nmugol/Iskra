@@ -30,7 +30,7 @@ region = Rect2(44, 22, 21, 21)
 atlas = ExtResource("4_hhx80")
 region = Rect2(44, 44, 21, 21)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cfou3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hhx80"]
 texture = ExtResource("1_g8y6w")
 0:0/0 = 0
 0:1/0 = 0
@@ -55,7 +55,7 @@ texture = ExtResource("1_g8y6w")
 0:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_hhx80"]
-sources/0 = SubResource("TileSetAtlasSource_cfou3")
+sources/0 = SubResource("TileSetAtlasSource_hhx80")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fok47"]
 size = Vector2(338, 18)
@@ -87,9 +87,6 @@ level_position = NodePath("LevelLocation")
 path_to_follow = NodePath("Path2D/PathFollow2D")
 detect_area = NodePath("Path2D/PathFollow2D/Daniel/Area2D")
 daniel_zone = NodePath("Path2D/PathFollow2D/Daniel/StaticBody2D")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
