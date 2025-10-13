@@ -27,6 +27,8 @@ class_name Symbol
 @export var target_rotation_point: Marker2D # Docelowy punkt obrotu
 @export var area_2d: Area2D 
 
+const SPEED: float = 20
+
 var rotate_flag: bool = false # Czy obracać symbol
 var rotate_to_left_flag: bool = false # Czy obracać w lewo
 
@@ -53,8 +55,8 @@ func _ready() -> void:
 func set_up() -> void:
 	in_target = false
 	rotate_flag = false
-	move_on_x_axis = false
-	move_on_y_axis = false
+	move_on_x_axis = false # Reset flag
+	move_on_y_axis = false # Reset flag
 	in_border_area = true 
 
 	# Resetuj transformacje
@@ -67,7 +69,7 @@ func set_up() -> void:
 	target.offset = target_offset_value
 	target_rotation_point.rotation_degrees = target_rotation_value
 	symbol.texture = symbol_icons
-	area_2d.global_position = symbol.global_position + symbol.offset
+	area_2d.position = symbol.offset # Użycie pozycji lokalnej
 
 	self.show()
 
@@ -84,6 +86,7 @@ func connect_signals() -> void:
 		rotate_to_left_flag = left
 		)
 	
+	# Sygnały ustawiają flagi ruchu ciągłego
 	Signals.symbol_move_on_x_axis.connect(func(left: bool) -> void:
 		move_on_x_axis = true
 		move_left_flag = left
@@ -96,7 +99,8 @@ func connect_signals() -> void:
 	
 	Signals.stop_moving_and_rotate_symbol.connect(func() -> void:
 		rotate_flag = false
-		move_on_x_axis = false
+		# Flagi są resetowane po zwolnieniu przycisku
+		move_on_x_axis = false 
 		move_on_y_axis = false
 		)
 	
@@ -130,28 +134,35 @@ func _process(delta: float) -> void:
 				return
 			rotation_point.global_rotation += deg_to_rad(rotation_speed * rotation_direction) * delta
 
-	# Obsługa przesuwania po osi X
+	# Obsługa przesuwania po osi X (ciągły ruch, płynny dzięki delta)
 	if move_on_x_axis:
 		if move_left_flag:
 			if moving_distance_x == 0:
 				return
-			symbol.offset.x += round(-moving_distance_x * delta)
+			# POPRAWIONE: Usunięto round()
+			symbol.offset.x -= moving_distance_x * SPEED * delta
 		else:
 			if moving_distance_x == 0:
 				return
-			symbol.offset.x -= round(-moving_distance_x * delta)
+			# POPRAWIONE: Usunięto round()
+			symbol.offset.x += moving_distance_x * SPEED * delta
 
-	# Obsługa przesuwania po osi Y
+	# Obsługa przesuwania po osi Y (ciągły ruch, płynny dzięki delta)
 	if move_on_y_axis:
 		if move_up_flag:
 			if moving_distance_y == 0:
 				return
-			symbol.offset.y -= round(moving_distance_y * delta)
+			# POPRAWIONE: Usunięto round()
+			symbol.offset.y -= moving_distance_y * SPEED * delta
 		else:
 			if moving_distance_y == 0:
 				return
-			symbol.offset.y += round(moving_distance_y * delta)
-	area_2d.global_position = symbol.global_position + symbol.offset
+			# POPRAWIONE: Usunięto round()
+			symbol.offset.y += moving_distance_y * SPEED * delta
+            
+	# Aktualizacja pozycji obszaru kolizji
+	area_2d.position = symbol.offset
+    
 	symbol_in_target_space()
 	update_symbol_opacity()
 	

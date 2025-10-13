@@ -12,19 +12,19 @@ target = NodePath("TargetRotationPoint/TargetSymbolSprite")
 symbol = NodePath("RotatePoint/SymbolSprite")
 rotation_point = NodePath("RotatePoint")
 target_rotation_point = NodePath("TargetRotationPoint")
-area_2d = NodePath("RotatePoint/SymbolSprite/Area2D")
+area_2d = NodePath("RotatePoint/Area2D")
 
 [node name="RotatePoint" type="Marker2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="RotatePoint"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatePoint/Area2D"]
+shape = SubResource("CircleShape2D_sbms6")
 
 [node name="SymbolSprite" type="Sprite2D" parent="RotatePoint"]
 texture_filter = 1
 texture = ExtResource("3_cv4w2")
 metadata/_edit_lock_ = true
-
-[node name="Area2D" type="Area2D" parent="RotatePoint/SymbolSprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatePoint/SymbolSprite/Area2D"]
-shape = SubResource("CircleShape2D_sbms6")
 
 [node name="TargetRotationPoint" type="Marker2D" parent="."]
 

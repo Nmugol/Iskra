@@ -246,6 +246,7 @@ bus = &"Music"
 
 [node name="Setting" parent="GUI" instance=ExtResource("2_45d1s")]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -269,6 +270,7 @@ visible = false
 
 [node name="UI" parent="GUI" instance=ExtResource("5_p70al")]
 unique_name_in_owner = true
+visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="GUI"]
 unique_name_in_owner = true

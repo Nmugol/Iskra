@@ -27,9 +27,6 @@ extends Node2D
 
 @onready var symbol_counter: RichTextLabel = $Control/SymbolCounter/MarginContainer/RichTextLabel
 
-
-
-
 var current_symbols: Array[Symbol] = []
 
 enum above_button {
@@ -70,6 +67,7 @@ func _process(delta: float) -> void:
 		Signals.stop_moving_and_rotate_symbol.emit()
 	else: Signals.set_cursor.emit(State.Cursors.USE)	
 
+	# Obsługa ciągłego ruchu i obrotu (działa również jako jednokrokowy klik)
 	if Input.is_action_pressed("MovePlayer"):
 		match cursor_above_button:
 			above_button.UP: move_up()
@@ -83,6 +81,7 @@ func _process(delta: float) -> void:
 				cristal.global_rotation += deg_to_rad(-rotate_speed) * delta
 				Signals.rotate_symbol.emit(false)
 
+	# Zatrzymanie ruchu i obrotu po zwolnieniu przycisku (kończy się jednokrokowy/ciągły ruch)
 	if Input.is_action_just_released("MovePlayer"):
 		Signals.stop_moving_and_rotate_symbol.emit()
 
@@ -98,9 +97,6 @@ func check_symbol_position() -> void:
 	complete_symbols = count
 	
 	symbol_counter.text = "%d / %d [img=16x16]res://Sprite/symbols/linked_symbols.png[/img]" % [count, current_symbols.size()]
-
-	
-	
 
 func check_level_completion() -> void:
 	if change_level:  return
@@ -154,38 +150,26 @@ func show_symbols() -> void:
 func move_left() -> void:
 	var target_x = candle.global_position.x - move_distance
 	candle.global_position.x = clamp(target_x, max_candle_left.global_position.x, max_candle_right.global_position.x)
-	
-	if candle.global_position.x == max_candle_left.global_position.x or candle.global_position.x == max_candle_right.global_position.x:
-		Signals.stop_moving_and_rotate_symbol.emit()
-	else:
-		Signals.symbol_move_on_x_axis.emit(true)
+	# Sygnał ruchu symbolu jest zawsze emitowany.
+	Signals.symbol_move_on_x_axis.emit(true)
 
 func move_right() -> void:
 	var target_x = candle.global_position.x + move_distance
 	candle.global_position.x = clamp(target_x, max_candle_left.global_position.x, max_candle_right.global_position.x)
-	
-	if candle.global_position.x == max_candle_left.global_position.x or candle.global_position.x == max_candle_right.global_position.x:
-		Signals.stop_moving_and_rotate_symbol.emit()
-	else:
-		Signals.symbol_move_on_x_axis.emit(false)
+	# Sygnał ruchu symbolu jest zawsze emitowany.
+	Signals.symbol_move_on_x_axis.emit(false)
 
 func move_up() -> void:
 	var target_y = candle.global_position.y - move_distance
 	candle.global_position.y = clamp(target_y, max_candle_top.global_position.y, max_candle_bottom.global_position.y)
-
-	if candle.global_position.y == max_candle_top.global_position.y or candle.global_position.y == max_candle_bottom.global_position.y:
-		Signals.stop_moving_and_rotate_symbol.emit()
-	else:
-		Signals.symbol_move_on_y_axis.emit(true)
+	# Sygnał ruchu symbolu jest zawsze emitowany.
+	Signals.symbol_move_on_y_axis.emit(true)
 
 func move_down() -> void:
 	var target_y = candle.global_position.y + move_distance
 	candle.global_position.y = clamp(target_y, max_candle_top.global_position.y, max_candle_bottom.global_position.y)
-	
-	if candle.global_position.y == max_candle_top.global_position.y or candle.global_position.y == max_candle_bottom.global_position.y:
-		Signals.stop_moving_and_rotate_symbol.emit()
-	else:
-		Signals.symbol_move_on_y_axis.emit(false)
+	# Sygnał ruchu symbolu jest zawsze emitowany.
+	Signals.symbol_move_on_y_axis.emit(false)
 
 # Signal handlers with corrected variable names
 func _on_rotate_to_right_mouse_entered() -> void:

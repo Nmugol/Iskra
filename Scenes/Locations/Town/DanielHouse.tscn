@@ -49,7 +49,7 @@ width = 330.0
 height = 140.0
 text_to_display = "Use map [img]res://Sprite/Informations/mapa.png[/img] and select shopping area [img=16x16]res://Sprite/Map/ShoppingAreaIcon.png[/img] to fast travel"
 is_visible_flag = true
-active_on_stages = Array[int]([13, 14, 12])
+active_on_stages = Array[int]([13, 14, 12, 15, 16])
 metadata/_edit_use_anchors_ = true
 
 [node name="Teren" type="Node2D" parent="."]

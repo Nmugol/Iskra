@@ -1,5 +1,13 @@
-@tool
 extends Button
+
+enum Locations{
+	NONE,
+	Shopping_Area,
+	Residential_Area,
+	Railway_Station,
+	Mines,
+	Town
+}
 
 @export_category("Location")
 @export var location_scene_path: String = "res://Scenes/Locations/Mines/mines.tscn":
@@ -8,10 +16,11 @@ extends Button
 @export var location_position: Vector2 = Vector2.ZERO:
 	set(value):
 		location_position = value
-@export var location_name: String = "location":
+@export var location: Locations = Locations.NONE:
 	set(value):
-		location_name = value
-		text = value
+		location = value
+		var temp: String = Locations.keys()[location]
+		text = temp.replace("_", " ")
 
 @export var location_icon: CompressedTexture2D:
 	set(value):
@@ -29,6 +38,6 @@ func _on_pressed() -> void:
 	Save.current_scene_path = location_scene_path
 	get_tree().change_scene_to_file(MAIN_SCENE)
 
-func _pressed() -> void:
+func _process(_delta: float) -> void:
 	if disable_on_state.has(State.state_number):
 		self.hide()

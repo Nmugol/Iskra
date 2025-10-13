@@ -52,6 +52,7 @@ func _process(_delta: float) -> void:
 	# Sprawdzamy czy gracz ma steel_sheet w ekwipunku
 	if Save._is_in_equipment("Steel sheet") and not steel_sheet_picked_up:
 		steel_sheet_picked_up = true
+		Signals.change_info_panel_text.emit("Give the steel sheet to Peter")
 	
 	if player_find_steel_sheet and steel_sheet_picked_up and State.selected_item != null and State.selected_item.item_name == "Steel sheet":
 		player_find_steel_sheet = false
