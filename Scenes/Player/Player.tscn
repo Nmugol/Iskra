@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://c0yr4dgbqxqlm"]
+[gd_scene load_steps=27 format=3 uid="uid://c0yr4dgbqxqlm"]
 
 [ext_resource type="Script" uid="uid://bo7fjk0di7b5m" path="res://Script/Player/PlayerController.gd" id="1_lpgxi"]
 [ext_resource type="Texture2D" uid="uid://ck1jt8x1v7xxq" path="res://Sprite/Character/Daniel/Daniel Fight.png" id="2_h54ih"]
 [ext_resource type="Texture2D" uid="uid://mybqqh4r8sl1" path="res://Sprite/Character/Daniel/$Daniel Other.png" id="3_ude3g"]
+[ext_resource type="Texture2D" uid="uid://du1ufftgka251" path="res://Sprite/Cursors/MovimgBoots-Sheet.png" id="4_ude3g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jmcll"]
 atlas = ExtResource("2_h54ih")
@@ -156,6 +157,42 @@ animations = [{
 radius = 1.0
 height = 12.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0objx"]
+atlas = ExtResource("4_ude3g")
+region = Rect2(0, 0, 23, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w71ue"]
+atlas = ExtResource("4_ude3g")
+region = Rect2(23, 0, 23, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e6p3"]
+atlas = ExtResource("4_ude3g")
+region = Rect2(46, 0, 23, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb677"]
+atlas = ExtResource("4_ude3g")
+region = Rect2(69, 0, 23, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8cj01"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0objx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w71ue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e6p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb677")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 2
 y_sort_enabled = true
@@ -175,3 +212,9 @@ shape = SubResource("CapsuleShape2D_h54ih")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
+
+[node name="SpotMark" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_8cj01")

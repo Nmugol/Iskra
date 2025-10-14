@@ -4,8 +4,10 @@ extends CharacterBody2D
 @export var speed: float = 100
 @onready var navigation: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
+@onready var spot_marc:AnimatedSprite2D = $SpotMark
 
 const DISTANT_TO_CLICK: float = 10
+var in_spot: bool = false
 
 func _ready() -> void:
 	Signals.save_game.connect(func () -> void: Save.player_position = position)
@@ -27,13 +29,21 @@ func _physics_process(_delta: float) -> void:
 		Signals.reset_cursor.emit()
 		return
 
-	if Input.is_action_pressed("MovePlayer") and State.is_in_area and distance_to_click():
+	if Input.is_action_pressed("MovePlayer") and State.is_in_area and distance_to_click() and not in_spot:
 		navigation.target_position = get_global_mouse_position()
+		in_spot = true
+		spot_marc.global_position = get_global_mouse_position()
+		spot_marc.show()
+		spot_marc.play("default")
+
+
 
 	if navigation.is_navigation_finished():
 		velocity = Vector2.ZERO
 		sprite.scale = Vector2(0.5,0.5)
 		sprite.play("idle")
+		spot_marc.hide()
+		in_spot = false
 		Signals.update_distance.emit()
 	else:
 		var next_pos = navigation.get_next_path_position()
@@ -42,7 +52,7 @@ func _physics_process(_delta: float) -> void:
 			var direction = (next_pos - global_position).normalized()
 			velocity = direction * speed
 			sprite.scale = Vector2(0.667,0.667)
-			
+			spot_marc.global_position = navigation.target_position
 			# Poprawiona logika animacji
 			update_animations(direction)
 

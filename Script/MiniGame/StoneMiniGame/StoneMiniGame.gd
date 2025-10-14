@@ -34,6 +34,7 @@ func _process(_delta: float) -> void:
 
 func level_loader() -> void:
 	daniel_zone.show()
+	detect_area.hide()
 	for c in level_position.get_children(): 
 		c.queue_free()
 	
@@ -61,8 +62,9 @@ func _deferred_disable_monitoring() -> void:
 
 func _on_play_pressed() -> void:
 	daniel_zone.hide()
+	await get_tree().create_timer(0.5).timeout
 	daniel_is_moving = true
-	# Use call_deferred here as well
+	detect_area.show()
 	call_deferred("_deferred_enable_monitoring")
 
 func _deferred_enable_monitoring() -> void:
@@ -73,6 +75,6 @@ func _on_reset_pressed() -> void:
 	level_loader()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Stone"):
+	if daniel_is_moving and body.is_in_group("Stone"):
 		# Use call_deferred to safely call level_loader
 		call_deferred("level_loader")

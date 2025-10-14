@@ -6,14 +6,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2juu1"]
 size = Vector2(112, 80)
 
-[node name="SimonButtopn" type="Node2D"]
+[node name="SimonButtopn" type="Node2D" node_paths=PackedStringArray("background")]
 script = ExtResource("1_anefk")
+background = NodePath("BG")
+MOUSE_ON_COLOR = Color(0.730146, 0.74902, 0.613622, 1)
+MOUSE_CLICK_COLOR = Color(0.74902, 0.74902, 0.74902, 1)
+DEFAULT_COLOR = Color(1, 1, 1, 1)
 
 [node name="BG" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_2juu1")
 
-[node name="Symbol" type="Sprite2D" parent="."]
+[node name="Symbol" type="Sprite2D" parent="BG"]
 
 [node name="Area2D" type="Area2D" parent="."]
 

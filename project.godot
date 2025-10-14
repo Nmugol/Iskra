@@ -60,6 +60,7 @@ candle_mini_game_zone=""
 TurnManager=""
 Patrol=""
 Stone=""
+Bariera=""
 
 [input]
 

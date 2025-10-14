@@ -34,20 +34,20 @@ func update_sprite()->void:
 	match size:
 			StoneSize.SMALL:
 				sprite.texture = sprite_size_small
-				collision.shape.size = Vector2(31,31)
-				logical_collision.shape.size = Vector2(32,32)
+				collision.shape.size = Vector2(30,30)
+				logical_collision.shape.size = Vector2(31,31)
 			StoneSize.LARGE_VERTICAL:
 				sprite.texture = sprite_size_large_vertical
-				collision.shape.size = Vector2(31,63)
-				logical_collision.shape.size = Vector2(32,64)
+				collision.shape.size = Vector2(30,62)
+				logical_collision.shape.size = Vector2(31,63)
 			StoneSize.LARGE_HORIZONTAL:
 				sprite.texture = sprite_size_large_horizontal
-				collision.shape.size = Vector2(62,31)
-				logical_collision.shape.size = Vector2(64,32)
+				collision.shape.size = Vector2(62,30)
+				logical_collision.shape.size = Vector2(63,31)
 			StoneSize.BIG:
 				sprite.texture = sprite_size_big
-				collision.shape.size = Vector2(63,63)
-				logical_collision.shape.size = Vector2(64,64)
+				collision.shape.size = Vector2(62,62)
+				logical_collision.shape.size = Vector2(63,63)
 
 func _ready() -> void:
 	Signals.move_stone.connect(_on_move_stone)

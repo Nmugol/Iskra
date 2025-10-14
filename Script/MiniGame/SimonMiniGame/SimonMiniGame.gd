@@ -9,6 +9,7 @@ extends Node2D
 
 @export var panel: NinePatchRect
 @export var grid: GridContainer
+@export var _timer: Timer
 
 var current_level = 1
 var sequence: Array[int] = []
@@ -63,6 +64,7 @@ func update_symbol(id: int, size:int) -> void:
 			atlas_texture.region = new_region
 
 func randomize_sequence() -> void:
+	_timer.stop()
 	symbols_is_displaying = true
 	player_sequence_header = 0
 	player_sequence.clear()
@@ -83,7 +85,20 @@ func randomize_sequence() -> void:
 		
 		sequence.append(new_symbol)
 		last_symbol = new_symbol
+	
+	if length > 0 and sequence[0] == sequence[length - 1]:
+		var first_symbol = sequence[0]
+		var new_last_symbol: int = 0
 		
+		var second_to_last_symbol = sequence[length - 2] if length >= 2 else -1
+		
+		while true:
+			new_last_symbol = randi_range(1, symbols.size())
+			if new_last_symbol != first_symbol and new_last_symbol != second_to_last_symbol:
+				break
+		
+		sequence[length - 1] = new_last_symbol
+
 	display_symbol() 
 	print(sequence)
 
@@ -110,8 +125,19 @@ func display_symbol()->void:
 	
 	for s in sequence:
 		symbol_spot.texture = symbols.get(s)
-		await get_tree().create_timer(symbol_swap_time).timeout
-	await get_tree().create_timer(symbol_restart_time).timeout
+		_timer.wait_time = symbol_swap_time
+		_timer.start()
+		await _timer.timeout
+	
+	_timer.wait_time = symbol_swap_time
+	_timer.start()
+	await _timer.timeout
+	
+	symbol_spot.hide()
+	_timer.wait_time = symbol_restart_time
+	_timer.start()
+	await _timer.timeout
+	symbol_spot.show()
 
 	symbols_is_displaying = false
 	display_symbol()

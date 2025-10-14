@@ -89,7 +89,7 @@ texture = ExtResource("2_dfcq1")
 [sub_resource type="TileSet" id="TileSet_xscqu"]
 sources/0 = SubResource("TileSetAtlasSource_j0cf8")
 
-[node name="SimonMiniGame" type="Node2D" node_paths=PackedStringArray("symbol_spot", "panel", "grid")]
+[node name="SimonMiniGame" type="Node2D" node_paths=PackedStringArray("symbol_spot", "panel", "grid", "_timer")]
 script = ExtResource("1_8iey8")
 symbol_spot = NodePath("SymbolSpot")
 symbol_swap_time = 2.0
@@ -104,6 +104,7 @@ symbols = Dictionary[int, CompressedTexture2D]({
 number_of_symbols_per_level = Array[int]([4, 8, 12])
 panel = NodePath("CanvasLayer/VBoxContainer/Info2")
 grid = NodePath("CanvasLayer/VBoxContainer/Info2/MarginContainer/GridContainer")
+_timer = NodePath("Timer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -147,7 +148,7 @@ layout_mode = 2
 theme = ExtResource("3_n8pr0")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "Move the stones so David [img=16x16]res://Sprite/PatrolMiniGame/Daniel.png[/img] can cross to the other side.
+text = "Click the bricks in the correct order
 "
 vertical_alignment = 1
 
@@ -280,3 +281,6 @@ symbol_id = 4
 [node name="SimonButtopn5" parent="Buttons" instance=ExtResource("9_sisci")]
 symbol = ExtResource("6_wall1")
 symbol_id = 5
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
