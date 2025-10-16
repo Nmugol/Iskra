@@ -34,7 +34,7 @@ region = Rect2(0, 44, 21, 21)
 atlas = ExtResource("23_h15r2")
 region = Rect2(0, 22, 21, 21)
 
-[node name="Dialog" type="Control" node_paths=PackedStringArray("info_text", "info_timer")]
+[node name="Dialog" type="Control" node_paths=PackedStringArray("info_text", "info_timer", "close_button_visible_timer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,6 +67,7 @@ icons = Dictionary[String, CompressedTexture2D]({
 info_text = NodePath("Box/HBoxContainer/DialogPanel/InfoText")
 info_timer = NodePath("Info")
 typewriter_sfx = ExtResource("22_tnyw7")
+close_button_visible_timer = NodePath("CloseButonShortcout")
 
 [node name="Box" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -216,5 +217,10 @@ layout_mode = 2
 wait_time = 2.0
 one_shot = true
 
+[node name="CloseButonShortcout" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="pressed" from="Box/HBoxContainer/DialogPanel/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="timeout" from="Info" to="." method="_on_info_timeout"]
+[connection signal="timeout" from="CloseButonShortcout" to="." method="_on_close_buton_shortcout_timeout"]

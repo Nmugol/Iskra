@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 func _first_dialog() -> void:
 	player.sprite.play("idle")
 	Signals.show_dialog.emit()
-	#1
+	#0
 	Signals.people_message.emit("Guard7", "Daniel, go home. There’s been a gas leak in the mine. Your section has been closed until further notice. You’ll receive a new assignment tomorrow.", true)
 	
 	#1

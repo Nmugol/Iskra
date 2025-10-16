@@ -22,6 +22,8 @@ extends Node
 @export_category("Audio")
 @export var typewriter_sfx: AudioStream
 
+@export_category("Timers")
+@export var close_button_visible_timer: Timer
 
 var display_speed: float = 0.1
 var queue: Array = []
@@ -30,6 +32,7 @@ var text_is_end: bool = false
 var finish_state: bool = true
 var current_text: String = ""
 var current_char_index: int = 0
+var close_button_is_visible: bool = false
 
 signal text_finished
 signal talk_finished
@@ -44,6 +47,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Close"):
+		_on_close_button_pressed()
+	
+	if text_is_end and close_button_is_visible and Input.is_action_just_pressed("LoadText"):
 		_on_close_button_pressed()
 	
 	if Input.is_action_just_pressed("LoadText"):
@@ -69,16 +75,19 @@ func add_to_queue(func_ref: Callable, iconName: String, textToDisplay: String, i
 func process_queue(increase_stage_phase: bool = true) -> void:
 	if is_talking or queue.is_empty():
 		if finish_state:
-			if increase_stage_phase: State.state_phase += 1
 			finish_state = false
 		return
 	
 	is_talking = true
 	var item = queue.pop_front()
-	State.state_phase += 1
+	
+
+	if increase_stage_phase:
+		State.state_phase += 1
 	item[0].call(item[1], item[2])
 
 func people_talk(iconName: String="", textToDisplay:String="") -> void:
+	close_button_is_visible = false
 	State.is_running = false
 	player_panel.hide()
 	close_button.hide()
@@ -88,6 +97,7 @@ func people_talk(iconName: String="", textToDisplay:String="") -> void:
 	text_finished.connect(_on_text_finished, CONNECT_ONE_SHOT)
 
 func player_talk(iconName: String="", textToDisplay:String="") -> void:
+	close_button_is_visible = false
 	State.is_running = false
 	people_panel.hide()
 	close_button.hide()
@@ -130,6 +140,7 @@ func _on_text_finished():
 	# Dodane: pokaż przycisk zamknięcia, jeśli nie ma już dialogów
 	if queue.is_empty():
 		close_button.show()
+		close_button_visible_timer.start()
 
 func _on_close_button_pressed() -> void:
 	Signals.hide_dialog.emit()
@@ -140,3 +151,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_info_timeout() -> void:
 	info_text.show()
+
+
+func _on_close_buton_shortcout_timeout() -> void:
+	close_button_is_visible = true

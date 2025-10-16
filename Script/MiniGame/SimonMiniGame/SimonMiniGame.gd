@@ -91,8 +91,6 @@ func randomize_sequence() -> void:
 			if new_last_symbol != first_symbol and new_last_symbol != second_to_last_symbol:
 				sequence[-1] = new_last_symbol
 				break
-
-	print("Nowa sekwencja: ", sequence)
 	display_symbol_loop() 
 
 func add_symbol_to_player_sequence(_symbol: int)->void:
@@ -112,8 +110,6 @@ func add_symbol_to_player_sequence(_symbol: int)->void:
 	
 	if player_sequence_header == sequence.size():
 		if current_level == 3:
-			print("win")
-			# Tutaj możesz dodać logikę wygranej
 			return
 		current_level+=1
 		randomize_sequence()

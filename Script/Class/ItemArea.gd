@@ -29,6 +29,7 @@ class_name ItemArea
 var player_in_item_area: bool = false
 var mouse_on: bool = false
 var message_sent: bool = false
+var should_queue_free: bool = false
 
 var is_not_item_messages: Array[String] = [
 	"There's nothing here.",
@@ -75,6 +76,7 @@ func _ready() -> void:
 	
 	Signals.remove_items_from_scene.connect(remove_form_scene)
 	Signals.remove_all_items_from_scene.connect(func(): if State.state_number not in active_on: self.queue_free())
+	Signals.hide_dialog.connect(_on_dialog_hidden) 
 
 	if item_area and item_area.shape: item_area.shape = item_area.shape.duplicate()
 	if distance_area and distance_area.shape: distance_area.shape = distance_area.shape.duplicate()
@@ -124,7 +126,7 @@ func _process(_delta: float) -> void:
 				Signals.mouse_above_item.emit(area_name)
 				Signals.show_dialog.emit()
 				Signals.player_message.emit("Daniel", is_not_item_messages.pick_random(), false)
-				self.queue_free()
+				should_queue_free = true # ZMIANA: Ustaw flagę zamiast natychmiast usuwać
 			else:
 				Signals.mouse_above_item.emit(area_name)
 				Signals.show_dialog.emit()
@@ -133,6 +135,11 @@ func _process(_delta: float) -> void:
 			State.state_number = temp_state_number
 			State.state_phase = temp_state_phase
 			message_sent = true
+
+func _on_dialog_hidden() -> void:
+	if should_queue_free:
+		self.queue_free()
+
 func _on_distance_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player_in_item_area = true

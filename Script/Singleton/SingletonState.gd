@@ -33,3 +33,12 @@ enum Cursors_above{
 	CRYSTAL_SHARD,
 	NONE
 }
+
+enum Locations{
+	NONE,
+	Shopping_Area,
+	Residential_Area,
+	Railway_Station,
+	Mines,
+	Town
+}

@@ -186,7 +186,7 @@ func calculate_match_percentage() -> float:
 	var rotation_match = 1.0 - clamp(rotation_diff / max_rotation_tolerance, 0.0, 1.0)
 	
 	# Połącz oba współczynniki (średnia ważona)
-	var overall_match = (distance_match * 0.5 + rotation_match * 0.5)
+	var overall_match = (distance_match * 0.7 + rotation_match * 0.3)
 	
 	return overall_match
 

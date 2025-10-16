@@ -14,13 +14,11 @@ extends Node2D
 @onready var contro_button: Control = %UI
 
 func _ready() -> void:
-	print("Stane phase: ", State.state_phase, " State number: ", State.state_number)  
 	transition.play("loading")
 	Signals.play_sound.emit(State.AudioType.Music, music, 1, -15)
 	_connect_signals()
 	load_level()
 	await transition.animation_finished
-
 
 func _connect_signals() -> void:
 	Signals.show_ui.connect(func(): settings_in_game.show())

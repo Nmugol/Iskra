@@ -51,5 +51,4 @@ func _on_reset_level() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Patrol"):
-		print("player in patrol")
 		Signals.reset_level.emit()

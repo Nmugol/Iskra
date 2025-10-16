@@ -43,16 +43,16 @@ func _process(_delta: float) -> void:
 				0:
 					jonas.hide()
 					_first_dialog()
-				3:
+				1:
 					jonas.show()
 					var smoke = $Particle/Smoke
 					smoke.play = true
 					jonas_in._play()
-				4:
+				2:
 					jonas.update_state("idle",true)
-				8:
+				6:
 					james_out._play()
-				9:
+				7:
 					State.state_phase = 0
 					State.state_number = 6
 					james.hide()
@@ -70,20 +70,19 @@ func _process(_delta: float) -> void:
 						var area = blocking_areas.get_node_or_null("Area2D")
 						if area:
 							area.queue_free()
-				3:
 					james.show()
 					james_in._play()
 					player.navigation.target_position = $Events/FixedWheelPosition.global_position
-				4:
+				2:
 					player.global_position = $Events/FixedWheelPosition.global_position
 					james_in.path.progress_ratio = 1
 					james.update_state("Idle", true)
 					guard_in._play()
 					guard6.show()
-				5:
+				3:
 					guard_in.path.progress_ratio = guard_in.stop_points
 					guard6.update_state("Idle", true)
-				7:
+				5:
 					State.state_number = 8
 					State.state_phase = 0
 					Save.player_position = Vector2(792,1616) 

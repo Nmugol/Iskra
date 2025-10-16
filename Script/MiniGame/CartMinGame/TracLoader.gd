@@ -37,6 +37,5 @@ func _update_cart()->void:
 
 func _on_finish_body_entered(_body:Node2D) -> void:
 	if !signal_is_emited:
-		print("finish")
 		signal_is_emited = true
 		Signals.increase_cart_stage.emit()

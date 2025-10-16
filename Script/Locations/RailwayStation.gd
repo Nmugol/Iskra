@@ -66,7 +66,7 @@ func _process(_delta: float) -> void:
 						dialog_is_running = true
 						_first_task()
 						player.sprite.flip_h = true
-				10:
+				8:
 					player.sprite.flip_h = false
 					for i in 2:
 						await get_tree().process_frame
@@ -77,7 +77,7 @@ func _process(_delta: float) -> void:
 					State.state_phase = 0
 		2:
 			match  State.state_phase:
-				6:
+				4:
 					if get_node_or_null("EventArea/GiveSteelSheet") != null:
 						$EventArea/GiveSteelSheet/BrokenCart.hide()
 						$EventArea/GiveSteelSheet.queue_free()
@@ -97,7 +97,7 @@ func _process(_delta: float) -> void:
 					var broken_wheel: Item = Item.new("Broken wheel",[],true,"res://Sprite/Items/BrokenCartWheelSmall.png","res://Sprite/Items/BrokenCartWheel.png",[])
 					if not Save._is_in_equipment(broken_wheel.item_name):
 						broken_wheel.add_to_equipment()
-				9:
+				7:
 					dialog_is_running = false
 					State.state_number = 5
 					State.state_phase = 0

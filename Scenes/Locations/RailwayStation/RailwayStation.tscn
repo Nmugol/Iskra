@@ -127,7 +127,7 @@ tile_set = ExtResource("1_nuh5u")
 [node name="Border" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
-position = Vector2(1280, -8)
+position = Vector2(1280, -5)
 shape = SubResource("RectangleShape2D_basko")
 disabled = true
 
@@ -141,9 +141,9 @@ position = Vector2(2120, -40)
 zoom = Vector2(2, 2)
 process_callback = 0
 limit_left = 72
-limit_top = -392
+limit_top = -389
 limit_right = 2488
-limit_bottom = 376
+limit_bottom = 379
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

@@ -61,6 +61,7 @@ func _process(_delta: float) -> void:
 					dialog_is_running = false
 					_finish_candle_mini_game()
 					exit.show()
+					Signals.show_location_button.emit(State.Locations.Shopping_Area)
 					Signals.save_to_file.emit()
 		12:
 			match State.state_phase:

@@ -284,7 +284,6 @@ center_point = NodePath("../../../Points/TopLeftPoint")
 border_area = NodePath("../../../Area2D")
 
 [node name="Symbol2" parent="CentralZone/Symbols/Level1" node_paths=PackedStringArray("center_point", "border_area") instance=ExtResource("8_bkgmx")]
-visible = false
 position = Vector2(80, -16)
 symbol_icons = ExtResource("12_lqkxw")
 offset_value = Vector2(-100, -50)

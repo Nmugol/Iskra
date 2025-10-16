@@ -186,3 +186,6 @@ signal finish_stone_min_game()
 
 @warning_ignore("unused_signal")
 signal simon_button_is_pressed(id:int)
+
+@warning_ignore("unused_signal")
+signal show_location_button(name: State.Locations)

@@ -72,12 +72,12 @@ func _process(_delta: float) -> void:
 					if not dialog_is_running:
 						dialog_is_running = true
 						first_dialogue()
-				9:
+				7:
 					miriam_path._play()
-				11:
+				9:
 					miriam_path._finish_play()
 					
-				12:
+				10:
 					dialog_is_running = false
 					State.state_phase = 0
 					State.state_number = 14
@@ -89,11 +89,11 @@ func _process(_delta: float) -> void:
 					if not dialog_is_running:
 						dialog_is_running = true
 						second_dialogue()
-				6:
+				4:
 					emil_path._play()
-				9:
+				7:
 					emil_path._finish_play()
-				15:
+				13:
 					dialog_is_running = false
 					if game == null:
 						init_patrol_mini_game()

@@ -18,6 +18,9 @@ func  _ready() -> void:
 	guard8.update_state("Walk", false)
 
 func _process(delta: float) -> void:
+
+	
+
 	if State.is_loading: return
 	
 	if walk:
@@ -43,13 +46,13 @@ func _process(delta: float) -> void:
 					guard7.update_state("Idle", true)
 					guard8.update_state("Idle", true)
 					$NPCS/Peter.flip_sprite = false
-				8:
+				6:
 					guard7.update_state("Walk", true)
 					guard8.update_state("Walk", true)
 					target_ratio = 1
 					walk = true
 				
-				9:
+				7:
 					State.state_number = 1
 					State.state_phase = 0
 					Save.player_position = Vector2(2120.0,-40)
