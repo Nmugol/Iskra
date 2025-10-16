@@ -93,7 +93,6 @@ sources/0 = SubResource("TileSetAtlasSource_j0cf8")
 script = ExtResource("1_8iey8")
 symbol_spot = NodePath("SymbolSpot")
 symbol_swap_time = 2.0
-symbol_restart_time = 5.0
 symbols = Dictionary[int, CompressedTexture2D]({
 1: ExtResource("2_sisci"),
 2: ExtResource("3_8dvf6"),
@@ -105,9 +104,6 @@ number_of_symbols_per_level = Array[int]([4, 8, 12])
 panel = NodePath("CanvasLayer/VBoxContainer/Info2")
 grid = NodePath("CanvasLayer/VBoxContainer/Info2/MarginContainer/GridContainer")
 _timer = NodePath("Timer")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

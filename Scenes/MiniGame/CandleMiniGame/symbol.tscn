@@ -22,6 +22,7 @@ area_2d = NodePath("RotatePoint/Area2D")
 shape = SubResource("CircleShape2D_sbms6")
 
 [node name="SymbolSprite" type="Sprite2D" parent="RotatePoint"]
+visible = false
 texture_filter = 1
 texture = ExtResource("3_cv4w2")
 metadata/_edit_lock_ = true
@@ -29,7 +30,7 @@ metadata/_edit_lock_ = true
 [node name="TargetRotationPoint" type="Marker2D" parent="."]
 
 [node name="TargetSymbolSprite" type="Sprite2D" parent="TargetRotationPoint"]
-modulate = Color(1, 1, 1, 0.156863)
+modulate = Color(1, 1, 1, 0.454902)
 texture_filter = 1
 texture = ExtResource("3_cv4w2")
 

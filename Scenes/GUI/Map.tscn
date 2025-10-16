@@ -208,6 +208,6 @@ location_scene_path = "res://Scenes/Locations/Town/CommercialArea.tscn"
 location_position = Vector2(1392, 128)
 location = 1
 location_icon = ExtResource("10_u51vk")
-disable_on_state = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+disable_on_state = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
 
 [connection signal="pressed" from="MarginContainer/Panel/CloseButton" to="." method="_on_close_button_pressed"]

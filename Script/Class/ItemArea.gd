@@ -112,6 +112,8 @@ func _process(_delta: float) -> void:
 		return
 
 	if Input.is_action_just_pressed("MovePlayer"):
+		var temp_state_number = State.state_number
+		var temp_state_phase = State.state_phase
 		if not player_in_item_area:
 			Signals.show_dialog.emit()
 			Signals.player_message.emit("Daniel", out_of_range_messages.pick_random(), false)
@@ -128,6 +130,8 @@ func _process(_delta: float) -> void:
 				Signals.show_dialog.emit()
 				Signals.player_message.emit("Daniel", is_something_here_message.pick_random(), false)
 			
+			State.state_number = temp_state_number
+			State.state_phase = temp_state_phase
 			message_sent = true
 func _on_distance_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

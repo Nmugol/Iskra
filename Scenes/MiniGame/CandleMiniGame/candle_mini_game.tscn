@@ -240,6 +240,7 @@ position = Vector2(-79, -16)
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="CentralZone" groups=["candle_mini_game_zone"]]
+visible = false
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CentralZone/Area2D"]
@@ -283,6 +284,7 @@ center_point = NodePath("../../../Points/TopLeftPoint")
 border_area = NodePath("../../../Area2D")
 
 [node name="Symbol2" parent="CentralZone/Symbols/Level1" node_paths=PackedStringArray("center_point", "border_area") instance=ExtResource("8_bkgmx")]
+visible = false
 position = Vector2(80, -16)
 symbol_icons = ExtResource("12_lqkxw")
 offset_value = Vector2(-100, -50)
