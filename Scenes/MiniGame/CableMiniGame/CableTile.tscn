@@ -1,7 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://i2s40i8x4xbg"]
+[gd_scene load_steps=14 format=3 uid="uid://i2s40i8x4xbg"]
 
 [ext_resource type="Script" uid="uid://ctc3n1bdlk3rt" path="res://Script/MiniGame/CableMiniGame/CableTile.gd" id="1_6aoua"]
 [ext_resource type="Texture2D" uid="uid://c8016meucewx5" path="res://Sprite/CableMiniGame/CableTails.png" id="2_mnrjt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnrjt"]
+atlas = ExtResource("2_mnrjt")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm47m"]
+atlas = ExtResource("2_mnrjt")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1hp6w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnrjt")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm47m")
+}],
+"loop": true,
+"name": &"Deactivated",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hp6w"]
 atlas = ExtResource("2_mnrjt")
@@ -81,17 +108,21 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aoua"]
 size = Vector2(32, 32)
 
-[node name="CableTile" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="CableTile" type="Node2D" node_paths=PackedStringArray("sprite", "bg")]
 script = ExtResource("1_6aoua")
-sprite = NodePath("AnimatedSprite2D")
-grid_position = null
+sprite = NodePath("Speite")
+bg = NodePath("bacground")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="bacground" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_1hp6w")
+animation = &"Deactivated"
+
+[node name="Speite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_mnrjt")
-animation = &"STRAIGHT"
-frame_progress = 0.429104
+animation = &"DUAL_CORNER"
 
 [node name="Area2D" type="Area2D" parent="."]
 
