@@ -189,3 +189,6 @@ signal simon_button_is_pressed(id:int)
 
 @warning_ignore("unused_signal")
 signal show_location_button(name: State.Locations)
+
+@warning_ignore("unused_signal")
+signal tile_rotated(tile_position: Vector2i)

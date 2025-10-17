@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bigvpig1xor1q"]
+
+[ext_resource type="Script" uid="uid://cy1w8uw7fxmyd" path="res://Script/MiniGame/CableMiniGame/CableMiniGame.gd" id="1_jo0fv"]
+[ext_resource type="PackedScene" uid="uid://i2s40i8x4xbg" path="res://Scenes/MiniGame/CableMiniGame/CableTile.tscn" id="2_ko8ib"]
+
+[node name="CableMiniGame" type="Node2D" node_paths=PackedStringArray("tile_container")]
+script = ExtResource("1_jo0fv")
+tile_scene = ExtResource("2_ko8ib")
+tile_container = NodePath("TileContainer")
+
+[node name="TileContainer" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
