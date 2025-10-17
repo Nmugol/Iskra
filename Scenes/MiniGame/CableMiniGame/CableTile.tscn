@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://i2s40i8x4xbg"]
+[gd_scene load_steps=15 format=3 uid="uid://i2s40i8x4xbg"]
 
 [ext_resource type="Script" uid="uid://ctc3n1bdlk3rt" path="res://Script/MiniGame/CableMiniGame/CableTile.gd" id="1_6aoua"]
 [ext_resource type="Texture2D" uid="uid://c8016meucewx5" path="res://Sprite/CableMiniGame/CableTails.png" id="2_mnrjt"]
+[ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="3_5sfxv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mnrjt"]
 atlas = ExtResource("2_mnrjt")
@@ -108,10 +109,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aoua"]
 size = Vector2(32, 32)
 
-[node name="CableTile" type="Node2D" node_paths=PackedStringArray("sprite", "bg")]
+[node name="CableTile" type="Node2D" node_paths=PackedStringArray("sprite", "bg", "BotomLeft", "UpRight", "DefaultLight")]
 script = ExtResource("1_6aoua")
 sprite = NodePath("Speite")
+rotation_step = 1
 bg = NodePath("bacground")
+BotomLeft = NodePath("Speite/LB")
+UpRight = NodePath("Speite/UR")
+DefaultLight = NodePath("Speite/D")
 
 [node name="bacground" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -120,9 +125,27 @@ animation = &"Deactivated"
 
 [node name="Speite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_mnrjt")
 animation = &"DUAL_CORNER"
+
+[node name="D" type="PointLight2D" parent="Speite"]
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_5sfxv")
+
+[node name="LB" type="PointLight2D" parent="Speite"]
+position = Vector2(-3, 4)
+rotation = -0.785397
+scale = Vector2(0.07, 0.11)
+texture = ExtResource("3_5sfxv")
+
+[node name="UR" type="PointLight2D" parent="Speite"]
+position = Vector2(4, -4)
+rotation = 0.785398
+scale = Vector2(0.133126, 0.0547348)
+texture = ExtResource("3_5sfxv")
+
+[node name="Node2D" type="Node2D" parent="Speite"]
 
 [node name="Area2D" type="Area2D" parent="."]
 

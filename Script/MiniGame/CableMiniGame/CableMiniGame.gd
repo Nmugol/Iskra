@@ -41,15 +41,15 @@ const LEVEL_DATA = [
 		"source": [Vector2i(1, 1)], 
 		"target": [Vector2i(0, 4),Vector2i(3,3), Vector2i(4,0)],
 		"tiles": [
-			[0,0,3,1],[1,0,1,3],[2,0,0,1],[3,0,1,0],[4,0,0,0],
+			[0,0,3,3],[1,0,1,2],[2,0,0,1],[3,0,1,1],[4,0,0,0],
 
-			[0,1,2,0],[1,1,1,1],[2,1,0,0],[3,1,5,1],[4,1,4,1],
+			[0,1,2,1],[1,1,1,1],[2,1,0,1],[3,1,5,1],[4,1,4,2],
 
-			[0,2,2,3],[1,2,1,0],[2,2,0,0],[3,2,3,3],[4,2,0,0],
+			[0,2,2,2],[1,2,1,1],[2,2,0,1],[3,2,3,3],[4,2,0,1],
 
-			[0,3,0,0],[1,3,2,3],[2,3,1,0],[3,3,0,1],[4,3,1,1],
+			[0,3,0,1],[1,3,2,1],[2,3,1,0],[3,3,0,1],[4,3,1,2],
 
-			[0,4,0,1],[1,4,0,1],[2,4,1,1],[3,4,5,1],[4,4,0,0],
+			[0,4,0,1],[1,4,0,0],[2,4,1,2],[3,4,5,1],[4,4,0,1],
 		]
 	},
 ]
@@ -147,13 +147,11 @@ func recalculate_power_flow():
 	var tiles_to_check: Array[Vector2i] = []
 	var powered_tiles_info: Dictionary = {} 
 	
-	# 1. Resetowanie wszystkich kafelków
 	for x in grid_size.x:
 		for y in grid_size.y:
 			var tile: CableTile = grid[x][y]
 			tile.set_power_state(false, [])
 
-	# 2. Dodanie źródeł do kolejki
 	for source_pos in source_positions:
 		var source_tile: CableTile = get_tile(source_pos)
 		if source_tile:
