@@ -62,7 +62,7 @@ region = Rect2(32, 0, 32, 32)
 atlas = SubResource("CompressedTexture2D_8dvf6")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j0cf8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ewi13"]
 texture = ExtResource("2_dfcq1")
 0:0/0 = 0
 0:1/0 = 0
@@ -87,7 +87,7 @@ texture = ExtResource("2_dfcq1")
 0:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_xscqu"]
-sources/0 = SubResource("TileSetAtlasSource_j0cf8")
+sources/0 = SubResource("TileSetAtlasSource_ewi13")
 
 [node name="SimonMiniGame" type="Node2D" node_paths=PackedStringArray("symbol_spot", "panel", "grid", "_timer")]
 script = ExtResource("1_8iey8")

@@ -1,14 +1,147 @@
-[gd_scene load_steps=3 format=3 uid="uid://bigvpig1xor1q"]
+[gd_scene load_steps=11 format=4 uid="uid://bigvpig1xor1q"]
 
 [ext_resource type="Script" uid="uid://cy1w8uw7fxmyd" path="res://Script/MiniGame/CableMiniGame/CableMiniGame.gd" id="1_jo0fv"]
 [ext_resource type="PackedScene" uid="uid://i2s40i8x4xbg" path="res://Scenes/MiniGame/CableMiniGame/CableTile.tscn" id="2_ko8ib"]
+[ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="3_kve8m"]
+[ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="4_a2qwb"]
+[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="5_a2qwb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0x7s"]
+texture = ExtResource("3_kve8m")
+0:0/0 = 0
+0:1/0 = 0
+1:0/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+5:4/0 = 0
+5:1/0 = 0
+5:0/0 = 0
+4:0/0 = 0
+1:1/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+5:3/0 = 0
+5:2/0 = 0
+0:3/0 = 0
+0:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_v1qyo"]
+sources/0 = SubResource("TileSetAtlasSource_k0x7s")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0x7s"]
+atlas = ExtResource("5_a2qwb")
+region = Rect2(44, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1qyo"]
+atlas = ExtResource("5_a2qwb")
+region = Rect2(44, 22, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0ikh"]
+atlas = ExtResource("5_a2qwb")
+region = Rect2(44, 44, 21, 21)
 
 [node name="CableMiniGame" type="Node2D" node_paths=PackedStringArray("tile_container")]
 script = ExtResource("1_jo0fv")
 tile_scene = ExtResource("2_ko8ib")
 tile_container = NodePath("TileContainer")
 
+[node name="BG" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="BG"]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD/////AAABAAEAAAD//wAAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAD///3/AAABAAEAAAD///7/AAABAAEAAAAAAP3/AAABAAEAAAAAAP7/AAABAAEAAAD///v/AAABAAEAAAD///z/AAABAAEAAAAAAPv/AAABAAEAAAAAAPz/AAABAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAAAAAEAAAABAAEAAAAAAAIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAAAAAMAAAABAAEAAAAAAAQAAAABAAEAAAABAP//AAABAAEAAAABAAAAAAABAAEAAAACAP//AAABAAEAAAACAAAAAAABAAEAAAADAP//AAABAAEAAAADAAAAAAABAAEAAAAEAP//AAABAAEAAAAEAAAAAAABAAEAAAD9////AAABAAEAAAD9/wAAAAABAAEAAAD+////AAABAAEAAAD+/wAAAAABAAEAAAD7////AAABAAEAAAD7/wAAAAABAAEAAAD8////AAABAAEAAAD8/wAAAAABAAEAAAD7//3/AAABAAEAAAD7//7/AAABAAEAAAD8//3/AAABAAEAAAD8//7/AAABAAEAAAD7//v/AAABAAEAAAD7//z/AAABAAEAAAD8//v/AAABAAEAAAD8//z/AAABAAEAAAD9//v/AAABAAEAAAD9//z/AAABAAEAAAD+//v/AAABAAEAAAD+//z/AAABAAEAAAD9//3/AAABAAEAAAD9//7/AAABAAEAAAD+//3/AAABAAEAAAD+//7/AAABAAEAAAABAP3/AAABAAEAAAABAP7/AAABAAEAAAACAP3/AAABAAEAAAACAP7/AAABAAEAAAADAP3/AAABAAEAAAADAP7/AAABAAEAAAAEAP3/AAABAAEAAAAEAP7/AAABAAEAAAADAPv/AAABAAEAAAADAPz/AAABAAEAAAAEAPv/AAABAAEAAAAEAPz/AAABAAEAAAABAPv/AAABAAEAAAABAPz/AAABAAEAAAACAPv/AAABAAEAAAACAPz/AAABAAEAAAD8/wEAAAABAAEAAAD8/wIAAAABAAEAAAD9/wEAAAABAAEAAAD9/wIAAAABAAEAAAD7/wEAAAABAAEAAAD7/wIAAAABAAEAAAD+/wEAAAABAAEAAAD+/wIAAAABAAEAAAD7/wMAAAABAAEAAAD7/wQAAAABAAEAAAD8/wMAAAABAAEAAAD8/wQAAAABAAEAAAD9/wMAAAABAAEAAAD9/wQAAAABAAEAAAD+/wMAAAABAAEAAAD+/wQAAAABAAEAAAABAAMAAAABAAEAAAABAAQAAAABAAEAAAACAAMAAAABAAEAAAACAAQAAAABAAEAAAADAAMAAAABAAEAAAADAAQAAAABAAEAAAAEAAMAAAABAAEAAAAEAAQAAAABAAEAAAADAAEAAAABAAEAAAADAAIAAAABAAEAAAAEAAEAAAABAAEAAAAEAAIAAAABAAEAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAACAAEAAAABAAEAAAACAAIAAAABAAEAAAD6//r/AAAAAAAAAAD6//v/AAAAAAEAAAAFAPr/AAAFAAAAAAAFAPv/AAAFAAEAAAAFAAQAAAAFAAQAAAAFAAUAAAAFAAUAAAD6/wUAAAAAAAUAAAD7/wUAAAABAAUAAAD8/wUAAAACAAUAAAD9/wUAAAACAAUAAAD+/wUAAAACAAUAAAD//wUAAAACAAUAAAAAAAUAAAACAAUAAAABAAUAAAACAAUAAAACAAUAAAACAAUAAAADAAUAAAACAAUAAAAEAAUAAAAEAAUAAAAFAAMAAAAFAAIAAAAFAAIAAAAFAAIAAAAFAAEAAAAFAAIAAAAFAAAAAAAFAAIAAAAFAP//AAAFAAIAAAAFAP7/AAAFAAIAAAAFAP3/AAAFAAIAAAAFAPz/AAAFAAIAAAAEAPr/AAACAAAAAAADAPr/AAACAAAAAAACAPr/AAACAAAAAAABAPr/AAACAAAAAAAAAPr/AAACAAAAAAD///r/AAACAAAAAAD+//r/AAACAAAAAAD9//r/AAACAAAAAAD8//r/AAACAAAAAAD7//r/AAABAAAAAAD6/wQAAAAAAAQAAAD6/wMAAAAAAAIAAAD6/wIAAAAAAAIAAAD6/wEAAAAAAAIAAAD6/wAAAAAAAAIAAAD6////AAAAAAIAAAD6//7/AAAAAAIAAAD6//3/AAAAAAIAAAD6//z/AAAAAAIAAAA=")
+tile_set = SubResource("TileSet_v1qyo")
+
 [node name="TileContainer" type="Node2D" parent="."]
+position = Vector2(-64, -64)
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Info" type="NinePatchRect" parent="CanvasLayer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -73.0
+offset_right = 416.0
+offset_bottom = 73.0
+grow_vertical = 2
+texture = ExtResource("3_kve8m")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 13
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Info/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_a2qwb")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Deliver energy from the sources [img=16x16]res://Sprite/CableMiniGame/source.png[/img] to the targets [img=16x16]res://Sprite/CableMiniGame/Target.png[/img] by laying a path of cables [img=16x16]res://Sprite/CableMiniGame/cable.png[/img]"
+vertical_alignment = 1
+
+[node name="ResetButton" type="NinePatchRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -40.5
+offset_bottom = 40.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("3_kve8m")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ResetButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 11
+
+[node name="Reset" type="TextureButton" parent="CanvasLayer/ResetButton/MarginContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_k0x7s")
+texture_pressed = SubResource("AtlasTexture_v1qyo")
+texture_hover = SubResource("AtlasTexture_y0ikh")
+texture_disabled = SubResource("AtlasTexture_v1qyo")
+texture_focused = SubResource("AtlasTexture_y0ikh")
+stretch_mode = 0
+
+[connection signal="pressed" from="CanvasLayer/ResetButton/MarginContainer/Reset" to="." method="_on_reset_pressed"]

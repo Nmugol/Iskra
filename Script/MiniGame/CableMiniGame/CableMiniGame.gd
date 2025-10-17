@@ -218,5 +218,11 @@ func game_won():
 	
 	var next_level_index = current_level_index + 1
 	
-	if next_level_index < LEVEL_DATA.size(): load_level(next_level_index)
+	if next_level_index < LEVEL_DATA.size():
+		await get_tree().create_timer(1).timeout 
+		load_level(next_level_index)
 	else: print("GRATULACJE! Ukończono wszystkie poziomy!")
+
+
+func _on_reset_pressed() -> void:
+	load_level(current_level_index)
