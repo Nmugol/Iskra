@@ -133,17 +133,17 @@ disabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_8f76d")]
 top_level = true
-position = Vector2(2120, -40)
+position = Vector2(2153, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(2120, -40)
+position = Vector2(2153, -8)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 72
-limit_top = -389
-limit_right = 2488
-limit_bottom = 379
+limit_left = 40
+limit_top = -192
+limit_right = 1288
+limit_bottom = 304
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -153,7 +153,7 @@ script = ExtResource("3_sycnr")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(2120, -40)
+position = Vector2(2153, -8)
 script = ExtResource("4_ektoh")
 follow_mode = 5
 follow_target = NodePath("../Player")

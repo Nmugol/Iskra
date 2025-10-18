@@ -10,10 +10,7 @@ func _ready() -> void:
 	self.hide()
 	
 	paren_area.mouse_entered.connect(func():
-		# czekanie na aktualizacje flag
-		for i in 2: await get_tree().process_frame
-		
-		if State.is_loading and State.is_running:
+		if not State.is_loading and State.is_running:
 			self.show()
 		)
 	
