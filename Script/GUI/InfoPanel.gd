@@ -6,12 +6,8 @@ class_name InfoPanel
 @onready var button: TextureButton = $NinePatchRect/TextureButton
 
 @export_category("Panel size")
-
-@export_range(55, 1000, 5)
-var width: float = 300.0
-
-@export_range(55, 1000, 5)
-var height: float = 150.0
+@export_range(55, 1000, 5) var width: float = 300.0
+@export_range(55, 1000, 5) var height: float = 150.0
 
 @export_category("Text")
 @export var text_to_display: String = "Info text"
@@ -24,38 +20,62 @@ var height: float = 150.0
 @export var button_sfx: AudioStream
 
 const MINIMAL_SIZE: Vector2 = Vector2(60, 53)
+
 var is_in_minimal_size: bool = false
+var is_ui_blocker_active: bool = false
+
 
 func _ready() -> void:
-	# Ustaw początkowe wartości po załadowaniu węzłów
 	panel.size = Vector2(width, height)
 	info_text.text = text_to_display
-
-	# Ustaw początkową widoczność
+	
+	_connect_signals()
 	change_visibility()
-	
-	# Połącz sygnały
-	Signals.show_map.connect(func (): hide())
-	Signals.hide_map.connect(change_visibility)
 
-	Signals.show_equipment.connect(func (): hide())
-	Signals.hide_equipment.connect(change_visibility)
 
-	Signals.change_info_panel_visibility.connect(func (v) -> void:
-		is_visible_flag = v
-		change_visibility()
-		)
+func _connect_signals() -> void:
+	# Sygnały do włączania/wyłączania "aktywności" panelu
+	Signals.change_info_panel_visibility.connect(_on_change_info_panel_visibility)
 	Signals.change_info_panel_text.connect(change_text)
+
+	# Sygnały pokazujące UI, które blokują panel (wg. WorldControler.gd)
+	Signals.show_map.connect(_on_show_ui_blocker)
+	Signals.show_equipment.connect(_on_show_ui_blocker)
+	Signals.show_dialog.connect(_on_show_ui_blocker)
+	Signals.show_settings_in_game.connect(_on_show_ui_blocker)
+
+	# Sygnały ukrywające UI, które odblokowują panel
+	Signals.hide_map.connect(_on_hide_ui_blocker)
+	Signals.hide_equipment.connect(_on_hide_ui_blocker)
+	Signals.hide_dialog.connect(_on_hide_ui_blocker)
+	Signals.hide_settings_in_game.connect(_on_hide_ui_blocker)
 	
+	# Sygnały od dialogu (nadal przydatne)
 	Signals.show_dialog.connect(func () -> void: set_process_input(false))
-	Signals.hide_dialog.connect(func () -> void:set_process_input(true))
+	Signals.hide_dialog.connect(func () -> void: set_process_input(true))
+
+func _on_change_info_panel_visibility(is_active: bool) -> void:
+	is_visible_flag = is_active
+	change_visibility()
+
+func _on_show_ui_blocker() -> void:
+	is_ui_blocker_active = true
+	change_visibility()
+
+func _on_hide_ui_blocker() -> void:
+	is_ui_blocker_active = false
+	change_visibility()
 
 func change_text(new_text: String) -> void:
 	info_text.text = new_text
 
 func change_visibility() -> void:
-	if is_visible_flag and active_on_stages.has(State.state_number): show()
-	else: hide()
+	var should_be_active = is_visible_flag and active_on_stages.has(State.state_number)
+	if should_be_active and not is_ui_blocker_active:
+		show()
+	else:
+		hide()
+
 
 func _on_texture_button_pressed() -> void:
 	if is_in_minimal_size:

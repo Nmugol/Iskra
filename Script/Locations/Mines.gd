@@ -2,25 +2,35 @@ extends Node2D
 
 @onready var guard7: NPC = $Path2D/PathFollow2D/Guard5
 @onready var guard8: NPC = $Path2D/PathFollow2D/Guard6
+@onready var peter: NPC = $NPCS/Peter
 
 @onready var path: PathFollow2D = $Path2D/PathFollow2D
-
-const  MAIN_SCENE = "res://Scenes/World.tscn"
 
 var speed_ratio = 0.1    # prędkość w jednostkach ratio na sekundę
 var target_ratio = 0.45   # gdzie ma się zatrzymać
 
 var walk: bool = false
+var dialog_is_running: bool = false
 
 func  _ready() -> void:
-	path.progress_ratio = 0.0
-	guard7.update_state("Walk", false)
-	guard8.update_state("Walk", false)
-
-func _process(delta: float) -> void:
-
 	
 
+	match State.state_number:
+		0:
+			match State.state_phase:
+				0:
+					path.progress_ratio = 0.0
+					guard7.update_state("Walk", false)
+					guard8.update_state("Walk", false)
+		20:
+			Signals.change_info_panel_text.emit("Go to the cave and find supervisor.")
+			Signals.change_info_panel_visibility.emit(true)
+		_:
+			guard7.hide()
+			guard8.hide()
+			peter.hide()
+
+func _process(delta: float) -> void:
 	if State.is_loading: return
 	
 	if walk:
@@ -36,7 +46,9 @@ func _process(delta: float) -> void:
 		0:
 			match State.state_phase:
 				0: 
-					start_dialog();
+					if not dialog_is_running:
+						dialog_is_running = true
+						_first_dialog();
 				4:
 					guard7.update_state("Walk", false)
 					guard8.update_state("Walk", false)
@@ -58,9 +70,20 @@ func _process(delta: float) -> void:
 					Save.player_position = Vector2(2120.0,-40)
 					Save.current_scene_path = "res://Scenes/Locations/RailwayStation/RailwayStation.tscn"
 					Signals.enable_loading_screen.emit()
-					get_tree().change_scene_to_file(MAIN_SCENE)
+					get_tree().change_scene_to_file(State.MAIN_SCENE)
+		20:
+			match State.state_phase:
+				0:
+					if not dialog_is_running:
+						dialog_is_running = true
+						_second_dialog()
+				1:
+					State.state_number = 21
+					State.state_phase = 0
+					Signals.save_game.emit()
+					Signals.save_to_file.emit()
 
-func start_dialog() -> void:
+func _first_dialog() -> void:
 	Signals.show_dialog.emit()
 	Signals.people_message.emit("Peter", "Hey, Daniel! You're late again. I wonder if we'll ever manage to be on time?", true)
 	Signals.player_message.emit("Daniel", "Don't even get me started. On the way here, I got stopped for a check. They thought I was carrying contraband. And you know how long their personal searches take.", true)
@@ -70,3 +93,9 @@ func start_dialog() -> void:
 	Signals.people_message.emit("Peter", "[shake rate=15.0 level=2 connecter=1]Whaaa...? Whyyy usss?[/shake]",true)
 	Signals.people_message.emit("Guard8", "Your Sparks will come in handy for removing the wagon. Don't waste our time and move it.",true)
 	Signals.player_message.emit("Daniel", "Alright, we're coming. Peter, calm down and don't panic.", true)
+
+func _second_dialog() -> void:
+	Signals.show_dialog.emit()
+	Signals.player_message.emit("Daniel", "There's no one here anymore. The supervisor probably took everyone to the mine.", true)
+	Signals.player_message.emit("Daniel", "I'll have to stay after hours again to make up for the delay.", true)
+

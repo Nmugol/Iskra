@@ -35,6 +35,10 @@ func default_data() -> void:
 	State.pick_up_items = []
 	State.state_number = 0
 	State.state_phase = 0
+	State.pick_up_all_book = false
+	State.pick_up_all_poster = false
+	State.pick_up_books = []
+	State.pick_up_poster = []
 
 func _ready()->void:
 	Signals.save_to_file.connect(save_data_to_file) 	
@@ -56,6 +60,13 @@ func load_data_from_file()->void:
 		
 		State.state_number = data["state_number"]
 		State.state_phase = data["state_phase"]
+		State.day_count = data["day_count"]
+
+		State.pick_up_books = data["pick_up_books"]
+		State.pick_up_all_book = data["pick_up_all_book"]
+		
+		State.pick_up_poster = data["pick_up_poster"]
+		State.pick_up_all_poster = data["pick_up_all_poster"]
 		
 		for item in data["equipment"]:
 			var new_item = Item.from_json(item)
@@ -72,7 +83,12 @@ func save_data_to_file()->void:
 		"current_scene_path": current_scene_path,
 		"player_position": [player_position.x, player_position.y],
 		"state_number": State.state_number,
-		"state_phase": State.state_phase, 
+		"state_phase": State.state_phase,
+		"day_count":  State.day_count,
+		"pick_up_books": State.pick_up_books,
+		"pick_up_poster": State.pick_up_poster,
+		"pick_up_all_poster": State.pick_up_all_poster,
+		"pick_up_all_book": State.pick_up_all_book,
 		"equipment": [],
 		"pick_up_items": []
 	}

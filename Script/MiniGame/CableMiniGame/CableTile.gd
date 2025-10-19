@@ -114,7 +114,7 @@ func set_power_state(powered: bool, powered_from: Array[Vector2i]) -> void:
 		return
 
 	var upright_light_active = false
-	var botomleft_light_active = false
+	var bottomleft_light_active = false
 	
 	for incoming_dir in powered_from:
 		
@@ -123,30 +123,30 @@ func set_power_state(powered: bool, powered_from: Array[Vector2i]) -> void:
 				if incoming_dir == UP or incoming_dir == RIGHT:
 					upright_light_active = true
 				if incoming_dir == DOWN or incoming_dir == LEFT:
-					botomleft_light_active = true
+					bottomleft_light_active = true
 			1:
 				if incoming_dir == RIGHT or incoming_dir == DOWN:
 					upright_light_active = true
 				if incoming_dir == UP or incoming_dir == LEFT:
-					botomleft_light_active = true
+					bottomleft_light_active = true
 			2:
 				if incoming_dir == UP or incoming_dir == RIGHT:
-					botomleft_light_active = true 
+					bottomleft_light_active = true 
 				if incoming_dir == DOWN or incoming_dir == LEFT:
 					upright_light_active = true
 			3:
 				if incoming_dir == UP or incoming_dir == LEFT:
 					upright_light_active = true
 				if incoming_dir == DOWN or incoming_dir == RIGHT:
-					botomleft_light_active = true
+					bottomleft_light_active = true
 
 	if upright_light_active and is_instance_valid(UpRight):
 		UpRight.show()
 		
-	if botomleft_light_active and is_instance_valid(BotomLeft):
+	if bottomleft_light_active and is_instance_valid(BotomLeft):
 		BotomLeft.show()
 		
-	if upright_light_active and botomleft_light_active and is_instance_valid(DefaultLight):
+	if upright_light_active and bottomleft_light_active and is_instance_valid(DefaultLight):
 		DefaultLight.show()
 
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int) -> void:

@@ -192,3 +192,9 @@ signal show_location_button(name: State.Locations)
 
 @warning_ignore("unused_signal")
 signal tile_rotated(tile_position: Vector2i)
+
+@warning_ignore("unused_signal")
+signal play_day_screen()
+
+@warning_ignore("unused_signal")
+signal achieved_update(type: State.AchievedType)

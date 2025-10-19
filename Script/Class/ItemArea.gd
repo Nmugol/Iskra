@@ -126,7 +126,7 @@ func _process(_delta: float) -> void:
 				Signals.mouse_above_item.emit(area_name)
 				Signals.show_dialog.emit()
 				Signals.player_message.emit("Daniel", is_not_item_messages.pick_random(), false)
-				should_queue_free = true # ZMIANA: Ustaw flagę zamiast natychmiast usuwać
+				should_queue_free = true
 			else:
 				Signals.mouse_above_item.emit(area_name)
 				Signals.show_dialog.emit()

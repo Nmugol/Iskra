@@ -1,7 +1,5 @@
 extends Node2D
 
-const  MAIN_SCENE = "res://Scenes/World.tscn"
-
 @onready var player: Player = $Player
 
 @export_category("NPCs")
@@ -57,6 +55,7 @@ func _process(_delta: float) -> void:
 					State.state_number = 6
 					james.hide()
 					Save._remove_item("Broken wheel")
+					Signals.change_info_panel_visibility.emit(true)
 		7:
 			match  State.state_phase:
 				0:
@@ -88,7 +87,7 @@ func _process(_delta: float) -> void:
 					Save.player_position = Vector2(792,1616) 
 					Save.current_scene_path = 'res://Scenes/Locations/Mines/MineHub.tscn'
 					Signals.enable_loading_screen.emit()
-					get_tree().change_scene_to_file(MAIN_SCENE)
+					get_tree().change_scene_to_file(State.MAIN_SCENE)
 
 func _first_dialog() -> void:
 

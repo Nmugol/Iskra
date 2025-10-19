@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cwpyjyttkkb54"]
+[gd_scene load_steps=19 format=4 uid="uid://cwpyjyttkkb54"]
 
 [ext_resource type="TileSet" uid="uid://fakyakw3gfom" path="res://TileSet/Wall.tres" id="1_3k242"]
 [ext_resource type="Script" uid="uid://buf2nex6eqpt3" path="res://Script/Locations/Cave1.gd" id="1_jpcqj"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="11_1to3h"]
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="12_v2ujh"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_v8sys"]
+[ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="15_i6qwv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saell"]
 size = Vector2(1552, 1112)
@@ -28,8 +29,11 @@ ease = 2
 radius = 24.0
 height = 64.0
 
-[node name="Cave1" type="Node2D"]
+[node name="Cave1" type="Node2D" node_paths=PackedStringArray("_player", "supervisor", "mini_game_pos")]
 script = ExtResource("1_jpcqj")
+_player = NodePath("Player")
+supervisor = NodePath("NPCs/NPC")
+mini_game_pos = NodePath("Events/StoneMiniGame/Marker2D")
 
 [node name="CameraBorder" type="Area2D" parent="."]
 metadata/_edit_lock_ = true
@@ -92,10 +96,10 @@ physics_interpolation_mode = 1
 position = Vector2(314, 131)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 4
-limit_top = -384
-limit_right = 1488
-limit_bottom = 256
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -148,3 +152,34 @@ energy = 2.85
 texture = ExtResource("12_v2ujh")
 script = ExtResource("14_v8sys")
 paren_area = NodePath("..")
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="NPC" parent="NPCs" instance=ExtResource("15_i6qwv")]
+position = Vector2(352, 144)
+npc_name = 18
+
+[node name="NPC2" parent="NPCs" instance=ExtResource("15_i6qwv")]
+position = Vector2(1232, 696)
+npc_name = 18
+flip_sprite = true
+
+[node name="NPC3" parent="NPCs" instance=ExtResource("15_i6qwv")]
+position = Vector2(1304, 688)
+npc_name = 18
+
+[node name="Events" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="StoneMiniGame" type="Area2D" parent="Events"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Events/StoneMiniGame"]
+position = Vector2(1304, 720)
+polygon = PackedVector2Array(-128, 104, -128, -88, -8, -120, 120, -120, 120, 104)
+
+[node name="Marker2D" type="Marker2D" parent="Events/StoneMiniGame"]
+position = Vector2(936, 448)
+
+[connection signal="body_entered" from="Events/StoneMiniGame" to="." method="_on_stone_mini_game_body_entered"]

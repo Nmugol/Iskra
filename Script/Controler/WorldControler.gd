@@ -12,10 +12,13 @@ extends Node2D
 @onready var transition: AnimationPlayer = %Transition
 @onready var settings_in_game: Control = %Setting
 @onready var contro_button: Control = %UI
+@onready var day_label: Label = %DayCounter
 
 func _ready() -> void:
 	transition.play("loading")
+
 	Signals.play_sound.emit(State.AudioType.Music, music, 1, -15)
+
 	_connect_signals()
 	load_level()
 	await transition.animation_finished
@@ -38,7 +41,16 @@ func _connect_signals() -> void:
 	
 	Signals.show_settings_in_game.connect(show_setting_in_game)
 	Signals.hide_settings_in_game.connect(hide_setting_in_game)
-	
+
+	Signals.play_day_screen.connect(_play_day_screen)
+
+func _play_day_screen() -> void:
+	day_label.text = "Day " + str(State.day_count)
+	transition.play("day_screen")
+	await transition.animation_finished
+	State.state_number += 1
+	State.state_phase = 0
+
 func load_level() -> void:
 	State.is_running = false
 	State.is_loading = true

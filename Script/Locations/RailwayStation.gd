@@ -13,7 +13,6 @@ extends Node2D
 @onready var mini_game_pos: Marker2D = $EventArea/Cart/Marker2D
 
 @onready var mini_game = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
-const  MAIN_SCENE = "res://Scenes/World.tscn"
 var game:Node = null
 var game_load_finish: bool = false
 
@@ -29,7 +28,7 @@ func _ready() -> void:
 	Signals.load_cart_game.connect(_load_game)
 	Signals.finish_cart_game.connect(_finish_game)
 
-	if State.state_number >= 1 and State.state_phase >= 10:
+	if (State.state_number == 2 and State.state_phase < 4) or (State.state_number >= 1 and State.state_phase >= 10):
 		Signals.change_info_panel_visibility.emit(true)
 
 	if State.state_number >= 3:
@@ -38,7 +37,6 @@ func _ready() -> void:
 	if State.state_number >= 4:
 		cart.monitoring = false
 	
-	# Dodane: automatyczne wznowienie mini-gry po powrocie do sceny
 	if State.state_number == 3 and game == null:
 		_load_game()
 		Signals.change_info_panel_visibility.emit(false)
@@ -51,8 +49,9 @@ func _process(_delta: float) -> void:
 
 	# Sprawdzamy czy gracz ma steel_sheet w ekwipunku
 	if Save._is_in_equipment("Steel sheet") and not steel_sheet_picked_up:
-		steel_sheet_picked_up = true
 		Signals.change_info_panel_text.emit("Give the steel sheet to Peter")
+		steel_sheet_picked_up = true
+
 	
 	if player_find_steel_sheet and steel_sheet_picked_up and State.selected_item != null and State.selected_item.item_name == "Steel sheet":
 		player_find_steel_sheet = false
@@ -104,7 +103,7 @@ func _process(_delta: float) -> void:
 					Save.player_position = Vector2(440,-184) 
 					Save.current_scene_path = 'res://Scenes/Locations/Town/Workshop.tscn'
 					Signals.enable_loading_screen.emit()
-					get_tree().change_scene_to_file(MAIN_SCENE)
+					get_tree().change_scene_to_file(State.MAIN_SCENE)
 
 func _on_give_steel_sheet_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

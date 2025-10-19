@@ -1,7 +1,5 @@
 extends Node2D
 
-const  MAIN_SCENE = "res://Scenes/World.tscn"
-
 @export var player: Player
 
 @export_category("Mini game")
@@ -108,7 +106,7 @@ func _process(_delta: float) -> void:
 					Save.player_position = Vector2(791,-465) 
 					Save.current_scene_path = 'res://Scenes/Locations/Town/DanielHouse.tscn'
 					Signals.enable_loading_screen.emit()
-					get_tree().change_scene_to_file(MAIN_SCENE)
+					get_tree().change_scene_to_file(State.MAIN_SCENE)
 
 func init_patrol_mini_game() -> void:
 	game = mini_game.instantiate()

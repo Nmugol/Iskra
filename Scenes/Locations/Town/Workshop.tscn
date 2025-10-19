@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dcqoiqloarmjh"]
+[gd_scene load_steps=33 format=4 uid="uid://dcqoiqloarmjh"]
 
 [ext_resource type="Script" uid="uid://ccbuep3ih5m7j" path="res://Script/Locations/Workshop.gd" id="1_ra8wh"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="1_vcysl"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="19_mcm2u"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="20_djqyw"]
 [ext_resource type="Script" uid="uid://c2tymt362682o" path="res://Script/Class/PathControler.gd" id="21_v7tvf"]
+[ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="22_45q5c"]
 [ext_resource type="PackedScene" uid="uid://o6rfn8s5ly44" path="res://Scenes/Particle/smoke.tscn" id="22_763pe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2oj5v"]
@@ -344,6 +345,19 @@ flip_sprite = true
 
 [node name="Smoke" parent="Particle" instance=ExtResource("22_763pe")]
 position = Vector2(330, -317)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("22_45q5c")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -104.0
+offset_bottom = -104.0
+grow_vertical = 2
+width = 355.0
+text_to_display = "Look around the workshop."
+active_on_stages = Array[int]([5, 6])
 
 [connection signal="body_entered" from="Events/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Events/Area2D" to="." method="_on_area_2d_body_exited"]

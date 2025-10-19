@@ -88,7 +88,24 @@ func _process(_delta: float) -> void:
 					State.state_number = 17
 					State.state_phase = 0
 					Signals.save_to_file.emit()
-
+		17:
+			match State.state_phase:
+				0:
+					dialog_is_running = false
+					Signals.play_day_screen.emit()
+		18:
+			match State.state_phase:
+				0:
+					if not dialog_is_running:
+						dialog_is_running = true
+						_fifth_dialog()
+				3:
+					State.state_number = 19
+					State.state_phase = 0
+					Save.player_position = Vector2(856,1584) 
+					Save.current_scene_path = 'res://Scenes/Locations/Mines/MineHub.tscn'
+					Signals.enable_loading_screen.emit()
+					get_tree().change_scene_to_file(State.MAIN_SCENE)
 
 	if in_candle_mini_game_area and State.selected_item != null and State.selected_item.item_name == "Crystal shard" and not mini_game_is_running:
 		State.state_number = 10
@@ -109,12 +126,10 @@ func init_candle_mini_game() -> void:
 func _finish_candle_mini_game() -> void:
 
 	var symbol_note: Item = Item.new("Symbol note",[],true,"res://Sprite/Items/SymbolNoteSmall.png","res://Sprite/Items/SymbolNote.png",[])
-
 	symbol_note.add_to_equipment()
-
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()
-
+	
 	$PhantomCamera2D.follow_target = player
 	mini_game_is_running = false
 	State.is_running = true
@@ -162,6 +177,15 @@ func _on_candle_mini_game_body_exited(body:Node2D) -> void:
 func _four_dialog() -> void:
 	Signals.show_dialog.emit()
 	#1
-	Signals.player_message.emit("Daniel","Udało się, nikt mnie nie zauważył.", true)
+	Signals.player_message.emit("Daniel","I made it, nobody saw me.", true)
 	#2
-	Signals.player_message.emit("Daniel","To był dość intensywny dzień. Jestem wykończony. Oby jutro było spokojniej.", true)
+	Signals.player_message.emit("Daniel","That was a pretty intense day. I'm exhausted. I hope tomorrow will be calmer.", true)
+	#3
+	State.day_count = 2
+
+func _fifth_dialog() -> void:
+	Signals.show_dialog.emit()
+	Signals.player_message.emit("Daniel","What time is it? It's already so late. I have to hurry, or I'll be late for the briefing.", true)
+	Signals.player_message.emit("Daniel","Wait, what's this on the table? A piece of paper? But I didn't put anything there last night.", true)
+	Signals.player_message.emit("Daniel","A map of the camp? But why is some passage marked at the train station?", true)
+	Signals.player_message.emit("Daniel","Right, I don't have time to deal with this now. I have to go to the mine as quickly as possible.", true)

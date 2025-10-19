@@ -4,7 +4,7 @@ extends Area2D
 @export var player: Player
 @export var min_distance: float = 100
 @export var location_path: String = "res://Scenes/Locations/Mines/Cave1.tscn"
-var MAIN_SCEN = "res://Scenes/World.tscn"
+
 var dist
 var in_scene: bool = true
 
@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 			
 			Save.current_scene_path = location_path
 			Save.player_position = Vector2(314,131)
-			get_tree().change_scene_to_file(MAIN_SCEN)
+			get_tree().change_scene_to_file(State.MAIN_SCENE)
 			in_scene = false
 			
 		if Input.is_action_just_pressed("MovePlayer") and dist > min_distance and in_scene:
