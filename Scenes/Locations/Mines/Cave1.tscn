@@ -161,12 +161,12 @@ npc_name = 18
 
 [node name="NPC2" parent="NPCs" instance=ExtResource("15_i6qwv")]
 position = Vector2(1232, 696)
-npc_name = 18
+npc_name = 20
 flip_sprite = true
 
 [node name="NPC3" parent="NPCs" instance=ExtResource("15_i6qwv")]
 position = Vector2(1304, 688)
-npc_name = 18
+npc_name = 24
 
 [node name="Events" type="Node2D" parent="."]
 metadata/_edit_lock_ = true

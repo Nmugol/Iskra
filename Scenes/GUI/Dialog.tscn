@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ch7ywbdvrm5ud"]
+[gd_scene load_steps=37 format=3 uid="uid://ch7ywbdvrm5ud"]
 
 [ext_resource type="Script" uid="uid://dgus4uexcarco" path="res://Script/GUI/Dialog.gd" id="1_0hepe"]
 [ext_resource type="Texture2D" uid="uid://glidwj223lpj" path="res://Sprite/Character/Guards/Guard Face.png" id="2_lu68g"]
@@ -21,10 +21,19 @@
 [ext_resource type="Texture2D" uid="uid://ri4xkks1ar6" path="res://Sprite/Character/Peter/Peter Face.png" id="19_sflmd"]
 [ext_resource type="Texture2D" uid="uid://cqaoa43fo2d0v" path="res://Sprite/Character/Przemek/Przemek Face.png" id="20_yc2vb"]
 [ext_resource type="Texture2D" uid="uid://dpe2fyc4ogfcg" path="res://Sprite/Character/Zygmunt/Zygmunt Face.png" id="21_71ten"]
+[ext_resource type="Texture2D" uid="uid://g04i4kvtwtoy" path="res://Sprite/Character/NPC-RANDOM/Npc-1.png" id="22_7omyu"]
 [ext_resource type="AudioStream" uid="uid://d1lmmktfigqan" path="res://Sound/mixkit-single-key-type-2533.wav" id="22_tnyw7"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="22_v3bn7"]
 [ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="23_1eixm"]
+[ext_resource type="Texture2D" uid="uid://b50w3dckto7ko" path="res://Sprite/Character/NPC-RANDOM/Npc-2.png" id="23_gkxrx"]
 [ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="23_h15r2"]
+[ext_resource type="Texture2D" uid="uid://shidtwissypd" path="res://Sprite/Character/NPC-RANDOM/Npc-3.png" id="24_3ikec"]
+[ext_resource type="Texture2D" uid="uid://cwxywxg2qwuyh" path="res://Sprite/Character/NPC-RANDOM/Npc-4.png" id="25_lwaeu"]
+[ext_resource type="Texture2D" uid="uid://cpmlau47j48be" path="res://Sprite/Character/NPC-RANDOM/Npc-5.png" id="26_sflmd"]
+[ext_resource type="Texture2D" uid="uid://bupl7jh52516t" path="res://Sprite/Character/NPC-RANDOM/Npc-6.png" id="27_yc2vb"]
+[ext_resource type="Texture2D" uid="uid://cqknbokmu6mqp" path="res://Sprite/Character/NPC-RANDOM/Npc-7.png" id="28_71ten"]
+[ext_resource type="Texture2D" uid="uid://bdprm8ha652tt" path="res://Sprite/Character/NPC-RANDOM/Npc-8.png" id="29_e7l2i"]
+[ext_resource type="Texture2D" uid="uid://qs4ohyjn2xla" path="res://Sprite/Character/NPC-RANDOM/Npc-9.png" id="30_j362o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1eixm"]
 atlas = ExtResource("23_h15r2")
@@ -59,6 +68,15 @@ icons = Dictionary[String, CompressedTexture2D]({
 "Kacper": ExtResource("15_7omyu"),
 "Kamila": ExtResource("16_gkxrx"),
 "MiriamSchmidt": ExtResource("17_3ikec"),
+"NPC_1": ExtResource("22_7omyu"),
+"NPC_2": ExtResource("23_gkxrx"),
+"NPC_3": ExtResource("24_3ikec"),
+"NPC_4": ExtResource("25_lwaeu"),
+"NPC_5": ExtResource("26_sflmd"),
+"NPC_6": ExtResource("27_yc2vb"),
+"NPC_7": ExtResource("28_71ten"),
+"NPC_8": ExtResource("29_e7l2i"),
+"NPC_9": ExtResource("30_j362o"),
 "Patryk": ExtResource("18_lwaeu"),
 "Peter": ExtResource("19_sflmd"),
 "Przemek": ExtResource("20_yc2vb"),

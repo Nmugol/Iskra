@@ -59,8 +59,8 @@ func _second_dialog() -> void:
     Signals.save_game.emit()
     Signals.save_to_file.emit()
     Signals.show_dialog.emit()
-    Signals.people_message.emit("Przemek", "Well, our sleeping princess has finally arrived!", true)
-    Signals.people_message.emit("Przemek", "What's the matter, didn't want to get out of bed?", true)
+    Signals.people_message.emit("NPC_6", "Well, our sleeping princess has finally arrived!", true)
+    Signals.people_message.emit("NPC_2", "What's the matter, didn't want to get out of bed?", true)
     Signals.player_message.emit("Daniel", "Oh, come on, guys, give me a break and let's get to work. I have to stay late to catch up anyway.", true)
 
 func _on_stone_mini_game_body_entered(body:Node2D) -> void:

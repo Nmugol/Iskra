@@ -23,7 +23,16 @@ enum Npc_names{
 	KACPER,
 	KAMILA,
 	PATRYK,
-	PRZEMEK
+	PRZEMEK,
+	NPC_1,
+	NPC_2,
+	NPC_3,
+	NPC_4,
+	NPC_5,
+	NPC_6,
+	NPC_7,
+	NPC_8,
+	NPC_9,
 }
 @export var npc_name: Npc_names = Npc_names.GUARD_1:
 	set(value):
