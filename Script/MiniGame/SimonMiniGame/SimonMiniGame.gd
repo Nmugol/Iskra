@@ -3,9 +3,11 @@ extends Node2D
 @export_category("Symbols")
 @export var symbol_spot: Sprite2D
 @export var symbol_swap_time: float = 1
-@export var symbol_restart_time: float = 2 # Czas przed powtórzeniem sekwencji
+@export var symbol_restart_time: float = 2
 @export var symbols: Dictionary[int,CompressedTexture2D]
 @export var number_of_symbols_per_level: Array[int] = []
+@export var blink_duration: float = 0.4 
+@export var blink_speed: float = 0.1
 
 @export var panel: NinePatchRect
 @export var grid: GridContainer
@@ -16,7 +18,6 @@ var sequence: Array[int] = []
 var player_sequence: Array[int] = [] 
 var player_sequence_header: int = 0
 
-# Ta zmienna kontroluje teraz, czy komputer jest w trakcie pokazywania sekwencji
 var is_computers_turn: bool = false
 
 const SIZE:int = 32
@@ -94,10 +95,6 @@ func randomize_sequence() -> void:
 	display_symbol_loop() 
 
 func add_symbol_to_player_sequence(_symbol: int)->void:
-	# POPRAWKA: Pierwsze kliknięcie gracza przerywa pętlę komputera
-	if is_computers_turn:
-		is_computers_turn = false
-		_timer.stop()
 	
 	if player_sequence_header >= sequence.size() or _symbol != sequence[player_sequence_header]:
 		randomize_sequence()
@@ -114,32 +111,51 @@ func add_symbol_to_player_sequence(_symbol: int)->void:
 		current_level+=1
 		randomize_sequence()
 
-# POPRAWKA: Ta funkcja teraz działa w pętli, powtarzając sekwencję
 func display_symbol_loop()->void:
 	is_computers_turn = true
-	
+    
 	while is_computers_turn:
-		# Pokaż całą sekwencję raz
-		symbol_spot.show()
+		symbol_spot.show() 
+        
 		for s in sequence:
-			# Jeśli gracz przerwał w trakcie, zakończ natychmiast
 			if not is_computers_turn:
 				symbol_spot.texture = null
 				return
 
 			symbol_spot.texture = symbols.get(s)
-			_timer.wait_time = symbol_swap_time
+			symbol_spot.visible = true 
+
+			var solid_time = symbol_swap_time - blink_duration
+            
+			if solid_time > 0:
+				_timer.wait_time = solid_time
+				_timer.start()
+				await _timer.timeout
+				if not is_computers_turn:
+					symbol_spot.texture = null
+					return
+            
+			var blink_elapsed: float = 0.0
+			var current_visible_state = false
+			while blink_elapsed < blink_duration:
+				if not is_computers_turn:
+					symbol_spot.texture = null
+					return
+
+				symbol_spot.visible = current_visible_state
+				current_visible_state = not current_visible_state 
+
+				var wait_time = min(blink_speed, blink_duration - blink_elapsed)
+				_timer.wait_time = wait_time
+				_timer.start()
+				await _timer.timeout
+				
+				blink_elapsed += wait_time
+
+			symbol_spot.visible = true 
+			symbol_spot.texture = null
+			if not is_computers_turn: return
+
+			_timer.wait_time = symbol_restart_time
 			_timer.start()
 			await _timer.timeout
-		
-		# Wyczyść symbol po pokazaniu sekwencji
-		symbol_spot.texture = null
-		
-		# Jeśli gracz przerwał zaraz po, zakończ
-		if not is_computers_turn:
-			return
-		
-		# Poczekaj przed ponownym wyświetleniem
-		_timer.wait_time = symbol_restart_time
-		_timer.start()
-		await _timer.timeout

@@ -26,25 +26,36 @@ func _ready() -> void:
         _:
             supervisor.hide()
 
-func _process(_delta: float) -> void:
-    if mini_game_is_running or State.is_loading: return
+func _connect_signals()->void:
+    Signals.finish_stone_min_game.connect(_finish_stone_mini_game)
 
-    if State.state_number == 22 and State.state_phase == 2 and game != null:
-        _start_stone_mini_game()
+func _process(_delta: float) -> void:
+    print("State number: ", State.state_number, " State phase: ", State.state_phase)
+    if mini_game_is_running or State.is_loading: return
 
     match State.state_number:
         21:
             match State.state_phase:
                 0:
-                    if not dialog_is_running:
-                        _first_dialog()
-                5:
+                    _first_dialog()
+                4:
                     dialog_is_running = false
                     Signals.change_info_panel_text.emit("Go to the crew and start clearing the stones from the tunnel.")
                     Signals.change_info_panel_visibility.emit(true)
                     State.state_number = 22
                     State.state_phase = 0
-
+        22:
+            match State.state_phase:
+                3:
+                    if game == null:
+                        _start_stone_mini_game()
+        23:
+            match State.state_phase:
+                0:
+                    supervisor.position = Vector2(1272,584)
+                    supervisor.show()
+                    _player.position = Vector2(1208,600)
+                    _player.navigation.target_position = Vector2(1208,600)
 
 
 func _first_dialog() -> void:
@@ -63,6 +74,16 @@ func _second_dialog() -> void:
     Signals.people_message.emit("NPC_2", "What's the matter, didn't want to get out of bed?", true)
     Signals.player_message.emit("Daniel", "Oh, come on, guys, give me a break and let's get to work. I have to stay late to catch up anyway.", true)
 
+func _third_dialogue() -> void:
+    Signals.save_game.emit()
+    Signals.people_message.emit("Przemek", "The lads let me know you've finished.", true)
+    Signals.people_message.emit("Przemek", "Kid, I'm feeling generous, so go home already.", true)
+    Signals.player_message.emit("Daniel", "But I have to make up for being late.", true)
+    Signals.people_message.emit("Przemek", "Let's put it this way: I'll turn a blind eye to you being late, because I'm in a hurry today myself. It's my anniversary with my wife.", true)
+    Signals.player_message.emit("Daniel", "Wow, thanks, boss. You're the best!", true)
+    Signals.people_message.emit("Przemek", "But remember, just this one time.", true)
+    
+
 func _on_stone_mini_game_body_entered(body:Node2D) -> void:
     if body.is_in_group("Player"):
         _second_dialog()
@@ -77,3 +98,15 @@ func _start_stone_mini_game() -> void:
     $PhantomCamera2D.follow_target = game
     _player.hide()
     State.is_running = false
+
+func _finish_stone_mini_game() -> void:
+    $PhantomCamera2D.follow_target = _player
+    mini_game_is_running = false
+    _player.show()
+
+    State.state_number = 23
+    State.state_phase = 0
+
+    Signals.save_game.emit()
+    Signals.save_to_file.emit()
+    State.is_running = true

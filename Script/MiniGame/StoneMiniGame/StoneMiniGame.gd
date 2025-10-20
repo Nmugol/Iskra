@@ -50,9 +50,9 @@ func level_loader() -> void:
 			level_position.add_child(level_3_instance)
 		4:
 			Signals.finish_stone_min_game.emit()
+			self.queue_free()
 			
 	path_to_follow.progress_ratio = 0
-	# Use call_deferred to safely change monitoring state
 	call_deferred("_deferred_disable_monitoring")
 	daniel_is_moving = false
 

@@ -1,7 +1,7 @@
 class_name MovingArrow
 extends Area2D
 
-@export var disabe_area: Area2D
+@export var disable_area: Area2D
 
 @export_category("Sprite")
 @export var sprite: Sprite2D
@@ -24,47 +24,47 @@ func _ready() -> void:
 	Signals.stone_not_moving.connect(_on_stone_not_moving)
 	
 	# Konfiguracja warstw kolizji dla disable_area
-	disabe_area.collision_mask = 2  # Wykrywa kamienie na warstwie 2
-	disabe_area.collision_layer = 0  # Nie musi być na żadnej warstwie
+	disable_area.collision_mask = 2  # Wykrywa kamienie na warstwie 2
+	disable_area.collision_layer = 0  # Nie musi być na żadnej warstwie
 	
 	# Sprawdzamy czy już są obiekty w kolizji przy starcie
 	_update_blocked_state()
 	
-	disabe_area.area_entered.connect(
+	disable_area.area_entered.connect(
 		func(_area) -> void:
 			call_deferred("_update_blocked_state")
 	)
 			
-	disabe_area.area_exited.connect(
+	disable_area.area_exited.connect(
 		func(_area) -> void:
 			call_deferred("_update_blocked_state")
 	)
 	
-	disabe_area.body_entered.connect(
+	disable_area.body_entered.connect(
 		func(_body) -> void:
 			call_deferred("_update_blocked_state")
 	)
 			
-	disabe_area.body_exited.connect(
+	disable_area.body_exited.connect(
 		func(_body) -> void:
 			call_deferred("_update_blocked_state")
 	)
 
-func _on_move_stone(move_velocity: Vector2, moved_stone_id: int) -> void:
+func _on_move_stone(moved_stone_id: int) -> void:
 	# Wyłączamy TYLKO strzałki przypisane do ruchomego kamienia
 	if moved_stone_id == stone_to_move.id:
 		is_active = false
 		sprite.hide()
 
-func _on_stone_not_moving(stopped_stone_id: int) -> void:
+func _on_stone_not_moving() -> void:
 	# Aktywujemy WSZYSTKIE strzałki gdy jakikolwiek kamień się zatrzyma
 	is_active = true
 	call_deferred("_update_blocked_state")
 
 func _update_blocked_state() -> void:
 	# Sprawdzamy zarówno bodies jak i areas w kolizji
-	var overlapping_bodies = disabe_area.get_overlapping_bodies()
-	var overlapping_areas = disabe_area.get_overlapping_areas()
+	var overlapping_bodies = disable_area.get_overlapping_bodies()
+	var overlapping_areas = disable_area.get_overlapping_areas()
 	
 	# Sprawdzamy czy którykolwiek z wykrytych obiektów jest kamieniem (ale nie tym, do którego jest przypisana strzałka)
 	var has_stone = false

@@ -192,10 +192,10 @@ physics_interpolation_mode = 1
 position = Vector2(1064, -88)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 4
-limit_top = -384
-limit_right = 1488
-limit_bottom = 256
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -267,10 +267,9 @@ flip_sprite = true
 
 [node name="BlockinAreas" type="Node2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="BlockinAreas" node_paths=PackedStringArray("player", "back_to_position")]
+[node name="Area2D" type="Area2D" parent="BlockinAreas" node_paths=PackedStringArray("back_to_position")]
 monitoring = false
 script = ExtResource("21_02tu6")
-player = NodePath("")
 back_to_position = NodePath("Marker2D")
 active_on = Array[int]([19, 20])
 

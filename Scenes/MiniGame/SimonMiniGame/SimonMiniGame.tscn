@@ -100,7 +100,7 @@ symbols = Dictionary[int, CompressedTexture2D]({
 4: ExtResource("5_7v6d2"),
 5: ExtResource("6_wall1")
 })
-number_of_symbols_per_level = Array[int]([4, 8, 12])
+number_of_symbols_per_level = Array[int]([4, 6, 8])
 panel = NodePath("CanvasLayer/VBoxContainer/Info2")
 grid = NodePath("CanvasLayer/VBoxContainer/Info2/MarginContainer/GridContainer")
 _timer = NodePath("Timer")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://capoc2ep1dmtn"]
+[gd_scene load_steps=23 format=4 uid="uid://capoc2ep1dmtn"]
 
 [ext_resource type="Script" uid="uid://cintkfqkdptn8" path="res://Script/Locations/DanielHouse.gd" id="1_o2u0l"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="1_veld1"]
@@ -34,6 +34,9 @@ size = Vector2(64, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwym7"]
 size = Vector2(79, 79.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rd7dl"]
+size = Vector2(48, 62.5)
 
 [node name="DanielHouse" type="Node2D"]
 script = ExtResource("1_o2u0l")
@@ -126,10 +129,10 @@ physics_interpolation_mode = 1
 position = Vector2(729, -465)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 72
-limit_top = -389
-limit_right = 2488
-limit_bottom = 379
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -212,5 +215,12 @@ shape = SubResource("RectangleShape2D_bwym7")
 [node name="Marker2D" type="Marker2D" parent="Events/CandleMiniGame"]
 position = Vector2(650, -600)
 
+[node name="Bead" type="Area2D" parent="Events"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Bead"]
+position = Vector2(840, -471.25)
+shape = SubResource("RectangleShape2D_rd7dl")
+
 [connection signal="body_entered" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_entered"]
 [connection signal="body_exited" from="Events/CandleMiniGame" to="." method="_on_candle_mini_game_body_exited"]
+[connection signal="body_entered" from="Events/Bead" to="." method="_on_bead_body_entered"]

@@ -92,7 +92,7 @@ func _process(_delta: float) -> void:
 			match State.state_phase:
 				0:
 					dialog_is_running = false
-					Signals.play_day_screen.emit()
+					
 		18:
 			match State.state_phase:
 				0:
@@ -142,6 +142,8 @@ func _finish_candle_mini_game() -> void:
 
 	player.show()
 	State.is_running = true
+	Signals.save_game.emit()
+	Signals.save_to_file.emit()
 
 func _first_dialog() -> void:
 	Signals.show_dialog.emit()
@@ -180,6 +182,7 @@ func _four_dialog() -> void:
 	Signals.player_message.emit("Daniel","I made it, nobody saw me.", true)
 	#2
 	Signals.player_message.emit("Daniel","That was a pretty intense day. I'm exhausted. I hope tomorrow will be calmer.", true)
+	Signals.player_message.emit("Daniel","I’m going to lie down in bed and sleep.",true)
 	#3
 	State.day_count = 2
 
@@ -189,3 +192,8 @@ func _fifth_dialog() -> void:
 	Signals.player_message.emit("Daniel","Wait, what's this on the table? A piece of paper? But I didn't put anything there last night.", true)
 	Signals.player_message.emit("Daniel","A map of the camp? But why is some passage marked at the train station?", true)
 	Signals.player_message.emit("Daniel","Right, I don't have time to deal with this now. I have to go to the mine as quickly as possible.", true)
+
+
+func _on_bead_body_entered(body:Node2D) -> void:
+	if body.is_in_group("Player") and State.state_number == 17 and State.state_phase == 2:
+		Signals.play_day_screen.emit()
