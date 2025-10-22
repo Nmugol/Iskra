@@ -45,9 +45,9 @@ shape = SubResource("RectangleShape2D_s150w")
 [node name="ControlAreas" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="up" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disabe_area", "sprite", "stone_to_move")]
+[node name="up" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disable_area", "sprite", "stone_to_move")]
 script = ExtResource("3_e21ec")
-disabe_area = NodePath("Area2D")
+disable_area = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 stone_to_move = NodePath("../..")
 velocity = Vector2(0, -1)
@@ -70,9 +70,9 @@ texture = ExtResource("4_r8nnj")
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_ei545")
 
-[node name="right" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disabe_area", "sprite", "stone_to_move")]
+[node name="right" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disable_area", "sprite", "stone_to_move")]
 script = ExtResource("3_e21ec")
-disabe_area = NodePath("Area2D")
+disable_area = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 stone_to_move = NodePath("../..")
 velocity = Vector2(1, 0)
@@ -95,9 +95,9 @@ texture = ExtResource("4_r8nnj")
 position = Vector2(22, 0)
 shape = SubResource("RectangleShape2D_sts3i")
 
-[node name="down" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disabe_area", "sprite", "stone_to_move")]
+[node name="down" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disable_area", "sprite", "stone_to_move")]
 script = ExtResource("3_e21ec")
-disabe_area = NodePath("Area2D")
+disable_area = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 stone_to_move = NodePath("../..")
 velocity = Vector2(0, 1)
@@ -120,9 +120,9 @@ texture = ExtResource("4_r8nnj")
 position = Vector2(0, 22)
 shape = SubResource("RectangleShape2D_7oiid")
 
-[node name="left" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disabe_area", "sprite", "stone_to_move")]
+[node name="left" type="Area2D" parent="ControlAreas" node_paths=PackedStringArray("disable_area", "sprite", "stone_to_move")]
 script = ExtResource("3_e21ec")
-disabe_area = NodePath("Area2D")
+disable_area = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 stone_to_move = NodePath("../..")
 velocity = Vector2(-1, 0)

@@ -25,7 +25,7 @@ func _ready() -> void:
 	
 	# Konfiguracja warstw kolizji dla disable_area
 	disable_area.collision_mask = 2  # Wykrywa kamienie na warstwie 2
-	disable_area.collision_layer = 0  # Nie musi być na żadnej warstwie
+	disable_area.collision_layer = 1 # Nie musi być na żadnej warstwie
 	
 	# Sprawdzamy czy już są obiekty w kolizji przy starcie
 	_update_blocked_state()

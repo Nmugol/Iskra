@@ -17,7 +17,7 @@ func _ready() -> void:
     match State.state_number:
         21:
             match State.state_phase:
-                0:
+                1:
                     supervisor.show()
         22:
             match State.state_phase:
@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
     match State.state_number:
         21:
             match State.state_phase:
-                0:
+                1:
                     _first_dialog()
                 4:
                     dialog_is_running = false
