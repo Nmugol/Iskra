@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cvlmog41ye2dj"]
+[gd_scene load_steps=16 format=4 uid="uid://cvlmog41ye2dj"]
 
 [ext_resource type="TileSet" uid="uid://cg1e6gkobylhf" path="res://TileSet/Furniture.tres" id="2_urs4t"]
 [ext_resource type="TileSet" uid="uid://b7gyxne43ykf7" path="res://TileSet/Tools.tres" id="3_urs4t"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="10_u4oww"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="11_picbo"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="11_u4oww"]
+[ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="12_mlyii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11dnt"]
 size = Vector2(1248, 496)
@@ -100,10 +101,10 @@ physics_interpolation_mode = 1
 position = Vector2(360, 8)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -88
-limit_top = -256
-limit_right = 1464
-limit_bottom = 856
+limit_left = 40
+limit_top = -192
+limit_right = 1288
+limit_bottom = 304
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -151,3 +152,18 @@ script = ExtResource("11_u4oww")
 paren_area = NodePath("..")
 
 [node name="NPC" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("12_mlyii")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+width = 330.0
+height = 140.0
+text_to_display = "Go to the crew and start clearing the stones from the tunnel."
+is_visible_flag = true
+active_on_stages = Array[int]([22, 23])
+metadata/_edit_use_anchors_ = true

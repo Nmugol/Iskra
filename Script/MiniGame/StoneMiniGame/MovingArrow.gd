@@ -50,16 +50,17 @@ func _ready() -> void:
 			call_deferred("_update_blocked_state")
 	)
 
-func _on_move_stone(moved_stone_id: int) -> void:
+func _on_move_stone(_v: Vector2, moved_stone_id: int) -> void:
 	# Wyłączamy TYLKO strzałki przypisane do ruchomego kamienia
 	if moved_stone_id == stone_to_move.id:
 		is_active = false
 		sprite.hide()
 
-func _on_stone_not_moving() -> void:
-	# Aktywujemy WSZYSTKIE strzałki gdy jakikolwiek kamień się zatrzyma
-	is_active = true
-	call_deferred("_update_blocked_state")
+func _on_stone_not_moving(_id: int) -> void:
+	if stone_to_move.id == _id:
+		# Aktywujemy WSZYSTKIE strzałki gdy jakikolwiek kamień się zatrzyma
+		is_active = true
+		call_deferred("_update_blocked_state")
 
 func _update_blocked_state() -> void:
 	# Sprawdzamy zarówno bodies jak i areas w kolizji

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cqkd701kqpce2"]
+[gd_scene load_steps=21 format=4 uid="uid://cqkd701kqpce2"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_pnvbm"]
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_xlfrg"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://8y8t7jn1otcs" path="res://Script/Class/Exit.gd" id="14_hbmdt"]
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="15_nj5bj"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="16_2k2mq"]
+[ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="17_nj5bj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81c8h"]
 size = Vector2(2224, 1800)
@@ -186,3 +187,18 @@ paren_area = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Mines2"]
 position = Vector2(168, -32)
 shape = SubResource("CapsuleShape2D_om1d2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("17_nj5bj")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+width = 330.0
+height = 140.0
+text_to_display = "Go to the crew and start clearing the stones from the tunnel."
+is_visible_flag = true
+active_on_stages = Array[int]([22, 23])
+metadata/_edit_use_anchors_ = true

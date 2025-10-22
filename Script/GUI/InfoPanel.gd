@@ -67,7 +67,11 @@ func _on_hide_ui_blocker() -> void:
 	change_visibility()
 
 func change_text(new_text: String) -> void:
-	info_text.text = new_text
+	text_to_display = new_text
+	panel.size = Vector2(width, height)
+	is_in_minimal_size = false
+	info_text.text = text_to_display
+	info_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 
 func change_visibility() -> void:
 	var should_be_active = is_visible_flag and active_on_stages.has(State.state_number)

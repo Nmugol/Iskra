@@ -22,9 +22,10 @@ func  _ready() -> void:
 					path.progress_ratio = 0.0
 					guard7.update_state("Walk", false)
 					guard8.update_state("Walk", false)
-		20:
+		21:
 			Signals.change_info_panel_text.emit("Go to the cave and find supervisor.")
 			Signals.change_info_panel_visibility.emit(true)
+			peter.hide()
 		_:
 			guard7.hide()
 			guard8.hide()
@@ -80,8 +81,20 @@ func _process(delta: float) -> void:
 				1:
 					State.state_number = 21
 					State.state_phase = 0
+					Signals.change_info_panel_visibility.emit(true)
 					Signals.save_game.emit()
 					Signals.save_to_file.emit()
+		23:
+			match State.state_phase:
+				0:
+					peter.position = Vector2(992,-104)
+					show()
+					_third_dialogue()
+				8:
+					State.state_number = 24
+					State.state_phase = 8
+					Signals.change_info_panel_text.emit("Meet Peter at the railway station")
+					Signals.change_info_panel_visibility.emit(true)
 
 func _first_dialog() -> void:
 	Signals.show_dialog.emit()
@@ -99,3 +112,13 @@ func _second_dialog() -> void:
 	Signals.player_message.emit("Daniel", "There's no one here anymore. The supervisor probably took everyone to the mine.", true)
 	Signals.player_message.emit("Daniel", "I'll have to stay after hours again to make up for the delay.", true)
 
+func _third_dialogue() -> void:
+	Signals.show_dialog.emit()
+	Signals.people_message.emit("Peter", "Oh, Daniel, hey. Have you finished your shift for today?", true)
+	Signals.player_message.emit("Daniel", "Yeah, about 30 minutes ago.", true)
+	Signals.people_message.emit("Peter", "Will you help me with one thing?", true)
+	Signals.player_message.emit("Daniel", "Sure, but with what?", true)
+	Signals.people_message.emit("Peter", "Let's meet at the train station.", true)
+	Signals.player_message.emit("Daniel", "What did you do again? I don't really like this, but I'll help you.", true)
+	Signals.people_message.emit("Peter", "Oh, don't worry, I'm not up to anything.", true)
+	Signals.people_message.emit("Peter", "Let's meet there and I'll explain everything to you.", true)

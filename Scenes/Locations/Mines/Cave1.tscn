@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cwpyjyttkkb54"]
+[gd_scene load_steps=20 format=4 uid="uid://cwpyjyttkkb54"]
 
 [ext_resource type="TileSet" uid="uid://fakyakw3gfom" path="res://TileSet/Wall.tres" id="1_3k242"]
 [ext_resource type="Script" uid="uid://buf2nex6eqpt3" path="res://Script/Locations/Cave1.gd" id="1_jpcqj"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="12_v2ujh"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_v8sys"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="15_i6qwv"]
+[ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="16_j0fjp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saell"]
 size = Vector2(1552, 1112)
@@ -181,5 +182,19 @@ polygon = PackedVector2Array(-128, 104, -128, -88, -8, -120, 120, -120, 120, 104
 
 [node name="Marker2D" type="Marker2D" parent="Events/StoneMiniGame"]
 position = Vector2(936, 448)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("16_j0fjp")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+width = 330.0
+height = 140.0
+text_to_display = "Go to the crew and start clearing the stones from the tunnel."
+is_visible_flag = true
+active_on_stages = Array[int]([22, 23])
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Events/StoneMiniGame" to="." method="_on_stone_mini_game_body_entered"]

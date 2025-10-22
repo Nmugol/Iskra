@@ -50,6 +50,8 @@ func level_loader() -> void:
 			level_position.add_child(level_3_instance)
 		4:
 			Signals.finish_stone_min_game.emit()
+			State.state_number = 23
+			State.state_phase = 0
 			self.queue_free()
 			
 	path_to_follow.progress_ratio = 0

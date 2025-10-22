@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://gu6ykutygd0o"]
+[gd_scene load_steps=22 format=4 uid="uid://gu6ykutygd0o"]
 
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_plpsv"]
 [ext_resource type="TileSet" uid="uid://dtlpkx3wv80s7" path="res://TileSet/FloorShadow.tres" id="2_lwscp"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bnv0133hthkyy" path="res://Sprite/LightShape/Light1.png" id="14_r08l3"]
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="15_r5nvl"]
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="16_r5nvl"]
+[ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="17_w173l"]
 
 [sub_resource type="Resource" id="Resource_w173l"]
 script = ExtResource("12_r5nvl")
@@ -217,3 +218,18 @@ scale = Vector2(0.16, 0.24)
 texture = ExtResource("16_r5nvl")
 script = ExtResource("15_r5nvl")
 paren_area = NodePath("..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("17_w173l")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+width = 330.0
+height = 140.0
+text_to_display = "Go to the crew and start clearing the stones from the tunnel."
+is_visible_flag = true
+active_on_stages = Array[int]([22, 23])
+metadata/_edit_use_anchors_ = true
