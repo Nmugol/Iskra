@@ -92,7 +92,7 @@ func _process(delta: float) -> void:
 					_third_dialogue()
 				8:
 					State.state_number = 24
-					State.state_phase = 8
+					State.state_phase = 0
 					Signals.change_info_panel_text.emit("Meet Peter at the railway station")
 					Signals.change_info_panel_visibility.emit(true)
 

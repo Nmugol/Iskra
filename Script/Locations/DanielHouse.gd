@@ -190,7 +190,7 @@ func _fifth_dialog() -> void:
 	Signals.show_dialog.emit()
 	Signals.player_message.emit("Daniel","What time is it? It's already so late. I have to hurry, or I'll be late for the briefing.", true)
 	Signals.player_message.emit("Daniel","Wait, what's this on the table? A piece of paper? But I didn't put anything there last night.", true)
-	Signals.player_message.emit("Daniel","A map of the camp? But why is some passage marked at the train station?", true)
+	Signals.player_message.emit("Daniel","A map of the camp? But why is some passage marked at the railway station?", true)
 	Signals.player_message.emit("Daniel","Right, I don't have time to deal with this now. I have to go to the mine as quickly as possible.", true)
 
 

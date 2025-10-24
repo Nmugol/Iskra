@@ -43,6 +43,13 @@ func _ready() -> void:
 	
 	if State.state_number >= 7:
 		give_sheet.monitoring = false
+	
+	if State.state_number >= 24:
+		guard7.hide()
+		guard8.hide()
+		peter.show()
+		peter.position = Vector2(2191,-180)
+		player.position = Vector2(2191,-188)
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
@@ -104,6 +111,14 @@ func _process(_delta: float) -> void:
 					Save.current_scene_path = 'res://Scenes/Locations/Town/Workshop.tscn'
 					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(State.MAIN_SCENE)
+		24:
+			match  State.state_phase:
+				0:
+					if not dialog_is_running:
+						dialog_is_running = true
+						_fourth_dialogue()
+				11:
+					Signals.change_info_panel_text.emit("Take a look at the top wall")
 
 func _on_give_steel_sheet_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -218,3 +233,19 @@ func  _third_dialogue() -> void:
 	Signals.player_message.emit("Daniel", "Okay. After I give it to them, should I return to the mine right away?", true)
 	#9
 	Signals.people_message.emit("Guard8", "No, wait there until they fix the wheel, and only then go back to the mine. Don't waste time—go.", true)
+
+func _fourth_dialogue() -> void:
+	Signals.show_dialog.emit()
+	Signals.player_message.emit("Daniel", "Oh, you're already here.", true)
+	Signals.people_message.emit("Peter", "I'm here, I'm here. Now, tell me, what's this all about? Why did I have to come here?", true)
+	Signals.player_message.emit("Daniel", "This morning I found a map on the table with the train station underlined.", true)
+	Signals.people_message.emit("Peter", "A map? But from where? How? Did someone break into your house? And what does this have to do with me?", true)
+	Signals.player_message.emit("Daniel", "Nothing to do with you, but if I had told you about it right away, you wouldn't have agreed and you wouldn't have come at all.", true)
+	Signals.player_message.emit("Daniel", "Did someone break in? I have no idea. The doors were fine, the windows were locked.", true)
+	Signals.people_message.emit("Peter", "OK, but what are we doing here?", true)
+	Signals.player_message.emit("Daniel", "I thought this might interest you.", true)
+	Signals.people_message.emit("Peter", "Interest me? Me?! Are you hearing yourself? You know I don't want to get into trouble.", true)
+	Signals.player_message.emit("Daniel", "I know, I know. But maybe you'll want to help me with this.", true)
+	Signals.people_message.emit("Peter", "Since you've dragged me here anyway, I'll help you. Show me this map.", true)
+	Signals.people_message.emit("Peter", "It looks like, besides the station being underlined, the top wall is also circled.", true)
+	Signals.player_message.emit("Daniel", "The top wall, you say? Give me a moment, I'll see if I can find anything interesting.", true)
