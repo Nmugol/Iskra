@@ -198,3 +198,6 @@ signal play_day_screen()
 
 @warning_ignore("unused_signal")
 signal achieved_update(type: State.AchievedType)
+
+@warning_ignore("unused_signal")
+signal  finish_simon_mini_game()

@@ -106,10 +106,15 @@ func add_symbol_to_player_sequence(_symbol: int)->void:
 	update_symbol(player_sequence_header,SIZE)
 	
 	if player_sequence_header == sequence.size():
-		if current_level == 3:
-			return
+		if current_level == 3: _finish()
 		current_level+=1
 		randomize_sequence()
+
+func _finish() -> void:
+	State.state_number = 26
+	State.state_phase = 0
+	Signals.finish_simon_mini_game.emit()
+	self.queue_free()
 
 func display_symbol_loop()->void:
 	is_computers_turn = true

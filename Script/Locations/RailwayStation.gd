@@ -10,9 +10,16 @@ extends Node2D
 
 @onready var cart: Area2D = $EventArea/Cart
 @onready var give_sheet: Area2D = $EventArea/GiveSteelSheet
+@onready var simon_mini_game_area : Area2D = $EventArea/SimonMiniGame
 @onready var mini_game_pos: Marker2D = $EventArea/Cart/Marker2D
 
+@onready var headquarters_passage: Area2D = $Passage/Headquarters
+
 @onready var mini_game = load("res://Scenes/MiniGame/CartMinGame/cart_mini_gam.tscn")
+@onready var simon_mini_game = load("res://Scenes/MiniGame/SimonMiniGame/SimonMiniGame.tscn")
+
+var headquarters_scene: String = "res://Scenes/Locations/RailwayStation/HeadquartersOfTheResistance.tscn"
+
 var game:Node = null
 var game_load_finish: bool = false
 
@@ -27,6 +34,7 @@ func _ready() -> void:
 	
 	Signals.load_cart_game.connect(_load_game)
 	Signals.finish_cart_game.connect(_finish_game)
+	Signals.finish_simon_mini_game.connect(_finish_simon_mini_game)
 
 	if (State.state_number == 2 and State.state_phase < 4) or (State.state_number >= 1 and State.state_phase >= 10):
 		Signals.change_info_panel_visibility.emit(true)
@@ -50,6 +58,13 @@ func _ready() -> void:
 		peter.show()
 		peter.position = Vector2(2191,-180)
 		player.position = Vector2(2191,-188)
+		simon_mini_game_area.show()
+	
+	if State.state_number == 25:
+		Signals.change_info_panel_text.emit("Take a look at the top wall")
+	
+	if State.state_number >= 26:
+		headquarters_passage.show()
 
 func _process(_delta: float) -> void:
 	if State.is_loading: return
@@ -118,7 +133,26 @@ func _process(_delta: float) -> void:
 						dialog_is_running = true
 						_fourth_dialogue()
 				11:
+					dialog_is_running = false
 					Signals.change_info_panel_text.emit("Take a look at the top wall")
+					State.state_number = 25
+					State.state_phase = 0
+		25:
+			match State.state_phase:
+				5:
+					_init_simon_mini_hame()
+		26:
+			match State.state_phase:
+				0:
+					_sixth_dialogue()
+				4:
+					dialog_is_running = false
+					State.state_number = 27
+					State.state_phase = 0
+					Save.player_position = Vector2(90,0) 
+					Save.current_scene_path = headquarters_scene
+					Signals.enable_loading_screen.emit()
+					get_tree().change_scene_to_file(State.MAIN_SCENE)
 
 func _on_give_steel_sheet_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -136,7 +170,7 @@ func  _reper_cart() -> void:
 	State.selected_item.remove_from_equipment()
 	State.active_item = null
 	Signals.reset_look_at_item.emit()
-	_second_task()  # Teraz _second_task wywoła się dopiero po użyciu przedmiotu
+	_second_task()
 
 func _on_cart_mouse_entered() -> void:
 	
@@ -159,6 +193,11 @@ func _load_game()-> void:
 	State.is_running = false
 
 func _finish_game()-> void:
+	# POPRAWKA: Dodano usuwanie węzła minigry
+	if is_instance_valid(game):
+		game.queue_free()
+		game = null
+	
 	$PhantomCamera2D.follow_target = player
 	player.show()
 	State.state_number = 4
@@ -249,3 +288,52 @@ func _fourth_dialogue() -> void:
 	Signals.people_message.emit("Peter", "Since you've dragged me here anyway, I'll help you. Show me this map.", true)
 	Signals.people_message.emit("Peter", "It looks like, besides the station being underlined, the top wall is also circled.", true)
 	Signals.player_message.emit("Daniel", "The top wall, you say? Give me a moment, I'll see if I can find anything interesting.", true)
+
+func _fifth_dialogue() -> void:
+	Signals.show_dialog.emit()
+	Signals.player_message.emit("Daniel", "Peter, come over here. What's carved into these bricks?", true)
+	Signals.people_message.emit("Peter", "What? They're probably just cracks from old age.", true)
+	Signals.player_message.emit("Daniel", "No, no, these aren't random cracks, they're carved by hand.", true)
+	Signals.player_message.emit("Daniel", "Wait, I've seen these symbols somewhere before. Aren't these the same symbols?", true)
+	Signals.people_message.emit("Peter", "What do you mean, 'the same'?", true)
+	Signals.player_message.emit("Daniel", "Where did I put that paper? Ah, here it is.", true)
+	Signals.player_message.emit("Daniel", "Peter, hold this and point out the symbols from the paper to me in order, as you spot them.", true)
+
+func _sixth_dialogue() -> void:
+	Signals.show_dialog.emit()
+	Signals.people_message.emit("Peter", "Wait, is this some kind of entrance?", true)
+	Signals.people_message.emit("Peter", "Daniel, just don't tell me you want to go in there.", true)
+	Signals.player_message.emit("Daniel", "Are you asking, or do you already know? A mysterious entrance hidden behind a mechanism.", true)
+	Signals.player_message.emit("Daniel", "Obviously, I want to go in there.", true)
+	Signals.people_message.emit("Peter", "Alright, let's go, because I know you'll drag me in there anyway, and I don't want to have you on my conscience if something happens to you in there.", true)
+
+func _init_simon_mini_hame() -> void:
+	game = simon_mini_game.instantiate()
+	game.z_index = 1
+	game.global_position = mini_game_pos.global_position
+	add_child(game)
+	$PhantomCamera2D.follow_target = game
+	game_load_finish = true
+	player.hide()
+	State.is_running = false
+
+func _finish_simon_mini_game() -> void:
+	$PhantomCamera2D.follow_target = player
+	player.show()
+	State.state_number = 26
+	State.state_phase = 0
+	
+	if is_instance_valid(game):
+		game.queue_free()
+	game = null
+	
+	simon_mini_game_area.hide()
+	headquarters_passage.show()
+	State.is_running = true
+	Signals.save_game.emit()
+	Signals.save_to_file.emit()
+
+func _on_simon_mini_game_body_entered(body:Node2D) -> void:
+	if body.is_in_group("Player") and not dialog_is_running:
+		dialog_is_running = true
+		_fifth_dialogue()

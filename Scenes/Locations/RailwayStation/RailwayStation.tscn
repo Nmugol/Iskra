@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=36 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -62,6 +62,9 @@ region = Rect2(16, 6, 32, 26)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h1ofm"]
 radius = 72.4431
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1s613"]
+size = Vector2(112, 81)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egf6h"]
 size = Vector2(176, 66)
@@ -247,7 +250,8 @@ texture = ExtResource("12_5r2dp")
 script = ExtResource("15_ljs7w")
 paren_area = NodePath("..")
 
-[node name="Hedquoters" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+[node name="Headquarters" type="Area2D" parent="Passage" node_paths=PackedStringArray("area_shape", "player")]
+visible = false
 position = Vector2(2260, -302)
 script = ExtResource("13_7y4t6")
 location_path = "res://Scenes/Locations/RailwayStation/HeadquartersOfTheResistance.tscn"
@@ -258,10 +262,10 @@ stopping_point = Vector2(2260, -262)
 target_player_position = Vector2(96, 8)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Hedquoters"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Headquarters"]
 shape = SubResource("CapsuleShape2D_nv2js")
 
-[node name="PointLight2D" type="PointLight2D" parent="Passage/Hedquoters" node_paths=PackedStringArray("paren_area")]
+[node name="PointLight2D" type="PointLight2D" parent="Passage/Headquarters" node_paths=PackedStringArray("paren_area")]
 scale = Vector2(0.16, 0.26)
 texture = ExtResource("16_1s613")
 script = ExtResource("15_ljs7w")
@@ -370,13 +374,22 @@ shape = SubResource("CircleShape2D_h1ofm")
 
 [node name="Marker2D" type="Marker2D" parent="EventArea/Cart"]
 
+[node name="SimonMiniGame" type="Area2D" parent="EventArea"]
+visible = false
+position = Vector2(2260, -302)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventArea/SimonMiniGame"]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_1s613")
+
 [node name="Blok" type="Node2D" parent="."]
 
 [node name="BlockingArea" type="Area2D" parent="Blok" node_paths=PackedStringArray("player", "back_to_position")]
 script = ExtResource("21_h1ofm")
 player = NodePath("../../Player")
 back_to_position = NodePath("Marker2D")
-active_on = Array[int]([1, 2, 3, 4])
+active_on = Array[int]([1, 2, 3, 4, 24, 25])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blok/BlockingArea"]
@@ -391,7 +404,7 @@ position = Vector2(-672, 16)
 script = ExtResource("21_h1ofm")
 player = NodePath("../../Player")
 back_to_position = NodePath("Marker2D")
-active_on = Array[int]([1, 2, 3, 4])
+active_on = Array[int]([1, 2, 3, 4, 24, 25])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blok/BlockingArea2"]
@@ -406,7 +419,7 @@ position = Vector2(-1056, 16)
 script = ExtResource("21_h1ofm")
 player = NodePath("../../Player")
 back_to_position = NodePath("Marker2D")
-active_on = Array[int]([1, 2, 3, 4])
+active_on = Array[int]([1, 2, 3, 4, 24, 25])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blok/BlockingArea3"]
@@ -432,3 +445,4 @@ active_on_stages = Array[int]([1, 2, 3])
 [connection signal="body_entered" from="EventArea/GiveSteelSheet" to="." method="_on_give_steel_sheet_body_entered"]
 [connection signal="body_exited" from="EventArea/GiveSteelSheet" to="." method="_on_give_steel_sheet_body_exited"]
 [connection signal="mouse_entered" from="EventArea/Cart" to="." method="_on_cart_mouse_entered"]
+[connection signal="body_entered" from="EventArea/SimonMiniGame" to="." method="_on_simon_mini_game_body_entered"]
