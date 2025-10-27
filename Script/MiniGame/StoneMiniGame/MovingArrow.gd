@@ -14,41 +14,43 @@ var is_active: bool = true
 var is_blocked: bool = false
 var mouse_on: bool = false
 
+
 func _ready() -> void:
 	sprite.hide()
-	
+
 	self.mouse_entered.connect(_on_mouse_entered)
 	self.mouse_exited.connect(_on_mouse_exited)
-	
+
 	Signals.move_stone.connect(_on_move_stone)
 	Signals.stone_not_moving.connect(_on_stone_not_moving)
-	
+
 	# Konfiguracja warstw kolizji dla disable_area
-	disable_area.collision_mask = 2  # Wykrywa kamienie na warstwie 2
+	disable_area.collision_mask = 2 # Wykrywa kamienie na warstwie 2
 	disable_area.collision_layer = 1 # Nie musi być na żadnej warstwie
-	
+
 	# Sprawdzamy czy już są obiekty w kolizji przy starcie
 	_update_blocked_state()
-	
+
 	disable_area.area_entered.connect(
 		func(_area) -> void:
 			call_deferred("_update_blocked_state")
 	)
-			
+
 	disable_area.area_exited.connect(
 		func(_area) -> void:
 			call_deferred("_update_blocked_state")
 	)
-	
+
 	disable_area.body_entered.connect(
 		func(_body) -> void:
 			call_deferred("_update_blocked_state")
 	)
-			
+
 	disable_area.body_exited.connect(
 		func(_body) -> void:
 			call_deferred("_update_blocked_state")
 	)
+
 
 func _on_move_stone(_v: Vector2, moved_stone_id: int) -> void:
 	# Wyłączamy TYLKO strzałki przypisane do ruchomego kamienia
@@ -56,35 +58,38 @@ func _on_move_stone(_v: Vector2, moved_stone_id: int) -> void:
 		is_active = false
 		sprite.hide()
 
+
 func _on_stone_not_moving(_id: int) -> void:
 	if stone_to_move.id == _id:
 		# Aktywujemy WSZYSTKIE strzałki gdy jakikolwiek kamień się zatrzyma
 		is_active = true
 		call_deferred("_update_blocked_state")
 
+
 func _update_blocked_state() -> void:
 	# Sprawdzamy zarówno bodies jak i areas w kolizji
 	var overlapping_bodies = disable_area.get_overlapping_bodies()
 	var overlapping_areas = disable_area.get_overlapping_areas()
-	
+
 	# Sprawdzamy czy którykolwiek z wykrytych obiektów jest kamieniem (ale nie tym, do którego jest przypisana strzałka)
 	var has_stone = false
-	
+
 	for body in overlapping_bodies:
 		if body.is_in_group("Stone") and body != stone_to_move:
 			has_stone = true
 			break
-	
+
 	for area in overlapping_areas:
 		var parent = area.get_parent()
 		if parent and parent.is_in_group("Stone") and parent != stone_to_move:
 			has_stone = true
 			break
-	
+
 	is_blocked = has_stone
-		
+
 	# Aktualizujemy wygląd strzałki
 	_update_sprite_visibility()
+
 
 func _update_sprite_visibility() -> void:
 	if is_active and not is_blocked and mouse_on:
@@ -92,15 +97,18 @@ func _update_sprite_visibility() -> void:
 	else:
 		sprite.hide()
 
+
 func _process(_delta: float) -> void:
 	if is_active and not is_blocked and mouse_on and Input.is_action_just_pressed("MovePlayer"):
 		Signals.move_stone.emit(velocity, stone_to_move.id)
 
+
 func _on_mouse_entered() -> void:
-	if not is_active or is_blocked: 
+	if not is_active or is_blocked:
 		return
 	mouse_on = true
 	_update_sprite_visibility()
+
 
 func _on_mouse_exited() -> void:
 	mouse_on = false

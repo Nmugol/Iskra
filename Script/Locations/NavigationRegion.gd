@@ -5,24 +5,21 @@ extends Node2D
 @export var collision_area: CollisionPolygon2D
 
 
-
 func _ready() -> void:
 	show()
-	
+
 	# Utwórz nowy NavigationPolygon i dodaj kontur
 	var navigation_polygon = NavigationPolygon.new()
 	navigation_polygon.add_outline(collision_area.polygon)
-	
+
 	# Ustaw tymczasowy polygon w regionie
 	navigation.navigation_polygon = navigation_polygon
-	
+
 	# Użyj serwera nawigacji do wypieczenie polygon
-	navigation.bake_navigation_polygon(false)  # Argument 'true' dla synchronicznego pieczenia
-	
+	navigation.bake_navigation_polygon(false) # Argument 'true' dla synchronicznego pieczenia
+
 	# Ustaw kolizję
 	collision.polygon = collision_area.polygon
-
-
 
 
 func _on_area_2d_mouse_entered() -> void:

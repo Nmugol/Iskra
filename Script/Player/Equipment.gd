@@ -14,14 +14,17 @@ func _ready() -> void:
 	set_up()
 	create_item()
 
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Close") and visible:
 		_on_close_pressed()
+
 
 func set_up() -> void:
 	use_button.hide()
 	disassemble_button.hide()
 	assemble_button.hide()
+
 
 func create_item() -> void:
 	
@@ -44,6 +47,7 @@ func create_item() -> void:
 		
 		item_box.add_child(item_button)
 
+
 func look_at_item(item: Item) -> void:
 	State.active_item = item
 	look_at_item_texture.texture = load(item.full_sprite_path)
@@ -53,10 +57,12 @@ func look_at_item(item: Item) -> void:
 	else: disassemble_button.hide()
 	assemble_button.show()
 
+
 func show_equipment() -> void:
 	State.is_running = false
 	create_item()
 	show()
+
 
 func _on_close_pressed() -> void:
 	State.is_running = true
@@ -64,9 +70,9 @@ func _on_close_pressed() -> void:
 	hide()
 
 
-
 func _on_disassemble_pressed() -> void:
 	State.active_item.disassemble()
+
 
 func _on_assemble_pressed() -> void:
 	State.active_item.assemble(State.SelectedItem)

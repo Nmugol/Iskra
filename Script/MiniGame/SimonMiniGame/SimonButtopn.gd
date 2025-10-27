@@ -5,18 +5,19 @@ extends Node2D
 
 @onready var _sprite = $BG/Symbol
 
-var mouse_on:bool = false
+var mouse_on: bool = false
 
 @export var background: Sprite2D
 @export var MOUSE_ON_COLOR: Color
 @export var MOUSE_CLICK_COLOR: Color
-@export var DEFAULT_COLOR: Color 
+@export var DEFAULT_COLOR: Color
 
 
 func _ready() -> void:
 	_sprite.texture = symbol
 	background.modulate = DEFAULT_COLOR
-	
+
+
 func _process(_delta: float) -> void:
 	if mouse_on and Input.is_action_just_pressed("MovePlayer"):
 		background.modulate = MOUSE_CLICK_COLOR
@@ -26,11 +27,13 @@ func _process(_delta: float) -> void:
 		if mouse_on:
 			background.modulate = MOUSE_ON_COLOR
 		else:
-			background.modulate = DEFAULT_COLOR 
+			background.modulate = DEFAULT_COLOR
+
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_on = true
 	background.modulate = MOUSE_ON_COLOR
+
 
 func _on_area_2d_mouse_exited() -> void:
 	mouse_on = false

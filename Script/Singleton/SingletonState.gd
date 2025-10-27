@@ -20,38 +20,38 @@ var pick_up_books: Array = []
 var pick_up_all_book: bool = false
 
 var pick_up_poster: Array = []
-var pick_up_all_poster:bool = false
+var pick_up_all_poster: bool = false
 
-const  MAIN_SCENE = "res://Scenes/World.tscn"
+const MAIN_SCENE = "res://Scenes/World.tscn"
 
 enum Cursors {
 	DEFAULT,
 	PICKUP,
 	USE,
-	WALK
+	WALK,
 }
 
 enum AudioType {
-    Effect,
-    Music
+	Effect,
+	Music,
 }
 
-enum Cursors_above{
+enum Cursors_above {
 	STEEL_SHEET,
 	CRYSTAL_SHARD,
-	NONE
+	NONE,
 }
 
-enum Locations{
+enum Locations {
 	NONE,
 	Shopping_Area,
 	Residential_Area,
 	Railway_Station,
 	Mines,
-	Town
+	Town,
 }
 
-enum AchievedType{
+enum AchievedType {
 	BOOK,
-	POSTER
+	POSTER,
 }

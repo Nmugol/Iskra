@@ -1,4 +1,5 @@
 extends Control
+
 class_name InfoPanel
 
 @onready var panel: NinePatchRect = $NinePatchRect
@@ -28,7 +29,7 @@ var is_ui_blocker_active: bool = false
 func _ready() -> void:
 	panel.size = Vector2(width, height)
 	info_text.text = text_to_display
-	
+
 	_connect_signals()
 	change_visibility()
 
@@ -49,22 +50,26 @@ func _connect_signals() -> void:
 	Signals.hide_equipment.connect(_on_hide_ui_blocker)
 	Signals.hide_dialog.connect(_on_hide_ui_blocker)
 	Signals.hide_settings_in_game.connect(_on_hide_ui_blocker)
-	
+
 	# Sygnały od dialogu (nadal przydatne)
-	Signals.show_dialog.connect(func () -> void: set_process_input(false))
-	Signals.hide_dialog.connect(func () -> void: set_process_input(true))
+	Signals.show_dialog.connect(func() -> void: set_process_input(false))
+	Signals.hide_dialog.connect(func() -> void: set_process_input(true))
+
 
 func _on_change_info_panel_visibility(is_active: bool) -> void:
 	is_visible_flag = is_active
 	change_visibility()
 
+
 func _on_show_ui_blocker() -> void:
 	is_ui_blocker_active = true
 	change_visibility()
 
+
 func _on_hide_ui_blocker() -> void:
 	is_ui_blocker_active = false
 	change_visibility()
+
 
 func change_text(new_text: String) -> void:
 	text_to_display = new_text
@@ -72,6 +77,7 @@ func change_text(new_text: String) -> void:
 	is_in_minimal_size = false
 	info_text.text = text_to_display
 	info_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+
 
 func change_visibility() -> void:
 	var should_be_active = is_visible_flag and active_on_stages.has(State.state_number)
@@ -92,6 +98,6 @@ func _on_texture_button_pressed() -> void:
 		is_in_minimal_size = true
 		info_text.text = ""
 		info_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	
+
 	Signals.play_sound.emit(State.AudioType.Effect, button_sfx, 1, -15)
 	button.release_focus()

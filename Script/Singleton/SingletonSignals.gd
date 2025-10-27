@@ -45,7 +45,6 @@ signal disable_loading_screen()
 @warning_ignore("unused_signal")
 signal enable_loading_screen()
 
-
 @warning_ignore("unused_signal")
 signal show_settings_in_game()
 
@@ -86,7 +85,7 @@ signal finish_cart_game()
 signal reparent_cart()
 
 @warning_ignore("unused_signal")
-signal set_cart_pos(pos: Vector2) 
+signal set_cart_pos(pos: Vector2)
 
 @warning_ignore("unused_signal")
 signal get_cart(cart: Cart)
@@ -158,7 +157,7 @@ signal finish_patrol_game()
 signal play_sound(audio_type: State.AudioType, audio_stream: AudioStream, pitch_scale: float, volume_db: float)
 
 @warning_ignore("unused_signal")
-signal remove_items_from_scene( items:State.Cursors_above)
+signal remove_items_from_scene(items: State.Cursors_above)
 
 @warning_ignore("unused_signal")
 signal remove_all_items_from_scene()
@@ -170,7 +169,7 @@ signal change_info_panel_visibility(visible: bool)
 signal change_info_panel_text(text: String)
 
 @warning_ignore("unused_signal")
-signal stop_play_sound( type: State.AudioType)
+signal stop_play_sound(type: State.AudioType)
 
 @warning_ignore("unused_signal")
 signal increase_cart_stage()
@@ -185,7 +184,7 @@ signal stone_not_moving(stone_id: int)
 signal finish_stone_min_game()
 
 @warning_ignore("unused_signal")
-signal simon_button_is_pressed(id:int)
+signal simon_button_is_pressed(id: int)
 
 @warning_ignore("unused_signal")
 signal show_location_button(name: State.Locations)
@@ -200,4 +199,4 @@ signal play_day_screen()
 signal achieved_update(type: State.AchievedType)
 
 @warning_ignore("unused_signal")
-signal  finish_simon_mini_game()
+signal finish_simon_mini_game()

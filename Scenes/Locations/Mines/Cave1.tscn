@@ -97,10 +97,10 @@ physics_interpolation_mode = 1
 position = Vector2(314, 131)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -88
-limit_top = -256
-limit_right = 1464
-limit_bottom = 856
+limit_left = 72
+limit_top = -389
+limit_right = 2488
+limit_bottom = 379
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -157,7 +157,7 @@ paren_area = NodePath("..")
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="NPC" parent="NPCs" instance=ExtResource("15_i6qwv")]
-position = Vector2(1208, 600)
+position = Vector2(376, 152)
 npc_name = 18
 
 [node name="NPC2" parent="NPCs" instance=ExtResource("15_i6qwv")]
@@ -181,7 +181,7 @@ position = Vector2(1304, 720)
 polygon = PackedVector2Array(-128, 104, -128, -88, -8, -120, 120, -120, 120, 104)
 
 [node name="Marker2D" type="Marker2D" parent="Events/StoneMiniGame"]
-position = Vector2(936, 448)
+position = Vector2(736, 448)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

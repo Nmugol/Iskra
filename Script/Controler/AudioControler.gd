@@ -6,33 +6,35 @@ extends Node
 
 
 func _ready() -> void:
-    Signals.play_sound.connect(play_audio)
-    Signals.stop_play_sound.connect(stop_audio)
+	Signals.play_sound.connect(play_audio)
+	Signals.stop_play_sound.connect(stop_audio)
+
 
 func play_audio(audio_type: State.AudioType, audio_stream: AudioStream, pitch_scale: float = 1.0, volume_db: float = 0) -> void:
+	var player: AudioStreamPlayer = null
 
-    var player: AudioStreamPlayer = null
+	match audio_type:
+		State.AudioType.Effect:
+			player = sfx_player
+			State.can_play_sfx = false
+		State.AudioType.Music:
+			player = music_player
 
-    match audio_type:
-        State.AudioType.Effect: 
-            player = sfx_player
-            State.can_play_sfx = false
-        State.AudioType.Music: player = music_player
+	if player != null:
+		player.stream = audio_stream
+		player.pitch_scale = pitch_scale
+		player.volume_db = volume_db
+		player.stop()
+		player.play()
+		if audio_type == State.AudioType.Effect:
+			await player.finished
+			State.can_play_sfx = true
 
-    if player != null:
-        player.stream = audio_stream
-        player.pitch_scale = pitch_scale
-        player.volume_db = volume_db
-        player.stop()
-        player.play()
-        if audio_type == State.AudioType.Effect:
-            await player.finished
-            State.can_play_sfx = true
 
 func stop_audio(audio_type: State.AudioType) -> void:
-    match audio_type:
-        State.AudioType.Effect: 
-            sfx_player.stop()
-            State.can_play_sfx = true
-        State.AudioType.Music: 
-            music_player.stop()
+	match audio_type:
+		State.AudioType.Effect:
+			sfx_player.stop()
+			State.can_play_sfx = true
+		State.AudioType.Music:
+			music_player.stop()

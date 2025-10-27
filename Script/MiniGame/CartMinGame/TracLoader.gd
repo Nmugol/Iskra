@@ -28,14 +28,15 @@ var signal_is_emited: bool = false
 func _ready() -> void:
 	_update_cart()
 
-func _update_cart()->void:
+
+func _update_cart() -> void:
 	var children = self.get_children()
 	for child in children:
 		if child is Track:
 			child.cart = cart
 
 
-func _on_finish_body_entered(_body:Node2D) -> void:
+func _on_finish_body_entered(_body: Node2D) -> void:
 	if !signal_is_emited:
 		signal_is_emited = true
 		Signals.increase_cart_stage.emit()

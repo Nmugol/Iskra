@@ -22,6 +22,7 @@ Save="*res://Script/Singleton/SingletonSave.gd"
 Signals="*res://Script/Singleton/SingletonSignals.gd"
 State="*res://Script/Singleton/SingletonState.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 
 [display]
 
@@ -30,7 +31,7 @@ window/size/viewport_height=720
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/SignalVisualizer/plugin.cfg", "res://addons/globalize-plugins/plugin.cfg", "res://addons/godotresourcecleaner/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [file_customization]
 

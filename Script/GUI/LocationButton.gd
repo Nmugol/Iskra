@@ -24,21 +24,24 @@ extends Button
 @export var disable_on_state: Array[int] = []
 
 var is_visible_button: bool = false
-		
-const  MAIN_SCENE = "res://Scenes/World.tscn"
+
+const MAIN_SCENE = "res://Scenes/World.tscn"
+
 
 func _ready():
 	Signals.show_location_button.connect(_show_location_button)
-		
 
-func _show_location_button(location_name: State.Locations)->void:
+
+func _show_location_button(location_name: State.Locations) -> void:
 	if location == location_name:
 		is_visible_button = true
 		self.show()
 
+
 func _process(_delta: float) -> void:
 	if disable_on_state.has(State.state_number) and not is_visible_button:
 		self.hide()
+
 
 func _on_pressed() -> void:
 	Save.player_position = location_position

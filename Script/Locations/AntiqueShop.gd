@@ -20,7 +20,6 @@ extends Node2D
 @export_category("State 13")
 @export var player_pos: Vector2
 
-
 var game: Node = null
 var mini_game = load("res://Scenes/MiniGame/PatrolMiniGame/patrol_mini_game.tscn")
 
@@ -28,13 +27,9 @@ var dialog_is_running: bool = false
 
 
 func _ready() -> void:
-
-	
-
 	Signals.finish_patrol_game.connect(finish_patrol_mini_game)
 
 	if State.state_number == 13:
-		
 		emil.show()
 		miriam.show()
 
@@ -42,7 +37,7 @@ func _ready() -> void:
 		player.global_position = player_pos
 		player.position = player_pos
 
-		exit_1.hide()        
+		exit_1.hide()
 		exit_2.hide()
 
 	if State.state_number == 14:
@@ -50,15 +45,14 @@ func _ready() -> void:
 
 		exit_1.monitorable = false
 		exit_1.monitoring = false
-		exit_2.monitorable = false        
+		exit_2.monitorable = false
 		exit_2.monitoring = false
-	
+
 	if State.state_number == 14 and game == null:
 		init_patrol_mini_game()
 
 
 func _process(_delta: float) -> void:
-
 	match State.state_number:
 		13:
 			match State.state_phase:
@@ -74,13 +68,11 @@ func _process(_delta: float) -> void:
 					miriam_path._play()
 				9:
 					miriam_path._finish_play()
-					
 				10:
 					dialog_is_running = false
 					State.state_phase = 0
 					State.state_number = 14
 					Signals.save_to_file.emit()
-
 		14:
 			match State.state_phase:
 				0:
@@ -97,16 +89,16 @@ func _process(_delta: float) -> void:
 						init_patrol_mini_game()
 					State.state_number = 15
 					State.state_phase = 0
-
 		16:
 			match State.state_phase:
 				0:
 					State.state_phase = 0
 					State.state_number = 16
-					Save.player_position = Vector2(791,-465) 
+					Save.player_position = Vector2(791, -465)
 					Save.current_scene_path = 'res://Scenes/Locations/Town/DanielHouse.tscn'
 					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(State.MAIN_SCENE)
+
 
 func init_patrol_mini_game() -> void:
 	game = mini_game.instantiate()
@@ -115,16 +107,16 @@ func init_patrol_mini_game() -> void:
 
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
-	
+
 	player.hide()
 	State.is_running = false
 
+
 func finish_patrol_mini_game() -> void:
 	$PhantomCamera2D.follow_target = player
-	
+
 	State.state_number = 16
 	State.state_phase = 0
-	
 
 	if game != null:
 		game.queue_free()
@@ -139,7 +131,7 @@ func first_dialogue() -> void:
 
 	#1
 	Signals.people_message.emit("MiriamSchmidt", "You stubborn fool, you'll push your luck too far one day. What you're doing is really dangerous.", true)
-	
+
 	#2
 	Signals.people_message.emit("MiriamSchmidt", "If I find out about this again, I won't cover for you anymore.", true)
 
@@ -159,13 +151,13 @@ func first_dialogue() -> void:
 
 	#8
 	Signals.player_message.emit("Daniel", "I know it's late, but I have a matter for Mr. Emil?", true)
-	
+
 	#9
 	Signals.people_message.emit("MiriamSchmidt", "Of course, please come in. I'm heading home now.", true)
-	
+
 	#10
 	Signals.people_message.emit("MiriamSchmidt", "Emil, when you're finished, I'll see you at home in an hour.", true)
-	
+
 	#11
 	Signals.people_message.emit("EmilSchmidt", "Alright, darling,", true)
 
@@ -175,10 +167,10 @@ func second_dialogue() -> void:
 
 	#1
 	Signals.people_message.emit("EmilSchmidt", "Hello Daniel, what brings you to me at such a late hour?", true)
-	
+
 	#2
 	Signals.player_message.emit("Daniel", "Hi Emil, sorry to bother you. I just have a quick question.", true)
-	
+
 	#3
 	Signals.player_message.emit("Daniel", "Do you know what these symbols are?", true)
 
@@ -187,7 +179,7 @@ func second_dialogue() -> void:
 
 	#5
 	Signals.people_message.emit("EmilSchmidt", "Give me a moment. I think they are symbols from an old legend.", true)
-	
+
 	#6
 	Signals.people_message.emit("EmilSchmidt", "I should still have a volume about that legend in the shop. Wait a moment, I'll be right back.", true)
 

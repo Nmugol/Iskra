@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-enum Npc_names{
+enum Npc_names {
 	EMIL_SCHMIDT,
 	MIRIAM_SCHMIDT,
 	JAMES,
@@ -38,10 +38,14 @@ enum Npc_names{
 	set(value):
 		npc_name = value
 		update_animation()
-	get: return npc_name
+	get:
+		return npc_name
 
-enum  Animation_names{
-	IDLE, WALK, UP, DOWN
+enum Animation_names {
+	IDLE,
+	WALK,
+	UP,
+	DOWN,
 }
 
 @export var animation_name: Animation_names = Animation_names.IDLE:
@@ -53,36 +57,40 @@ enum  Animation_names{
 	set(value):
 		flip_sprite = value
 		update_flip()
-	get: return flip_sprite
+	get:
+		return flip_sprite
+
 
 func update_state(anim: String, flip: bool):
 	animation_name = Animation_names[anim.to_upper()]
 	flip_sprite = flip
 
+
 func update_animation():
 	if not is_instance_valid(sprite) or not sprite.sprite_frames:
-		return  # Zabezpieczenie przed dostępem do niezainicjowanego węzła
-	
+		return # Zabezpieczenie przed dostępem do niezainicjowanego węzła
+
 	var animation_character: String = Npc_names.keys()[Npc_names.values().find(npc_name)]
 	var animation_typ: String = Animation_names.keys()[Animation_names.values().find(animation_name)]
-	var target_animation = "%s_%s" % [animation_character.capitalize().replace(" ","_"), animation_typ.capitalize()]
-	
+	var target_animation = "%s_%s" % [animation_character.capitalize().replace(" ", "_"), animation_typ.capitalize()]
+
 	if sprite.sprite_frames.has_animation(target_animation):
-		
 		match animation_name:
-			Animation_names.IDLE: 
+			Animation_names.IDLE:
 				sprite.scale = Vector2(0.5, 0.5)
-			Animation_names.WALK: 
+			Animation_names.WALK:
 				sprite.scale = Vector2(0.667, 0.667)
 		sprite.play(str(target_animation))
+
 
 func update_flip():
 	if is_instance_valid(sprite):
 		sprite.flip_h = flip_sprite
 
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-		
+
 	update_animation()
 	update_flip()
