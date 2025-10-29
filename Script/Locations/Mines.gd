@@ -83,14 +83,14 @@ func _process(delta: float) -> void:
 					Signals.change_info_panel_visibility.emit(true)
 					Signals.save_game.emit()
 					Signals.save_to_file.emit()
-		23:
+		24:
 			match State.state_phase:
-				6:
+				0:
 					peter.position = Vector2(992, -104)
 					peter.show()
 					_third_dialogue()
-				14:
-					State.state_number = 24
+				8:
+					State.state_number = 25
 					State.state_phase = 0
 					Signals.change_info_panel_text.emit("Meet Peter at the railway station")
 					Signals.change_info_panel_visibility.emit(true)

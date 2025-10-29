@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 		return
 
 	match State.state_number:
-		27:
+		28:
 			match State.state_phase:
 				0:
 					_player.position = Vector2(904, 129)
@@ -65,6 +65,13 @@ func _process(_delta: float) -> void:
 
 					radio.add_to_equipment()
 					battery.add_to_equipment()
+				25:
+					State.state_number = 5
+					State.state_phase = 0
+					Save.player_position = Vector2(440, -184)
+					Save.current_scene_path = 'res://Scenes/Locations/Town/DanielHouse.tscn'
+					Signals.enable_loading_screen.emit()
+					get_tree().change_scene_to_file(State.MAIN_SCENE)
 
 
 func _first_dialog() -> void:

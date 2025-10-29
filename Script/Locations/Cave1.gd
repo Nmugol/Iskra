@@ -70,6 +70,8 @@ func _process(_delta: float) -> void:
 				5:
 					Signals.change_info_panel_text.emit("Go back to home")
 					Signals.change_info_panel_visibility.emit(true)
+					State.state_number = 24
+					State.state_phase = 0
 
 
 func _first_dialog() -> void:

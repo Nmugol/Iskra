@@ -53,7 +53,7 @@ func _ready() -> void:
 	if State.state_number >= 7:
 		give_sheet.monitoring = false
 
-	if State.state_number >= 24:
+	if State.state_number >= 25:
 		guard7.hide()
 		guard8.hide()
 		peter.show()
@@ -61,10 +61,10 @@ func _ready() -> void:
 		player.position = Vector2(2191, -188)
 		simon_mini_game_area.show()
 
-	if State.state_number == 25:
+	if State.state_number == 26:
 		Signals.change_info_panel_text.emit("Take a look at the top wall")
 
-	if State.state_number >= 26:
+	if State.state_number >= 27:
 		headquarters_passage.show()
 
 
@@ -140,7 +140,7 @@ func _process(_delta: float) -> void:
 					Save.current_scene_path = 'res://Scenes/Locations/Town/Workshop.tscn'
 					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(State.MAIN_SCENE)
-		24:
+		25:
 			match State.state_phase:
 				0:
 					if not dialog_is_running:
@@ -149,19 +149,19 @@ func _process(_delta: float) -> void:
 				11:
 					dialog_is_running = false
 					Signals.change_info_panel_text.emit("Take a look at the top wall")
-					State.state_number = 25
+					State.state_number = 26
 					State.state_phase = 0
-		25:
+		26:
 			match State.state_phase:
 				5:
 					_init_simon_mini_hame()
-		26:
+		27:
 			match State.state_phase:
 				0:
 					_sixth_dialogue()
 				4:
 					dialog_is_running = false
-					State.state_number = 27
+					State.state_number = 28
 					State.state_phase = 0
 					Save.player_position = Vector2(90, 0)
 					Save.current_scene_path = headquarters_scene
