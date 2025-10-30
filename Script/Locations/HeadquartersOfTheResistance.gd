@@ -66,7 +66,7 @@ func _process(_delta: float) -> void:
 					radio.add_to_equipment()
 					battery.add_to_equipment()
 				25:
-					State.state_number = 5
+					State.state_number = 26
 					State.state_phase = 0
 					Save.player_position = Vector2(440, -184)
 					Save.current_scene_path = 'res://Scenes/Locations/Town/DanielHouse.tscn'

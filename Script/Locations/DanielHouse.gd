@@ -7,6 +7,7 @@ extends Node2D
 @onready var mini_game_pos: Marker2D = $Events/CandleMiniGame/Marker2D
 
 var mini_game = load("res://Scenes/MiniGame/CandleMiniGame/candle_mini_game.tscn")
+var cable_mini_game = load("res://Script/MiniGame/CableMiniGame/CableMiniGame.gd")
 
 var in_candle_mini_game_area: bool = false
 var mini_game_is_running: bool = false
@@ -16,6 +17,9 @@ var game: Node = null
 
 
 func _ready():
+
+	Signals.finish_cable_mini_game.connect(_finish_cable_mini_game)
+
 	info_panel.is_visible_flag = false
 	if State.state_number == 9:
 		cart_mini_game_area.monitoring = true
@@ -103,17 +107,52 @@ func _process(_delta: float) -> void:
 					Save.current_scene_path = 'res://Scenes/Locations/Mines/MineHub.tscn'
 					Signals.enable_loading_screen.emit()
 					get_tree().change_scene_to_file(State.MAIN_SCENE)
+		26:
+			match State.state_phase:
+				0:
+					if not dialog_is_running: 
+						dialog_is_running = true
+						_sixth_dialogue()
+		27:
+			match State.state_phase:
+				0:
+					dialog_is_running = false
+					if game == null and not dialog_is_running:
+						dialog_is_running = true
+						exit.hide()
+						init_candle_mini_game()
+				2:
+					Signals.change_info_panel_text.emit("Replace the batteries in the radio at the table and repair the connections between the cables.")
+		28:
+			match State.state_phase:
+				0:
+					_seventh_dialogue()
 
-	if in_candle_mini_game_area and State.selected_item != null and State.selected_item.item_name == "Crystal shard" and not mini_game_is_running:
-		State.state_number = 10
-		State.state_phase = 0
-		mini_game_is_running = true
+	if in_candle_mini_game_area and State.selected_item != null and not mini_game_is_running:
+		if State.selected_item.item_name == "Crystal shard":
+			State.state_number = 10
+			State.state_phase = 0
+			mini_game_is_running = true
+		if State.selected_item.item_name == "Powered radio":
+			State.state_number = 27
+			State.state_phase = 0
+			mini_game_is_running = true
 
 
 func init_candle_mini_game() -> void:
 	game = mini_game.instantiate()
 	game.z_index = 1
 	game.scale = Vector2(0.7, 0.7)
+	game.global_position = mini_game_pos.global_position
+	add_child(game)
+	$PhantomCamera2D.follow_target = game
+	player.hide()
+	State.is_running = false
+
+func _init_cable_mini_game() -> void:
+	game = cable_mini_game.instantiate()
+	game.z_index = 1
+	game.scale = Vector2(2, 2)
 	game.global_position = mini_game_pos.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
@@ -141,6 +180,15 @@ func _finish_candle_mini_game() -> void:
 	State.is_running = true
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()
+
+func _finish_cable_mini_game() -> void:
+	Signals.save_game.emit()
+	Signals.save_to_file.emit()
+	$PhantomCamera2D.follow_target = player
+	mini_game_is_running = false
+	State.is_running = true
+	State.state_number = 28
+	State.state_phase = 0
 
 
 func _first_dialog() -> void:
@@ -197,6 +245,21 @@ func _fifth_dialog() -> void:
 	Signals.player_message.emit("Daniel", "Right, I don't have time to deal with this now. I have to go to the mine as quickly as possible.", true)
 
 
+func _sixth_dialogue() -> void:
+	Signals.show_dialog.emit()
+	Signals.player_message.emit("Daniel", "Serce bije mi jak szalone. Kto by pomyślał żę James jest założycielem ruchu oporu.", true)
+	Signals.player_message.emit("Daniel", "Całe szczęście nie było żadnego patrolu po drodze. Z emocji rece mi drżą jak szalone.", true)
+	Signals.player_message.emit("Daniel", "Ale musze jeszcze naprawić to radio. No nie dziwie się ze nie działa skoro przewody są poprzerywane. Wymienie materie i na spokojnie przy stole je połączę ponownie", true)
+
+func _seventh_dialogue() -> void:
+	State.day_count = 3
+	Signals.save_game.emit()
+	Signals.save_to_file.emit()
+	Signals.show_dialog.emit()
+	Signals.player_message.emit("Daniel", "uff. Udało się naprawić. Prąd mnie nie kopną, radio działa można isć spać.", true)
+	Signals.player_message.emit("Daniel", "Jutro mam kopać tunel to muszę sie wyspać aby z zmęczenia nie paść.", true)
+
 func _on_bead_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player") and State.state_number == 17 and State.state_phase == 2:
-		Signals.play_day_screen.emit()
+	if body.is_in_group("Player"):
+		if (State.state_number == 17 and State.state_phase == 2) or (State.state_number == 28 and State.state_phase == 1):
+			Signals.play_day_screen.emit()

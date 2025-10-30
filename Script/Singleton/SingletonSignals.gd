@@ -200,3 +200,6 @@ signal achieved_update(type: State.AchievedType)
 
 @warning_ignore("unused_signal")
 signal finish_simon_mini_game()
+
+@warning_ignore("unused_signal")
+signal finish_cable_mini_game()

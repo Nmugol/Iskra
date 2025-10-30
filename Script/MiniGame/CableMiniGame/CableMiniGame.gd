@@ -275,7 +275,6 @@ func check_win_condition(powered_tiles: Array):
 
 func game_won():
 	is_game_active = false
-	print("WYGRANA! Wszystkie wyjścia są zasilone!")
 
 	var next_level_index = current_level_index + 1
 
@@ -283,7 +282,7 @@ func game_won():
 		await get_tree().create_timer(1).timeout
 		load_level(next_level_index)
 	else:
-		print("GRATULACJE! Ukończono wszystkie poziomy!")
+		Signals.finish_cable_mini_game.emit()
 
 
 func _on_reset_pressed() -> void:
