@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://vedkjltvlbjv"]
+
+[ext_resource type="Script" uid="uid://dl0uad0miaikw" path="res://Script/Class/AchievementZone.gd" id="1_1qn7r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5x0wd"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgst1"]
+radius = 40.0
+
+[sub_resource type="Curve" id="Curve_1qn7r"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0.0684211, -141.573), 0.0, 0.0, 0, 0, Vector2(0.573684, 190.112), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5x0wd"]
+curve = SubResource("Curve_1qn7r")
+
+[sub_resource type="Gradient" id="Gradient_bgst1"]
+offsets = PackedFloat32Array(0, 0.47561, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.914634, 0.914634, 0.914634, 1, 1, 0.854902, 0.470588, 0.756863)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a25pf"]
+gradient = SubResource("Gradient_bgst1")
+
+[sub_resource type="Curve" id="Curve_y2sqy"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -0.303371), 0.0, 0.0, 0, 0, Vector2(0.642105, 0.662921), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_157rv"]
+curve = SubResource("Curve_y2sqy")
+
+[sub_resource type="Curve" id="Curve_xhkoj"]
+_data = [Vector2(0, 0.449438), 0.0, 0.0, 0, 0, Vector2(0.505263, 0.764045), 0.0, 0.0, 0, 0, Vector2(0.942105, 0.651685), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_om3u4"]
+curve = SubResource("Curve_xhkoj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u8drv"]
+emission_shape = 1
+emission_sphere_radius = 39.85
+angle_min = 1.07288e-05
+angle_max = 463.3
+angle_curve = SubResource("CurveTexture_5x0wd")
+angular_velocity_min = -109.57
+angular_velocity_max = 344.35
+radial_velocity_min = 1.99998
+radial_velocity_max = 4.44998
+gravity = Vector3(0, -10, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 0.999998
+radial_accel_min = -2.23517e-06
+radial_accel_max = 10.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 39.96
+damping_min = 1.0
+damping_max = 10.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_om3u4")
+scale_over_velocity_max = 653.07
+color_ramp = SubResource("GradientTexture1D_a25pf")
+hue_variation_curve = SubResource("CurveTexture_157rv")
+
+[node name="AchievementZone" type="Node2D" node_paths=PackedStringArray("particle")]
+script = ExtResource("1_1qn7r")
+particle = NodePath("GPUParticles2D")
+
+[node name="PickUP" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUP"]
+shape = SubResource("CircleShape2D_5x0wd")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_bgst1")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 13
+process_material = SubResource("ParticleProcessMaterial_u8drv")
+
+[connection signal="input_event" from="PickUP" to="." method="_on_pick_up_input_event"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="mouse_entered" from="DetectionArea" to="." method="_on_detection_area_mouse_entered"]
+[connection signal="mouse_exited" from="DetectionArea" to="." method="_on_detection_area_mouse_exited"]

@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://duxh7nujnmgsd"]
+
+[ext_resource type="Script" uid="uid://douui77fuiro2" path="res://Script/GUI/Achievement.gd" id="1_glpkf"]
+[ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="1_ocef5"]
+[ext_resource type="Texture2D" uid="uid://buulp1nsigdbp" path="res://icon.svg" id="2_glpkf"]
+[ext_resource type="Theme" uid="uid://cn78im7s8t631" path="res://MainTheme.tres" id="3_ij4rh"]
+
+[node name="Achievement" type="Control" node_paths=PackedStringArray("textureRack", "label")]
+visible = false
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -64.0
+offset_right = 8.0
+offset_bottom = -64.0
+grow_vertical = 0
+script = ExtResource("1_glpkf")
+textureRack = NodePath("NinePatchRect/MarginContainer/HBoxContainer/TextureRect")
+label = NodePath("NinePatchRect/MarginContainer/HBoxContainer/Label")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 216.0
+offset_bottom = 56.0
+texture = ExtResource("1_ocef5")
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 11
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_glpkf")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_ij4rh")
+text = "All posters"
+horizontal_alignment = 1
+vertical_alignment = 2

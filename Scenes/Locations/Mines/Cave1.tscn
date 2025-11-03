@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cwpyjyttkkb54"]
+[gd_scene load_steps=21 format=4 uid="uid://cwpyjyttkkb54"]
 
 [ext_resource type="TileSet" uid="uid://fakyakw3gfom" path="res://TileSet/Wall.tres" id="1_3k242"]
 [ext_resource type="Script" uid="uid://buf2nex6eqpt3" path="res://Script/Locations/Cave1.gd" id="1_jpcqj"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://b7hapwft871qs" path="res://Script/Class/ShowPointLight.gd" id="14_v8sys"]
 [ext_resource type="PackedScene" uid="uid://csxu2selp6avn" path="res://Scenes/NPC/NPC.tscn" id="15_i6qwv"]
 [ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="16_j0fjp"]
+[ext_resource type="PackedScene" uid="uid://vedkjltvlbjv" path="res://Scenes/AchievementZone.tscn" id="17_cioie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saell"]
 size = Vector2(1552, 1112)
@@ -97,10 +98,10 @@ physics_interpolation_mode = 1
 position = Vector2(314, 131)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 72
-limit_top = -389
-limit_right = 2488
-limit_bottom = 379
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -196,5 +197,10 @@ text_to_display = "Go to the crew and start clearing the stones from the tunnel.
 is_visible_flag = true
 active_on_stages = Array[int]([22, 23])
 metadata/_edit_use_anchors_ = true
+
+[node name="AchievementZone" parent="." instance=ExtResource("17_cioie")]
+position = Vector2(784, 72)
+id = 4
+type = 1
 
 [connection signal="body_entered" from="Events/StoneMiniGame" to="." method="_on_stone_mini_game_body_entered"]

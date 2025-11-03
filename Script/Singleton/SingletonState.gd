@@ -16,10 +16,12 @@ var active_item: Item
 var selected_item: Item
 var can_play_sfx: bool = true
 
-var pick_up_books: Array = []
+const ALL_BOOKS_COUNT: int = 5
+var pick_up_books: Array[int] = []
 var pick_up_all_book: bool = false
 
-var pick_up_poster: Array = []
+const ALL_POSTER_COUNT: int = 5
+var pick_up_poster: Array[int] = []
 var pick_up_all_poster: bool = false
 
 const MAIN_SCENE = "res://Scenes/World.tscn"

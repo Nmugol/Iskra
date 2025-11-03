@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://cflie5mi8mlhh"]
+[gd_scene load_steps=28 format=4 uid="uid://cflie5mi8mlhh"]
 
 [ext_resource type="PackedScene" uid="uid://c0yr4dgbqxqlm" path="res://Scenes/Player/Player.tscn" id="1_00xur"]
 [ext_resource type="TileSet" uid="uid://blegydvio0g1h" path="res://TileSet/FloorNoShadow.tres" id="1_osjfl"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dr8kvlrvqwaw7" path="res://Sprite/LightShape/Light2.png" id="11_8knba"]
 [ext_resource type="PackedScene" uid="uid://dlea37ch83wt3" path="res://Scenes/Locations/NavigationRegion.tscn" id="12_t4cjj"]
 [ext_resource type="PackedScene" uid="uid://df5xt02musp5d" path="res://Scenes/GUI/InfoPanel.tscn" id="17_g5nuj"]
+[ext_resource type="PackedScene" uid="uid://vedkjltvlbjv" path="res://Scenes/AchievementZone.tscn" id="18_jqw0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8aml"]
 size = Vector2(2352, 1376)
@@ -347,3 +348,12 @@ text_to_display = "Go to the crew and start clearing the stones from the tunnel.
 is_visible_flag = true
 active_on_stages = Array[int]([22, 23])
 metadata/_edit_use_anchors_ = true
+
+[node name="AchievementZone" parent="." instance=ExtResource("18_jqw0d")]
+position = Vector2(567, 565)
+id = 3
+
+[node name="AchievementZone2" parent="." instance=ExtResource("18_jqw0d")]
+position = Vector2(-322, 468)
+id = 5
+type = 1

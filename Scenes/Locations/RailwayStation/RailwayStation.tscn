@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://4jjkf688l0no"]
+[gd_scene load_steps=37 format=4 uid="uid://4jjkf688l0no"]
 
 [ext_resource type="Script" uid="uid://4cx1msdukxvt" path="res://Script/Locations/RailwayStation.gd" id="1_gycxx"]
 [ext_resource type="TileSet" uid="uid://cq4re06u0y5li" path="res://TileSet/Dungeon.tres" id="1_nuh5u"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://b18j64xa02d8y" path="res://Scenes/Item.tscn" id="20_1s613"]
 [ext_resource type="Texture2D" uid="uid://becq2vvu2qfbw" path="res://Sprite/CartMiniGame/Cart1.png" id="20_egf6h"]
 [ext_resource type="Script" uid="uid://csjqy3f214fbw" path="res://Script/Class/BlockingArea.gd" id="21_h1ofm"]
+[ext_resource type="PackedScene" uid="uid://vedkjltvlbjv" path="res://Scenes/AchievementZone.tscn" id="23_nv2js"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
 size = Vector2(2416, 768)
@@ -441,6 +442,10 @@ grow_vertical = 2
 width = 355.0
 text_to_display = "Find something at the station that Piter can use to repair the wagon"
 active_on_stages = Array[int]([1, 2, 3])
+
+[node name="AchievementZone" parent="." instance=ExtResource("23_nv2js")]
+position = Vector2(32, 112)
+id = 1
 
 [connection signal="body_entered" from="EventArea/GiveSteelSheet" to="." method="_on_give_steel_sheet_body_entered"]
 [connection signal="body_exited" from="EventArea/GiveSteelSheet" to="." method="_on_give_steel_sheet_body_exited"]

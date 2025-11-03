@@ -203,3 +203,9 @@ signal finish_simon_mini_game()
 
 @warning_ignore("unused_signal")
 signal finish_cable_mini_game()
+
+@warning_ignore("unused_signal")
+signal pick_up_all_book()
+
+@warning_ignore("unused_signal")
+signal pick_up_all_posters()
