@@ -17,11 +17,11 @@ var selected_item: Item
 var can_play_sfx: bool = true
 
 const ALL_BOOKS_COUNT: int = 5
-var pick_up_books: Array[int] = []
+var pick_up_books: Array = []
 var pick_up_all_book: bool = false
 
 const ALL_POSTER_COUNT: int = 5
-var pick_up_poster: Array[int] = []
+var pick_up_poster: Array = []
 var pick_up_all_poster: bool = false
 
 const MAIN_SCENE = "res://Scenes/World.tscn"

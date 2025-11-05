@@ -11,8 +11,7 @@ enum AchievementTypes {
 @export var id: int = 0
 @export var type: AchievementTypes = AchievementTypes.BOOKS
 
-@export_category("Particle")
-@export var particle: GPUParticles2D
+
 
 var player_in_detection_area: bool = false
 
@@ -53,11 +52,3 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player_in_detection_area = false
-
-
-func _on_detection_area_mouse_entered() -> void:
-	particle.show()
-
-
-func _on_detection_area_mouse_exited() -> void:
-	particle.hide()

@@ -40,7 +40,7 @@ curve = SubResource("Curve_xhkoj")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u8drv"]
 emission_shape = 1
-emission_sphere_radius = 39.85
+emission_sphere_radius = 5.0
 angle_min = 1.07288e-05
 angle_max = 463.3
 angle_curve = SubResource("CurveTexture_5x0wd")
@@ -63,9 +63,8 @@ scale_over_velocity_max = 653.07
 color_ramp = SubResource("GradientTexture1D_a25pf")
 hue_variation_curve = SubResource("CurveTexture_157rv")
 
-[node name="AchievementZone" type="Node2D" node_paths=PackedStringArray("particle")]
+[node name="AchievementZone" type="Node2D"]
 script = ExtResource("1_1qn7r")
-particle = NodePath("GPUParticles2D")
 
 [node name="PickUP" type="Area2D" parent="."]
 metadata/_edit_lock_ = true
@@ -82,7 +81,6 @@ metadata/_edit_group_ = true
 shape = SubResource("CircleShape2D_bgst1")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
 amount = 13
 process_material = SubResource("ParticleProcessMaterial_u8drv")
 
