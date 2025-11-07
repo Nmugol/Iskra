@@ -399,7 +399,6 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Achievement" parent="GUI" instance=ExtResource("9_kn06e")]
-visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="GUI"]
 unique_name_in_owner = true

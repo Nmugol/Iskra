@@ -67,7 +67,7 @@ func _process(_delta: float) -> void:
 					_player.position = Vector2(1208, 600)
 					_player.navigation.target_position = Vector2(1208, 600)
 					_third_dialogue()
-				5:
+				6:
 					Signals.change_info_panel_text.emit("Go back to home")
 					Signals.change_info_panel_visibility.emit(true)
 					State.state_number = 24
