@@ -11,9 +11,12 @@ var mouse_on: bool = false
 @export var MOUSE_ON_COLOR: Color
 @export var MOUSE_CLICK_COLOR: Color
 @export var DEFAULT_COLOR: Color
+@export var DISABLE_COLOR: Color
 
 
 func _ready() -> void:
+	Signals.enable_buttons.connect(func () -> void: background.modulate = DEFAULT_COLOR)
+	Signals.disable_buttons.connect(func () -> void: background.modulate = DISABLE_COLOR)
 	_sprite.texture = symbol
 	background.modulate = DEFAULT_COLOR
 

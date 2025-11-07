@@ -209,3 +209,9 @@ signal pick_up_all_book()
 
 @warning_ignore("unused_signal")
 signal pick_up_all_posters()
+
+@warning_ignore("unused_signal")
+signal enable_buttons()
+
+@warning_ignore("unused_signal")
+signal disable_buttons()

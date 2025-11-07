@@ -100,6 +100,8 @@ func randomize_sequence() -> void:
 
 
 func add_symbol_to_player_sequence(_symbol: int) -> void:
+	if is_computers_turn:
+		return
 	if player_sequence_header >= sequence.size() or _symbol != sequence[player_sequence_header]:
 		randomize_sequence()
 		return
@@ -125,50 +127,57 @@ func _finish() -> void:
 
 func display_symbol_loop() -> void:
 	is_computers_turn = true
+	Signals.disable_buttons.emit()
+	# Pętla 'while is_computers_turn:'  została usunięta stąd.
+	
+	symbol_spot.show()
 
-	while is_computers_turn:
-		symbol_spot.show()
+	for s in sequence:
+		if not is_computers_turn:
+			symbol_spot.texture = null
+			return
 
-		for s in sequence:
+		symbol_spot.texture = symbols.get(s)
+		symbol_spot.visible = true
+
+		var solid_time = symbol_swap_time - blink_duration
+
+		if solid_time > 0:
+			_timer.wait_time = solid_time
+			_timer.start()
+			await _timer.timeout
 			if not is_computers_turn:
 				symbol_spot.texture = null
 				return
 
-			symbol_spot.texture = symbols.get(s)
-			symbol_spot.visible = true
-
-			var solid_time = symbol_swap_time - blink_duration
-
-			if solid_time > 0:
-				_timer.wait_time = solid_time
-				_timer.start()
-				await _timer.timeout
-				if not is_computers_turn:
-					symbol_spot.texture = null
-					return
-
-			var blink_elapsed: float = 0.0
-			var current_visible_state = false
-			while blink_elapsed < blink_duration:
-				if not is_computers_turn:
-					symbol_spot.texture = null
-					return
-
-				symbol_spot.visible = current_visible_state
-				current_visible_state = not current_visible_state
-
-				var wait_time = min(blink_speed, blink_duration - blink_elapsed)
-				_timer.wait_time = wait_time
-				_timer.start()
-				await _timer.timeout
-
-				blink_elapsed += wait_time
-
-			symbol_spot.visible = true
-			symbol_spot.texture = null
+		var blink_elapsed: float = 0.0
+		var current_visible_state = false
+		while blink_elapsed < blink_duration:
 			if not is_computers_turn:
+				symbol_spot.texture = null
 				return
 
-			_timer.wait_time = symbol_restart_time
+			symbol_spot.visible = current_visible_state
+			current_visible_state = not current_visible_state
+
+			var wait_time = min(blink_speed, blink_duration - blink_elapsed)
+			_timer.wait_time = wait_time
 			_timer.start()
 			await _timer.timeout
+
+			blink_elapsed += wait_time
+
+	# Kod poniżej był  w pętli 'while', teraz jest po pętli 'for' 
+	symbol_spot.visible = true
+	symbol_spot.texture = null
+	if not is_computers_turn:
+		return
+
+	_timer.wait_time = symbol_restart_time
+	_timer.start()
+	await _timer.timeout
+	
+	# DODAJ TE DWIE LINIE NA KOŃCU:
+	symbol_spot.hide()
+	is_computers_turn = false # Oddaj kontrolę graczowi
+	Signals.enable_buttons.emit()

@@ -87,5 +87,3 @@ process_material = SubResource("ParticleProcessMaterial_u8drv")
 [connection signal="input_event" from="PickUP" to="." method="_on_pick_up_input_event"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
-[connection signal="mouse_entered" from="DetectionArea" to="." method="_on_detection_area_mouse_entered"]
-[connection signal="mouse_exited" from="DetectionArea" to="." method="_on_detection_area_mouse_exited"]

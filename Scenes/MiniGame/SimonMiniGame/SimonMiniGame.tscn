@@ -144,7 +144,7 @@ layout_mode = 2
 theme = ExtResource("3_n8pr0")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "Click the bricks in the correct order
+text = "Click the bricks in the correct order.
 "
 vertical_alignment = 1
 
