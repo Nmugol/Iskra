@@ -283,6 +283,7 @@ func game_won():
 		load_level(next_level_index)
 	else:
 		Signals.finish_cable_mini_game.emit()
+		self.queue_free()
 
 
 func _on_reset_pressed() -> void:

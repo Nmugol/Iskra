@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://b1m36dwf277hp"]
+[gd_scene load_steps=30 format=4 uid="uid://b1m36dwf277hp"]
 
 [ext_resource type="Script" uid="uid://dhq760jqceeb4" path="res://Script/MiniGame/SimonMiniGame/SimonMiniGame.gd" id="1_8iey8"]
 [ext_resource type="Texture2D" uid="uid://n14d0ywacdle" path="res://Sprite/CrystalFantasy_UI_PixelPack/Assets/RectangleBox_96x96.png" id="2_dfcq1"]
@@ -10,6 +10,19 @@
 [ext_resource type="Texture2D" uid="uid://nns4ill58jjb" path="res://Sprite/SimonMiniGame/linked.png" id="6_wall1"]
 [ext_resource type="Texture2D" uid="uid://cn1csyxqn27ho" path="res://Sprite/SimonMiniGame/InfoButtons.png" id="9_8dvf6"]
 [ext_resource type="PackedScene" uid="uid://ck6c1y4kjgnof" path="res://Scenes/MiniGame/SimonMiniGame/SimonButtopn.tscn" id="9_sisci"]
+[ext_resource type="Texture2D" uid="uid://b50jt6pwommv0" path="res://Sprite/Buttons/OptionIcons.png" id="10_ewi13"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy1g4"]
+atlas = ExtResource("10_ewi13")
+region = Rect2(44, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86x1n"]
+atlas = ExtResource("10_ewi13")
+region = Rect2(44, 22, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n50cv"]
+atlas = ExtResource("10_ewi13")
+region = Rect2(44, 44, 21, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8dvf6"]
 atlas = ExtResource("9_8dvf6")
@@ -89,7 +102,7 @@ texture = ExtResource("2_dfcq1")
 [sub_resource type="TileSet" id="TileSet_xscqu"]
 sources/0 = SubResource("TileSetAtlasSource_ewi13")
 
-[node name="SimonMiniGame" type="Node2D" node_paths=PackedStringArray("symbol_spot", "panel", "grid", "_timer")]
+[node name="SimonMiniGame" type="Node2D" node_paths=PackedStringArray("symbol_spot", "panel", "grid", "_timer", "reset_button")]
 script = ExtResource("1_8iey8")
 symbol_spot = NodePath("SymbolSpot")
 symbol_swap_time = 2.0
@@ -104,6 +117,7 @@ number_of_symbols_per_level = Array[int]([4, 6, 8])
 panel = NodePath("CanvasLayer/VBoxContainer/Info2")
 grid = NodePath("CanvasLayer/VBoxContainer/Info2/MarginContainer/GridContainer")
 _timer = NodePath("Timer")
+reset_button = NodePath("CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/NinePatchRect/MarginContainer/reset_button")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -117,17 +131,22 @@ offset_bottom = 200.0
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="Info" type="NinePatchRect" parent="CanvasLayer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Info" type="NinePatchRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 texture = ExtResource("2_dfcq1")
 patch_margin_left = 26
 patch_margin_top = 26
 patch_margin_right = 27
 patch_margin_bottom = 27
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Info"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/Info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,7 +158,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/Info/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/HBoxContainer/Info/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("3_n8pr0")
 theme_override_font_sizes/normal_font_size = 32
@@ -147,6 +166,48 @@ bbcode_enabled = true
 text = "Click the bricks in the correct order.
 "
 vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 22
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_dfcq1")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 26
+patch_margin_top = 26
+patch_margin_right = 27
+patch_margin_bottom = 27
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 11
+
+[node name="reset_button" type="TextureButton" parent="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_sy1g4")
+texture_pressed = SubResource("AtlasTexture_86x1n")
+texture_hover = SubResource("AtlasTexture_n50cv")
+texture_disabled = SubResource("AtlasTexture_86x1n")
+texture_focused = SubResource("AtlasTexture_n50cv")
+stretch_mode = 0
 
 [node name="Info2" type="NinePatchRect" parent="CanvasLayer/VBoxContainer"]
 texture_filter = 1
@@ -280,3 +341,5 @@ symbol_id = 5
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/MarginContainer/NinePatchRect/MarginContainer/reset_button" to="." method="_on_reset_button_pressed"]

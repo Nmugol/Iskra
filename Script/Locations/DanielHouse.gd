@@ -7,7 +7,7 @@ extends Node2D
 @onready var mini_game_pos: Marker2D = $Events/CandleMiniGame/Marker2D
 
 var mini_game = load("res://Scenes/MiniGame/CandleMiniGame/candle_mini_game.tscn")
-var cable_mini_game = load("res://Script/MiniGame/CableMiniGame/CableMiniGame.gd")
+var cable_mini_game = load("res://Scenes/MiniGame/CableMiniGame/CableMiniGame.tscn")
 
 var in_candle_mini_game_area: bool = false
 var mini_game_is_running: bool = false
@@ -17,11 +17,10 @@ var game: Node = null
 
 
 func _ready():
-
 	Signals.finish_cable_mini_game.connect(_finish_cable_mini_game)
 
 	info_panel.is_visible_flag = false
-	if State.state_number == 9:
+	if State.state_number == 9 or State.state_number == 26:
 		cart_mini_game_area.monitoring = true
 		cart_mini_game_area.monitorable = true
 	else:
@@ -34,6 +33,9 @@ func _ready():
 	# Automatyczne wznowienie mini-gry po powrocie do sceny
 	if State.state_number == 10 and game == null:
 		init_candle_mini_game()
+
+	if State.state_number == 27 and game == null:
+		_init_cable_mini_game()
 
 
 func _process(_delta: float) -> void:
@@ -110,7 +112,7 @@ func _process(_delta: float) -> void:
 		26:
 			match State.state_phase:
 				0:
-					if not dialog_is_running: 
+					if not dialog_is_running:
 						dialog_is_running = true
 						_sixth_dialogue()
 		27:
@@ -120,7 +122,7 @@ func _process(_delta: float) -> void:
 					if game == null and not dialog_is_running:
 						dialog_is_running = true
 						exit.hide()
-						init_candle_mini_game()
+						_init_cable_mini_game()
 				2:
 					Signals.change_info_panel_text.emit("Replace the batteries in the radio at the table and repair the connections between the cables.")
 		28:
@@ -129,6 +131,7 @@ func _process(_delta: float) -> void:
 					_seventh_dialogue()
 
 	if in_candle_mini_game_area and State.selected_item != null and not mini_game_is_running:
+		print("in area")
 		if State.selected_item.item_name == "Crystal shard":
 			State.state_number = 10
 			State.state_phase = 0
@@ -149,11 +152,12 @@ func init_candle_mini_game() -> void:
 	player.hide()
 	State.is_running = false
 
+
 func _init_cable_mini_game() -> void:
+	Signals.hide_equipment.emit()
 	game = cable_mini_game.instantiate()
 	game.z_index = 1
-	game.scale = Vector2(2, 2)
-	game.global_position = mini_game_pos.global_position
+	game.global_position = Vector2(800, -530)
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
 	player.hide()
@@ -181,14 +185,16 @@ func _finish_candle_mini_game() -> void:
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()
 
+
 func _finish_cable_mini_game() -> void:
-	Signals.save_game.emit()
-	Signals.save_to_file.emit()
 	$PhantomCamera2D.follow_target = player
 	mini_game_is_running = false
 	State.is_running = true
 	State.state_number = 28
 	State.state_phase = 0
+	player.show()
+	Signals.save_game.emit()
+	Signals.save_to_file.emit()
 
 
 func _first_dialog() -> void:
@@ -247,19 +253,23 @@ func _fifth_dialog() -> void:
 
 func _sixth_dialogue() -> void:
 	Signals.show_dialog.emit()
-	Signals.player_message.emit("Daniel", "Serce bije mi jak szalone. Kto by pomyślał żę James jest założycielem ruchu oporu.", true)
-	Signals.player_message.emit("Daniel", "Całe szczęście nie było żadnego patrolu po drodze. Z emocji rece mi drżą jak szalone.", true)
-	Signals.player_message.emit("Daniel", "Ale musze jeszcze naprawić to radio. No nie dziwie się ze nie działa skoro przewody są poprzerywane. Wymienie materie i na spokojnie przy stole je połączę ponownie", true)
+	Signals.player_message.emit("Daniel", "My heart is beating like crazy. Who would have thought that James is the founder of the resistance.", true)
+	Signals.player_message.emit("Daniel", "Luckily, there were no patrols on the way. My hands are shaking like crazy from the excitement.", true)
+	Signals.player_message.emit("Daniel", "But I still have to fix this radio. Well, I'm not surprised it doesn't work since the wires are broken. I'll replace the batteries and calmly reconnect them at the table.", true)
+
 
 func _seventh_dialogue() -> void:
 	State.day_count = 3
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()
 	Signals.show_dialog.emit()
-	Signals.player_message.emit("Daniel", "uff. Udało się naprawić. Prąd mnie nie kopną, radio działa można isć spać.", true)
-	Signals.player_message.emit("Daniel", "Jutro mam kopać tunel to muszę sie wyspać aby z zmęczenia nie paść.", true)
+	Signals.player_message.emit("Daniel", "Phew. I managed to fix it. I didn't get shocked, the radio works, I can go to sleep.", true)
+	Signals.player_message.emit("Daniel", "I have to dig the tunnel tomorrow, so I need to get some sleep so I don't collapse from exhaustion.", true)
+
 
 func _on_bead_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		if (State.state_number == 17 and State.state_phase == 2) or (State.state_number == 28 and State.state_phase == 1):
+		if (State.state_number == 17 and State.state_phase == 2) or (State.state_number == 28 and State.state_phase > 0):
 			Signals.play_day_screen.emit()
+			Signals.save_game.emit()
+			Signals.save_to_file.emit()

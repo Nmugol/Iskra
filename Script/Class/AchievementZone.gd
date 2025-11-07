@@ -39,9 +39,9 @@ func _on_pick_up_input_event(_viewport: Node, _event: InputEvent, _shape_idx: in
 				if State.pick_up_poster.size() == State.ALL_POSTER_COUNT:
 					State.pick_up_all_poster = true
 					Signals.pick_up_all_posters.emit()
-	Signals.save_game.emit()
-	Signals.save_to_file.emit()
-	self.queue_free()
+		Signals.save_game.emit()
+		Signals.save_to_file.emit()
+		self.queue_free()
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:

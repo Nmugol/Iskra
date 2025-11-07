@@ -13,10 +13,22 @@ var mouse_on: bool = false
 @export var DEFAULT_COLOR: Color
 @export var DISABLE_COLOR: Color
 
+var disable_flag: bool = false
+
 
 func _ready() -> void:
-	Signals.enable_buttons.connect(func () -> void: background.modulate = DEFAULT_COLOR)
-	Signals.disable_buttons.connect(func () -> void: background.modulate = DISABLE_COLOR)
+	Signals.enable_buttons.connect(
+		func() -> void:
+			background.modulate = DEFAULT_COLOR
+			disable_flag = false
+			mouse_on = false
+	)
+	Signals.disable_buttons.connect(
+		func() -> void:
+			background.modulate = DISABLE_COLOR
+			disable_flag = true
+			mouse_on = false
+	)
 	_sprite.texture = symbol
 	background.modulate = DEFAULT_COLOR
 
@@ -34,10 +46,14 @@ func _process(_delta: float) -> void:
 
 
 func _on_area_2d_mouse_entered() -> void:
+	if disable_flag:
+		return
 	mouse_on = true
 	background.modulate = MOUSE_ON_COLOR
 
 
 func _on_area_2d_mouse_exited() -> void:
+	if disable_flag:
+		return
 	mouse_on = false
 	background.modulate = DEFAULT_COLOR

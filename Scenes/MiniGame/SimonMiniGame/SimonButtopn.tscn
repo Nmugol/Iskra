@@ -12,7 +12,7 @@ background = NodePath("BG")
 MOUSE_ON_COLOR = Color(0.730146, 0.74902, 0.613622, 1)
 MOUSE_CLICK_COLOR = Color(0.74902, 0.74902, 0.74902, 1)
 DEFAULT_COLOR = Color(1, 1, 1, 1)
-DISABLE_COLOR = Color(0.385871, 0.385798, 0.420819, 1)
+DISABLE_COLOR = Color(0.575862, 0.575862, 0.575862, 1)
 
 [node name="BG" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -21,7 +21,6 @@ texture = ExtResource("2_2juu1")
 [node name="Symbol" type="Sprite2D" parent="BG"]
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_2juu1")

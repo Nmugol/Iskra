@@ -62,7 +62,7 @@ func _ready() -> void:
 		simon_mini_game_area.show()
 
 	if State.state_number == 26:
-		Signals.change_info_panel_text.emit("Take a look at the top wall")
+		_init_simon_mini_hame()
 
 	if State.state_number >= 27:
 		headquarters_passage.show()
@@ -340,6 +340,7 @@ func _init_simon_mini_hame() -> void:
 	game.global_position = mini_game_pos.global_position
 	add_child(game)
 	$PhantomCamera2D.follow_target = game
+	$PhantomCamera2D.zoom = Vector2(1.5,1.5)
 	game_load_finish = true
 	player.hide()
 	State.is_running = false
@@ -347,8 +348,9 @@ func _init_simon_mini_hame() -> void:
 
 func _finish_simon_mini_game() -> void:
 	$PhantomCamera2D.follow_target = player
+	$PhantomCamera2D.zoom = Vector2(2,2)
 	player.show()
-	State.state_number = 26
+	State.state_number = 27
 	State.state_phase = 0
 
 	if is_instance_valid(game):

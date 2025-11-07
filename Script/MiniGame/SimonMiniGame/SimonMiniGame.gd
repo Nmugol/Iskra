@@ -12,7 +12,7 @@ extends Node2D
 @export var panel: NinePatchRect
 @export var grid: GridContainer
 @export var _timer: Timer
-
+@export var reset_button: TextureButton 
 var current_level = 1
 var sequence: Array[int] = []
 var player_sequence: Array[int] = []
@@ -98,12 +98,21 @@ func randomize_sequence() -> void:
 				break
 	display_symbol_loop()
 
+func reset_after_mistake() -> void:
+	_timer.stop()
+	is_computers_turn = true
+	player_sequence_header = 0
+	player_sequence.clear()
+	set_panel_size()
+	display_symbol_loop()
+
 
 func add_symbol_to_player_sequence(_symbol: int) -> void:
 	if is_computers_turn:
 		return
+		
 	if player_sequence_header >= sequence.size() or _symbol != sequence[player_sequence_header]:
-		randomize_sequence()
+		reset_after_mistake()
 		return
 
 	player_sequence.append(_symbol)
@@ -119,7 +128,7 @@ func add_symbol_to_player_sequence(_symbol: int) -> void:
 
 
 func _finish() -> void:
-	State.state_number = 26
+	State.state_number = 27
 	State.state_phase = 0
 	Signals.finish_simon_mini_game.emit()
 	self.queue_free()
@@ -127,9 +136,8 @@ func _finish() -> void:
 
 func display_symbol_loop() -> void:
 	is_computers_turn = true
-	Signals.disable_buttons.emit()
-	# Pętla 'while is_computers_turn:'  została usunięta stąd.
-	
+	reset_button.disabled = true
+	Signals.disable_buttons.emit()	
 	symbol_spot.show()
 
 	for s in sequence:
@@ -167,7 +175,6 @@ func display_symbol_loop() -> void:
 
 			blink_elapsed += wait_time
 
-	# Kod poniżej był  w pętli 'while', teraz jest po pętli 'for' 
 	symbol_spot.visible = true
 	symbol_spot.texture = null
 	if not is_computers_turn:
@@ -177,7 +184,11 @@ func display_symbol_loop() -> void:
 	_timer.start()
 	await _timer.timeout
 	
-	# DODAJ TE DWIE LINIE NA KOŃCU:
 	symbol_spot.hide()
-	is_computers_turn = false # Oddaj kontrolę graczowi
+	is_computers_turn = false
+	reset_button.disabled = false
 	Signals.enable_buttons.emit()
+
+func _on_reset_button_pressed() -> void:
+	reset_after_mistake()
+	

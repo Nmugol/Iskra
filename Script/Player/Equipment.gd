@@ -75,7 +75,7 @@ func _on_disassemble_pressed() -> void:
 
 
 func _on_assemble_pressed() -> void:
-	State.active_item.assemble(State.SelectedItem)
+	State.active_item.assemble(State.selected_item)
 
 
 func _on_use_pressed() -> void:
