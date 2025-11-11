@@ -189,9 +189,6 @@ texture = SubResource("AtlasTexture_43d8e")
 [node name="LevelLoader" type="Node2D" parent="."]
 position = Vector2(-88, -97)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-
 [connection signal="pressed" from="Control/NinePatchRect/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="mouse_entered" from="Node2D/StartCart" to="." method="_on_start_cart_mouse_entered"]

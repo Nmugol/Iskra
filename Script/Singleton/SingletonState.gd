@@ -20,7 +20,7 @@ const ALL_BOOKS_COUNT: int = 5
 var pick_up_books: Array = []
 var pick_up_all_book: bool = false
 
-const ALL_POSTER_COUNT: int = 5
+const ALL_POSTER_COUNT: int = 1
 var pick_up_poster: Array = []
 var pick_up_all_poster: bool = false
 

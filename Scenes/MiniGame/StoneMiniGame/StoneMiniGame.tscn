@@ -275,9 +275,6 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Daniel/StaticBody2D"]
 shape = SubResource("RectangleShape2D_ho5aj")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/PlayButton/MarginContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ResetButton/MarginContainer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="body_entered" from="Path2D/PathFollow2D/Daniel/Area2D" to="." method="_on_area_2d_body_entered"]

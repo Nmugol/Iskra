@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://vedkjltvlbjv" path="res://Scenes/AchievementZone.tscn" id="23_nv2js"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_basko"]
-size = Vector2(2416, 768)
+size = Vector2(2416, 805)
 
 [sub_resource type="Resource" id="Resource_bmnd2"]
 script = ExtResource("5_2siod")
@@ -40,7 +40,7 @@ size = Vector2(96, 24)
 size = Vector2(96, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y4t6"]
-size = Vector2(96, 24)
+size = Vector2(96, 32)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nv2js"]
 radius = 16.0
@@ -136,7 +136,7 @@ tile_set = ExtResource("1_nuh5u")
 [node name="Border" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
-position = Vector2(1280, -5)
+position = Vector2(1280, 13.5)
 shape = SubResource("RectangleShape2D_basko")
 disabled = true
 
@@ -149,10 +149,10 @@ physics_interpolation_mode = 1
 position = Vector2(2153, -8)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 359
-limit_top = -705
-limit_right = 1049
-limit_bottom = -229
+limit_left = -348
+limit_top = -440
+limit_right = 1044
+limit_bottom = 88
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -240,7 +240,7 @@ stopping_point = Vector2(1232, 384)
 target_player_position = Vector2(760, -800)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passage/Enter3"]
-position = Vector2(1232, 404)
+position = Vector2(1232, 400)
 shape = SubResource("RectangleShape2D_7y4t6")
 
 [node name="PointLight2D" type="PointLight2D" parent="Passage/Enter3" node_paths=PackedStringArray("paren_area")]
@@ -284,7 +284,7 @@ npc_name = 13
 flip_sprite = true
 
 [node name="Peter" parent="NPC" instance=ExtResource("16_bcjxh")]
-position = Vector2(2104, -72)
+position = Vector2(2104, -80)
 npc_name = 5
 flip_sprite = true
 
