@@ -181,6 +181,7 @@ func _finish_candle_mini_game() -> void:
 		game = null
 
 	player.show()
+	Save._remove_item("Crystal shard")
 	State.is_running = true
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()

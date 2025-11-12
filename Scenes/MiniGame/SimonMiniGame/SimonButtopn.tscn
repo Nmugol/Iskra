@@ -12,7 +12,7 @@ background = NodePath("BG")
 MOUSE_ON_COLOR = Color(0.730146, 0.74902, 0.613622, 1)
 MOUSE_CLICK_COLOR = Color(0.74902, 0.74902, 0.74902, 1)
 DEFAULT_COLOR = Color(1, 1, 1, 1)
-DISABLE_COLOR = Color(0.575862, 0.575862, 0.575862, 1)
+DISABLE_COLOR = Color(0.644531, 0.644531, 0.644531, 1)
 
 [node name="BG" type="Sprite2D" parent="."]
 texture_filter = 1
