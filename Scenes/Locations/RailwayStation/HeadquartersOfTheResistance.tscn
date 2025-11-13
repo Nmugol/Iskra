@@ -105,13 +105,13 @@ metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(360, 8)
+position = Vector2(904, 124)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 72
-limit_top = -389
-limit_right = 2488
-limit_bottom = 379
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -202,4 +202,5 @@ width = 330.0
 height = 140.0
 text_to_display = ""
 is_visible_flag = true
+active_on_stages = Array[int]([0])
 metadata/_edit_use_anchors_ = true

@@ -65,9 +65,7 @@ func show_equipment() -> void:
 
 
 func _on_close_pressed() -> void:
-	State.is_running = true
-	Signals.show_ui.emit()
-	hide()
+	Signals.hide_equipment.emit()
 
 
 func _on_disassemble_pressed() -> void:

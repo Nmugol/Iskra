@@ -130,19 +130,19 @@ func _process(_delta: float) -> void:
 		var temp_state_phase = State.state_phase
 		if not player_in_item_area:
 			Signals.show_dialog.emit()
-			Signals.player_message.emit("Daniel", out_of_range_messages.pick_random(), false)
+			Signals.player_message.emit("Daniel", out_of_range_messages[randi() % out_of_range_messages.size()], false)
 			message_sent = true
 		elif not message_sent:
 			State.player_in_item_area = true
 			if area_name == State.Cursors_above.NONE:
 				Signals.mouse_above_item.emit(area_name)
 				Signals.show_dialog.emit()
-				Signals.player_message.emit("Daniel", is_not_item_messages.pick_random(), false)
+				Signals.player_message.emit("Daniel", is_not_item_messages[randi() % is_not_item_messages.size()], false)
 				should_queue_free = true
 			else:
 				Signals.mouse_above_item.emit(area_name)
 				Signals.show_dialog.emit()
-				Signals.player_message.emit("Daniel", is_something_here_message.pick_random(), false)
+				Signals.player_message.emit("Daniel", is_something_here_message[randi() % is_something_here_message.size()], false)
 
 			State.state_number = temp_state_number
 			State.state_phase = temp_state_phase

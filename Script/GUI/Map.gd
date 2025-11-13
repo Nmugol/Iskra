@@ -6,6 +6,4 @@ func _process(_delta: float) -> void:
 
 
 func _on_close_button_pressed() -> void:
-	State.is_running = true
-	Signals.show_ui.emit()
-	hide()
+	Signals.hide_map.emit()

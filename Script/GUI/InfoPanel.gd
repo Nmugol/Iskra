@@ -23,7 +23,7 @@ class_name InfoPanel
 const MINIMAL_SIZE: Vector2 = Vector2(60, 53)
 
 var is_in_minimal_size: bool = false
-var is_ui_blocker_active: bool = false
+var ui_blocker_count: int = 0
 
 
 func _ready() -> void:
@@ -62,12 +62,12 @@ func _on_change_info_panel_visibility(is_active: bool) -> void:
 
 
 func _on_show_ui_blocker() -> void:
-	is_ui_blocker_active = true
+	ui_blocker_count += 1
 	change_visibility()
 
 
 func _on_hide_ui_blocker() -> void:
-	is_ui_blocker_active = false
+	ui_blocker_count = max(0, ui_blocker_count - 1)
 	change_visibility()
 
 
@@ -81,7 +81,7 @@ func change_text(new_text: String) -> void:
 
 func change_visibility() -> void:
 	var should_be_active = is_visible_flag and active_on_stages.has(State.state_number)
-	if should_be_active and not is_ui_blocker_active:
+	if should_be_active and ui_blocker_count == 0:
 		show()
 	else:
 		hide()

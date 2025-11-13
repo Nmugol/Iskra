@@ -19,22 +19,33 @@ var game: Node = null
 func _ready():
 	Signals.finish_cable_mini_game.connect(_finish_cable_mini_game)
 
-	info_panel.is_visible_flag = false
+	# --- Default Scene Setup ---
+	# Set elements to their default (often hidden or inactive) state.
+	Signals.change_info_panel_visibility.emit(true) # Info panel hidden by default
+	cart_mini_game_area.monitoring = false
+	cart_mini_game_area.monitorable = false
+	exit.show() # Exit is visible by default
+
+	# --- State-Specific Overrides ---
+	# Adjust elements based on the current game state.
+
+	# Cart/Cable Mini-Game Area activation
 	if State.state_number == 9 or State.state_number == 26:
 		cart_mini_game_area.monitoring = true
 		cart_mini_game_area.monitorable = true
-	else:
-		cart_mini_game_area.monitoring = false
-		cart_mini_game_area.monitorable = false
 
-	if State.state_number >= 12:
+	# Info Panel visibility
+	if State.state_number >= 12 and State.state_number <= 18:
 		Signals.change_info_panel_visibility.emit(true)
 
-	# Automatyczne wznowienie mini-gry po powrocie do sceny
-	if State.state_number == 10 and game == null:
+	# Minigame initialization and exit management
+	if State.state_number == 10:
+		exit.hide()
 		init_candle_mini_game()
-
-	if State.state_number == 27 and game == null:
+	elif State.state_number == 16:
+		exit.hide()
+	elif State.state_number == 27:
+		exit.hide()
 		_init_cable_mini_game()
 
 
@@ -181,7 +192,7 @@ func _finish_candle_mini_game() -> void:
 		game = null
 
 	player.show()
-	Save._remove_item("Crystal shard")
+	Save.remove_item("Crystal shard")
 	State.is_running = true
 	Signals.save_game.emit()
 	Signals.save_to_file.emit()

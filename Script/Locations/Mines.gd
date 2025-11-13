@@ -14,21 +14,39 @@ var dialog_is_running: bool = false
 
 
 func _ready() -> void:
-	match State.state_number:
-		0:
-			match State.state_phase:
-				0:
-					path.progress_ratio = 0.0
-					guard7.update_state("Walk", false)
-					guard8.update_state("Walk", false)
-		21:
-			Signals.change_info_panel_text.emit("Go to the cave and find supervisor.")
-			Signals.change_info_panel_visibility.emit(true)
-			peter.hide()
-		_:
-			guard7.hide()
-			guard8.hide()
-			peter.hide()
+	# --- Default Scene Setup ---
+	guard7.hide()
+	guard8.hide()
+	peter.hide()
+	Signals.change_info_panel_visibility.emit(true) # Hide info panel by default
+
+	# --- State-Specific Overrides ---
+	if State.state_number == 0:
+		# Guards are present and at their initial position.
+		guard7.show()
+		guard8.show()
+		# The exact position and movement state depends on State.state_phase.
+		# For simplicity, let's assume they are at the start of their path
+		# or at the target_ratio if phase 5 or later.
+		if State.state_phase >= 5:
+			path.progress_ratio = target_ratio # Guards are at the first stop
+		else:
+			path.progress_ratio = 0.0 # Guards are at the very beginning
+		guard7.update_state("Idle", true) # Assume idle, _process will handle movement
+		guard8.update_state("Idle", true) # Assume idle, _process will handle movement
+	elif State.state_number == 20:
+		# Guards are present for the second dialogue.
+		guard7.show()
+		guard8.show()
+	elif State.state_number == 21:
+		# Info panel is shown, Peter is hidden. Guards are gone.
+		Signals.change_info_panel_text.emit("Go to the cave and find supervisor.")
+		Signals.change_info_panel_visibility.emit(true)
+		peter.hide()
+	elif State.state_number == 24:
+		# Peter is present for the third dialogue.
+		peter.position = Vector2(992, -104)
+		peter.show()
 
 
 func _process(delta: float) -> void:

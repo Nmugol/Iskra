@@ -104,6 +104,7 @@ func show_equipment() -> void:
 func hide_equipment() -> void:
 	State.is_running = true
 	equipment.hide()
+	Signals.show_ui.emit()
 
 
 func show_map() -> void:
@@ -118,6 +119,7 @@ func show_map() -> void:
 func hide_map() -> void:
 	State.is_running = true
 	map.hide()
+	Signals.show_ui.emit()
 
 
 func disable_loading_screen() -> void:

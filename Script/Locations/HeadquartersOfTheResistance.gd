@@ -11,17 +11,20 @@ extends Node2D
 
 
 func _ready() -> void:
-	match State.state_number:
-		27:
-			match State.state_phase:
-				0:
-					_peter.show()
-					_james.show()
-					_przemek.show()
-		_:
-			_peter.hide()
-			_james.hide()
-			_przemek.hide()
+	Signals.change_info_panel_visibility.emit(true)
+	# --- Default Scene Setup ---
+	# Hide all NPCs by default.
+	_peter.hide()
+	_james.hide()
+	_przemek.hide()
+
+	# --- State-Specific Overrides ---
+	# Show NPCs based on the current game state.
+	if State.state_number == 27 or State.state_number == 28:
+		# In states 27 and 28, all NPCs are present for the initial meeting and subsequent dialogue.
+		_peter.show()
+		_james.show()
+		_przemek.show()
 
 
 func _process(_delta: float) -> void:

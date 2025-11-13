@@ -15,22 +15,32 @@ var game: Node = null
 
 
 func _ready() -> void:
-
+	Signals.change_info_panel_visibility.emit(true)
 	_connect_signals()
 
-	match State.state_number:
-		21:
-			match State.state_phase:
-				1:
-					supervisor.show()
-				_:
-					_first_dialog()
-		22:
-			match State.state_phase:
-				3:
-					_start_stone_mini_game()
-		_:
-			supervisor.hide()
+	# --- Story State Initialization ---
+	# This logic sets up the scene based on the player's progress when they enter.
+
+	# Default state: supervisor is hidden.
+	supervisor.hide()
+
+	# State 21: Supervisor appears. Dialogue is handled in _process.
+	if State.state_number == 21:
+		supervisor.show()
+
+	# State 22: Stone mini-game is active.
+	elif State.state_number == 22:
+		supervisor.show()
+		if game == null:
+			Signals.change_info_panel_visibility.emit(false)
+			_start_stone_mini_game()
+
+	# State 23: Post-minigame scene.
+	elif State.state_number == 23:
+		supervisor.position = Vector2(1272, 584)
+		supervisor.show()
+		_player.position = Vector2(1208, 600)
+		_player.navigation.target_position = Vector2(1208, 600)
 
 
 func _connect_signals() -> void:

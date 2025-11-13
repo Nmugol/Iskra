@@ -16,25 +16,47 @@ extends Node2D
 var player_in_area: bool = false
 
 
-func set_up() -> void:
-	guard6.hide()
-	if State.state_number != 5:
-		jonas.show()
-		james.show()
-	else:
-		james.show()
-		jonas.hide()
-
-
 func _ready() -> void:
-	set_up()
+	Signals.change_info_panel_visibility.emit(true)
+	# --- Default Scene Setup ---
+	# Set NPCs to their default visibility.
+	jonas.show()
+	james.show()
+	guard6.hide()
+
+	# --- State-Specific Overrides ---
+	# Adjust NPC visibility and scene state based on the current game state.
+	if State.state_number == 5:
+		# In state 5, Jonas is initially hidden for the dialogue, then appears.
+		if State.state_phase == 0:
+			jonas.hide()
+		else:
+			jonas.show()
+		
+		# James is hidden after phase 6
+		if State.state_phase > 6:
+			james.hide()
+
+	elif State.state_number == 6:
+		# In state 6, James is hidden.
+		james.hide()
+
+	elif State.state_number == 7:
+		# In state 7, James is initially hidden, then reappears. Guard6 also appears.
+		if State.state_phase == 0:
+			james.hide()
+		else:
+			james.show()
+		
+		if State.state_phase >= 2:
+			guard6.show()
 
 
 func _process(_delta: float) -> void:
 	if State.is_loading:
 		return
 
-	if player_in_area and Save._is_in_equipment("Crystal shard") == true:
+	if player_in_area and Save.is_in_equipment("Crystal shard") == true:
 		State.state_phase = 0
 		State.state_number = 7
 		$Events/Area2D.queue_free()
@@ -49,16 +71,16 @@ func _process(_delta: float) -> void:
 					jonas.show()
 					var smoke = $Particle/Smoke
 					smoke.play = true
-					jonas_in._play()
+					jonas_in.play()
 				2:
 					jonas.update_state("idle", true)
 				6:
-					james_out._play()
+					james_out.play()
 				7:
 					State.state_phase = 0
 					State.state_number = 6
 					james.hide()
-					Save._remove_item("Broken wheel")
+					Save.remove_item("Broken wheel")
 					Signals.change_info_panel_visibility.emit(true)
 		7:
 			match State.state_phase:
@@ -73,13 +95,13 @@ func _process(_delta: float) -> void:
 						if area:
 							area.queue_free()
 					james.show()
-					james_in._play()
+					james_in.play()
 					player.navigation.target_position = $Events/FixedWheelPosition.global_position
 				2:
 					player.global_position = $Events/FixedWheelPosition.global_position
 					james_in.path.progress_ratio = 1
 					james.update_state("Idle", true)
-					guard_in._play()
+					guard_in.play()
 					guard6.show()
 				3:
 					guard_in.path.progress_ratio = guard_in.stop_points

@@ -7,17 +7,19 @@ var dialog_is_running: bool = false
 
 
 func _ready() -> void:
-	match State.state_number:
-		8:
-			match State.state_phase:
-				0:
-					guard7.position = Vector2(760, 1640)
-					guard7.show()
-		19:
-			match State.state_phase:
-				0:
-					guard7.position = Vector2(704, 1584)
-					guard7.show()
+	Signals.change_info_panel_visibility.emit(true)
+	# --- Default Scene Setup ---
+	# Hide guard7 by default.
+	guard7.hide()
+
+	# --- State-Specific Overrides ---
+	# Show and position guard7 based on the current game state.
+	if State.state_number == 8:
+		guard7.position = Vector2(760, 1640)
+		guard7.show()
+	elif State.state_number == 19:
+		guard7.position = Vector2(704, 1584)
+		guard7.show()
 
 
 func _process(_delta: float) -> void:

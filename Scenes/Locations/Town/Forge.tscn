@@ -37,10 +37,10 @@ physics_interpolation_mode = 1
 position = Vector2(480, 180)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -472
-limit_top = -400
-limit_right = 808
-limit_bottom = 360
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -185,7 +185,6 @@ position = Vector2(480, 336)
 shape = SubResource("RectangleShape2D_n72us")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("17_ybn7d")]
 anchors_preset = 4

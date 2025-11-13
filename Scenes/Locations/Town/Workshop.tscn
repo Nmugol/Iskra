@@ -155,13 +155,13 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(440, -184)
+position = Vector2(314, 131)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = -348
-limit_top = -440
-limit_right = 1044
-limit_bottom = 88
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -244,8 +244,8 @@ item_area = {
 position = Vector2(892, -244)
 area_name = 1
 active_on = Array[int]([5, 6, 7])
-item_area_size = 11.4
-distance_to_item = 25.0
+item_area_size = 20.2
+distance_to_item = 35.4
 
 [node name="BlockingAreas" type="Node2D" parent="."]
 
@@ -358,7 +358,7 @@ offset_bottom = -104.0
 grow_vertical = 2
 width = 355.0
 text_to_display = "Look around the workshop."
-active_on_stages = Array[int]([5, 6])
+active_on_stages = Array[int]([5, 6, 0])
 
 [node name="AchievementZone" parent="." instance=ExtResource("23_45q5c")]
 position = Vector2(740, -339)

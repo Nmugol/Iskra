@@ -192,10 +192,10 @@ physics_interpolation_mode = 1
 position = Vector2(992, -104)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 359
-limit_top = -705
-limit_right = 1049
-limit_bottom = -229
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -291,5 +291,5 @@ width = 330.0
 height = 140.0
 text_to_display = "Go to cave"
 is_visible_flag = true
-active_on_stages = Array[int]([21])
+active_on_stages = Array[int]([21, 0])
 metadata/_edit_use_anchors_ = true

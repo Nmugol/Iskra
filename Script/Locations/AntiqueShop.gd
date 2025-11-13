@@ -27,29 +27,40 @@ var dialog_is_running: bool = false
 
 
 func _ready() -> void:
+	Signals.change_info_panel_visibility.emit(true)
 	Signals.finish_patrol_game.connect(finish_patrol_mini_game)
 
+	# --- Story State Initialization ---
+	# This logic sets up the scene based on the player's progress when they enter.
+
+	# State 13: Dialogue with Emil and Miriam
 	if State.state_number == 13:
 		emil.show()
 		miriam.show()
 
 		player.navigation.target_position = player_pos
 		player.global_position = player_pos
-		player.position = player_pos
 
 		exit_1.hide()
 		exit_2.hide()
 
-	if State.state_number == 14:
+	# States 14 & 15: Patrol minigame setup
+	elif State.state_number == 14 or State.state_number == 15:
+		miriam.hide()
 		emil.show()
 
-		exit_1.monitorable = false
-		exit_1.monitoring = false
-		exit_2.monitorable = false
-		exit_2.monitoring = false
+		exit_1.hide()
+		exit_2.hide()
 
-	if State.state_number == 14 and game == null:
-		init_patrol_mini_game()
+		if game == null:
+			init_patrol_mini_game()
+
+	# Default state for any other case (e.g., visiting before/after the quest)
+	else:
+		emil.hide()
+		miriam.hide()
+		exit_1.show()
+		exit_2.show()
 
 
 func _process(_delta: float) -> void:
@@ -65,9 +76,9 @@ func _process(_delta: float) -> void:
 						dialog_is_running = true
 						first_dialogue()
 				7:
-					miriam_path._play()
+					miriam_path.play()
 				9:
-					miriam_path._finish_play()
+					miriam_path.finish_play()
 				10:
 					dialog_is_running = false
 					State.state_phase = 0
@@ -80,9 +91,9 @@ func _process(_delta: float) -> void:
 						dialog_is_running = true
 						second_dialogue()
 				4:
-					emil_path._play()
+					emil_path.play()
 				7:
-					emil_path._finish_play()
+					emil_path.finish_play()
 				13:
 					dialog_is_running = false
 					if game == null:

@@ -43,10 +43,10 @@ physics_interpolation_mode = 1
 position = Vector2(1432, 304)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 359
-limit_top = -705
-limit_right = 1049
-limit_bottom = -229
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -199,7 +199,6 @@ script = ExtResource("17_l42c2")
 paren_area = NodePath("..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("19_l42c2")]
 anchors_preset = 4

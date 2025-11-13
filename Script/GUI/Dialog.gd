@@ -157,6 +157,9 @@ func _on_close_button_pressed() -> void:
 	Signals.stop_play_sound.emit(State.AudioType.Effect)
 	State.is_running = true
 	queue.clear()
+	is_talking = false
+	timer.stop()
+	talk_finished.emit()
 
 
 func _on_info_timeout() -> void:

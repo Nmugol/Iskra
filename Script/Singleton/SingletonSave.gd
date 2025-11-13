@@ -25,14 +25,14 @@ var equipment: Array[Item] = []:
 		return equipment
 
 
-func _is_in_equipment(i_name: String) -> bool:
+func is_in_equipment(i_name: String) -> bool:
 	for i in Save.equipment:
 		if i.item_name == i_name:
 			return true
 	return false
 
 
-func _remove_item(i_name: String) -> void:
+func remove_item(i_name: String) -> void:
 	for i in Save.equipment:
 		if i.item_name == i_name:
 			i.remove_from_equipment()

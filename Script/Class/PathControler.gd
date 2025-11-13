@@ -44,12 +44,12 @@ func _process(delta: float) -> void:
 		active = false
 
 
-func _play() -> void:
+func play() -> void:
 	previous_pos = npc.global_position
 	current_pos = npc.global_position
 	active = true
 
 
-func _finish_play() -> void:
+func finish_play() -> void:
 	path.progress_ratio = 1
 	active = false

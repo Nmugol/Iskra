@@ -30,6 +30,7 @@ var dialog_is_running: bool = false
 
 
 func _ready() -> void:
+	Signals.change_info_panel_visibility.emit(true)
 	camer.global_position = player.global_position
 	camer.follow_target = player
 
@@ -37,35 +38,49 @@ func _ready() -> void:
 	Signals.finish_cart_game.connect(_finish_game)
 	Signals.finish_simon_mini_game.connect(_finish_simon_mini_game)
 
-	if (State.state_number == 2 and State.state_phase < 4) or (State.state_number >= 1 and State.state_phase >= 10):
-		Signals.change_info_panel_visibility.emit(true)
+	# --- Story State Initialization ---
+	# This logic sets up the scene based on the player's progress when they enter.
 
-	if State.state_number >= 3:
+	# Handle states before the Simon mini-game (state < 25)
+	if State.state_number < 25:
+		if (State.state_number == 2 and State.state_phase < 4) or (State.state_number == 1 and State.state_phase >= 10):
+			Signals.change_info_panel_visibility.emit(true)
+		else:
+			Signals.change_info_panel_visibility.emit(false)
+
+		if State.state_number >= 3:
+			cart.show()
+		if State.state_number == 3 and game == null:
+			_load_game()
+			Signals.change_info_panel_visibility.emit(false)
+		
+		if State.state_number >= 4:
+			cart.monitoring = false
+		
+		if State.state_number >= 7:
+			give_sheet.monitoring = false
+
+	# Handle states related to the Simon mini-game and beyond (state >= 25)
+	else:
+		# Common setup for states 25 and beyond
 		cart.show()
-
-	if State.state_number >= 4:
 		cart.monitoring = false
-
-	if State.state_number == 3 and game == null:
-		_load_game()
-		Signals.change_info_panel_visibility.emit(false)
-
-	if State.state_number >= 7:
 		give_sheet.monitoring = false
-
-	if State.state_number >= 25:
 		guard7.hide()
 		guard8.hide()
 		peter.show()
 		peter.position = Vector2(2151, -180)
-		player.position = Vector2(2191, -188)
-		simon_mini_game_area.show()
 
-	if State.state_number == 26:
-		_init_simon_mini_hame()
-
-	if State.state_number >= 27:
-		headquarters_passage.show()
+		# State-specific setup
+		if State.state_number == 25:
+			player.position = Vector2(2191, -188)
+			simon_mini_game_area.show()
+		elif State.state_number == 26:
+			simon_mini_game_area.show()
+			_init_simon_mini_hame()
+		elif State.state_number >= 27:
+			simon_mini_game_area.hide()
+			headquarters_passage.show()
 
 
 func _process(_delta: float) -> void:
@@ -73,7 +88,7 @@ func _process(_delta: float) -> void:
 		return
 
 	# Sprawdzamy czy gracz ma steel_sheet w ekwipunku
-	if Save._is_in_equipment("Steel sheet") and not steel_sheet_picked_up:
+	if Save.is_in_equipment("Steel sheet") and not steel_sheet_picked_up:
 		Signals.change_info_panel_text.emit("Give the steel sheet to Peter")
 		steel_sheet_picked_up = true
 
@@ -130,7 +145,7 @@ func _process(_delta: float) -> void:
 						[],
 						true,
 					)
-					if not Save._is_in_equipment(broken_wheel.item_name):
+					if not Save.is_in_equipment(broken_wheel.item_name):
 						broken_wheel.add_to_equipment()
 				7:
 					dialog_is_running = false

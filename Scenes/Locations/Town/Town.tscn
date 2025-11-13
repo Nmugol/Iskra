@@ -134,10 +134,10 @@ physics_interpolation_mode = 1
 position = Vector2(0, -72)
 zoom = Vector2(2, 2)
 process_callback = 0
-limit_left = 72
-limit_top = -389
-limit_right = 2488
-limit_bottom = 379
+limit_left = -88
+limit_top = -256
+limit_right = 1464
+limit_bottom = 856
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -268,7 +268,6 @@ script = ExtResource("15_1on30")
 paren_area = NodePath("..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="InfoPanel" parent="CanvasLayer" instance=ExtResource("17_3ora4")]
 anchors_preset = 4
@@ -279,7 +278,7 @@ width = 330.0
 height = 140.0
 text_to_display = "Go to the crew and start clearing the stones from the tunnel."
 is_visible_flag = true
-active_on_stages = Array[int]([22, 23])
+active_on_stages = Array[int]([22, 23, 0])
 metadata/_edit_use_anchors_ = true
 
 [node name="AchievementZone" parent="." instance=ExtResource("18_lefyd")]
